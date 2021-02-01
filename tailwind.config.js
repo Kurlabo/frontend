@@ -30,6 +30,10 @@ module.exports = {
           600: '#5E107B',
         },
       },
+      spacing: {
+        1050: '1050px',
+        870: '870px',
+      },
     },
   },
   variants: {
