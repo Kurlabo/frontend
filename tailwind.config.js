@@ -1,8 +1,23 @@
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      backgroundImage: (theme) => ({
+        'pre-button':
+          "url('https://res.kurly.com/pc/service/main/1908/ico_prev1_x1.png')",
+        'next-button':
+          "url('https://res.kurly.com/pc/service/main/1908/ico_next1_x1.png')",
+      }),
+      inset: {
+        91: '91px',
+        159: '159px',
+      },
+      spacing: {
+        700: '700vw',
+        13: '52px',
+        370: '370px',
+      },
       colors: {
         kp: {
           100: '#B1A9C6',
