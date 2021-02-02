@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        body: ['Noto Sans KR'],
+      },
       colors: {
         kp: {
           100: '#B1A9C6',
@@ -33,6 +36,11 @@ module.exports = {
       spacing: {
         1050: '1050px',
         870: '870px',
+        308: '308px',
+        396: '396px',
+      },
+      outline: {
+        0: ['0px solid #ffffff'],
       },
     },
   },
