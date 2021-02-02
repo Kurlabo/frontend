@@ -2,8 +2,25 @@ module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      body: ['Noto Sans KR'],
+    },
+    fontSize: {
+      1.2: '1.2rem',
+      1.3: '1.3rem',
+      1.4: '1.4rem',
+      1.5: '1.5rem',
+      1.6: '1.6rem',
+      1.8: '1.8rem',
+      2: '2rem',
+    },
     extend: {
       colors: {
+        kg: {
+          200: '#b5b5b5',
+          300: '#4c4c4c',
+          400: '#333',
+        },
         kp: {
           100: '#B1A9C6',
           200: '#D2BEFF',
@@ -28,7 +45,16 @@ module.exports = {
           400: '#9563A6',
           500: '#7A3D91',
           600: '#5E107B',
+          700: '#E8F0FE',
         },
+      },
+      spacing: {
+        54: '54px',
+        340: '340px',
+        19: '1.9rem',
+        0.9: '0.9rem',
+        2.8: '2.8rem',
+        1.1: '1.1rem',
       },
     },
   },
