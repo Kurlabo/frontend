@@ -1,28 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
-
+import { Route, Switch } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import FindIdPage from './pages/FindIdPage';
+import FindPasswordPage from './pages/FindPasswordPage';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <div class="bg-white dark:bg-black">
-        <h1 class="text-gray-900 dark:text-white">Dark mode</h1>
-        <p class="text-gray-500 dark:text-gray-300">The feature you've all been waiting for.</p>
-      </div>
-    </div>
+    <Switch>
+      <Route path="/shop/account/signin" component={LoginPage} />
+      <Route path="/shop/account/find_id" component={FindIdPage} />
+      <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
+    </Switch>
   );
 }
 
