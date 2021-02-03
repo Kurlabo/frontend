@@ -1,12 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
-import RegisterContainer from './containers/RegisterContainer';
-
+import { Route, Switch } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import FindIdPage from './pages/FindIdPage';
+import FindPasswordPage from './pages/FindPasswordPage';
 function App() {
   return (
-    <div className="App">
-      <RegisterContainer />
-    </div>
+    <Switch>
+      <Route path="/shop/account/signin" component={LoginPage} />
+      <Route path="/shop/account/find_id" component={FindIdPage} />
+      <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
+    </Switch>
   );
 }
 
