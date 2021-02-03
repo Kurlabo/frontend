@@ -6,7 +6,7 @@ const titleStyle = 'text-2xl font-bold pt-8 pl-2 inline-block float-left leading
 
 const ItemListHeader = () => {
   return (
-    <div className="w-1050 mx-auto clear-both">
+    <div className="w-p-1050 mx-auto clear-both">
       <header className="pl-12">
         <div className="overflow-hidden">
           <img

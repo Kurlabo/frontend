@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AiOutlineDown } from 'react-icons/ai';
+import { AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
 import DropDownMenu from './DropDownMenu';
 import ItemNavLink from './ItemNavLink';
 export const listStyle =
@@ -12,7 +12,7 @@ const ItemNavigation = () => {
 
   return (
     <div className="flex justify-between pt-3">
-      <nav className="w-870">
+      <nav className="w-p-870">
         <ul className="text-xl ml-2 ">
           <ItemNavLink />
           <li className={listStyle}>제철과일</li>
@@ -30,7 +30,12 @@ const ItemNavigation = () => {
       </nav>
       <div className="relative">
         <button className={btnStyle} onClick={onClick}>
-          추천순 <AiOutlineDown className="inline-block align-middle" />
+          <span className="mr-2">추천순</span>
+          {dropDown ? (
+            <AiOutlineUp className="inline-block align-middle" />
+          ) : (
+            <AiOutlineDown className="inline-block align-middle" />
+          )}
         </button>
         {dropDown && <DropDownMenu />}
       </div>

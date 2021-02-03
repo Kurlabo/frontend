@@ -6,6 +6,13 @@ module.exports = {
       fontFamily: {
         body: ['Noto Sans KR'],
       },
+      borderRadius: {
+        'p-3': '0.3rem',
+      },
+      fontSize: {
+        'p-16': '1.6rem',
+        'p-24': '2.4rem',
+      },
       colors: {
         kp: {
           100: '#B1A9C6',
@@ -34,13 +41,20 @@ module.exports = {
         },
       },
       spacing: {
-        1050: '1050px',
-        870: '870px',
-        308: '308px',
-        396: '396px',
+        'p-28': '2.8rem',
+        'p-33': '3.3rem',
+        'p-38': '3.8rem',
+        'p-400': '40rem',
+        'p-1050': '105rem',
+        'p-870': '87rem',
+        'p-308': '30.8rem',
+        'p-396': '39.6rem',
       },
       outline: {
         0: ['0px solid #ffffff'],
+      },
+      minHeight: {
+        'p-148': '148px',
       },
     },
   },

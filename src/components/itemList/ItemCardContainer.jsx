@@ -3,7 +3,7 @@ import ItemCard from './ItemCard';
 
 const ItemCardContainer = () => {
   return (
-    <div className="w-1050  mx-auto">
+    <div className="w-p-1050  mx-auto">
       <ul className="flex flex-wrap">
         <li>
           <ItemCard />
