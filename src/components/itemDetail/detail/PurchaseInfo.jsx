@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import Counter from '../common/Counter';
-
 // 공통 스타일 변수
 const dlStyle = 'py-p-18 border-b border-gray-100 flex';
 const dtStyle = 'w-p-150 text-gray-700';
 const btnStyle = 'h-p-56 font-medium border rounded-p-3 text-p-16 text-center pt-6';
-
 const PurchaseInfo = ({
   img,
   name,
@@ -21,7 +19,6 @@ const PurchaseInfo = ({
     count: 1,
     total: price,
   });
-
   const increase = () => {
     setState(state => ({ count: state.count + 1, total: price * (state.count + 1) }));
   };
@@ -29,7 +26,6 @@ const PurchaseInfo = ({
     if (state.count < 1) return;
     setState(state => ({ count: state.count - 1, total: price * (state.count - 1) }));
   };
-
   return (
     <div className="flex justify-between py-p-18">
       <img className="block w-p-430 h-p-552" src={img} alt="상품 대표 이미지" />
@@ -90,5 +86,4 @@ const PurchaseInfo = ({
     </div>
   );
 };
-
 export default PurchaseInfo;

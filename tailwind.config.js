@@ -65,7 +65,7 @@ module.exports = {
         'p-560': '56rem',
         'p-950': '95rem',
         'p-1050': '105rem',
-        'per-500': '500%',
+        'per-500': '1000%',
       },
       borderRadius: {
         'p-3': '0.3rem',

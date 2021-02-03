@@ -1,14 +1,13 @@
 import React from 'react';
 import RelatedProduct from './detail/RelatedProduct';
 import PurchaseInfo from './detail/PurchaseInfo';
-
 const ItemDetail = () => {
   const data = {
     no: '63711',
     img: 'https://img-cf.kurly.com/shop/data/goods/1611715742614y0.jpg',
     name: '[우주] 무산 재래김 25g(10매 내외)',
     short_description: '장흥에서 양식한 유기 김',
-    price: '3,300',
+    price: '3300',
     long_description: '',
     tags: {
       names: ['Kurly only'],
@@ -47,110 +46,128 @@ const ItemDetail = () => {
     packing_type_text: '상온/종이포장',
     delivery_type: 0,
   };
-
   const relatedProducts = [
     {
+      no: '26448',
       img: 'https://img-cf.kurly.com/shop/data/goods/1585642854156l0.jpg',
       name: '[씨투게더]땅콩버터 오징어',
       price: '1000',
     },
     {
+      no: '26401',
       img: 'https://img-cf.kurly.com/shop/data/goods/1585642854156l0.jpg',
       name: '[씨투게더]땅콩버터 오징어',
       price: '1000',
     },
     {
+      no: '26402',
       img: 'https://img-cf.kurly.com/shop/data/goods/1585642854156l0.jpg',
       name: '[씨투게더]땅콩버터 오징어',
       price: '1000',
     },
     {
+      no: '26403',
       img: 'https://img-cf.kurly.com/shop/data/goods/1585642854156l0.jpg',
       name: '[씨투게더]땅콩버터 오징어',
       price: '1000',
     },
     {
+      no: '26404',
       img: 'https://img-cf.kurly.com/shop/data/goods/1585642854156l0.jpg',
       name: '[씨투게더]땅콩버터 오징어',
       price: '1000',
     },
     {
+      no: '26405',
       img: 'https://img-cf.kurly.com/shop/data/goods/1575349219737l0.jpg',
       name: '[씨투게더]명태어포',
       price: '2000',
     },
     {
+      no: '26406',
       img: 'https://img-cf.kurly.com/shop/data/goods/1575349219737l0.jpg',
       name: '[씨투게더]명태어포',
       price: '2000',
     },
     {
+      no: '26407',
       img: 'https://img-cf.kurly.com/shop/data/goods/1575349219737l0.jpg',
       name: '[씨투게더]명태어포',
       price: '2000',
     },
     {
+      no: '26408',
       img: 'https://img-cf.kurly.com/shop/data/goods/1575349219737l0.jpg',
       name: '[씨투게더]명태어포',
       price: '2000',
     },
     {
+      no: '26409',
       img: 'https://img-cf.kurly.com/shop/data/goods/1575349219737l0.jpg',
       name: '[씨투게더]명태어포',
       price: '2000',
     },
     {
+      no: '26410',
       img: 'https://img-cf.kurly.com/shop/data/goods/1589172960257l0.jpg',
       name: '[바다원]구운 쥐포채 150g',
       price: '3000',
     },
     {
+      no: '26411',
       img: 'https://img-cf.kurly.com/shop/data/goods/1589172960257l0.jpg',
       name: '[바다원]구운 쥐포채 150g',
       price: '3000',
     },
     {
+      no: '26412',
       img: 'https://img-cf.kurly.com/shop/data/goods/1589172960257l0.jpg',
       name: '[바다원]구운 쥐포채 150g',
       price: '3000',
     },
     {
+      no: '26412',
       img: 'https://img-cf.kurly.com/shop/data/goods/1589172960257l0.jpg',
       name: '[바다원]구운 쥐포채 150g',
       price: '3000',
     },
     {
+      no: '26413',
       img: 'https://img-cf.kurly.com/shop/data/goods/1589172960257l0.jpg',
       name: '[바다원]구운 쥐포채 150g',
       price: '3000',
     },
     {
+      no: '26414',
       img: 'https://img-cf.kurly.com/shop/data/goods/1592532897286l0.jpg',
       name: '[주전부리연구소]국산 내맘속에 핫다리 120g',
       price: '4000',
     },
     {
+      no: '26415',
       img: 'https://img-cf.kurly.com/shop/data/goods/1592532897286l0.jpg',
       name: '[주전부리연구소]국산 내맘속에 핫다리 120g',
       price: '4000',
     },
     {
+      no: '26416',
       img: 'https://img-cf.kurly.com/shop/data/goods/1592532897286l0.jpg',
       name: '[주전부리연구소]국산 내맘속에 핫다리 120g',
       price: '4000',
     },
     {
+      no: '26417',
       img: 'https://img-cf.kurly.com/shop/data/goods/1592532897286l0.jpg',
       name: '[주전부리연구소]국산 내맘속에 핫다리 120g',
       price: '4000',
     },
     {
+      no: '26418',
       img: 'https://img-cf.kurly.com/shop/data/goods/1592532897286l0.jpg',
       name: '[주전부리연구소]국산 내맘속에 핫다리 120g',
       price: '4000',
     },
   ];
-
   return (
     <div>
       <main className="w-p-1050 pt-8 mx-auto my-0 text-gray-800">
@@ -158,7 +175,7 @@ const ItemDetail = () => {
           img={data.img}
           name={data.name}
           desc={data.short_description}
-          price={+data.price.split(',').join('')}
+          price={+data.price}
           ea={data.unit_text}
           weight={data.weight}
           deliveryType={data.delivery_time_type_text}
@@ -170,5 +187,4 @@ const ItemDetail = () => {
     </div>
   );
 };
-
 export default ItemDetail;
