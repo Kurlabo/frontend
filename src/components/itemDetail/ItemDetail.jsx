@@ -52,108 +52,108 @@ const ItemDetail = () => {
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1585642854156l0.jpg',
       name: '[씨투게더]땅콩버터 오징어',
-      price: '9900',
+      price: '1000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1585642854156l0.jpg',
       name: '[씨투게더]땅콩버터 오징어',
-      price: '9900',
+      price: '1000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1585642854156l0.jpg',
       name: '[씨투게더]땅콩버터 오징어',
-      price: '9900',
+      price: '1000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1585642854156l0.jpg',
       name: '[씨투게더]땅콩버터 오징어',
-      price: '9900',
+      price: '1000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1585642854156l0.jpg',
       name: '[씨투게더]땅콩버터 오징어',
-      price: '9900',
+      price: '1000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1575349219737l0.jpg',
       name: '[씨투게더]명태어포',
-      price: '7900',
+      price: '2000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1575349219737l0.jpg',
       name: '[씨투게더]명태어포',
-      price: '7900',
+      price: '2000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1575349219737l0.jpg',
       name: '[씨투게더]명태어포',
-      price: '7900',
+      price: '2000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1575349219737l0.jpg',
       name: '[씨투게더]명태어포',
-      price: '7900',
+      price: '2000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1575349219737l0.jpg',
       name: '[씨투게더]명태어포',
-      price: '7900',
+      price: '2000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1589172960257l0.jpg',
       name: '[바다원]구운 쥐포채 150g',
-      price: '5900',
+      price: '3000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1589172960257l0.jpg',
       name: '[바다원]구운 쥐포채 150g',
-      price: '5900',
+      price: '3000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1589172960257l0.jpg',
       name: '[바다원]구운 쥐포채 150g',
-      price: '5900',
+      price: '3000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1589172960257l0.jpg',
       name: '[바다원]구운 쥐포채 150g',
-      price: '5900',
+      price: '3000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1589172960257l0.jpg',
       name: '[바다원]구운 쥐포채 150g',
-      price: '5900',
+      price: '3000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1592532897286l0.jpg',
       name: '[주전부리연구소]국산 내맘속에 핫다리 120g',
-      price: '11000',
+      price: '4000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1592532897286l0.jpg',
       name: '[주전부리연구소]국산 내맘속에 핫다리 120g',
-      price: '11000',
+      price: '4000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1592532897286l0.jpg',
       name: '[주전부리연구소]국산 내맘속에 핫다리 120g',
-      price: '11000',
+      price: '4000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1592532897286l0.jpg',
       name: '[주전부리연구소]국산 내맘속에 핫다리 120g',
-      price: '11000',
+      price: '4000',
     },
     {
       img: 'https://img-cf.kurly.com/shop/data/goods/1592532897286l0.jpg',
       name: '[주전부리연구소]국산 내맘속에 핫다리 120g',
-      price: '11000',
+      price: '4000',
     },
   ];
 
   return (
     <div>
-      <main className="w-1050 pt-8 mx-auto my-0 text-gray-800">
+      <main className="w-p-1050 pt-8 mx-auto my-0 text-gray-800">
         <PurchaseInfo
           img={data.img}
           name={data.name}
