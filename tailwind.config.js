@@ -2,25 +2,18 @@ module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    fontFamily: {
-      body: ['Noto Sans KR'],
-    },
-    fontSize: {
-      1.2: '1.2rem',
-      1.3: '1.3rem',
-      1.4: '1.4rem',
-      1.5: '1.5rem',
-      1.6: '1.6rem',
-      1.8: '1.8rem',
-      2: '2rem',
-    },
     extend: {
       fontFamily: {
         body: ['Noto Sans KR'],
       },
       fontSize: {
-        formTitle: '1.4rem',
-        formSub: '1.2rem',
+        'r-1.2': '1.2rem',
+        'r-1.3': '1.3rem',
+        'r-1.4': '1.4rem',
+        'r-1.5': '1.5rem',
+        'r-1.6': '1.6rem',
+        'r-1.8': '1.8rem',
+        'r-2': '2rem',
       },
       width: {
         formWidth: '64rem',
@@ -72,12 +65,15 @@ module.exports = {
         none: ['0px solid #0000ff', '0px'],
       },
       spacing: {
-        54: '54px',
-        340: '340px',
-        19: '1.9rem',
-        0.9: '0.9rem',
-        2.8: '2.8rem',
-        1.1: '1.1rem',
+        'p-54': '54px',
+        'p-340': '340px',
+        'r-0.9': '0.9rem',
+        'r-1.1': '1.1rem',
+        'r-1.9': '1.9rem',
+        'r-2.8': '2.8rem',
+        'r-4.4': '4.4rem',
+        'r-64': '64rem',
+        'r-32': '32rem',
       },
     },
   },
