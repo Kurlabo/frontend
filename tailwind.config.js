@@ -8,6 +8,7 @@ module.exports = {
       },
       borderRadius: {
         'p-3': '0.3rem',
+        '50-p': '50%',
       },
       fontSize: {
         'p-16': '1.6rem',
@@ -52,9 +53,6 @@ module.exports = {
       },
       outline: {
         0: ['0px solid #ffffff'],
-      },
-      minHeight: {
-        'p-148': '148px',
       },
     },
   },

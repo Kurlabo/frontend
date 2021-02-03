@@ -4,7 +4,25 @@ import ItemCard from './ItemCard';
 const ItemCardContainer = () => {
   return (
     <div className="w-p-1050  mx-auto">
-      <ul className="flex flex-wrap">
+      <ul className="flex flex-wrap pb-60">
+        <li>
+          <ItemCard />
+        </li>
+        <li>
+          <ItemCard />
+        </li>
+        <li>
+          <ItemCard />
+        </li>
+        <li>
+          <ItemCard />
+        </li>
+        <li>
+          <ItemCard />
+        </li>
+        <li>
+          <ItemCard />
+        </li>
         <li>
           <ItemCard />
         </li>
