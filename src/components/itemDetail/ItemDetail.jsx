@@ -1,6 +1,8 @@
 import React from 'react';
 import RelatedProduct from './detail/RelatedProduct';
 import PurchaseInfo from './detail/PurchaseInfo';
+import GoodsInfo from './detail/GoodsInfo';
+
 const ItemDetail = () => {
   const data = {
     no: '63711',
@@ -183,6 +185,7 @@ const ItemDetail = () => {
           expirationDate={data.expiration_date}
         />
         <RelatedProduct relatedProducts={relatedProducts} />
+        <GoodsInfo />
       </main>
     </div>
   );
