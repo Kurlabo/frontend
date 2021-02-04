@@ -3,8 +3,8 @@
 import { createAction, handleActions } from 'redux-actions';
 
 const SET_CAROUSEL = 'main/SET_INCREASE';
-const SET_CAROUSEL_MIN = 'mainSET_CAROUSEL_MIN';
-const SET_CAROUSEL_MAX = 'mainSET_CAROUSEL_MAX';
+const SET_CAROUSEL_MIN = 'main/SET_CAROUSEL_MIN';
+const SET_CAROUSEL_MAX = 'main/SET_CAROUSEL_MAX';
 
 // 액션 생성 함수
 

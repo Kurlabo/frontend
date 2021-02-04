@@ -5,15 +5,6 @@ module.exports = {
     fontFamily: {
       body: ['Noto Sans KR'],
     },
-    fontSize: {
-      1.2: '1.2rem',
-      1.3: '1.3rem',
-      1.4: '1.4rem',
-      1.5: '1.5rem',
-      1.6: '1.6rem',
-      1.8: '1.8rem',
-      2: '2rem',
-    },
     extend: {
       backgroundImage: (theme) => ({
         'pre-button':
@@ -22,13 +13,14 @@ module.exports = {
           "url('https://res.kurly.com/pc/service/main/1908/ico_next1_x1.png')",
       }),
       inset: {
-        91: '91px',
-        159: '159px',
+        'p-91': '9.1rem',
+        'p-159': '15.9rem',
       },
       spacing: {
-        700: '700vw',
-        13: '52px',
-        370: '370px',
+        'p-52': '5.2rem',
+        'vw-700': '700vw',
+        'r-52': '52rem',
+        'p-370': '370px',
       },
       colors: {
         kg: {
@@ -62,14 +54,6 @@ module.exports = {
           600: '#5E107B',
           700: '#E8F0FE',
         },
-      },
-      spacing: {
-        54: '54px',
-        340: '340px',
-        19: '1.9rem',
-        0.9: '0.9rem',
-        2.8: '2.8rem',
-        1.1: '1.1rem',
       },
     },
   },

@@ -1,20 +1,14 @@
 import { useEffect } from 'react';
 import { useRef } from 'react';
-import {
-  setCarousel,
-  setCarouselMax,
-  setCarouselMin,
-} from '../../../modules/main';
-import { useDispatch, useSelector } from 'react-redux';
+let onAnimate = false;
+let cur = 1;
 
 const Carousel = () => {
-  const dispatch = useDispatch();
-  const carouselNumber = useSelector((state) => state.main);
-
   const containerRef = useRef(null);
+
   useEffect(() => {
-    containerRef.current.style.transform = `translateX(-${carouselNumber}00%)`;
-  }, [carouselNumber]);
+    containerRef.current.style.transform = `translateX(-${cur}00%)`;
+  }, []);
 
   const imgArr = [
     'https://img-cf.kurly.com/shop/data/main/1/pc_img_1610827181.jpg',
@@ -27,80 +21,93 @@ const Carousel = () => {
   return (
     <div className="relative">
       <button
-        onClick={() => {
-          if (carouselNumber === 1) {
-            setTimeout(() => {
-              containerRef.current.style.transition = '';
-              containerRef.current.style.transitionDuration = '';
-              containerRef.current.style.transitionProperty = '';
-              containerRef.current.style.transitionTimingFunction = '';
-              setCarouselnumMax();
-            }, 500);
-            containerRef.current.style.transitionDuration = '0.5s';
-            containerRef.current.style.transitionProperty = 'all';
-            containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-            setCarouselnum(-1);
-          } else {
-            containerRef.current.style.transitionDuration = '0.5s';
-            containerRef.current.style.transitionProperty = 'all';
-            containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-            setCarouselnum(-1);
-          }
-        }}
-        className="absolute z-50 w-13 h-13 bg-pre-button left-91 top-159 focus:outline-none"
+        onClick={prevButton}
+        className="absolute z-50 w-p-52 h-p-52 bg-pre-button left-p-91 top-p-159 focus:outline-none"
       />
       <div ref={containerRef} className="relative">
-        <ul className="absolute w-700 ">
-          <li className="w-screen float-left">
-            <img className="h-370 " alt="img" src={imgArr[imgArr.length - 1]} />
-          </li>
+        <ul className="absolute w-vw-700 ">
+          <li
+            className="w-screen float-left h-p-370 bg-center"
+            style={{ backgroundImage: `url(${imgArr[imgArr.length - 1]})` }}
+          />
           {imgArr.map((img, i) => (
-            <li key={i} className="w-screen float-left">
-              <img alt={img} key={i} className="h-370 " src={img} />
-            </li>
+            <li
+              key={i}
+              className="w-screen float-left h-p-370 bg-center"
+              style={{ backgroundImage: `url(${img})` }}
+            />
           ))}
-          <li className="w-screen float-left">
-            <img alt="img" src={imgArr[0]} className="h-370 " />
-          </li>
+          <li
+            className="w-screen float-left h-p-370 bg-center"
+            style={{ backgroundImage: `url(${imgArr[0]})` }}
+          />
         </ul>
       </div>
       <button
-        onClick={() => {
-          if (carouselNumber === imgArr.length) {
-            setTimeout(() => {
-              containerRef.current.style.transition = '';
-              containerRef.current.style.transitionDuration = '';
-              containerRef.current.style.transitionProperty = '';
-              containerRef.current.style.transitionTimingFunction = '';
-              setCarouselnumMin();
-            }, 500);
-            containerRef.current.style.transitionDuration = '0.5s';
-            containerRef.current.style.transitionProperty = 'all';
-            containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-            setCarouselnum(+1);
-          } else {
-            containerRef.current.style.transitionDuration = '0.5s';
-            containerRef.current.style.transitionProperty = 'all';
-            containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-            setCarouselnum(+1);
-          }
-        }}
-        className="absolute right-0 w-13 h-13 bg-next-button right-91 top-159 focus:outline-none"
+        onClick={nextButton}
+        className="z-50 absolute w-p-52 h-p-52 bg-next-button right-p-91 top-p-159 focus:outline-none"
       />
     </div>
   );
 
-  function setCarouselnum(num) {
-    dispatch(setCarousel(num));
+  function prevButton() {
+    if (onAnimate) return;
+    onAnimate = true;
+    if (cur === 1) {
+      console.log('finish');
+      setTimeout(() => {
+        containerRef.current.style.transitionDuration = '';
+        containerRef.current.style.transitionProperty = '';
+        containerRef.current.style.transitionTimingFunction = '';
+        containerRef.current.style.transform = `translateX(-500%)`;
+        cur = 5;
+      }, 500);
+      containerRef.current.style.transitionDuration = '0.5s';
+      containerRef.current.style.transitionProperty = 'all';
+      containerRef.current.style.transitionTimingFunction = 'ease-in-out';
+      containerRef.current.style.transform = `translateX(-${cur - 1}00%)`;
+    } else {
+      console.log('cur + 2 : ', cur + 2);
+      containerRef.current.style.transitionDuration = '0.5s';
+      containerRef.current.style.transitionProperty = 'all';
+      containerRef.current.style.transitionTimingFunction = 'ease-in-out';
+      containerRef.current.style.transform = `translateX(-${cur - 1}00%)`;
+      --cur;
+    }
+
+    setTimeout(() => {
+      onAnimate = false;
+    }, 500);
   }
 
-  function setCarouselnumMin() {
-    dispatch(setCarouselMin());
-  }
+  function nextButton() {
+    if (onAnimate) return;
+    onAnimate = true;
+    if (cur === imgArr.length) {
+      console.log('finish');
+      setTimeout(() => {
+        containerRef.current.style.transitionDuration = '';
+        containerRef.current.style.transitionProperty = '';
+        containerRef.current.style.transitionTimingFunction = '';
+        containerRef.current.style.transform = `translateX(-100%)`;
+        cur = 1;
+      }, 500);
+      containerRef.current.style.transitionDuration = '0.5s';
+      containerRef.current.style.transitionProperty = 'all';
+      containerRef.current.style.transitionTimingFunction = 'ease-in-out';
+      containerRef.current.style.transform = `translateX(-${cur + 1}00%)`;
+    } else {
+      console.log('cur + 2 : ', cur + 2);
+      containerRef.current.style.transitionDuration = '0.5s';
+      containerRef.current.style.transitionProperty = 'all';
+      containerRef.current.style.transitionTimingFunction = 'ease-in-out';
+      containerRef.current.style.transform = `translateX(-${cur + 1}00%)`;
+      ++cur;
+    }
 
-  function setCarouselnumMax() {
-    dispatch(setCarouselMax());
+    setTimeout(() => {
+      onAnimate = false;
+    }, 500);
   }
 };
-
 export default Carousel;
