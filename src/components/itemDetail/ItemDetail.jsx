@@ -7,10 +7,12 @@ const ItemDetail = () => {
   const data = {
     no: '63711',
     img: 'https://img-cf.kurly.com/shop/data/goods/1611715742614y0.jpg',
+    goods_info_img: 'https://img-cf.kurly.com/shop/data/goodsview/20210127/gv30000154524_1.jpg',
     name: '[우주] 무산 재래김 25g(10매 내외)',
     short_description: '장흥에서 양식한 유기 김',
     price: '3300',
-    long_description: '',
+    long_description:
+      '유기산 없이 양식한 우주의 무산 재래김을 만나 보세요. 대부분의 김은 잡조류가 붙는 것을 막기 위해 양식 과정에서 유기산을 뿌리곤 합니다. 하지만 장흥에서는 산을 사용하는 대신 김발을 햇빛에 수시로 노출시켜 잡조류가 붙을 수 없게 했어요. 이처럼, 산을 사용하지 않아 유기 식품으로 인정 받은 재래김을 보내드립니다. 따로 간을 하지 않았으니 취향에 맞춰 소금을 뿌리거나 기름을 발라 구워 드셔 보세요.',
     tags: {
       names: ['Kurly only'],
       types: [
@@ -185,7 +187,12 @@ const ItemDetail = () => {
           expirationDate={data.expiration_date}
         />
         <RelatedProduct relatedProducts={relatedProducts} />
-        <GoodsInfo />
+        <GoodsInfo
+          img={data.goods_info_img}
+          name={data.name}
+          desc={data.short_description}
+          long_desc={data.long_description}
+        />
       </main>
     </div>
   );

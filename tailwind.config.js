@@ -13,6 +13,7 @@ module.exports = {
       1.6: '1.6rem',
       1.8: '1.8rem',
       2: '2rem',
+      3.8: '3.8rem',
     },
     extend: {
       colors: {
@@ -65,7 +66,8 @@ module.exports = {
         'p-430': '43rem',
         'p-552': '55.2rem',
         'p-560': '56rem',
-        'p-950': '95rem',
+        'r-67': '67rem',
+        'p-950': '94.9rem',
         'r-101': '101rem',
         'p-1050': '105rem',
         'per-500': '1000%',

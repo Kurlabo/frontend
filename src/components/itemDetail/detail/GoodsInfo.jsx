@@ -6,13 +6,13 @@ import GoodsReview from './GoodsReview';
 import ProductQnA from './ProductQnA';
 import InfoTab from './InfoTab';
 
-const GoodsInfo = () => {
-  const [state, setState] = useState('상품이미지');
+const GoodsInfo = ({ img, name, desc, long_desc }) => {
+  const [state, setState] = useState('상품설명');
 
   return (
     <div className="w-r-101 mt-20 mb-10">
       <InfoTab onClick={onClick} state={state} />
-      <div className="w-full h-p-950 bg-pink-100">{render()}</div>
+      {render()}
     </div>
   );
 
@@ -23,7 +23,7 @@ const GoodsInfo = () => {
   function render() {
     switch (state) {
       case '상품설명':
-        return <GoodsDesc />;
+        return <GoodsDesc img={img} name={name} desc={desc} long_desc={long_desc} />;
       case '상품이미지':
         return <GoodsImg />;
       case '상세정보':
