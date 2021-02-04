@@ -8,7 +8,7 @@ const SET_CAROUSEL_MAX = 'mainSET_CAROUSEL_MAX';
 
 // 액션 생성 함수
 
-export const setCarousel = createAction(SET_CAROUSEL, (num) => num);
+export const setCarousel = createAction(SET_CAROUSEL, num => num);
 export const setCarouselMin = createAction(SET_CAROUSEL_MIN);
 export const setCarouselMax = createAction(SET_CAROUSEL_MAX);
 

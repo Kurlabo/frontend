@@ -1,15 +1,11 @@
 import { useEffect } from 'react';
 import { useRef } from 'react';
-import {
-  setCarousel,
-  setCarouselMax,
-  setCarouselMin,
-} from '../../../modules/main';
+import { setCarousel, setCarouselMax, setCarouselMin } from '../../../modules/main';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Carousel = () => {
   const dispatch = useDispatch();
-  const carouselNumber = useSelector((state) => state.main);
+  const carouselNumber = useSelector(state => state.main);
 
   const containerRef = useRef(null);
   useEffect(() => {
@@ -85,7 +81,7 @@ const Carousel = () => {
             setCarouselnum(+1);
           }
         }}
-        className="absolute right-0 w-13 h-13 bg-next-button right-91 top-159 focus:outline-none"
+        className="absolute w-13 h-13 bg-next-button right-91 top-159 focus:outline-none"
       />
     </div>
   );
