@@ -1,22 +1,27 @@
 import React, { useRef, useState } from 'react';
-import { BiSearch, ImRadioChecked2 } from 'react-icons/fa';
+import { FiSearch } from 'react-icons/fi';
+import { RiRadioButtonFill } from 'react-icons/ri';
+import { RiCheckboxBlankCircleLine } from 'react-icons/ri';
+import CheckBox from './CheckBox';
+import FormInput from './FormInput';
+import IdInput from './IdInput';
 
 const Signup = () => {
-  // const divFlex = 'flex flex-row flex-nowrap justify-center items-center py-4';
   const formTitle = 'pt-28 font-black text-5xl text-center';
   const regForm = 'text-r-1.4';
   const regTitle = 'font-bold text-left align-top pt-7 ';
   const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
   const subText = 'text-r-1.2 text-gray-600';
-  // const regInputDate = 'border-solid border border-inputGray w-formInput h-16 px-6';
   const formButton =
     'w-48 ml-2 font-bold text-kp-600 border-kp-600 border-solid border rounded h-r-4.4';
   const formTdButton =
     'w-formInput font-bold text-kp-600 border-kp-600 border-solid border rounded h-r-4.4';
   const formRadio = 'w-10 h-10 border-inputRadio mr-5';
   const submitBtn = 'bg-kp-600 text-white w-96 h-20 rounded-md';
+  const hidden = 'bg-kp-600 text-white w-96 h-20 rounded-md';
   const radioLabel = { verticalAlign: 'super' };
-  // const birthDiv = 'border-solid border border-inputGray';
+  const formRadioIcon = 'inline-block w-10 h-10 border-inputRadio mr-5 text-kp-600';
+  const formRadioIcon2 = `${formRadioIcon} text-inputGray`;
 
   const [id, setId] = useState('');
   const [pass, setPass] = useState('');
@@ -31,49 +36,36 @@ const Signup = () => {
 
   const [validRePass, setValidRePass] = useState(false);
 
+  const [gender, setGender] = useState(false);
+
+  const [allagree, setAllAgree] = useState(false);
+  const [agree1, setAgree1] = useState(false);
+  const [agree2, setAgree2] = useState(false);
+  const [info, setInfo] = useState(false);
+  const [sns, setSns] = useState(false);
+  const [email, setEmail] = useState(false);
+  const [age, setAge] = useState(false);
+
+  const formRef = useRef();
   const idSub = useRef();
   const passSub = useRef();
   const rePassSub = useRef();
 
-  const onFocusId = () => {
-    idSub.current.className = 'block';
-  };
-  const onFocusPass = () => {
-    passSub.current.className = 'block';
-  };
-  const onFocusRePass = () => {
-    rePassSub.current.className = 'block';
-  };
+  const emailRef = useRef();
+  const phoneRef = useRef();
 
-  const onChangeId = e => {
-    setId(e.target.value);
-    var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+  const yearRef = useRef();
+  const monthRef = useRef();
+  const dayRef = useRef();
 
-    idReg.test(id) ? setValidId1(true) : setValidId1(false);
-  };
+  const agree1Ref = useRef();
+  const agree2Ref = useRef();
+  const infoRef = useRef();
+  const snsRef = useRef();
+  const emailRef2 = useRef();
+  const ageRef = useRef();
 
-  const onChangePass = e => {
-    setPass(e.target.value);
-    setValidRePass(false);
-    var pwRegExp1 = /^[~`!@#$%^&*()_+=[\]\{}|;':",.\/<>?a-zA-Z0-9-]+$/;
-    var pwRegExp2 = /(\w)\1\1/;
-
-    e.target.value.length >= 9 ? setValidPass1(true) : setValidPass1(false);
-    pwRegExp1.test(e.target.value) ? setValidPass2(true) : setValidPass2(false);
-    pwRegExp2.test(e.target.value) ? setValidPass3(false) : setValidPass3(true);
-  };
-
-  const onChangeRePass = e => {
-    setrePass(e.target.value);
-    pass && pass === e.target.value ? setValidRePass(true) : setValidRePass(false);
-  };
-
-  const onSubmit = e => {
-    e.preventDefault();
-    return validId1 && validId2 && validPass1 && validPass2 && validPass3 && validRePass
-      ? true
-      : false;
-  };
+  const setStates = [setAgree1, setAgree2, setInfo, setSns, setEmail, setAge];
 
   return (
     <div className="w-r-64 ml-auto mr-auto pb-48">
@@ -82,7 +74,7 @@ const Signup = () => {
         <span className="text-formStar">*</span>
         필수입력사항
       </p>
-      <form className={regForm} onSubmit={onSubmit}>
+      <form className={regForm} onSubmit={onSubmit} ref={formRef}>
         <table className="ml-auto mr-auto">
           <colgroup>
             <col width="160px" />
@@ -100,6 +92,9 @@ const Signup = () => {
                   className={regInput}
                   onChange={onChangeId}
                   onFocus={onFocusId}
+                  placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"
+                  ref={idSub}
+                  state={validId1}
                 />
                 <div className="hidden" ref={idSub}>
                   <p className={`${subText} ${validId1 ? 'text-green-700' : 'text-red-800'}`}>
@@ -125,6 +120,7 @@ const Signup = () => {
                   className={regInput}
                   onChange={onChangePass}
                   onFocus={onFocusPass}
+                  placeholder="비밀번호를 입력해주세요"
                 />
                 <div className="hidden" ref={passSub}>
                   <p className={`${subText} ${validPass1 ? 'text-green-700' : 'text-red-800'}`}>
@@ -150,6 +146,7 @@ const Signup = () => {
                   className={regInput}
                   onChange={onChangeRePass}
                   onFocus={onFocusRePass}
+                  placeholder="비밀번호를 한번 더 입력해주세요"
                 />
                 <div className="hidden" ref={rePassSub}>
                   <p className={`${subText} ${validRePass ? 'text-green-700' : 'text-red-800'}`}>
@@ -159,31 +156,27 @@ const Signup = () => {
               </td>
             </tr>
             <tr>
-              <th className={regTitle}>
-                이름<span className="text-formStar">*</span>
-              </th>
-              <td className="py-4" colSpan="2">
-                <input type="text" name="name" className={regInput} />
-              </td>
+              <FormInput name="name" placeholder="이름을 입력해주세요">
+                이름
+              </FormInput>
             </tr>
             <tr>
-              <th className={regTitle}>
-                이메일<span className="text-formStar">*</span>
-              </th>
-              <td className="py-4">
-                <input type="text" name="email" className={regInput} />
-              </td>
+              <FormInput name="email" placeholder="예: marketkurly@kurly.com" ref={emailRef}>
+                이메일
+              </FormInput>
               <td>
                 <button className={formButton}>중복확인</button>
               </td>
             </tr>
             <tr>
-              <th className={regTitle}>
-                휴대폰<span className="text-formStar">*</span>
-              </th>
-              <td className="py-4" colSpan="2">
-                <input type="text" name="phone" className={regInput} />
-              </td>
+              <FormInput
+                name="phone"
+                placeholder="숫자만 입력해주세요"
+                ref={phoneRef}
+                onChange={checkPhone}
+              >
+                휴대폰
+              </FormInput>
             </tr>
             <tr>
               <th className={regTitle}>
@@ -191,7 +184,7 @@ const Signup = () => {
               </th>
               <td className="py-4">
                 <button className={formTdButton}>
-                  <BiSearch />
+                  <FiSearch className="inline-block" />
                   주소검색
                 </button>
                 <input type="text" name="address" />
@@ -207,37 +200,54 @@ const Signup = () => {
                 <div className="w-1/3 inline-block">
                   <input
                     type="radio"
-                    id="gender1"
+                    id="man"
                     name="gender"
                     value="man"
-                    className={formRadio}
+                    className="hidden"
+                    onChange={e => setGender(e.target.id)}
                   />
-                  <label htmlFor="gender1" className="align-top">
+                  <label htmlFor="man" style={radioLabel}>
+                    {gender === 'man' ? (
+                      <RiRadioButtonFill className={formRadioIcon} />
+                    ) : (
+                      <RiCheckboxBlankCircleLine className={formRadioIcon2} />
+                    )}
                     남자
                   </label>
                 </div>
                 <div className="w-1/3 inline-block">
                   <input
                     type="radio"
-                    id="gender2"
+                    id="woman"
                     name="gender"
                     value="woman"
-                    className={formRadio}
+                    className="hidden"
+                    onChange={e => setGender(e.target.id)}
                   />
-                  <ImRadioChecked2 />
-                  <label htmlFor="gender2" className="align-top">
+                  <label htmlFor="woman" style={radioLabel}>
+                    {gender === 'woman' ? (
+                      <RiRadioButtonFill className={formRadioIcon} />
+                    ) : (
+                      <RiCheckboxBlankCircleLine className={formRadioIcon2} />
+                    )}
                     여자
                   </label>
                 </div>
                 <div className="w-1/3 inline-block">
                   <input
                     type="radio"
-                    id="gender3"
+                    id="none"
                     name="gender"
                     value="none"
-                    className={formRadio}
+                    className="hidden"
+                    onChange={e => setGender(e.target.id)}
                   />
-                  <label htmlFor="gender3" className="align-top">
+                  <label htmlFor="none" style={radioLabel}>
+                    {gender === 'none' ? (
+                      <RiRadioButtonFill className={formRadioIcon} />
+                    ) : (
+                      <RiCheckboxBlankCircleLine className={formRadioIcon2} />
+                    )}
                     선택안함
                   </label>
                 </div>
@@ -255,18 +265,21 @@ const Signup = () => {
                     name="birthY"
                     className="w-1/3 mt-3 text-center"
                     placeholder="YYYY"
+                    onChange={checkY}
                   />
                   <input
                     type="text"
                     name="birthM"
                     className="w-1/3 mt-3 text-center"
                     placeholder="MM"
+                    onChange={checkMD}
                   />
                   <input
                     type="text"
                     name="birthD"
                     className="w-1/3 mt-3 text-center"
                     placeholder="DD"
+                    onChange={checkMD}
                   />
                 </div>
               </td>
@@ -277,66 +290,57 @@ const Signup = () => {
                 이용약관동의<span className="text-formStar">*</span>
               </th>
               <td className="py-4" colSpan="2">
-                <div className="py-4">
-                  <input type="radio" id="allTerms" className={formRadio} />
-                  <label htmlFor="allTerms" style={radioLabel}>
-                    전체약관동의
-                  </label>
-                  <p className={`${subText} text-1.2 pl-14 -mt-4`}>
-                    선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수
-                    있습니다.
+                <CheckBox id="allTerms" state={allagree} onChange={onChangeAll}>
+                  전체약관동의
+                </CheckBox>
+                <CheckBox
+                  id="agree1"
+                  state={agree1}
+                  ref={agree1Ref}
+                  onChange={() => setAgree1(!agree1)}
+                >
+                  이용약관 동의<span className="sub">(필수)</span>
+                </CheckBox>
+                <CheckBox
+                  id="agree2"
+                  state={agree2}
+                  ref={agree2Ref}
+                  onChange={() => setAgree2(!agree2)}
+                >
+                  개인정보처리방침 동의<span className="sub">(필수)</span>
+                </CheckBox>
+                <CheckBox id="info" state={info} ref={infoRef} onChange={() => setInfo(!info)}>
+                  무료배송, 할인쿠폰 등 혜택/정보 수신 동의<span className="sub">(선택))</span>
+                </CheckBox>
+                <div className="pl-14">
+                  <CheckBox
+                    id="sns"
+                    state={sns}
+                    ref={snsRef}
+                    onChange={() => setSns(!sns)}
+                    sub={true}
+                  >
+                    <span className="align-middle">SMS</span>
+                  </CheckBox>
+                  <CheckBox
+                    id="email"
+                    state={email}
+                    ref={emailRef2}
+                    onChange={() => setEmail(!email)}
+                    sub={true}
+                  >
+                    <span className="align-middle">이메일</span>
+                  </CheckBox>
+                  <p className={`${subText} text-1.2`}>
+                    <span className="text-kp-600">
+                      동의 시 한 달간 [5% 적립] + [무제한 무료배송]
+                    </span>
+                    <span className="sub">(첫 주문 후 적용)</span>
                   </p>
                 </div>
-                <div className="py-4">
-                  <input type="radio" id="agree1" className={formRadio} />
-                  <label htmlFor="agree1" style={radioLabel}>
-                    이용약관 동의<span className="sub">(필수)</span>
-                  </label>
-                </div>
-                <div className="py-4">
-                  <input type="radio" id="agree2" className={formRadio} />
-                  <label htmlFor="agree2" style={radioLabel}>
-                    개인정보처리방침 동의<span className="sub">(필수)</span>
-                  </label>
-                </div>
-                <div className="py-4">
-                  <input type="radio" id="agree3" className={formRadio} />
-                  <label htmlFor="agree3" style={radioLabel}>
-                    개인정보처리방침 동의<span className="sub">(선택))</span>
-                  </label>
-                </div>
-                <div className="py-4">
-                  <input type="radio" id="allTerms" className={formRadio} />
-                  <label htmlFor="allTerms" style={radioLabel}>
-                    무료배송, 할인쿠폰 등 혜택/정보 수신 동의<span className="sub">(선택))</span>
-                  </label>
-                  <div className="pl-14">
-                    <input type="radio" id="contact1" name="method" value="sms" className="mr-5" />
-                    <label htmlFor="contact1" className="pr-32">
-                      SMS
-                    </label>
-                    <input
-                      type="radio"
-                      id="contact2"
-                      name="method"
-                      value="email"
-                      className="mr-5"
-                    />
-                    <label htmlFor="contact2">이메일</label>
-                    <p className={`${subText} text-1.2`}>
-                      <span className="text-kp-600">
-                        동의 시 한 달간 [5% 적립] + [무제한 무료배송]
-                      </span>
-                      <span className="sub">(첫 주문 후 적용)</span>
-                    </p>
-                  </div>
-                </div>
-                <div>
-                  <input type="radio" id="age" className={formRadio} />
-                  <label htmlFor="age" style={radioLabel}>
-                    본인은 만 14세 이상입니다. <span className="sub">(필수)</span>
-                  </label>
-                </div>
+                <CheckBox id="age" state={age} ref={ageRef} onChange={() => setAge(!age)}>
+                  본인은 만 14세 이상입니다. <span className="sub">(필수)</span>
+                </CheckBox>
               </td>
               <td></td>
             </tr>
@@ -352,6 +356,87 @@ const Signup = () => {
       </form>
     </div>
   );
+
+  function onFocusId() {
+    idSub.current.className = 'block';
+  }
+  function onFocusPass() {
+    passSub.current.className = 'block';
+  }
+  function onFocusRePass() {
+    rePassSub.current.className = 'block';
+  }
+
+  function onChangeId(e) {
+    setId(e.target.value);
+    var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+
+    idReg.test(id) ? setValidId1(true) : setValidId1(false);
+  }
+
+  function onChangePass(e) {
+    setPass(e.target.value);
+    setValidRePass(false);
+    var pwRegExp1 = /^[~`!@#$%^&*()_+=[\]\{}|;':",.\/<>?a-zA-Z0-9-]+$/;
+    var pwRegExp2 = /(\w)\1\1/;
+
+    e.target.value.length >= 9 ? setValidPass1(true) : setValidPass1(false);
+    pwRegExp1.test(e.target.value) ? setValidPass2(true) : setValidPass2(false);
+    pwRegExp2.test(e.target.value) ? setValidPass3(false) : setValidPass3(true);
+  }
+
+  function onChangeRePass(e) {
+    setrePass(e.target.value);
+    pass && pass === e.target.value ? setValidRePass(true) : setValidRePass(false);
+  }
+  function onChangeEmail(e) {
+    const emailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+    setrePass(e.target.value);
+    pass && pass === e.target.value ? setValidRePass(true) : setValidRePass(false);
+  }
+
+  function onChangeAll(e) {
+    setAllAgree(e.target.checked);
+    [agree1Ref, agree2Ref, infoRef, snsRef, emailRef2, ageRef].forEach((ref, i) => {
+      ref.current.checked = e.target.checked;
+      setStates[i](e.target.checked);
+    });
+  }
+
+  function onSubmit(e) {
+    e.preventDefault();
+    const valid = validId1 && validId2 && validPass1 && validPass2 && validPass3 && validRePass;
+    if (!valid) return false;
+    const newUser = {};
+    const formData = new FormData(formRef.current);
+    for (let [key, value] of formData) {
+      newUser[key] = value;
+    }
+    console.log(newUser);
+  }
+
+  function checkPhone(e) {
+    const phoneNum = e.target.value;
+    const lastChar = phoneNum.slice(-1);
+    if (!+lastChar || phoneNum.length > 12) {
+      e.target.value = phoneNum.substring(0, phoneNum.length - 1);
+    }
+  }
+  function checkY(e) {
+    const phoneNum = e.target.value;
+    const lastChar = phoneNum.slice(-1);
+    if (!+lastChar || phoneNum.length > 4) {
+      e.target.value = phoneNum.substring(0, phoneNum.length - 1);
+    }
+  }
+  function checkMD(e) {
+    const phoneNum = e.target.value;
+    const lastChar = phoneNum.slice(-1);
+    if (!+lastChar || phoneNum.length > 2) {
+      e.target.value = phoneNum.substring(0, phoneNum.length - 1);
+    }
+  }
 };
 
 export default Signup;
