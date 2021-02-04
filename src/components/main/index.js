@@ -1,10 +1,12 @@
 import React from 'react';
-import Carousel from './carousel/index';
+import Carousel from './BigCarousel';
+import SmallCarousel from './SmallCarousel/index';
 
 const Main = () => {
   return (
     <div>
-      <Carousel />
+      {/* <Carousel /> */}
+      <SmallCarousel title="이 상품 어때요?" />
     </div>
   );
 };

@@ -8,6 +8,12 @@
   margin: 0 auto;
 }
 
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
 /* 
 body {
   margin: 0;
@@ -27,4 +33,7 @@ code {
   html {
     font-size: 10px;
   }
+}
+* {
+  box-sizing: border-box;
 }

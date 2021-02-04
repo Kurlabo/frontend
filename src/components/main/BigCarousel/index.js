@@ -3,7 +3,7 @@ import { useRef } from 'react';
 let onAnimate = false;
 let cur = 1;
 
-const Carousel = () => {
+const BigCarousel = () => {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -19,13 +19,13 @@ const Carousel = () => {
   ];
 
   return (
-    <div className="relative">
+    <div className="relative ">
       <button
         onClick={prevButton}
         className="absolute z-50 w-p-52 h-p-52 bg-pre-button left-p-91 top-p-159 focus:outline-none"
       />
       <div ref={containerRef} className="relative">
-        <ul className="absolute w-vw-700 ">
+        <ul className="absolute w-vw-700">
           <li
             className="w-screen float-left h-p-370 bg-center"
             style={{ backgroundImage: `url(${imgArr[imgArr.length - 1]})` }}
@@ -110,4 +110,4 @@ const Carousel = () => {
     }, 500);
   }
 };
-export default Carousel;
+export default BigCarousel;
