@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 
 // const AuthStyledInput = styled.input``;
 export default function Input(props) {

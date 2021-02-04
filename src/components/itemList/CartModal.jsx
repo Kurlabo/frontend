@@ -55,11 +55,11 @@ const CartModal = ({ modalIsOpen, closeModal }) => {
         <div className="inline-block text-2xl font-bold">5,000원</div>
         <div className={quanWrapper}>
           <button className="w-p-28 focus:outline-0" onClick={onPlus}>
-            <img src="img/ico_plus_on.svg" alt="수량올리기" />
+            <img src="/img/ico_plus_on.svg" alt="수량올리기" />
           </button>
           <span className="w-p-33">{count}</span>
           <button className="w-p-28 focus:outline-0" onClick={onMinus}>
-            <img src="img/ico_minus_on.svg" alt="수량내리기" />
+            <img src="/img/ico_minus_on.svg" alt="수량내리기" />
           </button>
         </div>
       </div>

@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from './modules/index';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { ErrorBoundary } from '../node_modules/react-error-boundary/dist/index';
+import { ErrorBoundary } from 'react-error-boundary';
 import ErrorPage from './pages/ErrorPage';
 
 const store = createStore(rootReducer, composeWithDevTools());

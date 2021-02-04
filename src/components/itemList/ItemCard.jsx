@@ -14,7 +14,7 @@ const ItemCard = () => {
         <div className="pt-6 ">
           <button>
             <img
-              src="img/cart.svg"
+              src="/img/cart.svg"
               alt="장바구니 이미지"
               className={cartStyle}
               onClick={openModal}
