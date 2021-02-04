@@ -5,6 +5,8 @@ let cur = 1;
 
 const SmallCarousel = ({ title }) => {
   const containerRef = useRef(null);
+  const prevButtonRef = useRef(null);
+  const nextButtonRef = useRef(null);
 
   useEffect(() => {
     containerRef.current.style.transform = `translateX(-1050px)`;
@@ -43,7 +45,8 @@ const SmallCarousel = ({ title }) => {
       </p>
       <div className="relative">
         <button
-          onClick={prevButton}
+          onClick={(e) => prevButton(e)}
+          ref={prevButtonRef}
           className="absolute z-50 w-r-6 h-r-6 bg-r-6 left- bg-sm-pre-button left-r--3 top-r-13 focus:outline-none"
         />
         <div className="overflow-hidden">
@@ -457,33 +460,22 @@ const SmallCarousel = ({ title }) => {
           </ul>
         </div>
         <button
-          onClick={nextButton}
+          onClick={(e) => nextButton(e)}
+          ref={nextButtonRef}
           className="z-50 absolute w-r-6 h-r-6 bg-r-6 bg-sm-next-button right-r--3 top-r-13 focus:outline-none"
         />
       </div>
     </div>
   );
 
-  function prevButton() {
+  function prevButton(e) {
     if (onAnimate) return;
     onAnimate = true;
+    console.log(cur);
     if (cur === 1) {
-      console.log('finish');
-      setTimeout(() => {
-        containerRef.current.style.transitionDuration = '';
-        containerRef.current.style.transitionProperty = '';
-        containerRef.current.style.transitionTimingFunction = '';
-        containerRef.current.style.transform = `translateX(-5250px)`;
-        cur = 5;
-      }, 500);
-      containerRef.current.style.transitionDuration = '0.5s';
-      containerRef.current.style.transitionProperty = 'all';
-      containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-      containerRef.current.style.transform = `translateX(-${
-        (cur - 1) * 1050
-      }px)`;
+      e.target.disabled = true;
+      e.target.style.display = 'none';
     } else {
-      console.log('cur + 2 : ', cur + 2);
       containerRef.current.style.transitionDuration = '0.5s';
       containerRef.current.style.transitionProperty = 'all';
       containerRef.current.style.transitionTimingFunction = 'ease-in-out';
@@ -491,6 +483,8 @@ const SmallCarousel = ({ title }) => {
         (cur - 1) * 1050
       }px)`;
       --cur;
+      nextButtonRef.current.disabled = false;
+      nextButtonRef.current.style.display = '';
     }
 
     setTimeout(() => {
@@ -498,24 +492,12 @@ const SmallCarousel = ({ title }) => {
     }, 500);
   }
 
-  function nextButton() {
+  function nextButton(e) {
     if (onAnimate) return;
     onAnimate = true;
     if (cur === 5) {
-      console.log('finish');
-      setTimeout(() => {
-        containerRef.current.style.transitionDuration = '';
-        containerRef.current.style.transitionProperty = '';
-        containerRef.current.style.transitionTimingFunction = '';
-        containerRef.current.style.transform = `translateX(-1050px)`;
-        cur = 1;
-      }, 500);
-      containerRef.current.style.transitionDuration = '0.5s';
-      containerRef.current.style.transitionProperty = 'all';
-      containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-      containerRef.current.style.transform = `translateX(-${
-        (cur + 1) * 1050
-      }px)`;
+      e.target.style.display = 'none';
+      e.target.disabled = true;
     } else {
       containerRef.current.style.transitionDuration = '0.5s';
       containerRef.current.style.transitionProperty = 'all';
@@ -524,6 +506,8 @@ const SmallCarousel = ({ title }) => {
         (cur + 1) * 1050
       }px)`;
       ++cur;
+      prevButtonRef.current.disabled = false;
+      prevButtonRef.current.style.display = '';
     }
 
     setTimeout(() => {
