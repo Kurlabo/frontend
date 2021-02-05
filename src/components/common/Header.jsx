@@ -1,17 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import LinkToSign from './LinkToSign';
-import HeaderNav from './HeaderNav';
-import { a11yHidden } from './HeaderNav';
+import HeaderNav from '../header/HeaderNav';
+import { a11yHidden } from '../header/HeaderNav';
+import LinkToSign from '../header/LinkToSign';
 
 const logoUrl = 'https://res.kurly.com/images/marketkurly/logo/logo_x2.png';
 
 const Header = () => {
   return (
-    <header className="w-full border-gray-50 border-4 m-auto mb-5">
+    <header className="w-full m-auto mb-6">
       <LinkToSign />
-      <div className="mx-auto w-r-10.3 h-r-7.9 mb-7 font-bold">
+      <div className="mx-auto w-r-10.3 h-r-7.9 mb-2 font-bold transform -translate-y-6">
         <h1 className={a11yHidden}>마켓컬리 홈</h1>
         <Link to="/">
           <img src={logoUrl} alt="home" />

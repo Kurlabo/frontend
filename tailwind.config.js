@@ -6,7 +6,6 @@ module.exports = {
       fontFamily: {
         body: ['Noto Sans KR'],
       },
-
       borderRadius: {
         'p-3': '0.3rem',
         '50-p': '50%',
@@ -24,6 +23,8 @@ module.exports = {
         2: '2rem',
       },
       inset: {
+        'r-4.5': '4.5rem',
+        'r-4.6': '4.6rem',
         91: '91px',
         159: '159px',
       },
@@ -70,10 +71,13 @@ module.exports = {
         'p-870': '87rem',
         'p-1050': '105rem',
         // rem 단위
+        'r-0.3': '0.3rem',
+        'r-0.9': '0.9rem',
         'r-2.2': '2.2rem',
         'r-3.6': '3.6rem',
         'r-7.9': '7.9rem',
         'r-10.3': '10.3rem',
+        'r-15.8': '15.8rem',
         'r-16.3': '16.3rem',
         'r-24.2': '24.2rem',
         'r-58': '58rem',
@@ -81,6 +85,7 @@ module.exports = {
         13: '52px',
         370: '370px',
       },
+
       outline: {
         0: ['0px solid #ffffff'],
         54: '54px',
@@ -89,6 +94,14 @@ module.exports = {
         0.9: '0.9rem',
         2.8: '2.8rem',
         1.1: '1.1rem',
+      },
+      zIndex: {
+        60: 60,
+        70: 70,
+        80: 80,
+        90: 90,
+        100: 100,
+        900: 900,
       },
     },
   },
