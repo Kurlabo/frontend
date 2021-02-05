@@ -2,6 +2,9 @@ module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    borderRadius: {
+      'r-2': '2rem',
+    },
     backgroundSize: {
       'r-6': '6rem',
     },
@@ -46,10 +49,14 @@ module.exports = {
         'r-13': '13rem',
       },
       colors: {
+        kb: {
+          100: '#f6f3f8',
+        },
         kg: {
           200: '#b5b5b5',
           300: '#4c4c4c',
           400: '#333',
+          500: '#f7f7f7',
         },
         kp: {
           100: '#B1A9C6',
@@ -81,7 +88,7 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: { fontWeight: ['hover', 'focus'] },
   },
   plugins: [],
 };
