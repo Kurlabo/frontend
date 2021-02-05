@@ -9,7 +9,7 @@ const ItemCard = () => {
     <>
       <div className="pt-10 pl-14 relative cursor-pointer">
         <div className="overflow-hidden">
-          <img src="/img/banana.jpg" alt="avocado" className={imgStyle} />
+          <img src="/img/salmon.jpg" alt="avocado" className={imgStyle} />
         </div>
         <div className="pt-6 ">
           <button>
