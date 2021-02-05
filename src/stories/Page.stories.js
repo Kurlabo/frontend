@@ -1,4 +1,5 @@
 import React from 'react';
+import '../index.css';
 
 import { Page } from './Page';
 import * as HeaderStories from './Header.stories';
@@ -8,7 +9,7 @@ export default {
   component: Page,
 };
 
-const Template = (args) => <Page {...args} />;
+const Template = args => <Page {...args} />;
 
 export const LoggedIn = Template.bind({});
 LoggedIn.args = {
