@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -7,6 +7,9 @@ module.exports = {
         body: ['Noto Sans KR'],
       },
       fontSize: {
+        'r-0': '0rem',
+        'p-16': '1.6rem',
+        'p-24': '2.4rem',
         'r-1.2': '1.2rem',
         'r-1.3': '1.3rem',
         'r-1.4': '1.4rem',
@@ -19,11 +22,43 @@ module.exports = {
         formWidth: '64rem',
         formInput: '32rem',
       },
+      borderRadius: {
+        'p-3': '0.3rem',
+        '50-p': '50%',
+      },
       height: {
         16.5: '4.4rem',
       },
       padding: {
         102: '10.2rem',
+      },
+      inset: {
+        'r-4.5': '4.5rem',
+        'r-4.6': '4.6rem',
+        'p-91': '91px',
+        'p-159': '159px',
+      },
+      borderRadius: {
+        'p-3': '0.3rem',
+        '50-p': '50%',
+      },
+      fontSize: {
+        'r-0': '0rem',
+        'p-16': '1.6rem',
+        'p-24': '2.4rem',
+        1.2: '1.2rem',
+        1.3: '1.3rem',
+        1.4: '1.4rem',
+        1.5: '1.5rem',
+        1.6: '1.6rem',
+        1.8: '1.8rem',
+        2: '2rem',
+      },
+      inset: {
+        'r-4.5': '4.5rem',
+        'r-4.6': '4.6rem',
+        91: '91px',
+        159: '159px',
       },
       colors: {
         kg: {
@@ -62,7 +97,13 @@ module.exports = {
         inputRadio: '#dddddd',
       },
       outline: {
-        none: ['0px solid #0000ff', '0px'],
+        0: ['0px solid #ffffff'],
+        54: '54px',
+        340: '340px',
+        19: '1.9rem',
+        0.9: '0.9rem',
+        2.8: '2.8rem',
+        1.1: '1.1rem',
       },
       spacing: {
         'p-54': '54px',
@@ -75,6 +116,35 @@ module.exports = {
         'r-4.4': '4.4rem',
         'r-64': '64rem',
         'r-32': '32rem',
+        'p-28': '2.8rem',
+        'p-33': '3.3rem',
+        'p-38': '3.8rem',
+        'p-400': '40rem',
+        'p-308': '30.8rem',
+        'p-396': '39.6rem',
+        'p-870': '87rem',
+        'p-1050': '105rem',
+        // rem 단위
+        'r-0.3': '0.3rem',
+        'r-2.2': '2.2rem',
+        'r-3.6': '3.6rem',
+        'r-7.9': '7.9rem',
+        'r-10.3': '10.3rem',
+        'r-15.8': '15.8rem',
+        'r-16.3': '16.3rem',
+        'r-24.2': '24.2rem',
+        'r-58': '58rem',
+        700: '700vw',
+        13: '52px',
+        370: '370px',
+      },
+      zIndex: {
+        60: 60,
+        70: 70,
+        80: 80,
+        90: 90,
+        100: 100,
+        900: 900,
       },
     },
   },
