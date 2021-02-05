@@ -12,10 +12,8 @@ const GotopBtn = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', btnRender);
-    console.log('addevent');
     return () => {
       window.removeEventListener('scroll', btnRender);
-      console.log('cleanup');
     };
   }, []);
 
