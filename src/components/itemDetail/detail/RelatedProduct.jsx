@@ -94,7 +94,7 @@ const RelatedProduct = ({ relatedProducts }) => {
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
-          <path strokeLinecap="round" strokeLinejoinn="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
         <div className="h-p-320 w-p-950 overflow-hidden relative my-0 mx-auto">
           <ul className="absolute w-per-500" ref={containerRef}>

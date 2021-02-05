@@ -8,6 +8,7 @@ const ItemDetail = () => {
     no: '63711',
     img: 'https://img-cf.kurly.com/shop/data/goods/1611715742614y0.jpg',
     goods_info_img: 'https://img-cf.kurly.com/shop/data/goodsview/20210127/gv30000154524_1.jpg',
+    goods_detail_img: 'https://img-cf.kurly.com/shop/data/goodsview/20210127/gv30000154526_1.jpg',
     name: '[우주] 무산 재래김 25g(10매 내외)',
     short_description: '장흥에서 양식한 유기 김',
     price: '3300',
@@ -192,6 +193,7 @@ const ItemDetail = () => {
           name={data.name}
           desc={data.short_description}
           long_desc={data.long_description}
+          goods_detail_img={data.goods_detail_img}
         />
       </main>
     </div>

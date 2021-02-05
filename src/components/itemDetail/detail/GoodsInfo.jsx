@@ -6,7 +6,7 @@ import GoodsReview from './GoodsReview';
 import ProductQnA from './ProductQnA';
 import InfoTab from './InfoTab';
 
-const GoodsInfo = ({ img, name, desc, long_desc }) => {
+const GoodsInfo = ({ img, name, desc, long_desc, goods_detail_img }) => {
   const [state, setState] = useState('상품설명');
 
   return (
@@ -25,9 +25,9 @@ const GoodsInfo = ({ img, name, desc, long_desc }) => {
       case '상품설명':
         return <GoodsDesc img={img} name={name} desc={desc} long_desc={long_desc} />;
       case '상품이미지':
-        return <GoodsImg />;
+        return <GoodsImg goods_detail_img={goods_detail_img} />;
       case '상세정보':
-        return <GoodsDetailInfo />;
+        return <GoodsDetailInfo name={name} />;
       case '고객후기':
         return <GoodsReview />;
       case '상품문의':
