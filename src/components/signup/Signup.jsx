@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { RiRadioButtonFill } from 'react-icons/ri';
 import { RiCheckboxBlankCircleLine } from 'react-icons/ri';
 import CheckBox from './CheckBox';
 import FormInput from './FormInput';
 import IdInput from './IdInput';
+import PassInput from './PassInput';
 
 const Signup = () => {
   const formTitle = 'pt-28 font-black text-5xl text-center';
@@ -16,24 +17,16 @@ const Signup = () => {
     'w-48 ml-2 font-bold text-kp-600 border-kp-600 border-solid border rounded h-r-4.4';
   const formTdButton =
     'w-formInput font-bold text-kp-600 border-kp-600 border-solid border rounded h-r-4.4';
-  const formRadio = 'w-10 h-10 border-inputRadio mr-5';
   const submitBtn = 'bg-kp-600 text-white w-96 h-20 rounded-md';
-  const hidden = 'bg-kp-600 text-white w-96 h-20 rounded-md';
   const radioLabel = { verticalAlign: 'super' };
   const formRadioIcon = 'inline-block w-10 h-10 border-inputRadio mr-5 text-kp-600';
   const formRadioIcon2 = `${formRadioIcon} text-inputGray`;
 
-  const [id, setId] = useState('');
-  const [pass, setPass] = useState('');
-  const [repass, setrePass] = useState('');
-
   const [validId1, setValidId1] = useState(false);
   const [validId2, setValidId2] = useState(false);
-
   const [validPass1, setValidPass1] = useState(false);
   const [validPass2, setValidPass2] = useState(false);
   const [validPass3, setValidPass3] = useState(false);
-
   const [validRePass, setValidRePass] = useState(false);
 
   const [gender, setGender] = useState(false);
@@ -49,6 +42,7 @@ const Signup = () => {
   const formRef = useRef();
   const idSub = useRef();
   const passSub = useRef();
+  const rePassRef = useRef();
   const rePassSub = useRef();
 
   const emailRef = useRef();
@@ -81,80 +75,12 @@ const Signup = () => {
           </colgroup>
           <tbody>
             <tr>
-              <th className={regTitle}>
-                아이디
-                <span className="text-formStar">*</span>
-              </th>
-              <td className="py-4">
-                <input
-                  type="text"
-                  name="uid"
-                  className={regInput}
-                  onChange={onChangeId}
-                  onFocus={onFocusId}
-                  placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"
-                  ref={idSub}
-                  state={validId1}
-                />
-                <div className="hidden" ref={idSub}>
-                  <p className={`${subText} ${validId1 ? 'text-green-700' : 'text-red-800'}`}>
-                    · 6자 이상의 영문 혹은 영문과 숫자를 조합
-                  </p>
-                  <p className={`${subText} ${validId2 ? 'text-green-700' : 'text-red-800'}`}>
-                    · 아이디 중복확인
-                  </p>
-                </div>
-              </td>
-              <td className="align-baseline pt-3.5">
-                <button className={formButton}>중복확인</button>
-              </td>
+              <IdInput state={[validId1, validId2]} setState={[setValidId1, setValidId2]} />
             </tr>
-            <tr>
-              <th className={regTitle}>
-                비밀번호<span className="text-formStar">*</span>
-              </th>
-              <td className="py-4" colSpan="2">
-                <input
-                  type="password"
-                  name="password"
-                  className={regInput}
-                  onChange={onChangePass}
-                  onFocus={onFocusPass}
-                  placeholder="비밀번호를 입력해주세요"
-                />
-                <div className="hidden" ref={passSub}>
-                  <p className={`${subText} ${validPass1 ? 'text-green-700' : 'text-red-800'}`}>
-                    · 10자 이상 입력
-                  </p>
-                  <p className={`${subText} ${validPass2 ? 'text-green-700' : 'text-red-800'}`}>
-                    · 영문/숫자/특수문자(공백 제외)만 허용하며, 2개 이상 조합
-                  </p>
-                  <p className={`${subText} ${validPass3 ? 'text-green-700' : 'text-red-800'}`}>
-                    · 동일한 숫자 3개 이상 연속 사용 불가
-                  </p>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th className={regTitle}>
-                비밀번호 확인<span className="text-formStar">*</span>
-              </th>
-              <td className="py-4" colSpan="2">
-                <input
-                  type="password"
-                  name="rePass"
-                  className={regInput}
-                  onChange={onChangeRePass}
-                  onFocus={onFocusRePass}
-                  placeholder="비밀번호를 한번 더 입력해주세요"
-                />
-                <div className="hidden" ref={rePassSub}>
-                  <p className={`${subText} ${validRePass ? 'text-green-700' : 'text-red-800'}`}>
-                    동일한 비밀번호를 입력해주세요.
-                  </p>
-                </div>
-              </td>
-            </tr>
+            <PassInput
+              state={[validPass1, validPass2, validPass3, validRePass]}
+              setState={[setValidPass1, setValidPass2, setValidPass3, setValidRePass]}
+            />
             <tr>
               <FormInput name="name" placeholder="이름을 입력해주세요">
                 이름
@@ -212,7 +138,7 @@ const Signup = () => {
                     ) : (
                       <RiCheckboxBlankCircleLine className={formRadioIcon2} />
                     )}
-                    남자
+                    <span className="align-middle">남자</span>
                   </label>
                 </div>
                 <div className="w-1/3 inline-block">
@@ -230,7 +156,7 @@ const Signup = () => {
                     ) : (
                       <RiCheckboxBlankCircleLine className={formRadioIcon2} />
                     )}
-                    여자
+                    <span className="align-middle">여자</span>
                   </label>
                 </div>
                 <div className="w-1/3 inline-block">
@@ -248,7 +174,7 @@ const Signup = () => {
                     ) : (
                       <RiCheckboxBlankCircleLine className={formRadioIcon2} />
                     )}
-                    선택안함
+                    <span className="align-middle">선택안함</span>
                   </label>
                 </div>
               </td>
@@ -265,21 +191,21 @@ const Signup = () => {
                     name="birthY"
                     className="w-1/3 mt-3 text-center"
                     placeholder="YYYY"
-                    onChange={checkY}
+                    onChange={checkBirth}
                   />
                   <input
                     type="text"
                     name="birthM"
                     className="w-1/3 mt-3 text-center"
                     placeholder="MM"
-                    onChange={checkMD}
+                    onChange={checkBirth}
                   />
                   <input
                     type="text"
                     name="birthD"
                     className="w-1/3 mt-3 text-center"
                     placeholder="DD"
-                    onChange={checkMD}
+                    onChange={checkBirth}
                   />
                 </div>
               </td>
@@ -357,45 +283,6 @@ const Signup = () => {
     </div>
   );
 
-  function onFocusId() {
-    idSub.current.className = 'block';
-  }
-  function onFocusPass() {
-    passSub.current.className = 'block';
-  }
-  function onFocusRePass() {
-    rePassSub.current.className = 'block';
-  }
-
-  function onChangeId(e) {
-    setId(e.target.value);
-    var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
-
-    idReg.test(id) ? setValidId1(true) : setValidId1(false);
-  }
-
-  function onChangePass(e) {
-    setPass(e.target.value);
-    setValidRePass(false);
-    var pwRegExp1 = /^[~`!@#$%^&*()_+=[\]\{}|;':",.\/<>?a-zA-Z0-9-]+$/;
-    var pwRegExp2 = /(\w)\1\1/;
-
-    e.target.value.length >= 9 ? setValidPass1(true) : setValidPass1(false);
-    pwRegExp1.test(e.target.value) ? setValidPass2(true) : setValidPass2(false);
-    pwRegExp2.test(e.target.value) ? setValidPass3(false) : setValidPass3(true);
-  }
-
-  function onChangeRePass(e) {
-    setrePass(e.target.value);
-    pass && pass === e.target.value ? setValidRePass(true) : setValidRePass(false);
-  }
-  function onChangeEmail(e) {
-    const emailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-
-    setrePass(e.target.value);
-    pass && pass === e.target.value ? setValidRePass(true) : setValidRePass(false);
-  }
-
   function onChangeAll(e) {
     setAllAgree(e.target.checked);
     [agree1Ref, agree2Ref, infoRef, snsRef, emailRef2, ageRef].forEach((ref, i) => {
@@ -407,34 +294,31 @@ const Signup = () => {
   function onSubmit(e) {
     e.preventDefault();
     const valid = validId1 && validId2 && validPass1 && validPass2 && validPass3 && validRePass;
-    if (!valid) return false;
-    const newUser = {};
+    const valid2 = agree1 && agree2 && age;
+    if (!valid && !valid2) return false;
+    const newUser = { date_of_birth: '' };
     const formData = new FormData(formRef.current);
     for (let [key, value] of formData) {
-      newUser[key] = value;
+      if (key === 'birthY' || key === 'birthM' || key === 'birthD')
+        newUser['date_of_birth'] += value;
+      else newUser[key] = value;
     }
     console.log(newUser);
   }
 
   function checkPhone(e) {
-    const phoneNum = e.target.value;
-    const lastChar = phoneNum.slice(-1);
-    if (!+lastChar || phoneNum.length > 12) {
-      e.target.value = phoneNum.substring(0, phoneNum.length - 1);
+    const { value } = e.target;
+    const lastChar = value.slice(-1);
+    if (isNaN(+lastChar) || value.length > 12) {
+      e.target.value = value.substring(0, value.length - 1);
     }
   }
-  function checkY(e) {
-    const phoneNum = e.target.value;
-    const lastChar = phoneNum.slice(-1);
-    if (!+lastChar || phoneNum.length > 4) {
-      e.target.value = phoneNum.substring(0, phoneNum.length - 1);
-    }
-  }
-  function checkMD(e) {
-    const phoneNum = e.target.value;
-    const lastChar = phoneNum.slice(-1);
-    if (!+lastChar || phoneNum.length > 2) {
-      e.target.value = phoneNum.substring(0, phoneNum.length - 1);
+  function checkBirth(e) {
+    const { name, value } = e.target;
+    const lastChar = value.slice(-1);
+    const num = name === 'birthY' ? 4 : 2;
+    if (isNaN(+lastChar) || value.length > num) {
+      e.target.value = value.substring(0, value.length - 1);
     }
   }
 };
