@@ -3,7 +3,6 @@ import QTypeList from './QTypeList';
 import ConsumerGuide from './ConsumerGuide';
 
 const ConsumerCenter = () => {
-  console.log('컨슈머센터');
   return (
     <div className="pt-24 border-t border-gray-300">
       <h4 className="text-p-28 font-medium text-gray-500 mb-12">고객행복센터</h4>

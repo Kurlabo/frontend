@@ -16,7 +16,11 @@ module.exports = {
       3.8: '3.8rem',
     },
     extend: {
+      outline: {
+        0: ['0px solid #ffffff'],
+      },
       fontSize: {
+        'r-1': '1rem',
         'r-1.2': '1.2rem',
         'p-13': '1.3rem',
         'p-14': '1.4rem',
@@ -65,7 +69,9 @@ module.exports = {
         },
       },
       spacing: {
+        'r-0.4': '0.4rem',
         'p-18': '1.8rem',
+        'r-3.4': '3.4rem',
         'p-40': '4rem',
         'p-56': '5.6rem',
         'p-88': '8.8rem',
