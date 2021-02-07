@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
+import SignupButton from './SignupButton';
 
 const regTitle = 'font-bold text-left align-top pt-7 ';
 const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
 const subText = 'text-r-1.2 text-gray-600';
-const formButton =
-  'w-48 ml-2 font-bold text-kp-600 border-kp-600 border-solid border rounded h-r-4.4';
 
 const IdInput = ({ state: [validId1, validId2], setState: [setValidId1, setValidId2] }) => {
   const idSub = useRef();
@@ -34,7 +33,7 @@ const IdInput = ({ state: [validId1, validId2], setState: [setValidId1, setValid
         </div>
       </td>
       <td className="align-baseline pt-3.5">
-        <button className={formButton}>중복확인</button>
+        <SignupButton>중복확인</SignupButton>
       </td>
     </>
   );

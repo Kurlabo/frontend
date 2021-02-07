@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
-import { RiRadioButtonFill } from 'react-icons/ri';
-import { RiCheckboxBlankCircleLine } from 'react-icons/ri';
 import CheckBox from './CheckBox';
 import FormInput from './FormInput';
 import IdInput from './IdInput';
+import InputDate from './InputDate';
+import InputGender from './InputGender';
 import PassInput from './PassInput';
+import SignupButton from './SignupButton';
 
 const Signup = () => {
   const formTitle = 'pt-28 font-black text-5xl text-center';
@@ -13,14 +14,7 @@ const Signup = () => {
   const regTitle = 'font-bold text-left align-top pt-7 ';
   const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
   const subText = 'text-r-1.2 text-gray-600';
-  const formButton =
-    'w-48 ml-2 font-bold text-kp-600 border-kp-600 border-solid border rounded h-r-4.4';
-  const formTdButton =
-    'w-formInput font-bold text-kp-600 border-kp-600 border-solid border rounded h-r-4.4';
   const submitBtn = 'bg-kp-600 text-white w-96 h-20 rounded-md';
-  const radioLabel = { verticalAlign: 'super' };
-  const formRadioIcon = 'inline-block w-10 h-10 border-inputRadio mr-5 text-kp-600';
-  const formRadioIcon2 = `${formRadioIcon} text-inputGray`;
 
   const [validId1, setValidId1] = useState(false);
   const [validId2, setValidId2] = useState(false);
@@ -40,18 +34,8 @@ const Signup = () => {
   const [age, setAge] = useState(false);
 
   const formRef = useRef();
-  const idSub = useRef();
-  const passSub = useRef();
-  const rePassRef = useRef();
-  const rePassSub = useRef();
-
   const emailRef = useRef();
   const phoneRef = useRef();
-
-  const yearRef = useRef();
-  const monthRef = useRef();
-  const dayRef = useRef();
-
   const agree1Ref = useRef();
   const agree2Ref = useRef();
   const infoRef = useRef();
@@ -91,7 +75,7 @@ const Signup = () => {
                 이메일
               </FormInput>
               <td>
-                <button className={formButton}>중복확인</button>
+                <SignupButton onclick={clickButton}>중복확인</SignupButton>
               </td>
             </tr>
             <tr>
@@ -109,11 +93,10 @@ const Signup = () => {
                 주소<span className="text-formStar">*</span>
               </th>
               <td className="py-4">
-                <button className={formTdButton}>
+                <SignupButton big={true} onClick={clickButton}>
                   <FiSearch className="inline-block" />
                   주소검색
-                </button>
-                <input type="text" name="address" />
+                </SignupButton>
                 <p className={subText}>배송지에 따라 상품 정보가 달라질 수 있습니다.</p>
               </td>
               <td></td>
@@ -123,60 +106,30 @@ const Signup = () => {
                 성별<span className="text-formStar">*</span>
               </th>
               <td className="py-4">
-                <div className="w-1/3 inline-block">
-                  <input
-                    type="radio"
-                    id="man"
-                    name="gender"
-                    value="man"
-                    className="hidden"
-                    onChange={e => setGender(e.target.id)}
-                  />
-                  <label htmlFor="man" style={radioLabel}>
-                    {gender === 'man' ? (
-                      <RiRadioButtonFill className={formRadioIcon} />
-                    ) : (
-                      <RiCheckboxBlankCircleLine className={formRadioIcon2} />
-                    )}
-                    <span className="align-middle">남자</span>
-                  </label>
-                </div>
-                <div className="w-1/3 inline-block">
-                  <input
-                    type="radio"
-                    id="woman"
-                    name="gender"
-                    value="woman"
-                    className="hidden"
-                    onChange={e => setGender(e.target.id)}
-                  />
-                  <label htmlFor="woman" style={radioLabel}>
-                    {gender === 'woman' ? (
-                      <RiRadioButtonFill className={formRadioIcon} />
-                    ) : (
-                      <RiCheckboxBlankCircleLine className={formRadioIcon2} />
-                    )}
-                    <span className="align-middle">여자</span>
-                  </label>
-                </div>
-                <div className="w-1/3 inline-block">
-                  <input
-                    type="radio"
-                    id="none"
-                    name="gender"
-                    value="none"
-                    className="hidden"
-                    onChange={e => setGender(e.target.id)}
-                  />
-                  <label htmlFor="none" style={radioLabel}>
-                    {gender === 'none' ? (
-                      <RiRadioButtonFill className={formRadioIcon} />
-                    ) : (
-                      <RiCheckboxBlankCircleLine className={formRadioIcon2} />
-                    )}
-                    <span className="align-middle">선택안함</span>
-                  </label>
-                </div>
+                <InputGender
+                  id="man"
+                  name="gender"
+                  onChange={e => setGender(e.target.id)}
+                  state={gender}
+                >
+                  남자
+                </InputGender>
+                <InputGender
+                  id="woman"
+                  name="gender"
+                  onChange={e => setGender(e.target.id)}
+                  state={gender}
+                >
+                  여자
+                </InputGender>
+                <InputGender
+                  id="none"
+                  name="gender"
+                  onChange={e => setGender(e.target.id)}
+                  state={gender}
+                >
+                  선택안함
+                </InputGender>
               </td>
               <td></td>
             </tr>
@@ -186,27 +139,9 @@ const Signup = () => {
               </th>
               <td className="py-4">
                 <div className={regInput}>
-                  <input
-                    type="text"
-                    name="birthY"
-                    className="w-1/3 mt-3 text-center"
-                    placeholder="YYYY"
-                    onChange={checkBirth}
-                  />
-                  <input
-                    type="text"
-                    name="birthM"
-                    className="w-1/3 mt-3 text-center"
-                    placeholder="MM"
-                    onChange={checkBirth}
-                  />
-                  <input
-                    type="text"
-                    name="birthD"
-                    className="w-1/3 mt-3 text-center"
-                    placeholder="DD"
-                    onChange={checkBirth}
-                  />
+                  <InputDate name="birthY" placeholder="YYYY" onChange={checkBirth} />
+                  <InputDate name="birthM" placeholder="MM" onChange={checkBirth} />
+                  <InputDate name="birthD" placeholder="DD" onChange={checkBirth} />
                 </div>
               </td>
               <td></td>
@@ -282,6 +217,10 @@ const Signup = () => {
       </form>
     </div>
   );
+
+  function clickButton(params) {
+    console.log(1);
+  }
 
   function onChangeAll(e) {
     setAllAgree(e.target.checked);
