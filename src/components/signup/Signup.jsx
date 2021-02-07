@@ -238,6 +238,7 @@ const Signup = () => {
     const newUser = { date_of_birth: '' };
     const formData = new FormData(formRef.current);
     for (let [key, value] of formData) {
+      if (!value) return false;
       if (key === 'birthY' || key === 'birthM' || key === 'birthD')
         newUser['date_of_birth'] += value;
       else newUser[key] = value;
