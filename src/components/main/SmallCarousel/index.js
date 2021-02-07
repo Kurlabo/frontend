@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import MdButtons from './MdButtons/index';
 
 const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   console.log(1);
-  // const [mdCurIndex, setMdCurIndex] = useState('채소');
-  let mdCurIndex = '채소';
+  const [mdCurIndex, setMdCurIndex] = useState('채소');
+  // let mdCurIndex = '채소';
   // let [cur, setcur] = useState(0);
   let cur = useRef(0);
   let onAnimate = false;
@@ -87,7 +87,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
             subtitle={subtitle}
             suggestType={suggestType}
             mdCurIndex={mdCurIndex}
-            // setMdCurIndex={setMdCurIndex}
+            setMdCurIndex={setMdCurIndex}
           />
         )}
         <div className="relative">

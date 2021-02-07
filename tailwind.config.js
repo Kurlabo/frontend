@@ -1,3 +1,13 @@
+const plugin = require('tailwindcss/plugin');
+
+const focusedSiblingPlugin = plugin(function ({ addVariant, e }) {
+  addVariant('focused-sibling', ({ container }) => {
+    container.walkRules((rule) => {
+      rule.selector = `:checked + .focused-sibling\\:${rule.selector.slice(1)}`;
+    });
+  });
+});
+
 module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
@@ -99,8 +109,12 @@ module.exports = {
       },
     },
   },
+  plugins: [focusedSiblingPlugin],
   variants: {
-    extend: { fontWeight: ['hover', 'focus'] },
+    extend: {
+      fontWeight: ['hover', 'focus', 'focused-sibling'],
+      backgroundColor: ['focused-sibling'],
+      textColor: ['focused-sibling'],
+    },
   },
-  plugins: [],
 };
