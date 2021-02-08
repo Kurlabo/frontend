@@ -8,6 +8,7 @@ const Main = () => {
   return (
     <div>
       <Carousel />
+
       <SmallCarousel title="이 상품 어때요?" />
       <SmallCarousel title="알뜰 상품 >" />
       <SmallCarousel title="MD의 추천" mdSuggest />
