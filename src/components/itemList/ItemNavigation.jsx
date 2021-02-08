@@ -5,7 +5,7 @@ import ItemNavLink from './ItemNavLink';
 export const listStyle =
   'inline-block pr-5 pl-5 pb-3 text-gray-900 border-solid border-b-2 hover:text-kp-600 hover:border-kp-600 duration-100 cursor-pointer';
 const btnStyle =
-  'text-xl text-gray-900 pr-5 pb-5 mr-3  border-none text-right inline-block focus:outline-0';
+  'text-xl text-gray-900 pr-5 pb-5 mr-3 border-none text-right inline-block focus:outline-0 bg-blue-400';
 
 const ItemNavigation = () => {
   const [dropDown, setDropDown] = useState(false);
@@ -30,7 +30,7 @@ const ItemNavigation = () => {
       </nav>
       <div className="relative">
         <button className={btnStyle} onClick={onClick}>
-          <span className="mr-2">추천순</span>
+          <span className="mr-2 ">추천순</span>
           {dropDown ? (
             <AiOutlineUp className="inline-block align-middle" />
           ) : (
