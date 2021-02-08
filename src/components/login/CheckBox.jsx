@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { IoIosCheckbox } from 'react-icons/io';
 import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
 const CheckBoxStyle = styled.div`
   display: inline-block;
   width: 175px;
-  }
 `;
 export default function CheckBox({ value }) {
   const [checked, setchecked] = useState(false);
