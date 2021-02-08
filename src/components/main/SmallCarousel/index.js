@@ -1,9 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import MdButtons from './MdButtons/index';
 
 const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
-  let cur = 0;
+  console.log(1);
+  const [mdCurIndex, setMdCurIndex] = useState('채소');
+  // let mdCurIndex = '채소';
+  // let [cur, setcur] = useState(0);
+  let cur = useRef(0);
   let onAnimate = false;
   const containerRef = useRef(null);
   const prevButtonRef = useRef(null);
@@ -37,12 +42,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
       'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
     ],
 
-    [
-      'https://img-cf.kurly.com/shop/data/goods/1523522504728l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1523522504728l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1523522504728l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1523522504728l0.jpg',
-    ],
+    ['https://img-cf.kurly.com/shop/data/goods/1523522504728l0.jpg'],
   ];
 
   const suggestType = [
@@ -82,28 +82,13 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
           </Link>
         )}
         {mdSuggest && (
-          <p
-            to=""
-            className="block font-bold text-r-2.8 text-center pt-r-7.9 pb-r-3.5"
-          >
-            {title}
-            {subtitle && (
-              <p className="pt-4 font-normal text-r-1.6 text-gray-400 leading-8">
-                {subtitle}
-              </p>
-            )}
-          </p>
-        )}
-        {mdSuggest && (
-          <ul className="pb-8 text-center">
-            {suggestType.map((type) => (
-              <li className="inline-block px-2 pb-8">
-                <button className="hover:bg-kb-100 hover:text-kp-600 focus:bg-kp-600 focus:text-white focus:font-bold focus:outline-none inline-block h-16 px-8 pb-4 pt-4 rounded-r-2 bg-kg-500 text text-r-1.4 leading-6">
-                  {type}
-                </button>
-              </li>
-            ))}
-          </ul>
+          <MdButtons
+            title={title}
+            subtitle={subtitle}
+            suggestType={suggestType}
+            mdCurIndex={mdCurIndex}
+            setMdCurIndex={setMdCurIndex}
+          />
         )}
         <div className="relative">
           <button
@@ -144,6 +129,18 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
             ref={nextButtonRef}
             className="z-50 absolute w-r-6 h-r-6 bg-r-6 bg-sm-next-button right-r--3 top-r-13 focus:outline-none"
           />
+          {mdSuggest && (
+            <div className="w-r-52 mx-auto">
+              <Link
+                to=""
+                className="block h-r-5.6 pt-r-1.6 border-solid border-kmd-100 border text-r-1.6 leading-8 text-center"
+              >
+                <span className="px-7 text-black">
+                  {mdCurIndex} 전체보기{'>'}{' '}
+                </span>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -152,9 +149,9 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   function prevButton(e) {
     if (onAnimate) return;
     onAnimate = true;
-    if (cur === 1) {
+    if (cur.current === 1) {
       containerRef.current.style.transform = `translateX(-${
-        (cur - 1) * 1050
+        (cur.current - 1) * 1050
       }px)`;
       e.target.disabled = true;
       e.target.style.display = 'none';
@@ -162,10 +159,11 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
       nextButtonRef.current.disabled = false;
       nextButtonRef.current.style.display = '';
       containerRef.current.style.transform = `translateX(-${
-        (cur - 1) * 1050
+        (cur.current - 1) * 1050
       }px)`;
     }
-    --cur;
+    // setcur(--cur);
+    --cur.current;
 
     setTimeout(() => {
       onAnimate = false;
@@ -175,20 +173,30 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   function nextButton(e) {
     if (onAnimate) return;
     onAnimate = true;
-    if (cur === imgArr.length - 2) {
+    if (
+      cur.current === imgArr.length - 2 &&
+      imgArr[imgArr.length - 1].length !== 4
+    ) {
       containerRef.current.style.transform = `translateX(-${
-        (cur + 1) * 1050
+        cur.current * 1050 + 262 * imgArr[imgArr.length - 1].length
+      }px)`;
+      e.target.style.display = 'none';
+      e.target.disabled = true;
+    } else if (cur.current === imgArr.length - 2) {
+      containerRef.current.style.transform = `translateX(-${
+        (cur.current + 1) * 1050
       }px)`;
       e.target.style.display = 'none';
       e.target.disabled = true;
     } else {
       containerRef.current.style.transform = `translateX(-${
-        (cur + 1) * 1050
+        (cur.current + 1) * 1050
       }px)`;
       prevButtonRef.current.disabled = false;
       prevButtonRef.current.style.display = '';
     }
-    ++cur;
+    // setcur(++cur);
+    ++cur.current;
 
     setTimeout(() => {
       onAnimate = false;
