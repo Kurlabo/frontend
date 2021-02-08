@@ -7,7 +7,6 @@ const signWrapper = 'relative w-p-1050 flex justify-between items-center mx-auto
 
 const LinkToSign = () => {
   const [headerDrop, setHeaderDrop] = useState(false);
-  const [state, setstate] = useState(false);
 
   return (
     <div className={signWrapper}>
@@ -15,10 +14,10 @@ const LinkToSign = () => {
         <img
           src="https://res.kurly.com/pc/service/common/1908/delivery_190819.gif"
           alt="서울, 경기, 인천 샛별배송, 수도권 이외 지역 택배배송"
-          className="w-r-16.3 h-r-4.4 cursor-pointer"
+          className="w-r-16.3 h-9 cursor-pointer"
         />
       </Link>
-      <nav onMouseOver={onMaintain}>
+      <nav>
         <ul>
           <li className="inline-block text-kp-600">
             <NavLink to="/" className="px-3">
@@ -32,7 +31,7 @@ const LinkToSign = () => {
             </NavLink>
             <span className="text-gray-300">ㅣ</span>
           </li>
-          <li className="inline-block" onMouseOverCapture={onMouseOver} onMouseLeave={onMouseOut}>
+          <li className="inline-block" onMouseOver={onMouseOver}>
             <NavLink to="/" className="px-3">
               고객센터
             </NavLink>
@@ -45,16 +44,10 @@ const LinkToSign = () => {
   );
 
   function onMouseOver() {
-    console.log(1);
     setHeaderDrop(true);
   }
   function onMouseOut() {
-    console.log(2);
     setHeaderDrop(false);
-  }
-  function onMaintain() {
-    setHeaderDrop(true);
-    setstate(true);
   }
 };
 

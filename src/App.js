@@ -6,6 +6,7 @@ import SignupPage from './pages/SignupPage';
 import MainContainer from './containers/MainContainer';
 import NotFoundPage from './pages/NotFoundPage';
 import ItemListPage from './pages/ItemListPage';
+import SearchLocation from './components/common/SearchLocation';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/shop/account/find_id" component={FindIdPage} />
       <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
       <Route path="/shop/goods/item_list" component={ItemListPage} />
+      <Route path="/kakao/destination" component={SearchLocation} />
       <Route path="/" exact component={MainContainer} />
       <Route component={NotFoundPage} />
     </Switch>
