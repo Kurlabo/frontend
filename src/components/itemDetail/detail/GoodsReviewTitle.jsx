@@ -7,7 +7,7 @@ const GoodsReviewTitle = () => {
         <h2 className="text-p-13 pb-2 font-medium text-gray-700">PRODUCT REVIEW</h2>
         <ul className="text-r-1.2 list-disc pl-6">
           <li>
-            상품에 대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당
+            상품에 대한 후기를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당
             게시판으로 이동될 수 있습니다.
           </li>
           <li>

@@ -6,7 +6,7 @@ const UserGrade = ({ user_grade }) => {
   return (
     <div
       className={
-        'text-r-1 inline-block absolute right-28 w-16 rounded-xl pb-1 px-r-0.4 text-white bg-klp-' +
+        'text-r-1 inline-block absolute right-28 w-16 rounded-xl pb-1 px-r-0.4 text-white bg-kp-' +
         100 * +user_grade
       }
     >
