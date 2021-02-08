@@ -3,7 +3,7 @@ import LoginPage from './pages/LoginPage';
 import FindIdPage from './pages/FindIdPage';
 import FindPasswordPage from './pages/FindPasswordPage';
 import SignupPage from './pages/SignupPage';
-import MainContainer from './container/MainContainer';
+import MainContainer from './containers/MainContainer';
 import NotFoundPage from './pages/NotFoundPage';
 import ItemListPage from './pages/ItemListPage';
 
