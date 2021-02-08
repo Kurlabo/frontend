@@ -19,10 +19,7 @@ const Main = () => {
       <Instagram />
       <div className="container">
         <Link className="container" to="">
-          <img
-            alt=""
-            src="//img-cf.kurly.com/shop/data/main/15/pc_img_1568875999.png"
-          ></img>
+          <img alt="" src="//img-cf.kurly.com/shop/data/main/15/pc_img_1568875999.png"></img>
         </Link>
       </div>
     </div>

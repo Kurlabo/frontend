@@ -23,16 +23,12 @@ const BigCarousel = () => {
         containerRef.current.style.transitionDuration = '0.5s';
         containerRef.current.style.transitionProperty = 'all';
         containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-        containerRef.current.style.transform = `translateX(-${
-          cur.current - 1
-        }00%)`;
+        containerRef.current.style.transform = `translateX(-${cur.current - 1}00%)`;
       } else {
         containerRef.current.style.transitionDuration = '0.5s';
         containerRef.current.style.transitionProperty = 'all';
         containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-        containerRef.current.style.transform = `translateX(-${
-          cur.current - 1
-        }00%)`;
+        containerRef.current.style.transform = `translateX(-${cur.current - 1}00%)`;
         --cur.current;
       }
     }, 3000);
@@ -100,16 +96,12 @@ const BigCarousel = () => {
       containerRef.current.style.transitionDuration = '0.5s';
       containerRef.current.style.transitionProperty = 'all';
       containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-      containerRef.current.style.transform = `translateX(-${
-        cur.current - 1
-      }00%)`;
+      containerRef.current.style.transform = `translateX(-${cur.current - 1}00%)`;
     } else {
       containerRef.current.style.transitionDuration = '0.5s';
       containerRef.current.style.transitionProperty = 'all';
       containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-      containerRef.current.style.transform = `translateX(-${
-        cur.current - 1
-      }00%)`;
+      containerRef.current.style.transform = `translateX(-${cur.current - 1}00%)`;
       --cur.current;
     }
 
@@ -132,16 +124,12 @@ const BigCarousel = () => {
       containerRef.current.style.transitionDuration = '0.5s';
       containerRef.current.style.transitionProperty = 'all';
       containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-      containerRef.current.style.transform = `translateX(-${
-        cur.current + 1
-      }00%)`;
+      containerRef.current.style.transform = `translateX(-${cur.current + 1}00%)`;
     } else {
       containerRef.current.style.transitionDuration = '0.5s';
       containerRef.current.style.transitionProperty = 'all';
       containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-      containerRef.current.style.transform = `translateX(-${
-        cur.current + 1
-      }00%)`;
+      containerRef.current.style.transform = `translateX(-${cur.current + 1}00%)`;
       ++cur.current;
     }
 
