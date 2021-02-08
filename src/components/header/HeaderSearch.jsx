@@ -36,12 +36,13 @@ const HeaderSearch = () => {
           <BiSearch className={searchBtn} />
         </span>
       </div>
-      <div className="relative ">
+      <div className="relative">
         <h3 className={a11yHidden}>배송지 검색</h3>
-        <div className="inline-block mr-9 text-5xl ">
-          <GrLocation onMouseOver={onMouseOver} onMouseOut={onMouseOut} />
+        <div className="inline-block mr-9 text-5xl">
+          <GrLocation onMouseOver={onMouseOver} />
           {dropDown && <LoginDropDown />}
         </div>
+
         <div className="inline-block text-5xl">
           <FiShoppingCart />
         </div>
@@ -53,9 +54,9 @@ const HeaderSearch = () => {
     setDropDown(true);
   }
 
-  function onMouseOut() {
-    setDropDown(false);
-  }
+  // function onMouseOut() {
+  //   setDropDown(false);
+  // }
 
   // input창 관리
   function onChange() {

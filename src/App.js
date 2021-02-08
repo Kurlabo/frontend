@@ -14,7 +14,7 @@ function App() {
       <Route path="/shop/account/find_id" component={FindIdPage} />
       <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
       <Route path="/shop/goods/item_list" component={ItemListPage} />
-      <Route path="/searchloc" component={SearchLocation} />
+      <Route path="/kakao/destination" component={SearchLocation} />
       <Route path="/" exact component={MainContainer} />
       <Route component={NotFoundPage} />
     </Switch>
