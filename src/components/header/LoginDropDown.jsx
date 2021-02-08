@@ -23,13 +23,13 @@ const LoginDropDown = () => {
   function onClick() {
     const width = 500;
     const height = 400;
-    var _left = Math.ceil((window.screen.width - width) / 2);
-    var _top = Math.ceil((window.screen.height - height) / 2);
+    var left = Math.ceil((window.screen.width - width) / 2);
+    var top = Math.ceil((window.screen.height - height) / 2);
 
     window.open(
       '/kakao/destination',
       '_blank',
-      `height=${height},width=${width}, top=${_top}, left=${_left}`,
+      `height=${height},width=${width}, top=${top}, left=${left}`,
     );
   }
 };
