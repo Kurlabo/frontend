@@ -6,9 +6,7 @@ const MdButtons = ({ title, subtitle, suggestType, setMdCurIndex }) => {
       <p className="block font-bold text-r-2.8 text-center pt-r-7.9 pb-r-3.5">
         {title}
         {subtitle && (
-          <p className="pt-4 font-normal text-r-1.6 text-gray-400 leading-8">
-            {subtitle}
-          </p>
+          <p className="pt-4 font-normal text-r-1.6 text-gray-400 leading-8">{subtitle}</p>
         )}
       </p>
       <ul className="pb-8 text-center">
