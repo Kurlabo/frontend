@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Carousel from './BigCarousel';
-import Instagram from './Instagram/index';
-import SmallCarousel from './SmallCarousel/index';
+import Carousel from './BigCarousel/Index';
+import Instagram from './Instagram/Index';
+import SmallCarousel from './SmallCarousel/Index';
 
 const Main = () => {
   return (
@@ -19,10 +19,7 @@ const Main = () => {
       <Instagram />
       <div className="container">
         <Link className="container" to="">
-          <img
-            alt=""
-            src="//img-cf.kurly.com/shop/data/main/15/pc_img_1568875999.png"
-          ></img>
+          <img alt="" src="//img-cf.kurly.com/shop/data/main/15/pc_img_1568875999.png"></img>
         </Link>
       </div>
     </div>
