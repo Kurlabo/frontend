@@ -22,11 +22,15 @@ module.exports = {
       'r-1.4': '1.4rem',
       'r-1.6': '1.6rem',
       'r-2.8': '2.8rem',
+      'r-3': '3rem',
     },
     fontFamily: {
       body: ['Noto Sans KR'],
     },
     extend: {
+      lineHeight: {
+        'r-5': '5rem',
+      },
       backgroundImage: (theme) => ({
         'big-pre-button':
           "url('https://res.kurly.com/pc/service/main/1908/ico_prev1_x1.png')",
@@ -46,18 +50,19 @@ module.exports = {
         'r-1.3': '1.3rem',
         'r-1.6': '1.6rem',
         'r-3.5': '3.5rem',
+        'p-52': '5.2rem',
         'r-5.6': '5.6rem',
-        'p-52': '52px',
         'r-5.75': '5.75rem',
         'r-6': '6rem',
         'r-7.9': '7.9rem',
         'r-13': '13rem',
         'r-17.5': '17.5rem',
         'r-24.9': '24.9rem',
-        'p-370': '370px',
+        'p-370': '37rem',
         'r-49.6': '49.6rem',
         'r-52': '52rem',
         'r-65.2': '65.2rem',
+        'r-73': '73rem',
         'r-105': '105rem',
         'r-735': '735rem',
         'vw-99': '99vw',

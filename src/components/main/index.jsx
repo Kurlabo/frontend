@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Carousel from './BigCarousel';
-import Instagram from './Instagram/index';
-import SmallCarousel from './SmallCarousel/index';
+import Instagram from './Instagram';
+import SmallCarousel from './SmallCarousel';
 
 const Main = () => {
   return (

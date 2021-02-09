@@ -52,7 +52,7 @@ const BigCarousel = () => {
 
   return (
     <div
-      className="relative"
+      className="relative overflow-hidden"
       onMouseOver={() => (isStop = true)}
       onMouseOut={() => (isStop = false)}
     >

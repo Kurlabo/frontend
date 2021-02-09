@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import MdButtons from './MdButtons/index';
+import MdButtons from './MdButtons';
 
 const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   console.log(1);
