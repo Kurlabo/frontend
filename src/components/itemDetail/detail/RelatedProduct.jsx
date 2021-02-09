@@ -1,9 +1,15 @@
 import React, { useEffect, useRef } from 'react';
-
+import styled from 'styled-components';
 const btnStyle = 'w-12 text-gray-700 cursor-pointer absolute inset-y-1/2';
-
 let onAnimate = false;
-
+const NameBox = styled.p`
+  overflow: hidden;
+  width: 100%;
+  height: 35px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;
 const RelatedProduct = ({ relatedProducts }) => {
   let curIndex = 0;
   const containerRef = useRef();
@@ -12,11 +18,9 @@ const RelatedProduct = ({ relatedProducts }) => {
     ...relatedProducts,
     ...relatedProducts.slice(0, 5),
   ];
-
   useEffect(() => {
     containerRef.current.style.transform = 'translateX(-' + 950 + 'px)';
   }, [relatedProducts]);
-
   const slideNext = () => {
     if (onAnimate) return;
     onAnimate = true;
@@ -25,19 +29,28 @@ const RelatedProduct = ({ relatedProducts }) => {
       containerRef.current.style.transform = 'translateX(-' + 950 * (curIndex + 2) + 'px)';
       ++curIndex;
     }
+    console.log('curIndex', curIndex);
+    console.log('translate', 950 * (curIndex + 1));
     if (curIndex === 3) {
       setTimeout(() => {
         containerRef.current.style.transition = 'all 0s';
         containerRef.current.style.transform = 'translateX(-' + 0 + 'px)';
       }, 500);
       curIndex = -1;
+    } else if (curIndex === 4) {
+      setTimeout(() => {
+        containerRef.current.style.transition = 'all 0s';
+        containerRef.current.style.transform = 'translateX(-' + 950 + 'px)';
+      }, 500);
+      containerRef.current.style.transition = 'all 0.5s ease-in-out';
+      containerRef.current.style.transform = 'translateX(-' + 950 * 5 + 'px)';
+      console.log(950 * 4);
+      curIndex = 0;
     }
-
     setTimeout(() => {
       onAnimate = false;
     }, 500);
   };
-
   const slidePrev = () => {
     if (onAnimate) return;
     if (curIndex >= 0) {
@@ -54,12 +67,10 @@ const RelatedProduct = ({ relatedProducts }) => {
       }, 500);
       curIndex = 3;
     }
-
     setTimeout(() => {
       onAnimate = false;
     }, 500);
   };
-
   return (
     <div>
       <div className="w-8 h-2 bg-gray-800" />
@@ -83,19 +94,23 @@ const RelatedProduct = ({ relatedProducts }) => {
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
-          <path strokeLinecap="round" strokeLinejoinn="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
-
         <div className="h-p-320 w-p-950 overflow-hidden relative my-0 mx-auto">
           <ul className="absolute w-per-500" ref={containerRef}>
-            {carouselArr.map(product => {
+            {carouselArr.map((product, i) => {
               return (
-                <li className="cursor-pointer float-left w-p-180 h-p-320 mr-4 border border-gray-300">
+                <li
+                  className="cursor-pointer float-left w-p-180 h-p-320 mr-4 border border-gray-300"
+                  key={product.no + i}
+                >
                   <div className="h-p-230">
                     <img src={product.img} alt="연관 상품 이미지" />
                   </div>
                   <div className="p-4">
-                    <p className="text-p-14 text-gray-800 h-14 leading-7">{product.name}</p>
+                    <NameBox className="text-p-14 text-gray-800 h-14 leading-7">
+                      {product.name}
+                    </NameBox>
                     <p className="text-p-14">{(+product.price).toLocaleString()}원</p>
                   </div>
                 </li>
@@ -107,5 +122,4 @@ const RelatedProduct = ({ relatedProducts }) => {
     </div>
   );
 };
-
 export default RelatedProduct;
