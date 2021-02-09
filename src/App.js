@@ -7,6 +7,7 @@ import MainContainer from './containers/MainContainer';
 import NotFoundPage from './pages/NotFoundPage';
 import ItemListPage from './pages/ItemListPage';
 import SearchLocation from './components/common/SearchLocation';
+import Footer from './components/footer/Footer';
 
 function App() {
   return (
