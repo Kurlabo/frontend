@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import RelatedProduct from './detail/RelatedProduct';
 import PurchaseInfo from './detail/PurchaseInfo';
 import GoodsInfo from './detail/GoodsInfo';
+import GotopBtn from './detail/GotopBtn';
+import CartOption from './detail/CartOption';
 
 const ItemDetail = () => {
   const data = {
@@ -173,6 +175,15 @@ const ItemDetail = () => {
       price: '4000',
     },
   ];
+
+  const [viewCartOption, setviewCartOption] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener('scroll', cartOptionRender);
+    return () => {
+      window.removeEventListener('scroll', cartOptionRender);
+    };
+  }, []);
   return (
     <div>
       <main className="w-p-1050 pt-8 mx-auto my-0 text-gray-800">
@@ -195,8 +206,19 @@ const ItemDetail = () => {
           long_desc={data.long_description}
           goods_detail_img={data.goods_detail_img}
         />
+        <GotopBtn />
       </main>
+      {viewCartOption && <CartOption name={data.name} price={+data.price} />}
     </div>
   );
+
+  // window scroll이 500 이상으로 내려갔을때만 렌더링
+  function cartOptionRender() {
+    if (window.pageYOffset > 500) {
+      setviewCartOption(true);
+    } else {
+      setviewCartOption(false);
+    }
+  }
 };
 export default ItemDetail;

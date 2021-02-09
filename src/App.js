@@ -13,8 +13,8 @@ function App() {
       <Route path="/shop/account/signin" component={LoginPage} />
       <Route path="/shop/account/find_id" component={FindIdPage} />
       <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
-      <Route path="/shop/goods/item_list" component={ItemListPage} />
       <Route path="/shop/goods/item_list/detail" component={ItemDetail} />
+      <Route path="/shop/goods/item_list" component={ItemListPage} />
       <Route path="/" exact component={MainContainer} />
       <Route component={NotFoundPage} />
     </Switch>
