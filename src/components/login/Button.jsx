@@ -5,7 +5,6 @@ const LoginButton = styled.button`
   width: 340px;
   height: 54px;
 `;
-//
 export default function Button({ children, onClick, form }) {
   return (
     <LoginButton

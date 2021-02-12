@@ -4,14 +4,14 @@ const dropContainer = 'bg-white absolute top-14 right-8 w-44 text-right block sh
 
 const DropDownMenu = () => {
   return (
-    <div className={dropContainer}>
-      <div className={dropStyle}>추천순</div>
-      <div className={dropStyle}>신상품순</div>
-      <div className={dropStyle}>인기상품순</div>
-      <div className={dropStyle}>혜택순</div>
-      <div className={dropStyle}>낮은 가격순</div>
-      <div className={dropStyle}>높은 가격순</div>
-    </div>
+    <ul className={dropContainer}>
+      <li className={dropStyle}>추천순</li>
+      <li className={dropStyle}>신상품순</li>
+      <li className={dropStyle}>인기상품순</li>
+      <li className={dropStyle}>혜택순</li>
+      <li className={dropStyle}>낮은 가격순</li>
+      <li className={dropStyle}>높은 가격순</li>
+    </ul>
   );
 };
 
