@@ -3,11 +3,37 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer components {
+  .a11y-hidden {
+    position: absolute;
+    color: red;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    margin: -1px;
+    clip-path: polygon(0 0, 0 0, 0 0);
+    clip: rect(0 0 0 0);
+    clip: rect(0, 0, 0, 0);
+  }
+  .clear-fix::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  .none-white-space {
+    font-size: 0;
+    letter-spacing: 0;
+    word-spacing: 0;
+  }
+}
+
 html {
   font-size: 10px;
 }
 
 .container {
   width: 1050px;
-  margin: 0 auto;
+  min-width: 1050px;
+  margin: auto auto;
 }

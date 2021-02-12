@@ -15,12 +15,12 @@ module.exports = {
         'p-16': '1.6rem',
         'p-24': '2.4rem',
         'r-1.2': '1.2rem',
-      'r-1.3': '1.3rem',
-      'r-1.4': '1.4rem',
-      'r-1.5': '1.5rem',
-      'r-1.6': '1.6rem',
-      'r-1.8': '1.8rem',
-      'r-2': '2rem',
+        'r-1.3': '1.3rem',
+        'r-1.4': '1.4rem',
+        'r-1.5': '1.5rem',
+        'r-1.6': '1.6rem',
+        'r-1.8': '1.8rem',
+        'r-2': '2rem',
       },
       inset: {
         91: '91px',
@@ -28,8 +28,12 @@ module.exports = {
       },
       colors: {
         kg: {
+          50: '#fafafa',
+          100: '#f7f7f7',
+          150: '#999999',
           200: '#b5b5b5',
           300: '#4c4c4c',
+          350: '#666',
           400: '#333',
         },
         kp: {
@@ -73,10 +77,15 @@ module.exports = {
         370: '370px',
         'p-54': '54px',
         'p-340': '340px',
+        'r-0.4': '0.4rem',
         'r-0.9': '0.9rem',
         'r-1.1': '1.1rem',
         'r-1.9': '1.9rem',
         'r-2.8': '2.8rem',
+        'r-3.5': '3.5rem',
+        'r-17.8': '17.8rem',
+        'r-19.7': '19.7rem',
+        'r-44.6': '44.6rem',
       },
       outline: {
         0: ['0px solid #ffffff'],
@@ -90,7 +99,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      borderWidth: ['last'],
+    },
   },
   plugins: [],
 };
