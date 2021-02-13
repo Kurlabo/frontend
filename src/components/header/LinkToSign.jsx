@@ -18,7 +18,7 @@ const LinkToSign = () => {
         />
       </Link>
       <nav>
-        <ul>
+        <ul className="flex">
           <li className="inline-block text-kp-600">
             <NavLink to="/" className="px-3">
               회원가입
@@ -31,11 +31,11 @@ const LinkToSign = () => {
             </NavLink>
             <span className="text-gray-300">ㅣ</span>
           </li>
-          <li className="inline-block" onMouseOver={onMouseOver}>
-            <NavLink to="/" className="px-3">
+          <li className="inline-block" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            <NavLink to="/" className="block px-3 h-9">
               고객센터
             </NavLink>
-            <GoTriangleDown className="inline-block" />
+            <GoTriangleDown className="absolute -right-1 top-1 pl-2" />
             {headerDrop && <HeaderDropDown />}
           </li>
         </ul>
@@ -43,10 +43,10 @@ const LinkToSign = () => {
     </div>
   );
 
-  function onMouseOver() {
+  function onMouseEnter() {
     setHeaderDrop(true);
   }
-  function onMouseOut() {
+  function onMouseLeave() {
     setHeaderDrop(false);
   }
 };

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
+import Aside from '../aside/Aside';
 import CheckBox from './CheckBox';
 import FormInput from './FormInput';
 import IdInput from './IdInput';
@@ -7,6 +8,7 @@ import InputDate from './InputDate';
 import InputGender from './InputGender';
 import PassInput from './PassInput';
 import SignupButton from './SignupButton';
+import SignupModal from './SignupModal';
 
 const Signup = () => {
   const formTitle = 'pt-28 font-black text-5xl text-center';
@@ -23,7 +25,7 @@ const Signup = () => {
   const [validPass3, setValidPass3] = useState(false);
   const [validRePass, setValidRePass] = useState(false);
 
-  const [gender, setGender] = useState(false);
+  const [gender, setGender] = useState('none');
 
   const [allagree, setAllAgree] = useState(false);
   const [agree1, setAgree1] = useState(false);
@@ -32,6 +34,9 @@ const Signup = () => {
   const [sns, setSns] = useState(false);
   const [email, setEmail] = useState(false);
   const [age, setAge] = useState(false);
+
+  const [signup, setSignup] = useState(false);
+  const [modalValue, setModalValue] = useState('');
 
   const formRef = useRef();
   const emailRef = useRef();
@@ -45,6 +50,7 @@ const Signup = () => {
 
   const setStates = [setAgree1, setAgree2, setInfo, setSns, setEmail, setAge];
 
+  console.log(signup);
   return (
     <div className="w-r-64 ml-auto mr-auto pb-48">
       <h1 className={formTitle}>회원가입</h1>
@@ -215,6 +221,8 @@ const Signup = () => {
           </tbody>
         </table>
       </form>
+      <SignupModal modalIsOpen={signup} closeModal={closeModal} value={modalValue} />
+      <Aside />
     </div>
   );
 
@@ -234,11 +242,17 @@ const Signup = () => {
     e.preventDefault();
     const valid = validId1 && validId2 && validPass1 && validPass2 && validPass3 && validRePass;
     const valid2 = agree1 && agree2 && age;
-    if (!valid && !valid2) return false;
+    // if (!valid && !valid2) return false;
     const newUser = { date_of_birth: '' };
     const formData = new FormData(formRef.current);
+    console.log(formData.entries());
     for (let [key, value] of formData) {
-      if (!value) return false;
+      if (!value) {
+        console.log(key);
+        setSignup(true);
+        setModalValue(key);
+        return false;
+      }
       if (key === 'birthY' || key === 'birthM' || key === 'birthD')
         newUser['date_of_birth'] += value;
       else newUser[key] = value;
@@ -260,6 +274,12 @@ const Signup = () => {
     if (isNaN(+lastChar) || value.length > num) {
       e.target.value = value.substring(0, value.length - 1);
     }
+  }
+  function openModal() {
+    setSignup(true);
+  }
+  function closeModal() {
+    setSignup(false);
   }
 };
 

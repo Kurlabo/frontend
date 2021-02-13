@@ -10,7 +10,15 @@ const formRadioIcon2 = `${formRadioIcon} text-inputGray`;
 const InputGender = ({ id, name, onChange, state, children }) => {
   return (
     <div className="w-1/3 inline-block">
-      <input type="radio" id={id} name={name} value={id} className="hidden" onChange={onChange} />
+      <input
+        type="radio"
+        id={id}
+        name={name}
+        value={id}
+        className="hidden"
+        onChange={onChange}
+        checked={id === 'none' ? true : false}
+      />
       <label htmlFor={id} style={radioLabel}>
         {state === id ? (
           <RiRadioButtonFill className={formRadioIcon} />
