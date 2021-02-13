@@ -1,13 +1,28 @@
 import React from 'react';
-import Select from './select/Index';
-import Title from './title';
+import Adress from './Adress';
+import Cart from './Cart';
+import Notice from './Notice';
+import Prices from './Prices';
+import Select from './Select';
+import Summit from './Summit';
+import Title from './Title';
 
 const GoodsCart = () => {
   return (
     <div className="container">
       <Title />
-      <div>
-        <Select />
+      <div className="flex">
+        <div className="inline-block">
+          <Select />
+          <Cart />
+          <Select bottom />
+        </div>
+        <div className="inline-block mt-r-4.5">
+          <Adress />
+          <Prices />
+          <Summit />
+          <Notice />
+        </div>
       </div>
     </div>
   );

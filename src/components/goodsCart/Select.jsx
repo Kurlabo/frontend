@@ -1,10 +1,15 @@
 import React from 'react';
-import '../../../index.css';
 import { FaRegCheckCircle } from 'react-icons/fa';
 
-const Select = () => {
+const Select = ({ bottom }) => {
   return (
-    <div className="text-r-1.4 border-b border-solid py-5 border-black w-r-73">
+    <div
+      className={
+        bottom
+          ? 'text-r-1.4 border-t border-solid py-5 border-gray-300 w-r-73'
+          : 'text-r-1.4 border-b border-solid py-5 border-black w-r-73'
+      }
+    >
       <input type="radio" className="hidden" />
       <label className="py-7">
         <FaRegCheckCircle className="inline-block mr-4" />

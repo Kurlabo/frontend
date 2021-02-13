@@ -1,6 +1,6 @@
 import React from 'react';
-import Select from './Index';
-import '../../../index.css';
+import Select from './Select';
+import '../../index.css';
 
 export default {
   component: Select,

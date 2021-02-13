@@ -13,14 +13,17 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     borderRadius: {
+      'r-0.4': '0.4rem',
       'r-2': '2rem',
     },
     backgroundSize: {
       'r-6': '6rem',
     },
     fontSize: {
+      'r-1.2': '1.2rem',
       'r-1.4': '1.4rem',
       'r-1.6': '1.6rem',
+      'r-2.2': '2.2rem',
       'r-2.8': '2.8rem',
       'r-3': '3rem',
     },
@@ -29,7 +32,9 @@ module.exports = {
     },
     extend: {
       lineHeight: {
+        'r-3.5': '3.5rem',
         'r-5': '5rem',
+        'r-6.3': '6.3rem',
       },
       backgroundImage: (theme) => ({
         'big-pre-button':
@@ -42,6 +47,7 @@ module.exports = {
           "url('https://res.kurly.com/pc/service/main/1908/btn_next_default_hover_x2.png?v=1')",
       }),
       inset: {
+        'r--1': '-1rem',
         'r--3': '-3rem',
         'p-91': '9.1rem',
         'p-159': '15.9rem',
@@ -50,6 +56,7 @@ module.exports = {
         'r-1.3': '1.3rem',
         'r-1.6': '1.6rem',
         'r-3.5': '3.5rem',
+        'r-4.5': '4.5rem',
         'p-52': '5.2rem',
         'r-5.6': '5.6rem',
         'r-5.75': '5.75rem',
@@ -63,6 +70,7 @@ module.exports = {
         'r-52': '52rem',
         'r-65.2': '65.2rem',
         'r-73': '73rem',
+        'r-74.2': '74.2rem',
         'r-105': '105rem',
         'r-735': '735rem',
         'vw-99': '99vw',
