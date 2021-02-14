@@ -7,6 +7,11 @@
   html {
     font-size: 10px;
   }
+  body {
+    width: 100vw;
+    height: 100%;
+    position: relative;
+  }
 }
 * {
   box-sizing: border-box;

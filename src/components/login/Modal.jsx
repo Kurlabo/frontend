@@ -6,7 +6,7 @@ export default function Modal({ closeModal, modal, value }) {
       className={
         modal
           ? 'absolute left-0 top-0 w-full h-full overflow-y-hidden flex justify-center items-center'
-          : 'invisible'
+          : 'hidden'
       }
     >
       <div

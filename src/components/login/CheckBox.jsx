@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
-const CheckBoxStyle = styled.div`
-  display: inline-block;
-  width: 175px;
-  }
-`;
 export default function CheckBox({ value }) {
   const [checked, setchecked] = useState(false);
   const onClick = () => {
     setchecked(!checked);
   };
   return (
-    <CheckBoxStyle>
+    <>
       <input id="checkbox" type="checkbox" className="invisible absolute" />
       <label htmlFor="checkbox" onClick={onClick} className="inline-block ">
         {checked ? (
@@ -22,6 +17,6 @@ export default function CheckBox({ value }) {
         )}
         <span className="align-middle">{value}</span>
       </label>
-    </CheckBoxStyle>
+    </>
   );
 }
