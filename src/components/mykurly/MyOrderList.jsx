@@ -21,22 +21,6 @@ const MyOrderList = () => {
 const MyOrderListBlock = () => {
   return (
     <div className="float-left align-middle w-r-85 h-full mt-20 mb-14 px-12 pb-32">
-      <MyKurlyTitle />
-      <div>
-        <ul>
-          <MyOrderListItem />
-          <MyOrderListItem />
-          <MyOrderListItem />
-        </ul>
-        <MyKurlyPageNation />
-      </div>
-    </div>
-  );
-};
-
-const MyKurlyTitle = () => {
-  return (
-    <>
       <h1 className="a11y-hidden">주문 내역 확인 </h1>
       <div className="border-b-2 border-kg-300 pb-10 mb-10">
         <h2 className=" inline-block align-middle font-medium mr-6 text-r-2.4">주문내역</h2>
@@ -55,10 +39,17 @@ const MyKurlyTitle = () => {
           </ul>
         </div>
       </div>
-    </>
+      <div>
+        <ul>
+          <MyOrderListItem />
+          <MyOrderListItem />
+          <MyOrderListItem />
+        </ul>
+        <MyKurlyPageNation />
+      </div>
+    </div>
   );
 };
-
 const MyOrderListItem = () => {
   const qa_button =
     'text-kp-600 text-r-1.2 absolute top-1/2 right-3 transform -translate-y-2/4 border border-kp-600 px-20 py-4';
