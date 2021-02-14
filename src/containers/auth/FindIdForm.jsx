@@ -1,6 +1,5 @@
 import React from 'react';
 import FindId from '../../components/login/FindId';
-import Modalform from '../../components/login/Modalform';
 
 export default function FindIdForm() {
   const findUserId = '';
