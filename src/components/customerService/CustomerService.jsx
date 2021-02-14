@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import NavBar from './navBar/NavBar';
+import FrequentQuestion from './FrequentQuestion';
+import NavBar from './NavBar';
 import Notice from './Notice';
 
 const CustomerService = () => {
@@ -17,7 +18,7 @@ const CustomerService = () => {
       case '공지사항':
         return <Notice />;
       case '자주하는 질문':
-        return <div>자주하는 질문</div>;
+        return <FrequentQuestion />;
       case '1:1문의':
         return <div>1:1문의</div>;
       case '대량주문 문의':

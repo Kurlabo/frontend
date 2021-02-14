@@ -1,6 +1,6 @@
 import React from 'react';
 import Pagination from './common/Pagination';
-import BoardSearch from './BoardSearch';
+import BoardSearch from './NoticeBoardSearch';
 
 // Dummy data
 
@@ -58,8 +58,8 @@ const Notice = () => {
           컬리의 새로운 소식들과 유용한 정보들을 한곳에서 확인하세요.
         </span>
       </div>
-      <div className="border-b border-t-2 border-kp-600">
-        <div className="flex pt-8 pb-8 text-r-1.2 text-center justify-between border-gray-300 text-gray-700">
+      <div className="border-t-2 border-kp-600">
+        <div className="flex pt-8 pb-8 text-r-1.2 text-center justify-between border-b border-gray-600 text-gray-700">
           <span className="w-20">번호</span>
           <span className="w-r-54">제목</span>
           <span className="w-40">작성자</span>
