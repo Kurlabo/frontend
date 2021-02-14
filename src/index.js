@@ -2,12 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './modules/index';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorPage from './pages/ErrorPage';
+
+const store = createStore(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <ErrorBoundary FallbackComponent={ErrorPage}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ErrorBoundary>
+  </Provider>,
   document.getElementById('root'),
 );
 
