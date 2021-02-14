@@ -13,12 +13,12 @@ const category = [
 ];
 
 const myKurly_menu =
-  'w-80 border border-gray-100 border-b-0  last:border text-r-1.4 text-kg-350 hover:text-kp-600 hover:bg-kg-50 leading-none';
+  'w-80 border border-kg-80 border-b-0  last:border text-r-1.4 text-kg-350 hover:text-kp-600 hover:bg-kg-50 leading-none';
 const MyKurlyCategory = () => {
   return (
-    <main className="container">
+    <div className="float-left">
       <h1 className="a11y-hidden">마이컬리 메인</h1>
-      <section>
+      <section className="">
         <h2 className="text-5xl leading-none mt-20 mb-14">마이컬리</h2>
         <ul className="w-full ">
           {category.map(list => (
@@ -40,7 +40,7 @@ const MyKurlyCategory = () => {
           <FiChevronRight className="inline-block text-r-1.8 ml-6 align-middle text-kp-600" />
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 
