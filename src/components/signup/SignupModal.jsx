@@ -60,6 +60,7 @@ const SignupModal = ({ modalIsOpen, closeModal, value }) => {
       modalText = '생일을';
       break;
     default:
+      modalText = value;
       break;
   }
   return (
@@ -71,7 +72,9 @@ const SignupModal = ({ modalIsOpen, closeModal, value }) => {
             <IoCloseOutline />
           </button>
         </div>
-        <p className="py-20 text-r-1.4 text-center">{modalText} 입력해 주세요</p>
+        <p className="py-20 text-r-1.4 text-center">
+          {modalText.length > 10 ? modalText : `${modalText} 입력해 주세요`}
+        </p>
       </div>
       <div className="bg-modalBg py-12 text-center">
         <button

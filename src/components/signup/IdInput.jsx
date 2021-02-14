@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useEffect } from 'react';
 import SignupButton from './SignupButton';
 
 const regTitle = 'font-bold text-left align-top pt-7 ';
@@ -6,6 +7,7 @@ const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
 const subText = 'text-r-1.2 text-gray-600';
 
 const IdInput = ({ state: [validId1, validId2], setState: [setValidId1, setValidId2] }) => {
+  const idInput = useRef();
   const idSub = useRef();
 
   return (
@@ -19,9 +21,11 @@ const IdInput = ({ state: [validId1, validId2], setState: [setValidId1, setValid
           type="text"
           name="uid"
           className={regInput}
+          ref={idInput}
           onChange={checkId}
           onFocus={onFocusId}
           placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"
+          autoComplete="uid"
         />
         <div className="hidden" ref={idSub}>
           <p className={`${subText} ${validId1 ? 'text-green-700' : 'text-red-800'}`}>

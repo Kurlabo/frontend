@@ -50,7 +50,6 @@ const Signup = () => {
 
   const setStates = [setAgree1, setAgree2, setInfo, setSns, setEmail, setAge];
 
-  console.log(signup);
   return (
     <div className="w-r-64 ml-auto mr-auto pb-48">
       <h1 className={formTitle}>회원가입</h1>
@@ -58,7 +57,9 @@ const Signup = () => {
         <span className="text-formStar">*</span>
         필수입력사항
       </p>
-      <form className={regForm} onSubmit={onSubmit} ref={formRef}>
+      <form className={regForm} onSubmit={onSubmit} ref={formRef} autoComplete="off">
+        <input style={{ display: 'none' }} aria-hidden="true" />
+        <input type="password" style={{ display: 'none' }} aria-hidden="true" />
         <table className="ml-auto mr-auto">
           <colgroup>
             <col width="160px" />
@@ -240,15 +241,23 @@ const Signup = () => {
 
   function onSubmit(e) {
     e.preventDefault();
-    const valid = validId1 && validId2 && validPass1 && validPass2 && validPass3 && validRePass;
-    const valid2 = agree1 && agree2 && age;
-    // if (!valid && !valid2) return false;
+    const valid = [
+      validId1,
+      validId2,
+      validPass1,
+      validPass2,
+      validPass3,
+      validRePass,
+      agree1,
+      agree2,
+      age,
+    ];
+
     const newUser = { date_of_birth: '' };
     const formData = new FormData(formRef.current);
-    console.log(formData.entries());
+
     for (let [key, value] of formData) {
       if (!value) {
-        console.log(key);
         setSignup(true);
         setModalValue(key);
         return false;
@@ -256,6 +265,26 @@ const Signup = () => {
       if (key === 'birthY' || key === 'birthM' || key === 'birthD')
         newUser['date_of_birth'] += value;
       else newUser[key] = value;
+    }
+    for (let i = 0; i < valid.length; i++) {
+      if (!valid[i]) {
+        if (i < 2) {
+          setSignup(true);
+          setModalValue('아이디를 제대로 입력해 주세요');
+        } else if (i >= 2 && i < 5) {
+          setSignup(true);
+          setModalValue('비밀번호를 제대로 입력해 주세요');
+        } else if (i === 5) {
+          setSignup(true);
+          setModalValue('동일한 비밀번호 입력해 주세요');
+        } else if (i > 5 && i < 8) {
+          setSignup(true);
+          setModalValue('필수사항을 체크해 주세요');
+        } else if (i === 8) {
+          setSignup(true);
+          setModalValue('14세 이상 항목을 체크해 주세요');
+        }
+      }
     }
     console.log(newUser);
   }
