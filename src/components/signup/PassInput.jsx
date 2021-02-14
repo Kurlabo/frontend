@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useEffect } from 'react';
 
 const regTitle = 'font-bold text-left align-top pt-7 ';
 const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
@@ -29,6 +30,7 @@ const PassInput = ({
             onFocus={onFocusPass}
             ref={passRef}
             placeholder="비밀번호를 입력해주세요"
+            autoComplete="new-password"
           />
           <div className="hidden" ref={passSub}>
             <p className={`${subText} ${validPass1 ? 'text-green-700' : 'text-red-800'}`}>

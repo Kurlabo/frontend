@@ -32,6 +32,9 @@ module.exports = {
         'p-16': '1.6rem',
         'p-24': '2.4rem',
       },
+      borderWidth: {
+        1: '1px',
+      },
       borderRadius: {
         'r-2': '2rem',
         'p-3': '0.3rem',
@@ -113,6 +116,7 @@ module.exports = {
         formStar: '#ee6a7b',
         inputGray: '#cccccc',
         inputRadio: '#dddddd',
+        modalBg: '#f5f5f5',
       },
       outline: {
         0: ['0px solid #ffffff'],
@@ -173,6 +177,7 @@ module.exports = {
         'vw-700': '700vw',
         13: '52px',
         370: '370px',
+        510: '510px',
       },
       zIndex: {
         60: 60,
@@ -183,7 +188,9 @@ module.exports = {
         900: 900,
       },
       lineHeight: {
+        3: '3rem',
         4: '4rem',
+        5: '5rem',
       },
     },
   },

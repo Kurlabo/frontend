@@ -47,7 +47,7 @@ const CartModal = ({ modalIsOpen, closeModal }) => {
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       style={modalStyles}
-      contentLabel="장바구니창"
+      contentLabel="회원가입"
       ariaHideApp={false}
     >
       <h1 className="text-2xl ">친환경 대추방울토마토 500g</h1>

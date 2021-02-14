@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
+import Aside from '../aside/Aside';
 import CheckBox from './CheckBox';
 import FormInput from './FormInput';
 import IdInput from './IdInput';
@@ -7,6 +8,7 @@ import InputDate from './InputDate';
 import InputGender from './InputGender';
 import PassInput from './PassInput';
 import SignupButton from './SignupButton';
+import SignupModal from './SignupModal';
 
 const Signup = () => {
   const formTitle = 'pt-28 font-black text-5xl text-center';
@@ -23,7 +25,7 @@ const Signup = () => {
   const [validPass3, setValidPass3] = useState(false);
   const [validRePass, setValidRePass] = useState(false);
 
-  const [gender, setGender] = useState(false);
+  const [gender, setGender] = useState('none');
 
   const [allagree, setAllAgree] = useState(false);
   const [agree1, setAgree1] = useState(false);
@@ -32,6 +34,9 @@ const Signup = () => {
   const [sns, setSns] = useState(false);
   const [email, setEmail] = useState(false);
   const [age, setAge] = useState(false);
+
+  const [signup, setSignup] = useState(false);
+  const [modalValue, setModalValue] = useState('');
 
   const formRef = useRef();
   const emailRef = useRef();
@@ -52,7 +57,9 @@ const Signup = () => {
         <span className="text-formStar">*</span>
         필수입력사항
       </p>
-      <form className={regForm} onSubmit={onSubmit} ref={formRef}>
+      <form className={regForm} onSubmit={onSubmit} ref={formRef} autoComplete="off">
+        <input style={{ display: 'none' }} aria-hidden="true" />
+        <input type="password" style={{ display: 'none' }} aria-hidden="true" />
         <table className="ml-auto mr-auto">
           <colgroup>
             <col width="160px" />
@@ -215,6 +222,8 @@ const Signup = () => {
           </tbody>
         </table>
       </form>
+      <SignupModal modalIsOpen={signup} closeModal={closeModal} value={modalValue} />
+      <Aside />
     </div>
   );
 
@@ -232,16 +241,50 @@ const Signup = () => {
 
   function onSubmit(e) {
     e.preventDefault();
-    const valid = validId1 && validId2 && validPass1 && validPass2 && validPass3 && validRePass;
-    const valid2 = agree1 && agree2 && age;
-    if (!valid && !valid2) return false;
+    const valid = [
+      validId1,
+      validId2,
+      validPass1,
+      validPass2,
+      validPass3,
+      validRePass,
+      agree1,
+      agree2,
+      age,
+    ];
+
     const newUser = { date_of_birth: '' };
     const formData = new FormData(formRef.current);
+
     for (let [key, value] of formData) {
-      if (!value) return false;
+      if (!value) {
+        setSignup(true);
+        setModalValue(key);
+        return false;
+      }
       if (key === 'birthY' || key === 'birthM' || key === 'birthD')
         newUser['date_of_birth'] += value;
       else newUser[key] = value;
+    }
+    for (let i = 0; i < valid.length; i++) {
+      if (!valid[i]) {
+        if (i < 2) {
+          setSignup(true);
+          setModalValue('아이디를 제대로 입력해 주세요');
+        } else if (i >= 2 && i < 5) {
+          setSignup(true);
+          setModalValue('비밀번호를 제대로 입력해 주세요');
+        } else if (i === 5) {
+          setSignup(true);
+          setModalValue('동일한 비밀번호 입력해 주세요');
+        } else if (i > 5 && i < 8) {
+          setSignup(true);
+          setModalValue('필수사항을 체크해 주세요');
+        } else if (i === 8) {
+          setSignup(true);
+          setModalValue('14세 이상 항목을 체크해 주세요');
+        }
+      }
     }
     console.log(newUser);
   }
@@ -260,6 +303,12 @@ const Signup = () => {
     if (isNaN(+lastChar) || value.length > num) {
       e.target.value = value.substring(0, value.length - 1);
     }
+  }
+  function openModal() {
+    setSignup(true);
+  }
+  function closeModal() {
+    setSignup(false);
   }
 };
 
