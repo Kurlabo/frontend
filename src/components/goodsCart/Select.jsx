@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaRegCheckCircle } from 'react-icons/fa';
 
 const Select = ({ bottom }) => {
   return (
@@ -12,7 +11,12 @@ const Select = ({ bottom }) => {
     >
       <input type="radio" className="hidden" />
       <label className="py-7">
-        <FaRegCheckCircle className="inline-block mr-4" />
+        <img
+          alt=""
+          className="inline-block mr-3.5"
+          src="https://res.kurly.com/mobile/service/common/2006/ico_checkbox.svg"
+        />
+        {/* https://res.kurly.com/mobile/service/common/2006/ico_checkbox.svg */}
         전체선택 (0/0)
       </label>
       <span className="px-8 text-gray-400">|</span>

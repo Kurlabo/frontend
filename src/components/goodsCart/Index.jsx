@@ -12,7 +12,7 @@ const GoodsCart = () => {
     <div className="container">
       <Title />
       <div className="flex">
-        <div className="inline-block">
+        <div className="inline-block mr-r-3.5">
           <Select />
           <Cart />
           <Select bottom />
