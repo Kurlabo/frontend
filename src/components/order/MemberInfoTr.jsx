@@ -1,10 +1,12 @@
 import React from 'react';
 
-const MemberInfoTr = ({ heading, desc }) => {
+const MemberInfoTr = ({ tableHeader, desc }) => {
   return (
-    <tr>
-      <th>{heading}</th>
-      <td>{desc}</td>
+    <tr className="text-gray-900 text-left">
+      <th style={{ width: '19rem' }} className="pt-r-1.9 text-1.4 font-medium">
+        {tableHeader}
+      </th>
+      <td className="pt-r-1.9 text-1.4 font-normal">{desc}</td>
     </tr>
   );
 };

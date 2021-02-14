@@ -1,37 +1,46 @@
 import React from 'react';
 import OrderItemLi from './OrderItemLi';
+import { RiArrowUpSLine, RiArrowDownSLine } from 'react-icons/ri';
+import { useState } from 'react';
+
+export const borderBottom = 'border-b border-gray-800';
+const productWrapper = `flex justify-between w-p-1050 mx-auto text-2 ${borderBottom}`;
 
 const OrderProduct = () => {
+  const [btnSwitch, setBtnSwitch] = useState(false);
+
   return (
     <>
-      <div className="flex justify-between border-b border-gray-800">
-        <h2>주문상품</h2>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          className="w-12 h-12"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
+      <div className={productWrapper}>
+        <h2 className="pt-r-1.4 pb-r-1.6 font-medium">주문상품</h2>
+        <button className="focus:outline-0 text-5xl" onClick={onClick}>
+          {btnSwitch ? <RiArrowUpSLine /> : <RiArrowDownSLine />}
+        </button>
       </div>
-      <div>
-        <div>
-          [Kurly's] 동물복지 백색 유정란 10구의 <span className="text-kp-600">3개</span>상품을
-          주문합니다.
-        </div>
+      <div className="w-p-1050 mx-auto text-p-16">
         <ul>
           <OrderItemLi
             quantity={1}
-            tag="[Kurly's]"
-            productName="동물복지 백색 유정란 10구"
+            productName="[Kurly's] 동물복지 백색 유정란 10구"
+            price={4600}
+          />
+          <OrderItemLi
+            quantity={1}
+            productName="[Kurly's] 동물복지 백색 유정란 10구"
+            price={4600}
+          />
+          <OrderItemLi
+            quantity={1}
+            productName="[Kurly's] 동물복지 백색 유정란 10구"
             price={4600}
           />
         </ul>
       </div>
     </>
   );
+  function onClick() {
+    setBtnSwitch(!btnSwitch);
+  }
 };
 
 export default OrderProduct;
