@@ -31,7 +31,7 @@ const LinkToSign = () => {
             </NavLink>
             <span className="text-gray-300">ㅣ</span>
           </li>
-          <li className="inline-block" onMouseOver={onMouseOver}>
+          <li className="inline-block" onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
             <NavLink to="/" className="px-3">
               고객센터
             </NavLink>
