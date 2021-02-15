@@ -71,6 +71,8 @@ module.exports = {
           600: '#5E107B',
           700: '#E8F0FE',
         },
+        inputGray: '#cccccc',
+        inputRadio: '#dddddd',
       },
       spacing: {
         'p-28': '2.8rem',

@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import CardOption from './CardOption';
 import { wrapper } from './Coupon';
 import PaymentBrand from './PaymentBrand';
-// import { RiCheckboxCircleLine } from 'react-icons/ri';
-// import { IoIosCheckmarkCircle } from 'react-icons/io';
-// import { useState } from 'react';
 
 // 이미지 url
 const tossUrl = 'https://res.kurly.com/pc/service/order/1912/toss-logo-signature.svg';
@@ -46,9 +43,6 @@ const selectStyle = {
 };
 
 const PaySelection = () => {
-  // const formRadioIcon = 'inline-block w-10 h-10 border-inputRadio mr-5 text-kp-600';
-  // const formRadioIcon2 = `${formRadioIcon} text-inputGray`;
-
   return (
     <div className={wrapper}>
       <div className="w-r-74.6 ">

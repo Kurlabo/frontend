@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { drag } from '../../common_style/common';
 import GotopBtn from '../itemList/GotopBtn';
 import Coupon from './Coupon';
 import DeliveryInfo from './DeliveryInfo';
@@ -16,7 +17,7 @@ const OrderContainer = () => {
   const [agreeCheck, setAgreeCheck] = useState(true);
 
   return (
-    <div className="pb-r-12">
+    <div className="pb-r-12" style={drag}>
       <h1 className={headingStyle}>주문서</h1>
       <OrderProduct />
       <MemberInfo />
@@ -27,9 +28,10 @@ const OrderContainer = () => {
         <PaySelection />
       </div>
       <PersonalAgree
-        agreeCheck={() => {
+        onCheck={() => {
           setAgreeCheck(!agreeCheck);
         }}
+        agreeCheck={agreeCheck}
       />
       <PayButton agreeCheck={agreeCheck} />
       <GotopBtn />

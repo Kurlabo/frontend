@@ -2,7 +2,6 @@ import React from 'react';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
 export const wrapper = 'w-p-1050 mx-auto pt-r-7.4';
-const flexWrapper = `${wrapper} flex`;
 const buttonAllStyle =
   'w-r-12 h-r-4.4 text-1.4 text-gray-800 text-center cursor-pointer focus:outline-0 border border-gray-300 rounded-p-3';
 const useSavingStyle =
