@@ -24,7 +24,7 @@ const IdInput = ({ state, setState, readOnly }) => {
           ref={idInput}
           onChange={readOnly ? '' : checkId}
           onFocus={readOnly ? '' : onFocusId}
-          placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"
+          placeholder={readOnly ? '' : '6자 이상의 영문 혹은 영문과 숫자를 조합'}
           autoComplete="uid"
           readOnly={readOnly}
         />

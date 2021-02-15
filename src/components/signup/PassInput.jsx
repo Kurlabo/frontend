@@ -45,7 +45,7 @@ const PassInput = ({
             onChange={checkPass}
             onFocus={onFocusPass}
             ref={passRef}
-            placeholder="비밀번호를 입력해주세요"
+            placeholder={info ? '' : '비밀번호를 입력해주세요'}
             autoComplete="new-password"
           />
           <div className="hidden" ref={passSub}>
@@ -79,7 +79,7 @@ const PassInput = ({
             onChange={checkPass}
             onFocus={onFocusRePass}
             ref={rePassRef}
-            placeholder="비밀번호를 한번 더 입력해주세요"
+            placeholder={info ? '' : '비밀번호를 한번 더 입력해주세요'}
           />
           <div className="hidden" ref={rePassSub}>
             <p className={`${subText} ${validRePass ? 'text-green-700' : 'text-red-800'}`}>

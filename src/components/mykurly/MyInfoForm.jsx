@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { FiSearch } from 'react-icons/fi';
 import CheckBox from '../signup/CheckBox';
 import FormInput from '../signup/FormInput';
 import IdInput from '../signup/IdInput';
@@ -9,13 +8,12 @@ import PassInput from '../signup/PassInput';
 import SignupButton from '../signup/SignupButton';
 import SignupModal from '../signup/SignupModal';
 
-const MyInfoForm = ({ myinfo = false }) => {
+const MyInfoForm = () => {
   const formTitle = 'pb-14 border-b border-solid border-kg-400 font-bold text-r-24';
   const regForm = 'text-r-1.4';
   const regTitle = 'font-bold text-left align-top pt-7 ';
   const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
   const subText = 'text-r-1.2 text-gray-600';
-  const submitBtn = 'bg-kp-600 text-white w-96 h-20 rounded-md';
   const secesstBtn = 'border border-kp-600 mr-4 text-kp-600 w-48 h-20 rounded-md';
   const infoBtn = 'bg-kp-600 text-white w-48 h-20 rounded-md';
   const borderBottom = 'border-b border-solid border-kg-400';
@@ -27,7 +25,6 @@ const MyInfoForm = ({ myinfo = false }) => {
 
   const [gender, setGender] = useState('none');
 
-  const [allagree, setAllAgree] = useState(false);
   const [agree1, setAgree1] = useState(false);
   const [agree2, setAgree2] = useState(false);
   const [info, setInfo] = useState(false);
@@ -47,8 +44,6 @@ const MyInfoForm = ({ myinfo = false }) => {
   const snsRef = useRef();
   const emailRef2 = useRef();
   const ageRef = useRef();
-
-  const setStates = [setAgree1, setAgree2, setInfo, setSns, setEmail, setAge];
 
   return (
     <div className="w-r-64 ml-auto mr-auto pb-48">
