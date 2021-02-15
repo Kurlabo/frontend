@@ -3,17 +3,13 @@ import { Link } from 'react-router-dom';
 import { wrapperWithText } from './MemberInfo';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
-const PersonalAgree = () => {
+const PersonalAgree = ({ agreeCheck }) => {
   return (
     <div className={wrapperWithText}>
       <h2 className="pb-r-1.6 border-b border-gray-800">개인정보 수집/제공</h2>
-      <div>
-        <input type="radio" id="agreePersonal" className="mr-5" />
-        <label htmlFor="agreePersonal">
-          <p className="text-1.8 font-medium inline-block pt-3 text-gray-700">
-            결제 진행 필수 동의
-          </p>
-        </label>
+      <div className="font-medium pt-r-1.9">
+        <input type="checkbox" id="agreePersonal" className="mr-5" onChange={agreeCheck} />
+        <label htmlFor="agreePersonal">결제 진행 필수 동의</label>
       </div>
       <div className="pl-r-1.4 text-1.4 border-b border-gray-100 pb-7">
         <p className="pt-r-0.8 ml-5">

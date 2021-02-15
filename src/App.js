@@ -7,6 +7,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import ItemListPage from './pages/ItemListPage';
 import SearchLocation from './components/common/SearchLocation';
 import OrderPage from './pages/OrderPage';
+import PayCompletePage from './pages/PayCompletePage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
       <Route path="/shop/goods/item_list" component={ItemListPage} />
       <Route path="/order" component={OrderPage} />
+      <Route path="/pay_complete" component={PayCompletePage} />
       <Route path="/kakao/destination" component={SearchLocation} />
       <Route path="/" exact component={MainContainer} />
       <Route component={NotFoundPage} />
