@@ -39,7 +39,7 @@ const HeaderSearch = () => {
       <div className="relative">
         <h3 className={a11yHidden}>배송지 검색</h3>
         <div className="inline-block mr-9 text-5xl cursor-pointer">
-          <GrLocation onMouseOver={onMouseOver} className="" />
+          <GrLocation onMouseOver={onMouseOver} />
           {dropDown && <LoginDropDown />}
         </div>
 

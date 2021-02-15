@@ -73,6 +73,7 @@ module.exports = {
         },
         inputGray: '#cccccc',
         inputRadio: '#dddddd',
+        formStar: '#ee6a7b',
       },
       spacing: {
         'p-28': '2.8rem',

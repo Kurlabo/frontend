@@ -8,7 +8,7 @@ const MemberInfo = () => {
   return (
     <div className={wrapperWithText}>
       <h2 className="border-b border-gray-800 pb-8 font-medium">주문자 정보</h2>
-      <table>
+      <table width="100%">
         <tbody>
           <MemberInfoTr tableHeader="보내는 분" desc="조재연" />
           <MemberInfoTr tableHeader="휴대폰" desc="01098063260" />

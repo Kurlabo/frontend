@@ -10,6 +10,7 @@ import PayButton from './PayButton';
 import PayHistory from './PayHistory';
 import PaySelection from './PaySelection';
 import PersonalAgree from './PersonalAgree';
+import TypeUserInfo from './TypeUserInfo';
 
 const headingStyle = 'w-p-1050 text-5xl font-semibold pb-r-4.4 pt-r-5.5 mx-auto text-center';
 
@@ -35,6 +36,7 @@ const OrderContainer = () => {
       />
       <PayButton agreeCheck={agreeCheck} />
       <GotopBtn />
+      <TypeUserInfo />
     </div>
   );
 };
