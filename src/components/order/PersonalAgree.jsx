@@ -15,7 +15,7 @@ const PersonalAgree = () => {
           </p>
         </label>
       </div>
-      <p className="pl-r-1.4 text-1.4 border-b border-gray-100 pb-7">
+      <div className="pl-r-1.4 text-1.4 border-b border-gray-100 pb-7">
         <p className="pt-r-0.8 ml-5">
           개인정보 수집<span className="mx-1">&middot;</span>이용 및 위탁 동의
           <span className="text-gray-400 ml-1 mr-5">(필수)</span>
@@ -24,7 +24,7 @@ const PersonalAgree = () => {
             <MdKeyboardArrowRight className="inline-block text-1.6 align-bottom" />
           </Link>
         </p>
-      </p>
+      </div>
     </div>
   );
 };

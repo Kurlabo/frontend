@@ -19,10 +19,7 @@ const DeliveryInfo = () => {
           배송 휴무일:샛별배송(휴무없음),택배배송(일요일)
         </span>
         <button className={questionBtn} onClick={onOpen}>
-          <div className="mr-2 inline-block relative">
-            배송지 변경 안내
-            {modal && <SmallModal modal={modal} />}
-          </div>
+          <div className="mr-2 inline-block relative">배송지 변경 안내</div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -33,12 +30,17 @@ const DeliveryInfo = () => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={svgD} />
           </svg>
         </button>
+        {modal && <SmallModal modal={modal} onClose={onClose} />}
       </div>
       <DeliveryTable />
     </div>
   );
+
   function onOpen() {
     setModal(true);
+  }
+  function onClose() {
+    setModal(!modal);
   }
 };
 

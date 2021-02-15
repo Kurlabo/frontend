@@ -107,6 +107,7 @@ module.exports = {
         'r-16.3': '16.3rem',
         'r-19': '19rem',
         'r-24.2': '24.2rem',
+        'r-27.5': '27.5rem',
         'r-28.4': '28.4rem',
         'r-30.9': '30.9rem',
         'r-55.2': '55.2rem',
@@ -118,7 +119,9 @@ module.exports = {
         13: '52px',
         370: '370px',
       },
-
+      translate: {
+        'r-7.2': '7.2rem',
+      },
       outline: {
         0: ['0px solid #ffffff'],
         54: '54px',

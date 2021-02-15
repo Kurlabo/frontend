@@ -4,7 +4,7 @@ const tdStyle = 'pt-r-1.9 text-1.4 font-normal pb-10';
 const defaultDeliver =
   'w-r-7.4 rounded-r-1.1 bg-gray-100 text-1.2 text-center block mb-3 p-1 text-gray-600 font-medium';
 const modifyBtn =
-  'w-24 h-12 text-1.2 font-medium rounded-p-3 border border-gray-200 focus:outline-0';
+  'w-24 h-12 text-1.2 font-medium rounded-p-3 border border-kp-600 text-kp-600 focus:outline-0';
 
 const DeliveryTable = () => {
   return (
@@ -23,8 +23,8 @@ const DeliveryTable = () => {
         <tr style={{ width: '19rem' }} className="align-text-top border-b border-gray-100">
           <th className="pt-r-1.9 text-1.4 font-medium">상세 정보</th>
           <td className={tdStyle}>
-            <p className="pb-6">조재연, 01098063260</p>
-            <button className={modifyBtn}>수정</button>
+            <p className="pb-6 ">조재연, 01098063260</p>
+            <button className={modifyBtn}>입력</button>
           </td>
         </tr>
       </tbody>

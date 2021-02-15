@@ -1,5 +1,4 @@
 import React from 'react';
-import PayHistory from './PayHistory';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
 export const wrapper = 'w-p-1050 mx-auto pt-r-7.4';
@@ -11,7 +10,7 @@ const useSavingStyle =
 
 const Coupon = () => {
   return (
-    <div className={flexWrapper}>
+    <div className="flex pt-r-7.4">
       <div className="w-full mr-8">
         <h2 className="text-2 font-medium pb-r-1.6 border-b border-gray-800">쿠폰 / 적립금</h2>
         <table>
@@ -51,7 +50,6 @@ const Coupon = () => {
           </tbody>
         </table>
       </div>
-      <PayHistory />
     </div>
   );
 };

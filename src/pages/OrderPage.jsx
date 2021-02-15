@@ -1,9 +1,11 @@
 import React from 'react';
+import GotopBtn from '../components/itemList/GotopBtn';
 import Coupon from '../components/order/Coupon';
 import DeliveryInfo from '../components/order/DeliveryInfo';
 import MemberInfo from '../components/order/MemberInfo';
 import OrderProduct from '../components/order/OrderProduct';
 import PayButton from '../components/order/PayButton';
+import PayHistory from '../components/order/PayHistory';
 import PaySelection from '../components/order/PaySelection';
 import PersonalAgree from '../components/order/PersonalAgree';
 
@@ -16,10 +18,14 @@ const OrderPage = () => {
       <OrderProduct />
       <MemberInfo />
       <DeliveryInfo />
-      <Coupon />
-      <PaySelection />
+      <div className="flex flex-wrap mx-auto w-p-1050">
+        <Coupon />
+        <PayHistory />
+        <PaySelection />
+      </div>
       <PersonalAgree />
       <PayButton />
+      <GotopBtn />
     </div>
   );
 };

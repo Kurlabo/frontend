@@ -18,23 +18,29 @@ const OrderProduct = () => {
         </button>
       </div>
       <div className="w-p-1050 mx-auto text-p-16">
-        <ul>
-          <OrderItemLi
-            quantity={1}
-            productName="[Kurly's] 동물복지 백색 유정란 10구"
-            price={4600}
-          />
-          <OrderItemLi
-            quantity={1}
-            productName="[Kurly's] 동물복지 백색 유정란 10구"
-            price={4600}
-          />
-          <OrderItemLi
-            quantity={1}
-            productName="[Kurly's] 동물복지 백색 유정란 10구"
-            price={4600}
-          />
-        </ul>
+        {btnSwitch ? (
+          <ul>
+            <OrderItemLi
+              quantity={1}
+              productName="[Kurly's] 동물복지 백색 유정란 10구"
+              price={4600}
+            />
+            <OrderItemLi
+              quantity={1}
+              productName="[Kurly's] 동물복지 백색 유정란 10구"
+              price={4600}
+            />
+            <OrderItemLi
+              quantity={1}
+              productName="[Kurly's] 동물복지 백색 유정란 10구"
+              price={4600}
+            />
+          </ul>
+        ) : (
+          <p className="text-center font-medium pt-12">
+            방울토마토 500g외 <span className="text-kp-600">5개</span>상품을 주문합니다.
+          </p>
+        )}
       </div>
     </>
   );
