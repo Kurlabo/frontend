@@ -45,6 +45,10 @@ module.exports = {
           "url('https://res.kurly.com/pc/service/main/1908/btn_prev_default_x2.png?v=1')",
         'sm-next-button':
           "url('https://res.kurly.com/pc/service/main/1908/btn_next_default_hover_x2.png?v=1')",
+        'check-button':
+          "url('https://res.kurly.com/mobile/service/common/2006/ico_checkbox.svg')",
+        'checked-button':
+          "url('https://res.kurly.com/mobile/service/common/2006/ico_checkbox_checked.svg')",
       }),
       inset: {
         'r--1': '-1rem',
@@ -129,6 +133,7 @@ module.exports = {
     extend: {
       fontWeight: ['hover', 'focus', 'focused-sibling'],
       backgroundColor: ['focused-sibling'],
+      backgroundImage: ['focused-sibling'],
       textColor: ['focused-sibling'],
     },
   },

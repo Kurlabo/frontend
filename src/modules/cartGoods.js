@@ -1,31 +1,23 @@
 // 액션 타입
+
 import { createAction, handleActions } from 'redux-actions';
 
-const ISDROPDOWNFROZEN = 'cartGoods/ISDROPDOWNFROZEN';
-const ISDROPDOWNAMBIENT = 'cartGoods/ISDROPDOWNAMBIENT';
+const ADD_GOODS_CART = 'cartGoods/ADD_GOODS_CART';
 
 // 액션 생성함수
-export const isdropdownfrozen = createAction(ISDROPDOWNFROZEN);
-export const isdropdownambient = createAction(ISDROPDOWNAMBIENT);
+export const addGoodsCart = createAction(
+  ADD_GOODS_CART,
+  (goodsInfo) => goodsInfo,
+);
 
 // 초기값
-const initialize = {
-  frozen: false,
-  ambient: false,
-};
+const initialize = [];
 
 // 리듀서
 
 const cartGoods = handleActions(
   {
-    [ISDROPDOWNFROZEN]: (state, action) => ({
-      ...state,
-      frozen: !state.frozen,
-    }),
-    [ISDROPDOWNAMBIENT]: (state, action) => ({
-      ...state,
-      ambient: !state.ambient,
-    }),
+    [ADD_GOODS_CART]: (state, action) => [...state, action.payload],
   },
   initialize,
 );

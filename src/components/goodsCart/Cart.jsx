@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import CartGoods from './CartGoods';
 import CartGoodsType from './CartGoodsType';
 import NoGoods from './NoGoods';
-import { isdropdownfrozen, isdropdownambient } from '../../modules/cartGoods';
+import { isDropDownAmbient, isDropDownFrozen } from '../../modules/cart';
+import { setAllPrices } from '../../modules/cart';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -43,8 +44,17 @@ const Cart = () => {
   const ambient = goods.filter((good) => good.ambient);
   const frozen = goods.filter((good) => !good.ambient);
 
-  const isDropdownFrozen = useSelector((state) => state.cartGoods.frozen);
-  const isDropdownAmbient = useSelector((state) => state.cartGoods.ambient);
+  const isDropdownFrozen = useSelector((state) => state.cart.frozen);
+  const isDropdownAmbient = useSelector((state) => state.cart.ambient);
+
+  const dispatchPrams = goods.map((goods) => ({
+    id: goods.id,
+    select: false,
+    count: 1,
+    prices: goods.prices,
+    initalPrices: goods.prices,
+  }));
+  dispatch(setAllPrices(dispatchPrams));
 
   return (
     <div>
@@ -79,11 +89,11 @@ const Cart = () => {
   );
 
   function dropdownFrozen() {
-    dispatch(isdropdownfrozen());
+    dispatch(isDropDownFrozen());
   }
 
   function dropdownAmbient() {
-    dispatch(isdropdownambient());
+    dispatch(isDropDownAmbient());
   }
 };
 
