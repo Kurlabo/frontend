@@ -39,7 +39,7 @@ const GetSupportContent = ({ pQData, setPage }) => {
         )}
       </div>
       <div className="mt-12">
-        {pQData.length !== 0 && <Pagination num={2} />}
+        {pQData.length !== 0 && <Pagination num={1} />}
         <div
           onClick={onClick}
           className=" border text-p-13 bg-klp-500 p-3 w-40 cursor-pointer text-center text-white float-right mr-4 hover:bg-white hover:text-kdp-300 hover:border-kp-600"

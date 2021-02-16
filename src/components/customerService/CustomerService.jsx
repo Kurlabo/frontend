@@ -30,8 +30,7 @@ const CustomerService = () => {
   }
 
   function clickNav(e) {
-    console.log(e.target.firstChild.nodeValue);
-    setState(e.target.firstChild.nodeValue);
+    setState(e.currentTarget.firstChild.nodeValue);
   }
 };
 

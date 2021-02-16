@@ -76,7 +76,7 @@ const Pagination = ({ num, onClick }) => {
     const elArr = [];
     for (let i = 0; i < num; i++) {
       elArr.push(
-        <div onClick={onClick} id={i + 1} className={btnStyle + hoverStyle}>
+        <div key={i} onClick={onClick} id={i + 1} className={btnStyle + hoverStyle}>
           {i + 1}
         </div>,
       );

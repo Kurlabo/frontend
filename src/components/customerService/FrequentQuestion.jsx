@@ -123,7 +123,7 @@ const FrequentQuestion = () => {
       </div>
       <div className="flex flex-col pb-8">
         {viewData.map(data => (
-          <FrequentQuestionList data={data} />
+          <FrequentQuestionList data={data} key={data.no} />
         ))}
       </div>
       <div className="mt-24">

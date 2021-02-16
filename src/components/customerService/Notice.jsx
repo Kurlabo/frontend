@@ -82,7 +82,7 @@ const Notice = () => {
         ))}
       </ul>
       <div className="mt-24">
-        <Pagination num={2} />
+        <Pagination num={1} />
       </div>
       <div>
         <BoardSearch />

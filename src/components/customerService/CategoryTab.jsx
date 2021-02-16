@@ -55,6 +55,7 @@ const CategoryTab = ({ state, clickCategoryTab, clickCategory }) => {
         <ul>
           {categoryList.map((list, i) => (
             <li
+              key={i}
               onClick={clickCategory}
               className={categoryListStyle + (i === categoryList.length - 1 ? ' border-b' : '')}
             >
