@@ -4,7 +4,7 @@ import { selectAllCheckBox } from '../../modules/cart';
 
 const Select = ({ bottom }) => {
   const dispatch = useDispatch();
-  const selectAll = useSelector((state) => state.cart.selectAll);
+  const selectAll = useSelector(state => state.cart.selectAll);
   return (
     <div
       className={
@@ -14,7 +14,7 @@ const Select = ({ bottom }) => {
       }
     >
       <input
-        onChange={(e) => {
+        onChange={e => {
           onChangeRadio(e.target.checked);
         }}
         id="selectAll"

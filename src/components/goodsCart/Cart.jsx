@@ -41,13 +41,13 @@ const Cart = () => {
     },
   ];
 
-  const ambient = goods.filter((good) => good.ambient);
-  const frozen = goods.filter((good) => !good.ambient);
+  const ambient = goods.filter(good => good.ambient);
+  const frozen = goods.filter(good => !good.ambient);
 
-  const isDropdownFrozen = useSelector((state) => state.cart.frozen);
-  const isDropdownAmbient = useSelector((state) => state.cart.ambient);
+  const isDropdownFrozen = useSelector(state => state.cart.frozen);
+  const isDropdownAmbient = useSelector(state => state.cart.ambient);
 
-  const dispatchPrams = goods.map((goods) => ({
+  const dispatchPrams = goods.map(goods => ({
     id: goods.id,
     select: false,
     count: 1,
@@ -75,10 +75,7 @@ const Cart = () => {
       )}
       {ambient.length !== 0 && (
         <div>
-          <CartGoodsType
-            isDropdownAmbient={isDropdownAmbient}
-            dropdownAmbient={dropdownAmbient}
-          />
+          <CartGoodsType isDropdownAmbient={isDropdownAmbient} dropdownAmbient={dropdownAmbient} />
           <div className={isDropdownAmbient ? 'hidden' : ''}>
             <CartGoods isDropdownAmbient={isDropdownAmbient} goods={ambient} />
           </div>

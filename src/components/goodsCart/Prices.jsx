@@ -2,11 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const Prices = () => {
-  const prices = useSelector((state) => state.cart.cart);
+  const prices = useSelector(state => state.cart.cart);
 
-  const totalPrices = prices
-    .filter((item) => item.select)
-    .reduce((acc, cur) => acc + cur.prices, 0);
+  const totalPrices = prices.filter(item => item.select).reduce((acc, cur) => acc + cur.prices, 0);
   return (
     <div className="w-r-24.9 px-8 py-9 border text-r-1.6 bg-kg-500">
       <p className="pt-3">
@@ -31,8 +29,8 @@ const Prices = () => {
               : 'hidden'
           }
         >
-          {totalPrices <= 40000 ? (40000 - totalPrices).toLocaleString() : ''}원
-          추가주문 시, <span className="font-bold">무료배송</span>
+          {totalPrices <= 40000 ? (40000 - totalPrices).toLocaleString() : ''}원 추가주문 시,{' '}
+          <span className="font-bold">무료배송</span>
         </span>
       </p>
       <p className="pt-7 border-t mt-7">

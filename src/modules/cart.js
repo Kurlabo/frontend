@@ -15,10 +15,7 @@ const SELECT_ALL_CHECK_BOX = 'cart/SELECT_ALL_CHECKEX_BOX';
 export const isDropDownFrozen = createAction(IS_DROP_DOWN_FROZEN);
 export const isDropDownAmbient = createAction(IS_DROP_DOWN_AMBIENT);
 
-export const setAllPrices = createAction(
-  SET_ALL_PRICES,
-  (idCheckedArr) => idCheckedArr,
-);
+export const setAllPrices = createAction(SET_ALL_PRICES, idCheckedArr => idCheckedArr);
 
 export const setItemsNum = createAction(SET_ITEMS_NUM, (id, countNum) => ({
   id,
@@ -30,10 +27,7 @@ export const selectGoods = createAction(SELECT_GOODS, (id, select) => ({
   select,
 }));
 
-export const selectAllCheckBox = createAction(
-  SELECT_ALL_CHECK_BOX,
-  (check) => check,
-);
+export const selectAllCheckBox = createAction(SELECT_ALL_CHECK_BOX, check => check);
 
 // 초기값
 const initialize = {
@@ -61,29 +55,26 @@ const cart = handleActions(
     }),
     [SET_ITEMS_NUM]: (state, action) => ({
       ...state,
-      cart: state.cart.map((item) =>
+      cart: state.cart.map(item =>
         item.id === action.payload.id
           ? {
               ...item,
               count: item.count + action.payload.countNum,
-              prices:
-                item.initalPrices * (item.count + action.payload.countNum),
+              prices: item.initalPrices * (item.count + action.payload.countNum),
             }
           : item,
       ),
     }),
     [SELECT_GOODS]: (state, action) => ({
       ...state,
-      cart: state.cart.map((item) =>
-        item.id === action.payload.id
-          ? { ...item, select: action.payload.select }
-          : item,
+      cart: state.cart.map(item =>
+        item.id === action.payload.id ? { ...item, select: action.payload.select } : item,
       ),
     }),
     [SELECT_ALL_CHECK_BOX]: (state, action) => ({
       ...state,
       selectAll: action.payload,
-      cart: state.cart.map((item) => ({
+      cart: state.cart.map(item => ({
         ...item,
         select: action.payload,
       })),

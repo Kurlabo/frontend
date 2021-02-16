@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import MdButtons from './MdButtons';
+import MdButtons from './MdButtons/Index';
 
 const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   console.log(1);
@@ -69,15 +69,10 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
     <div className={`${bgGray ? 'bg-kg-500' : ''}`}>
       <div className="container h-auto">
         {!mdSuggest && (
-          <Link
-            to=""
-            className="block font-bold text-r-2.8 text-center pt-r-7.9 pb-r-3.5"
-          >
+          <Link to="" className="block font-bold text-r-2.8 text-center pt-r-7.9 pb-r-3.5">
             {title}
             {subtitle && (
-              <p className="pt-4 font-normal text-r-1.6 text-gray-400 leading-8">
-                {subtitle}
-              </p>
+              <p className="pt-4 font-normal text-r-1.6 text-gray-400 leading-8">{subtitle}</p>
             )}
           </Link>
         )}
@@ -92,32 +87,26 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
         )}
         <div className="relative">
           <button
-            onClick={(e) => prevButton(e)}
+            onClick={e => prevButton(e)}
             style={{ display: 'none' }}
             ref={prevButtonRef}
             className="absolute z-50 w-r-6 h-r-6 bg-r-6 left- bg-sm-pre-button left-r--3 top-r-13 focus:outline-none"
           />
           <div className="overflow-hidden">
             <ul ref={containerRef} className="w-r-735">
-              {imgArr.map((imgs) => (
+              {imgArr.map(imgs => (
                 <li className="w-r-105 float-left">
-                  {imgs.map((img) => (
+                  {imgs.map(img => (
                     <div className="inline-block h-r-49.6 w-r-24.9 mr-r-1.3 ">
                       <Link to>
                         <img alt="" src={img} />
-                        <p className="text-r-1.6 mt-5 mb-4">
-                          [헤말린] 멸치 3종 (냉장)
-                        </p>
+                        <p className="text-r-1.6 mt-5 mb-4">[헤말린] 멸치 3종 (냉장)</p>
                       </Link>
                       <span className="font-bold">
-                        <span className="text-r-1.6 mr-3 text-discount-100">
-                          10%
-                        </span>
+                        <span className="text-r-1.6 mr-3 text-discount-100">10%</span>
                         <span className="text-r-1.6">7.470원</span>
                       </span>
-                      <p className="text-r-1.4 mt-2 text-gray-400 line-through">
-                        8,300원
-                      </p>
+                      <p className="text-r-1.4 mt-2 text-gray-400 line-through">8,300원</p>
                     </div>
                   ))}
                 </li>
@@ -125,7 +114,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
             </ul>
           </div>
           <button
-            onClick={(e) => nextButton(e)}
+            onClick={e => nextButton(e)}
             ref={nextButtonRef}
             className="z-50 absolute w-r-6 h-r-6 bg-r-6 bg-sm-next-button right-r--3 top-r-13 focus:outline-none"
           />
@@ -150,17 +139,13 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
     if (onAnimate) return;
     onAnimate = true;
     if (cur.current === 1) {
-      containerRef.current.style.transform = `translateX(-${
-        (cur.current - 1) * 1050
-      }px)`;
+      containerRef.current.style.transform = `translateX(-${(cur.current - 1) * 1050}px)`;
       e.target.disabled = true;
       e.target.style.display = 'none';
     } else {
       nextButtonRef.current.disabled = false;
       nextButtonRef.current.style.display = '';
-      containerRef.current.style.transform = `translateX(-${
-        (cur.current - 1) * 1050
-      }px)`;
+      containerRef.current.style.transform = `translateX(-${(cur.current - 1) * 1050}px)`;
     }
     // setcur(--cur);
     --cur.current;
@@ -173,25 +158,18 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   function nextButton(e) {
     if (onAnimate) return;
     onAnimate = true;
-    if (
-      cur.current === imgArr.length - 2 &&
-      imgArr[imgArr.length - 1].length !== 4
-    ) {
+    if (cur.current === imgArr.length - 2 && imgArr[imgArr.length - 1].length !== 4) {
       containerRef.current.style.transform = `translateX(-${
         cur.current * 1050 + 262 * imgArr[imgArr.length - 1].length
       }px)`;
       e.target.style.display = 'none';
       e.target.disabled = true;
     } else if (cur.current === imgArr.length - 2) {
-      containerRef.current.style.transform = `translateX(-${
-        (cur.current + 1) * 1050
-      }px)`;
+      containerRef.current.style.transform = `translateX(-${(cur.current + 1) * 1050}px)`;
       e.target.style.display = 'none';
       e.target.disabled = true;
     } else {
-      containerRef.current.style.transform = `translateX(-${
-        (cur.current + 1) * 1050
-      }px)`;
+      containerRef.current.style.transform = `translateX(-${(cur.current + 1) * 1050}px)`;
       prevButtonRef.current.disabled = false;
       prevButtonRef.current.style.display = '';
     }

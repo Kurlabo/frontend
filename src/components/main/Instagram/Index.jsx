@@ -54,24 +54,21 @@ const Instagram = ({ title, subtitle }) => {
   return (
     <div>
       <div className="container h-auto">
-        <Link
-          to=""
-          className="block font-bold text-r-2.8 text-center pt-r-7.9 pb-r-3.5"
-        >
+        <Link to="" className="block font-bold text-r-2.8 text-center pt-r-7.9 pb-r-3.5">
           인스타그램 고객 후기
         </Link>
         <div className="relative">
           <button
-            onClick={(e) => prevButton(e)}
+            onClick={e => prevButton(e)}
             style={{ display: 'none' }}
             ref={prevButtonRef}
             className="absolute z-50 w-r-6 h-r-6 bg-r-6 bg-sm-pre-button left-r--3 top-r-5.75 focus:outline-none"
           />
           <div className="overflow-hidden">
             <ul ref={containerRef} className="w-r-735">
-              {imgArr.map((imgs) => (
+              {imgArr.map(imgs => (
                 <li className="w-r-105 float-left">
-                  {imgs.map((img) => (
+                  {imgs.map(img => (
                     <div className="inline-block ">
                       <Link to>
                         <img className="h-r-17.5 w-r-17.5" alt="" src={img} />
@@ -83,15 +80,13 @@ const Instagram = ({ title, subtitle }) => {
             </ul>
           </div>
           <button
-            onClick={(e) => nextButton(e)}
+            onClick={e => nextButton(e)}
             ref={nextButtonRef}
             className="z-50 absolute w-r-6 h-r-6 bg-r-6 bg-sm-next-button right-r--3 top-r-5.75 focus:outline-none"
           />
         </div>
         <div className="pt-16 pb-40 font-bold text-r-1.6 leading-10 text-center">
-          <span className="block font-normal text-kmi-100">
-            더 많은 고객 후기가 궁금하다면?
-          </span>
+          <span className="block font-normal text-kmi-100">더 많은 고객 후기가 궁금하다면?</span>
           <Link to="" className="font-bold">
             @marketkurly_regram
           </Link>
@@ -104,17 +99,13 @@ const Instagram = ({ title, subtitle }) => {
     if (onAnimate) return;
     onAnimate = true;
     if (cur === 1) {
-      containerRef.current.style.transform = `translateX(-${
-        (cur - 1) * 1050
-      }px)`;
+      containerRef.current.style.transform = `translateX(-${(cur - 1) * 1050}px)`;
       e.target.disabled = true;
       e.target.style.display = 'none';
     } else {
       nextButtonRef.current.disabled = false;
       nextButtonRef.current.style.display = '';
-      containerRef.current.style.transform = `translateX(-${
-        (cur - 1) * 1050
-      }px)`;
+      containerRef.current.style.transform = `translateX(-${(cur - 1) * 1050}px)`;
     }
     --cur;
 
@@ -133,15 +124,11 @@ const Instagram = ({ title, subtitle }) => {
       e.target.style.display = 'none';
       e.target.disabled = true;
     } else if (cur === imgArr.length - 2) {
-      containerRef.current.style.transform = `translateX(-${
-        (cur + 1) * 1050
-      }px)`;
+      containerRef.current.style.transform = `translateX(-${(cur + 1) * 1050}px)`;
       e.target.style.display = 'none';
       e.target.disabled = true;
     } else {
-      containerRef.current.style.transform = `translateX(-${
-        (cur + 1) * 1050
-      }px)`;
+      containerRef.current.style.transform = `translateX(-${(cur + 1) * 1050}px)`;
       prevButtonRef.current.disabled = false;
       prevButtonRef.current.style.display = '';
     }
