@@ -167,6 +167,7 @@ module.exports = {
         'r-17': '17rem',
         'r-17.5': '17.5rem',
         'p-180': '18rem',
+        'r-19.4': '19.4rem',
         'r-20': '20rem',
         'r-21.2': '21.2rem',
         'r-22': '22rem',
@@ -195,6 +196,7 @@ module.exports = {
         'p-552': '55.2rem',
         'p-560': '56rem',
         'r-58': '58rem',
+        'r-60': '60rem',
         'r-61.5': '61.5rem',
         'r-64': '64rem',
         'r-65': '65rem',
@@ -239,8 +241,9 @@ module.exports = {
   variants: {
     extend: {
       fontWeight: ['hover', 'focus', 'focused-sibling'],
-      backgroundColor: ['focused-sibling'],
+      backgroundColor: ['focused-sibling', 'odd'],
       textColor: ['focused-sibling'],
+      display: ['focused-sibling'],
     },
   },
 };
