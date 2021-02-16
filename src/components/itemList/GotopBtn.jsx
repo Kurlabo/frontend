@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { AiOutlineArrowUp } from 'react-icons/ai';
 
 const buttonTopStyle =
-  'w-24 h-24 border-gray-300 border-2 rounded-50-p text-6xl text-gray-600 hover:bg-gray-100 duration-300 focus:outline-0';
+  'w-24 h-24 border-gray-300 border-2 rounded-50-p text-6xl text-gray-600 hover:bg-gray-100 focus:outline-0 ';
 
 const GotopBtn = () => {
   // 버튼 렌더링 상태관리

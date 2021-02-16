@@ -5,7 +5,7 @@ import ItemNavLink from './ItemNavLink';
 export const listStyle =
   'inline-block pr-5 pl-5 pb-3 text-gray-900 border-solid border-b-2 hover:text-kp-600 hover:border-kp-600 duration-100 cursor-pointer';
 const btnStyle =
-  'text-xl text-gray-900 pr-5 pb-5 mr-3 border-none text-right inline-block focus:outline-0 bg-blue-400';
+  'text-xl text-gray-900 pr-5 pb-5 mr-3 border-none text-right inline-block focus:outline-0';
 
 const ItemNavigation = () => {
   const [dropDown, setDropDown] = useState(false);
