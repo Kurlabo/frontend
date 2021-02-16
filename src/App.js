@@ -18,29 +18,34 @@ import ItemDetail from './components/itemDetail/ItemDetail';
 import SearchLocation from './components/common/SearchLocation';
 import Footer from './components/footer/Footer';
 import WeekEvent from './components/weekEvent/WeekEvent';
+import Aside from './components/aside/Aside';
 
 function App() {
   return (
-    <Switch>
-      <Route path="/shop/account/signin" component={LoginPage} />
-      <Route path="/shop/account/signup" component={SignupPage} />
-      <Route path="/shop/account/find_id" component={FindIdPage} />
-      <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
-      <Route path="/shop/account/modal" component={Modal} />
-      <Route path="/shop/goods/item_list/detail" component={ItemDetail} />
-      <Route path="/shop/goods/item_list" component={ItemListPage} />
-      <Route path="/shop/goods/event" component={WeekEvent} />
-      <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />
-      <Route path="/shop/mypage/destination/list" component={MyDestinationLIstPage} />
-      <Route path="/shop/mypage/mypage_wishlist" component={MyWishListPage} />
-      <Route path="/shop/mypage/mypage_review" component={MyReviewPage} />
-      <Route path="/shop/mypage/mypage_emoney" component={MyEmoneyPage} />
-      <Route path="/shop/mypage/mypage_coupon" component={MyCouponPage} />
-      <Route path="/shop/member/myinfo" component={MyInfoPage} />
-      <Route path="/kakao/destination" component={SearchLocation} />
-      <Route path="/" exact component={MainContainer} />
-      <Route component={NotFoundPage} />
-    </Switch>
+    <>
+      <Switch>
+        <Route path="/shop/account/signin" component={LoginPage} />
+        <Route path="/shop/account/signup" component={SignupPage} />
+        <Route path="/shop/account/find_id" component={FindIdPage} />
+        <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
+        <Route path="/shop/account/modal" component={Modal} />
+        <Route path="/shop/goods/item_list/detail" component={ItemDetail} />
+        <Route path="/shop/goods/item_list" component={ItemListPage} />
+        <Route path="/shop/goods/event" component={WeekEvent} />
+        <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />
+        <Route path="/shop/mypage/destination/list" component={MyDestinationLIstPage} />
+        <Route path="/shop/mypage/mypage_wishlist" component={MyWishListPage} />
+        <Route path="/shop/mypage/mypage_review" component={MyReviewPage} />
+        <Route path="/shop/mypage/mypage_emoney" component={MyEmoneyPage} />
+        <Route path="/shop/mypage/mypage_coupon" component={MyCouponPage} />
+        <Route path="/shop/member/myinfo" component={MyInfoPage} />
+        <Route path="/kakao/destination" component={SearchLocation} />
+        <Route path="/" exact component={MainContainer} />
+        <Route component={NotFoundPage} />
+      </Switch>
+      <Aside />
+      <Footer />
+    </>
   );
 }
 

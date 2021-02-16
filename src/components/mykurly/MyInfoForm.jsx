@@ -92,6 +92,9 @@ const MyInfoForm = () => {
               >
                 휴대폰
               </FormInput>
+              <td>
+                <SignupButton onclick={clickButton}>다른 번호인증</SignupButton>
+              </td>
             </tr>
             <tr>
               <th className={regTitle}>성별</th>
@@ -145,12 +148,13 @@ const MyInfoForm = () => {
                 >
                   개인정보 수집·이용 동의 <span className="sub">(선택)</span>
                 </CheckBox>
+                <span>약관보기</span>
               </td>
             </tr>
             <tr>
               <th className={regTitle}>이용약관동의</th>
               <td className="py-4" colSpan="2">
-                <CheckBox id="info" state={info} ref={infoRef} onChange={() => setInfo(!info)}>
+                <CheckBox id="info" state={info} ref={infoRef} onChange={onSnsAll}>
                   무료배송, 할인쿠폰 등 혜택/정보 수신 동의<span className="sub">(선택))</span>
                 </CheckBox>
                 <div className="pl-14">
@@ -184,7 +188,9 @@ const MyInfoForm = () => {
             </tr>
             <tr>
               <td colSpan="3" className="text-center pt-16">
-                <button className={secesstBtn}>탈퇴하기</button>
+                <button className={secesstBtn} onclick={secession}>
+                  탈퇴하기
+                </button>
                 <button type="submit" className={infoBtn}>
                   회원정보수정
                 </button>
@@ -197,8 +203,16 @@ const MyInfoForm = () => {
     </div>
   );
 
+  function secession() {}
+
   function clickButton(params) {
     console.log(1);
+  }
+
+  function onSnsAll(e) {
+    setInfo(!info);
+    setSns(!info);
+    setEmail(!info);
   }
 
   function onSubmit(e) {}

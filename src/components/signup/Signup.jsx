@@ -11,14 +11,11 @@ import SignupModal from './SignupModal';
 
 const Signup = ({ myinfo = false }) => {
   const formTitle = 'pt-28 font-black text-5xl text-center';
-  const formTitle2 = 'pb-14 border-b border-solid border-kg-400  font-bold text-r-24';
   const regForm = 'text-r-1.4';
   const regTitle = 'font-bold text-left align-top pt-7 ';
   const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
   const subText = 'text-r-1.2 text-gray-600';
   const submitBtn = 'bg-kp-600 text-white w-96 h-20 rounded-md';
-  const secesstBtn = 'border border-kp-600 mr-4 text-kp-600 w-48 h-20 rounded-md';
-  const infoBtn = 'bg-kp-600 text-white w-48 h-20 rounded-md';
   const borderBottom = 'border-b border-solid border-kg-400';
 
   const [validId1, setValidId1] = useState(false);
@@ -201,7 +198,7 @@ const Signup = ({ myinfo = false }) => {
                 >
                   개인정보처리방침 동의<span className="sub">(필수)</span>
                 </CheckBox>
-                <CheckBox id="info" state={info} ref={infoRef} onChange={() => setInfo(!info)}>
+                <CheckBox id="info" state={info} ref={infoRef} onChange={onSnsAll}>
                   무료배송, 할인쿠폰 등 혜택/정보 수신 동의<span className="sub">(선택))</span>
                 </CheckBox>
                 <div className="pl-14">
@@ -249,17 +246,21 @@ const Signup = ({ myinfo = false }) => {
       <SignupModal modalIsOpen={signup} closeModal={closeModal} value={modalValue} />
     </div>
   );
-
   function clickButton(params) {
     console.log(1);
   }
-
   function onChangeAll(e) {
     setAllAgree(e.target.checked);
     [agree1Ref, agree2Ref, infoRef, snsRef, emailRef2, ageRef].forEach((ref, i) => {
       ref.current.checked = e.target.checked;
       setStates[i](e.target.checked);
     });
+  }
+
+  function onSnsAll(e) {
+    setInfo(!info);
+    setSns(!info);
+    setEmail(!info);
   }
 
   function onSubmit(e) {
@@ -276,10 +277,8 @@ const Signup = ({ myinfo = false }) => {
       agree2,
       age,
     ];
-
     const newUser = { date_of_birth: '' };
     const formData = new FormData(formRef.current);
-
     for (let [key, value] of formData) {
       if (!value) {
         setSignup(true);
@@ -312,7 +311,6 @@ const Signup = ({ myinfo = false }) => {
     }
     console.log(newUser);
   }
-
   function checkPhone(e) {
     const { value } = e.target;
     const lastChar = value.slice(-1);
@@ -335,5 +333,4 @@ const Signup = ({ myinfo = false }) => {
     setSignup(false);
   }
 };
-
 export default Signup;
