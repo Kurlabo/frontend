@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FrequentQuestion from './FrequentQuestion';
+import GetSupport from './GetSupport';
 import NavBar from './NavBar';
 import Notice from './Notice';
 
@@ -20,7 +21,7 @@ const CustomerService = () => {
       case '자주하는 질문':
         return <FrequentQuestion />;
       case '1:1문의':
-        return <div>1:1문의</div>;
+        return <GetSupport />;
       case '대량주문 문의':
         return <div>대량주문 문의</div>;
       default:

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const navList = ['공지사항', '자주하는 질문', '1:1문의', '대량주문 문의'];
+const navList = ['공지사항', '자주하는 질문', '1:1문의'];
 
 const listStyle =
   'w-r-20 font-medium border-t border-r border-l border-gray-200 py-6 pl-8 flex cursor-pointer justify-between hover:text-kp-600 hover:bg-gray-100';
