@@ -24,12 +24,27 @@ const DeliveryTable = () => {
           <th className="pt-r-1.9 text-1.4 font-medium">상세 정보</th>
           <td className={tdStyle}>
             <p className="pb-6 ">조재연, 01098063260</p>
-            <button className={modifyBtn}>입력</button>
+            <button className={modifyBtn} onClick={typeDeliveryInfo}>
+              입력
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
   );
+
+  function typeDeliveryInfo() {
+    const width = 500;
+    const height = 800;
+    var left = Math.ceil((window.screen.width - width) / 2);
+    var top = Math.ceil((window.screen.height - height) / 2);
+
+    window.open(
+      '/order/input_reception',
+      '_blank',
+      `height=${height},width=${width}, top=${top}, left=${left}`,
+    );
+  }
 };
 
 export default DeliveryTable;

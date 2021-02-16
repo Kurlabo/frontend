@@ -36,7 +36,6 @@ const OrderContainer = () => {
       />
       <PayButton agreeCheck={agreeCheck} />
       <GotopBtn />
-      <TypeUserInfo />
     </div>
   );
 };

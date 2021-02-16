@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CardOption from './CardOption';
 import { wrapper } from './Coupon';
@@ -43,13 +43,20 @@ const selectStyle = {
 };
 
 const PaySelection = () => {
+  const [paySelect, setpaySelect] = useState('normal');
   return (
     <div className={wrapper}>
       <div className="w-r-74.6 ">
         <h2 className="text-2 font-medium pb-r-1.6 border-b border-gray-800">결제수단</h2>
         <table className="w-full">
           <tbody>
-            <PaymentBrand brand="일반" id="normal" credit="신용카드" />
+            <PaymentBrand
+              brand="일반"
+              id="normal"
+              credit="신용카드"
+              state={paySelect}
+              onChange={e => setpaySelect(e.target.id)}
+            />
             <tr>
               <th></th>
               <td>
@@ -71,12 +78,47 @@ const PaySelection = () => {
                 </p>
               </td>
             </tr>
-            <PaymentBrand brand="CHAI" imgUrl={chaiUrl} id="chai" />
-            <PaymentBrand brand="toss" imgUrl={tossUrl} id="toss" />
-            <PaymentBrand brand="네이버페이" imgUrl={naverUrl} id="naver" />
-            <PaymentBrand brand="PAYCO" imgUrl={paycoUrl} id="payco" />
-            <PaymentBrand brand="스마일페이" imgUrl={smileUrl} id="smilepay" />
-            <PaymentBrand brand="휴대폰" id="phonepay" />
+            <PaymentBrand
+              brand="CHAI"
+              imgUrl={chaiUrl}
+              id="chai"
+              state={paySelect}
+              onChange={e => setpaySelect(e.target.id)}
+            />
+            <PaymentBrand
+              brand="toss"
+              imgUrl={tossUrl}
+              id="toss"
+              state={paySelect}
+              onChange={e => setpaySelect(e.target.id)}
+            />
+            <PaymentBrand
+              brand="네이버페이"
+              imgUrl={naverUrl}
+              id="naver"
+              state={paySelect}
+              onChange={e => setpaySelect(e.target.id)}
+            />
+            <PaymentBrand
+              brand="PAYCO"
+              imgUrl={paycoUrl}
+              id="payco"
+              state={paySelect}
+              onChange={e => setpaySelect(e.target.id)}
+            />
+            <PaymentBrand
+              brand="스마일페이"
+              imgUrl={smileUrl}
+              id="smilepay"
+              state={paySelect}
+              onChange={e => setpaySelect(e.target.id)}
+            />
+            <PaymentBrand
+              brand="휴대폰"
+              id="phonepay"
+              state={paySelect}
+              onChange={e => setpaySelect(e.target.id)}
+            />
           </tbody>
         </table>
         <ul className="pt-12 pb-8 text-gray-500 text-1.2 border-b border-gray-100">
