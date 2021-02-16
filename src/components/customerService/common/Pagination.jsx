@@ -4,7 +4,7 @@ const btnStyle =
   'w-12 border-t border-r border-b text-center p-2 text-1.3 font-medium cursor-pointer';
 const hoverStyle = '  hover:bg-klp-50 hover:text-kdp-300';
 
-const Pagination = () => {
+const Pagination = ({ num, onClick }) => {
   return (
     <div className="flex justify-center">
       <div className=" border w-12 p-2 cursor-pointer">
@@ -35,8 +35,7 @@ const Pagination = () => {
           />
         </svg>
       </div>
-      <div className={btnStyle + hoverStyle}>1</div>
-      <div className={btnStyle + hoverStyle}>2</div>
+      {setPageNum()}
       <div className={btnStyle}>
         <svg
           className="w-7 mt-1 text-gray-500"
@@ -72,6 +71,19 @@ const Pagination = () => {
       </div>
     </div>
   );
+
+  function setPageNum() {
+    const elArr = [];
+    for (let i = 0; i < num; i++) {
+      elArr.push(
+        <div onClick={onClick} id={i + 1} className={btnStyle + hoverStyle}>
+          {i + 1}
+        </div>,
+      );
+    }
+
+    return elArr;
+  }
 };
 
 export default Pagination;
