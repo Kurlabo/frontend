@@ -1,21 +1,18 @@
 import React from 'react';
+import ReceiveDeliveryChild from './ReceiveDeliveryChild';
 
-const ReceiveDelivery = ({ title }) => {
+const ReceiveDelivery = ({ title, state, onChange }) => {
   return (
     <div>
       <fieldset id="location">
-        <legend>
+        <legend className="pb-6 pt-10 text-1.4 font-semibold">
           {title}
           <span className="text-formStar">*</span>
         </legend>
-        <input type="radio" id="door" value="door" name="location" />
-        <label htmlFor="door">문 앞</label>
-        <input type="radio" id="security" value="security" name="location" />
-        <label htmlFor="security">경비실</label>
-        <input type="radio" id="courier" value="courier" name="location" />
-        <label htmlFor="courier">택배함</label>
-        <input type="radio" id="other" value="other" name="location" />
-        <label htmlFor="other">기타 장소</label>
+        <ReceiveDeliveryChild id="door" title="문 앞" state={state} onChange={onChange} />
+        <ReceiveDeliveryChild id="security" title="경비실" state={state} onChange={onChange} />
+        <ReceiveDeliveryChild id="courier" title="택배함" state={state} onChange={onChange} />
+        <ReceiveDeliveryChild id="other" title="기타 장소" state={state} onChange={onChange} />
       </fieldset>
     </div>
   );
