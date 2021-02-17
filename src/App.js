@@ -17,6 +17,9 @@ import NotFoundPage from './pages/NotFoundPage';
 import ItemListPage from './pages/ItemListPage';
 import ItemDetail from './components/itemDetail/ItemDetail';
 import SearchLocation from './components/common/SearchLocation';
+import OrderPage from './pages/OrderPage';
+import PayCompletePage from './pages/PayCompletePage';
+import TypeUserInfo from './components/order/TypeUserInfo';
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
       <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
       <Route path="/shop/goods/item_list/detail" component={ItemDetail} />
       <Route path="/shop/goods/item_list" component={ItemListPage} />
+      <Route path="/order/input_reception" exact component={TypeUserInfo} />
+      <Route path="/order" component={OrderPage} />
+      <Route path="/pay_complete" component={PayCompletePage} />
       <Route path="/shop/account/modal" component={Modal} />
       <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />
       <Route path="/shop/mypage/destination/list" component={MyDestinationLIstPage} />
