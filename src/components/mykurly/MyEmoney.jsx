@@ -53,7 +53,7 @@ const MyEmoneyBlock = () => {
           <MyEmoneyItem />
         </ul>
 
-        <MyKurlyPageNation />
+        <MyKurlyPageNation pageNumber="1" />
       </div>
     </div>
   );
