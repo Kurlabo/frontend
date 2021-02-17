@@ -1,5 +1,5 @@
 import React from 'react';
-import Main from '../components/main/Index';
+import Main from '../components/main';
 
 const MainContainer = () => {
   return <Main />;
