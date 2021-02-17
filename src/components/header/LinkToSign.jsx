@@ -6,7 +6,9 @@ import HeaderDropDown from './HeaderDropDown';
 const signWrapper = 'relative w-p-1050 flex justify-between items-center mx-auto mt-2 text-1.2';
 
 const LinkToSign = () => {
-  const [headerDrop, setHeaderDrop] = useState(false);
+  const [headerDrop, setHeaderDrop] = useState({
+    showAboutMenu: false,
+  });
 
   return (
     <div className={signWrapper}>
@@ -31,12 +33,14 @@ const LinkToSign = () => {
             </NavLink>
             <span className="text-gray-300">ㅣ</span>
           </li>
-          <li className="inline-block" onMouseOver={onMouseOver}>
-            <NavLink to="/" className="px-3">
-              고객센터
-            </NavLink>
-            <GoTriangleDown className="inline-block" />
-            {headerDrop && <HeaderDropDown />}
+          <li className="inline-block" onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+            <div className="bg-kp-300">
+              <NavLink to="/" className="px-3">
+                고객센터
+              </NavLink>
+              <GoTriangleDown className="inline-block" />
+              {headerDrop.showAboutMenu && <HeaderDropDown />}
+            </div>
           </li>
         </ul>
       </nav>
@@ -44,10 +48,11 @@ const LinkToSign = () => {
   );
 
   function onMouseOver() {
-    setHeaderDrop(true);
+    setHeaderDrop({ showAboutMenu: true });
   }
-  function onMouseOut() {
-    setHeaderDrop(false);
+  function onMouseOut(e) {
+    console.log(e.target);
+    setHeaderDrop({ showAboutMenu: false });
   }
 };
 
