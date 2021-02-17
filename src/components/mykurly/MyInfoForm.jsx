@@ -1,25 +1,23 @@
 import React, { useRef, useState } from 'react';
-import { FiSearch } from 'react-icons/fi';
-import CheckBox from './CheckBox';
-import FormInput from './FormInput';
-import IdInput from './IdInput';
-import InputDate from './InputDate';
-import InputGender from './InputGender';
-import PassInput from './PassInput';
-import SignupButton from './SignupButton';
-import SignupModal from './SignupModal';
+import CheckBox from '../signup/CheckBox';
+import FormInput from '../signup/FormInput';
+import IdInput from '../signup/IdInput';
+import InputDate from '../signup/InputDate';
+import InputGender from '../signup/InputGender';
+import PassInput from '../signup/PassInput';
+import SignupButton from '../signup/SignupButton';
+import SignupModal from '../signup/SignupModal';
 
-const Signup = ({ myinfo = false }) => {
-  const formTitle = 'pt-28 font-black text-5xl text-center';
+const MyInfoForm = () => {
+  const formTitle = 'pb-14 border-b border-solid border-kg-400 font-bold text-r-24';
   const regForm = 'text-r-1.4';
   const regTitle = 'font-bold text-left align-top pt-7 ';
   const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
   const subText = 'text-r-1.2 text-gray-600';
-  const submitBtn = 'bg-kp-600 text-white w-96 h-20 rounded-md';
+  const secesstBtn = 'border border-kp-600 mr-4 text-kp-600 w-48 h-20 rounded-md';
+  const infoBtn = 'bg-kp-600 text-white w-48 h-20 rounded-md';
   const borderBottom = 'border-b border-solid border-kg-400';
 
-  const [validId1, setValidId1] = useState(false);
-  const [validId2, setValidId2] = useState(false);
   const [validPass1, setValidPass1] = useState(false);
   const [validPass2, setValidPass2] = useState(false);
   const [validPass3, setValidPass3] = useState(false);
@@ -27,7 +25,6 @@ const Signup = ({ myinfo = false }) => {
 
   const [gender, setGender] = useState('none');
 
-  const [allagree, setAllAgree] = useState(false);
   const [agree1, setAgree1] = useState(false);
   const [agree2, setAgree2] = useState(false);
   const [info, setInfo] = useState(false);
@@ -48,15 +45,9 @@ const Signup = ({ myinfo = false }) => {
   const emailRef2 = useRef();
   const ageRef = useRef();
 
-  const setStates = [setAgree1, setAgree2, setInfo, setSns, setEmail, setAge];
-
   return (
     <div className="w-r-64 ml-auto mr-auto pb-48">
-      <h1 className={formTitle}>회원가입</h1>
-      <p className="text-right pt-9 pb-4 pb- ">
-        <span className="text-formStar">*</span>
-        필수입력사항
-      </p>
+      <h1 className={formTitle}>개인 정보 수정</h1>
       <form className={regForm} onSubmit={onSubmit} ref={formRef} autoComplete="off">
         <input style={{ display: 'none' }} aria-hidden="true" />
         <input type="password" style={{ display: 'none' }} aria-hidden="true" />
@@ -66,19 +57,25 @@ const Signup = ({ myinfo = false }) => {
           </colgroup>
           <tbody>
             <tr>
-              <IdInput state={[validId1, validId2]} setState={[setValidId1, setValidId2]} />
+              <IdInput readOnly={true} />
             </tr>
             <PassInput
               state={[validPass1, validPass2, validPass3, validRePass]}
               setState={[setValidPass1, setValidPass2, setValidPass3, setValidRePass]}
+              info={true}
             />
             <tr>
-              <FormInput name="name" placeholder="이름을 입력해주세요">
+              <FormInput name="name" placeholder="이름을 입력해주세요" inFo={true}>
                 이름
               </FormInput>
             </tr>
             <tr>
-              <FormInput name="email" placeholder="예: marketkurly@kurly.com" ref={emailRef}>
+              <FormInput
+                name="email"
+                placeholder="예: marketkurly@kurly.com"
+                ref={emailRef}
+                inFo={true}
+              >
                 이메일
               </FormInput>
               <td>
@@ -91,31 +88,16 @@ const Signup = ({ myinfo = false }) => {
                 placeholder="숫자만 입력해주세요"
                 ref={phoneRef}
                 onChange={checkPhone}
+                inFo={true}
               >
                 휴대폰
               </FormInput>
+              <td>
+                <SignupButton onclick={clickButton}>다른 번호인증</SignupButton>
+              </td>
             </tr>
-            {myinfo ? (
-              <></>
-            ) : (
-              <tr>
-                <th className={regTitle}>
-                  주소<span className="text-formStar">*</span>
-                </th>
-                <td className="py-4">
-                  <SignupButton big={true} onClick={clickButton}>
-                    <FiSearch className="inline-block" />
-                    주소검색
-                  </SignupButton>
-                  <p className={subText}>배송지에 따라 상품 정보가 달라질 수 있습니다.</p>
-                </td>
-                <td></td>
-              </tr>
-            )}
             <tr>
-              <th className={regTitle}>
-                성별<span className="text-formStar">*</span>
-              </th>
+              <th className={regTitle}>성별</th>
               <td className="py-4">
                 <InputGender
                   id="man"
@@ -145,9 +127,7 @@ const Signup = ({ myinfo = false }) => {
               <td></td>
             </tr>
             <tr>
-              <th className={regTitle}>
-                생년월일<span className="text-formStar">*</span>
-              </th>
+              <th className={regTitle}>생년월일</th>
               <td className="py-4">
                 <div className={regInput}>
                   <InputDate name="birthY" placeholder="YYYY" onChange={checkBirth} />
@@ -157,47 +137,23 @@ const Signup = ({ myinfo = false }) => {
               </td>
               <td></td>
             </tr>
-            {myinfo ? (
-              <tr>
-                <th className={(regTitle, borderBottom)}>선택약관동의</th>
-                <td colSpan="2" className={borderBottom}>
-                  <CheckBox
-                    id="agree2"
-                    state={agree2}
-                    ref={agree2Ref}
-                    onChange={() => setAgree2(!agree2)}
-                  >
-                    개인정보 수집·이용 동의 <span className="sub">(선택)</span>
-                  </CheckBox>
-                </td>
-              </tr>
-            ) : (
-              <></>
-            )}
             <tr>
-              <th className={regTitle}>
-                이용약관동의<span className="text-formStar">*</span>
-              </th>
-              <td className="py-4" colSpan="2">
-                <CheckBox id="allTerms" state={allagree} onChange={onChangeAll}>
-                  전체약관동의
-                </CheckBox>
-                <CheckBox
-                  id="agree1"
-                  state={agree1}
-                  ref={agree1Ref}
-                  onChange={() => setAgree1(!agree1)}
-                >
-                  이용약관 동의<span className="sub">(필수)</span>
-                </CheckBox>
+              <th className={`${regTitle} ${borderBottom}`}>선택약관동의</th>
+              <td colSpan="2" className={borderBottom}>
                 <CheckBox
                   id="agree2"
                   state={agree2}
                   ref={agree2Ref}
                   onChange={() => setAgree2(!agree2)}
                 >
-                  개인정보처리방침 동의<span className="sub">(필수)</span>
+                  개인정보 수집·이용 동의 <span className="sub">(선택)</span>
                 </CheckBox>
+                <span>약관보기</span>
+              </td>
+            </tr>
+            <tr>
+              <th className={regTitle}>이용약관동의</th>
+              <td className="py-4" colSpan="2">
                 <CheckBox id="info" state={info} ref={infoRef} onChange={onSnsAll}>
                   무료배송, 할인쿠폰 등 혜택/정보 수신 동의<span className="sub">(선택))</span>
                 </CheckBox>
@@ -227,16 +183,16 @@ const Signup = ({ myinfo = false }) => {
                     <span className="sub">(첫 주문 후 적용)</span>
                   </p>
                 </div>
-                <CheckBox id="age" state={age} ref={ageRef} onChange={() => setAge(!age)}>
-                  본인은 만 14세 이상입니다. <span className="sub">(필수)</span>
-                </CheckBox>
               </td>
               <td></td>
             </tr>
             <tr>
-              <td colSpan="3" className="text-center pt-16 w-">
-                <button type="submit" className={submitBtn}>
-                  가입하기
+              <td colSpan="3" className="text-center pt-16">
+                <button className={secesstBtn} onclick={secession}>
+                  탈퇴하기
+                </button>
+                <button type="submit" className={infoBtn}>
+                  회원정보수정
                 </button>
               </td>
             </tr>
@@ -246,15 +202,11 @@ const Signup = ({ myinfo = false }) => {
       <SignupModal modalIsOpen={signup} closeModal={closeModal} value={modalValue} />
     </div>
   );
+
+  function secession() {}
+
   function clickButton(params) {
     console.log(1);
-  }
-  function onChangeAll(e) {
-    setAllAgree(e.target.checked);
-    [agree1Ref, agree2Ref, infoRef, snsRef, emailRef2, ageRef].forEach((ref, i) => {
-      ref.current.checked = e.target.checked;
-      setStates[i](e.target.checked);
-    });
   }
 
   function onSnsAll(e) {
@@ -263,54 +215,8 @@ const Signup = ({ myinfo = false }) => {
     setEmail(!info);
   }
 
-  function onSubmit(e) {
-    if (myinfo) return false;
-    e.preventDefault();
-    const valid = [
-      validId1,
-      validId2,
-      validPass1,
-      validPass2,
-      validPass3,
-      validRePass,
-      agree1,
-      agree2,
-      age,
-    ];
-    const newUser = { date_of_birth: '' };
-    const formData = new FormData(formRef.current);
-    for (let [key, value] of formData) {
-      if (!value) {
-        setSignup(true);
-        setModalValue(key);
-        return false;
-      }
-      if (key === 'birthY' || key === 'birthM' || key === 'birthD')
-        newUser['date_of_birth'] += value;
-      else newUser[key] = value;
-    }
-    for (let i = 0; i < valid.length; i++) {
-      if (!valid[i]) {
-        if (i < 2) {
-          setSignup(true);
-          setModalValue('아이디를 제대로 입력해 주세요');
-        } else if (i >= 2 && i < 5) {
-          setSignup(true);
-          setModalValue('비밀번호를 제대로 입력해 주세요');
-        } else if (i === 5) {
-          setSignup(true);
-          setModalValue('동일한 비밀번호 입력해 주세요');
-        } else if (i > 5 && i < 8) {
-          setSignup(true);
-          setModalValue('필수사항을 체크해 주세요');
-        } else if (i === 8) {
-          setSignup(true);
-          setModalValue('14세 이상 항목을 체크해 주세요');
-        }
-      }
-    }
-    console.log(newUser);
-  }
+  function onSubmit(e) {}
+
   function checkPhone(e) {
     const { value } = e.target;
     const lastChar = value.slice(-1);
@@ -333,4 +239,5 @@ const Signup = ({ myinfo = false }) => {
     setSignup(false);
   }
 };
-export default Signup;
+
+export default MyInfoForm;

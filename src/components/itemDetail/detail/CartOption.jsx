@@ -57,11 +57,11 @@ const CartOption = ({ name, price }) => {
         <div className="flex justify-end items-end w-r-90 py-8 mx-auto leading-10">
           <span className="text-p-13 font-medium mt-1">총 상품금액: </span>
           <span className="text-p-28 ml-5 font-bold">{option.total.toLocaleString()}</span>
-          <span className="text-p-20 ml-2">원</span>
+          <span className="text-p-20 ml-2">원</span>
         </div>
         <div className="flex w-r-90 py-8 mx-auto justify-between pb-24">
           <div className="border border-gray-300 rounded select-none text-gray-400 w-r-21.2 h-p-56 text-p-16 text-center pt-6 font-medium">
-            재입고 알림
+            재입고 알림
           </div>
           <div className="border border-klp-600 rounded select-none text-klp-600 w-r-21.2 h-p-56 text-p-16 text-center pt-6 font-medium cursor-pointer">
             늘 사는 것

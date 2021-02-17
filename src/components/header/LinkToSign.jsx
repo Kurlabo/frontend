@@ -18,7 +18,7 @@ const LinkToSign = () => {
         />
       </Link>
       <nav>
-        <ul>
+        <ul className="flex">
           <li className="inline-block text-kp-600">
             <NavLink to="/" className="px-3">
               회원가입
