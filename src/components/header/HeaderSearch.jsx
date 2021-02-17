@@ -5,6 +5,7 @@ import { BiSearch } from 'react-icons/bi';
 import { a11yHidden } from './HeaderNav';
 import LoginDropDown from './LoginDropDown';
 import { IoMdCloseCircle } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 
 const inputStyle =
   'inline-block focus:outline-0 focus:bg-gray-50 w-r-24.2 h-r-3.6 rounded-3xl shadow-2xl pl-8 pr-24 bg-gray-100 text-1.2';
@@ -38,25 +39,34 @@ const HeaderSearch = () => {
       </div>
       <div className="relative">
         <h3 className={a11yHidden}>배송지 검색</h3>
-        <div className="inline-block mr-9 text-5xl cursor-pointer">
-          <GrLocation onMouseOver={onMouseOver} />
-          {dropDown && <LoginDropDown />}
+        <div
+          className="inline-block mr-9 text-5xl "
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
+          <GrLocation className="cursor-pointer" />
+          {dropDown && (
+            <>
+              <LoginDropDown />
+              <div className="cursor-pointer bg-conversation-btn bg-no-repeat absolute w-32 h-36 bg-center -top-r-0.4 -left-r-2.5 "></div>
+            </>
+          )}
         </div>
 
-        <div className="inline-block text-5xl">
-          <FiShoppingCart className="hover:text-kp-600 cursor-pointer" />
-        </div>
+        <Link to="/" className="inline-block text-5xl cursor-pointer">
+          <FiShoppingCart className="hover:text-kp-600" />
+        </Link>
       </div>
     </div>
   );
   // 배송지, 로그인 정보 창
-  function onMouseOver() {
+  function onMouseEnter() {
     setDropDown(true);
   }
 
-  // function onMouseOut() {
-  //   setDropDown(false);
-  // }
+  function onMouseLeave() {
+    setDropDown(false);
+  }
 
   // input창 관리
   function onChange() {
