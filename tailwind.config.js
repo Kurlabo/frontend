@@ -61,6 +61,9 @@ module.exports = {
           700: '#E8F0FE',
         },
       },
+      backgroundImage: theme => ({
+        'conversation-btn': 'url(https://res.kurly.com/pc/ico/2011/ico_point_up_18x12.svg)',
+      }),
       spacing: {
         'p-28': '2.8rem',
         'p-33': '3.3rem',
@@ -72,8 +75,10 @@ module.exports = {
         'p-1050': '105rem',
         // rem 단위
         'r-0.3': '0.3rem',
+        'r-0.4': '0.4rem',
         'r-0.9': '0.9rem',
         'r-2.2': '2.2rem',
+        'r-2.5': '2.5rem',
         'r-3.6': '3.6rem',
         'r-4.4': '4.4rem',
         'r-7.9': '7.9rem',
