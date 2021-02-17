@@ -19,27 +19,30 @@ import ItemDetail from './components/itemDetail/ItemDetail';
 import SearchLocation from './components/common/SearchLocation';
 import CustomerService from './components/customerService/CustomerService';
 import NoticeDetail from './components/customerService/NoticeDetail';
+import Footer from './components/common/Footer';
+import WeekEvent from './components/weekEvent/WeekEvent';
+import Aside from './components/aside/Aside';
 import MyOrderViewPage from './pages/MyOrderViewPage';
 import OrderPage from './pages/OrderPage';
 import PayCompletePage from './pages/PayCompletePage';
 import TypeUserInfo from './components/order/TypeUserInfo';
+import Header from './components/common/Header';
 
 function App() {
   return (
     <Switch>
-      <Route path="/" exact component={MainContainer} />
-      <Route path="/goods_cart" component={GoodsCartContainer} />
       <Route path="/shop/account/signin" component={LoginPage} />
       <Route path="/shop/account/signup" component={SignupPage} />
       <Route path="/shop/account/find_id" component={FindIdPage} />
       <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
-      <Route path="/shop/customer/board" component={CustomerService} />
-      <Route path="/shop/customer/NoticeDetail" component={NoticeDetail} />
+
       <Route path="/shop/goods/item_list/detail" component={ItemDetail} />
       <Route path="/shop/goods/item_list" component={ItemListPage} />
+      <Route path="/shop/goods/event" component={WeekEvent} />
+
       <Route path="/order/input_reception" exact component={TypeUserInfo} />
       <Route path="/order" component={OrderPage} />
-      <Route path="/pay_complete" component={PayCompletePage} />
+
       <Route path="/shop/account/modal" component={Modal} />
       <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />
       <Route path="/shop/mypage/mypage_orderview/ordno=:orderNumber" component={MyOrderViewPage} />
