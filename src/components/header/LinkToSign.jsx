@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { GoTriangleDown } from 'react-icons/go';
 import HeaderDropDown from './HeaderDropDown';
 
-const signWrapper = 'relative w-p-1050 flex justify-between items-center mx-auto mt-2 text-1.2';
+const signWrapper = 'relative w-p-1050 flex justify-between items-center mx-auto mt-2 text-r-1.2';
 
 const LinkToSign = () => {
   const [headerDrop, setHeaderDrop] = useState(false);
@@ -31,11 +31,11 @@ const LinkToSign = () => {
             </NavLink>
             <span className="text-gray-300">ㅣ</span>
           </li>
-          <li className="inline-block" onMouseOver={onMouseOver}>
-            <NavLink to="/" className="px-3">
+          <li className="inline-block h-8 " onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            <NavLink to="/" className="px-3 inline-block">
               고객센터
             </NavLink>
-            <GoTriangleDown className="inline-block" />
+            <GoTriangleDown className="inline-block cursor-pointer" />
             {headerDrop && <HeaderDropDown />}
           </li>
         </ul>
@@ -43,10 +43,10 @@ const LinkToSign = () => {
     </div>
   );
 
-  function onMouseOver() {
+  function onMouseEnter() {
     setHeaderDrop(true);
   }
-  function onMouseOut() {
+  function onMouseLeave() {
     setHeaderDrop(false);
   }
 };

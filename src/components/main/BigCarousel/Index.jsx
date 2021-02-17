@@ -31,7 +31,7 @@ const BigCarousel = () => {
         containerRef.current.style.transform = `translateX(-${cur.current - 1}00%)`;
         --cur.current;
       }
-    }, 3000);
+    }, 100000);
     return () => {
       console.log('clearInterval');
       clearInterval(timerId);
@@ -40,10 +40,10 @@ const BigCarousel = () => {
 
   const imgArr = [
     'https://img-cf.kurly.com/shop/data/main/1/pc_img_1610827181.jpg',
-    'https://img-cf.kurly.com/shop/data/main/1/pc_img_1612094440.jpg',
-    'https://img-cf.kurly.com/shop/data/main/1/pc_img_1611795651.jpg',
-    'https://img-cf.kurly.com/shop/data/main/1/pc_img_1596164134.jpg',
-    'https://img-cf.kurly.com/shop/data/main/1/pc_img_1612149449.jpg',
+    'https://img-cf.kurly.com/shop/data/main/1/pc_img_1610827181.jpg',
+    'https://img-cf.kurly.com/shop/data/main/1/pc_img_1610827181.jpg',
+    'https://img-cf.kurly.com/shop/data/main/1/pc_img_1610827181.jpg',
+    'https://img-cf.kurly.com/shop/data/main/1/pc_img_1610827181.jpg',
   ];
 
   return (
@@ -59,18 +59,18 @@ const BigCarousel = () => {
       <div ref={containerRef} className="relative h-p-370">
         <ul className="absolute w-vw-700">
           <li
-            className="list-none w-vw-99 float-left h-p-370 bg-center bg-no-repeat"
+            className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${imgArr[imgArr.length - 1]})` }}
           />
           {imgArr.map((img, i) => (
             <li
               key={i}
-              className="list-none w-vw-99 float-left h-p-370 bg-center bg-no-repeat"
+              className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
               style={{ backgroundImage: `url(${img})` }}
             />
           ))}
           <li
-            className="list-none w-vw-99 float-left h-p-370 bg-center bg-no-repeat"
+            className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${imgArr[0]})` }}
           />
         </ul>
