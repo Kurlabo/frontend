@@ -9,6 +9,7 @@ import ItemListPage from './pages/ItemListPage';
 import ItemDetail from './components/itemDetail/ItemDetail';
 import SearchLocation from './components/common/SearchLocation';
 import CustomerService from './components/customerService/CustomerService';
+import NoticeDetail from './components/customerService/NoticeDetail';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/shop/account/find_id" component={FindIdPage} />
       <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
       <Route path="/shop/customer/board" component={CustomerService} />
+      <Route path="/shop/customer/NoticeDetail" component={NoticeDetail} />
       <Route path="/shop/goods/item_list/detail" component={ItemDetail} />
       <Route path="/shop/goods/item_list" component={ItemListPage} />
       <Route path="/kakao/destination" component={SearchLocation} />

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Pagination from './common/Pagination';
 import BoardSearch from './NoticeBoardSearch';
 
@@ -70,11 +71,14 @@ const Notice = () => {
       <ul className="flex flex-col pb-8">
         {noticeData.map(data => (
           <li
-            className="flex pt-8 pb-8 text-r-1.2 text-center justify-between border-gray-200 text-gray-700 border-b"
+            className="flex items-center midd px-8 text-r-1.2 text-center justify-between border-gray-200 text-gray-700 border-b"
+            onClick={onClick}
             key={data.no}
           >
             <span className="w-20">{data.no}</span>
-            <span className="w-r-54 text-left cursor-pointer">{data.title}</span>
+            <Link to="./NoticeDetail" className="w-r-54 text-left cursor-pointer py-8">
+              {data.title}
+            </Link>
             <span className="w-40">{data.writer}</span>
             <span className="w-40 text-gray-400">{data.date}</span>
             <span className="w-12 text-gray-400">{data.views}</span>
@@ -89,6 +93,8 @@ const Notice = () => {
       </div>
     </div>
   );
+
+  function onClick(e) {}
 };
 
 export default Notice;

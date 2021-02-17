@@ -99,6 +99,7 @@ module.exports = {
           400: '#A775D6',
           500: '#875EB3',
           600: '#5F0080',
+          700: '#795b8f',
         },
         discount: {
           100: '#FA622F',
@@ -119,6 +120,8 @@ module.exports = {
           600: '#5E107B',
           700: '#E8F0FE',
         },
+        tableColor: '#f7f5f8',
+        tableBorder: '#f4f4f4',
         formStar: '#ee6a7b',
         inputGray: '#cccccc',
         inputRadio: '#dddddd',
@@ -233,6 +236,13 @@ module.exports = {
         90: 90,
         100: 100,
         900: 900,
+      },
+      lineHeight: {
+        40: '4rem',
+        50: '5rem',
+      },
+      borderWidth: {
+        3: '3px',
       },
     },
   },
