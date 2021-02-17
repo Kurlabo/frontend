@@ -184,6 +184,8 @@ module.exports = {
         'p-950': '94.9rem',
         'p-1050': '105rem',
         'per-500': '1000%',
+        'r-0.1': '0.1rem',
+        'r-0.2': '0.2rem',
         'r-0.3': '0.3rem',
         'r-0.4': '0.4rem',
         'r-0.6': '0.6rem',
@@ -218,6 +220,7 @@ module.exports = {
         'r-8.2': '8.2rem',
         'r-10.3': '10.3rem',
         'r-11': '11rem',
+        'r-11.5': '11.5rem',
         'r-12': '12rem',
         'r-12.8': '12.8rem',
         'r-13': '13rem',
@@ -283,6 +286,7 @@ module.exports = {
         1.1: '1.1rem',
       },
       zIndex: {
+        '-1': '-1',
         60: 60,
         70: 70,
         80: 80,
@@ -299,7 +303,7 @@ module.exports = {
     extend: {
       borderWidth: ['last'],
       fontWeight: ['hover', 'focus', 'focused-sibling'],
-      backgroundColor: ['focused-sibling'],
+      backgroundColor: ['focused-sibling', 'active'],
       backgroundImage: ['focused-sibling'],
       textColor: ['focused-sibling'],
     },
