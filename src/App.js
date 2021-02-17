@@ -1,4 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
+import GoodsCartContainer from './containers/GoodsCartContainer';
 import LoginPage from './pages/LoginPage';
 import FindIdPage from './pages/FindIdPage';
 import FindPasswordPage from './pages/FindPasswordPage';
@@ -16,14 +17,23 @@ import NotFoundPage from './pages/NotFoundPage';
 import ItemListPage from './pages/ItemListPage';
 import ItemDetail from './components/itemDetail/ItemDetail';
 import SearchLocation from './components/common/SearchLocation';
-import Footer from './components/footer/Footer';
+import Footer from './components/common/Footer';
 import WeekEvent from './components/weekEvent/WeekEvent';
 import Aside from './components/aside/Aside';
+import MyOrderViewPage from './pages/MyOrderViewPage';
+import OrderPage from './pages/OrderPage';
+import PayCompletePage from './pages/PayCompletePage';
+import TypeUserInfo from './components/order/TypeUserInfo';
+import Header from './components/common/Header';
 
 function App() {
   return (
     <>
+      <Header />
       <Switch>
+        <Route path="/order" component={OrderPage} />
+        <Route path="/order/input_reception" exact component={TypeUserInfo} />
+        <Route path="/pay_complete" component={PayCompletePage} />
         <Route path="/shop/account/signin" component={LoginPage} />
         <Route path="/shop/account/signup" component={SignupPage} />
         <Route path="/shop/account/find_id" component={FindIdPage} />

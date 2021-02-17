@@ -9,8 +9,8 @@ const linkHover = 'hover:text-kp-600 border-transparent border-b border-solid ho
 const navStyle =
   'w-p-1050  mx-auto text-p-16 flex justify-between items-center text-gray-800 pb-4 ';
 const headerFix =
-  'w-full fixed bg-white top-0 z-900 transform duration-75 border-gray-50 border-b-4 pt-4 bg-kp-600';
-const headerRel = 'w-full bg-white z-900 transform duration-75 border-gray-50 border-b-4 ';
+  'w-full fixed bg-white top-0 z-100 transform duration-75 border-gray-50 border-b-4 pt-4 ';
+const headerRel = 'w-full bg-white z-100 transform duration-75 border-gray-50 border-b-4 relative';
 
 const HeaderNav = () => {
   const [fix, setFix] = useState(false);

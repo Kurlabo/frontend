@@ -1,7 +1,7 @@
 import React from 'react';
-import FooterBanner from './FooterBanner';
-import FooterLeft from './FooterLeft';
-import FooterRight from './FooterRight';
+import FooterBanner from '../footer/FooterBanner';
+import FooterLeft from '../footer/FooterLeft';
+import FooterRight from '../footer/FooterRight';
 
 const Footer = () => {
   return (
