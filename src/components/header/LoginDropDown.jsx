@@ -2,12 +2,14 @@ import React from 'react';
 import { BiSearch } from 'react-icons/bi';
 
 const loginWrapper =
-  'absolute border-2 bg-white border-gray-100 pt-8 pr-7 pb-8 pl-8 text-1.6 w-r-30.9 right-8 top-r-4.6 z-50 ';
+  'absolute border-2 bg-white border-gray-100 pt-8 pr-7 pb-8 pl-8 text-r-1.6 w-r-30.9 right-8 top-r-4.6 z-50 ';
 const deliverReg = 'text-kp-600 font-medium mb-2';
 const loginBtn =
   'text-kp-600 border border-kp-600 w-r-10.3 mr-4 rounded-md font-medium focus:outline-0';
 const locationBtn =
   'bg-kp-600 text-white flex border border-kp-600 w-r-15.8 justify-center py-4 rounded-md';
+// const dropWrapper =
+//   'absolute bg-white border-2 border-gray-200 pt-8 pr-7 pb-8 pl-8 text-1.6 w-r-30.9 right-8 top-r-4.6 z-900';
 
 const LoginDropDown = () => {
   return (
