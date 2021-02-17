@@ -3,12 +3,10 @@ import { Link, NavLink } from 'react-router-dom';
 import { GoTriangleDown } from 'react-icons/go';
 import HeaderDropDown from './HeaderDropDown';
 
-const signWrapper = 'relative w-p-1050 flex justify-between items-center mx-auto mt-2 text-1.2';
+const signWrapper = 'relative w-p-1050 flex justify-between items-center mx-auto mt-2 text-r-1.2';
 
 const LinkToSign = () => {
-  const [headerDrop, setHeaderDrop] = useState({
-    showAboutMenu: false,
-  });
+  const [headerDrop, setHeaderDrop] = useState(false);
 
   return (
     <div className={signWrapper}>
@@ -33,26 +31,23 @@ const LinkToSign = () => {
             </NavLink>
             <span className="text-gray-300">ㅣ</span>
           </li>
-          <li className="inline-block" onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
-            <div className="bg-kp-300">
-              <NavLink to="/" className="px-3">
-                고객센터
-              </NavLink>
-              <GoTriangleDown className="inline-block" />
-              {headerDrop.showAboutMenu && <HeaderDropDown />}
-            </div>
+          <li className="inline-block h-8 " onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            <NavLink to="/" className="px-3 inline-block">
+              고객센터
+            </NavLink>
+            <GoTriangleDown className="inline-block cursor-pointer" />
+            {headerDrop && <HeaderDropDown />}
           </li>
         </ul>
       </nav>
     </div>
   );
 
-  function onMouseOver() {
-    setHeaderDrop({ showAboutMenu: true });
+  function onMouseEnter() {
+    setHeaderDrop(true);
   }
-  function onMouseOut(e) {
-    console.log(e.target);
-    setHeaderDrop({ showAboutMenu: false });
+  function onMouseLeave() {
+    setHeaderDrop(false);
   }
 };
 

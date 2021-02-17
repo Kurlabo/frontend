@@ -19,8 +19,11 @@ module.exports = {
       borderRadius: {
         'p-3': '0.3rem',
         '50-p': '50%',
+        'r-0.4': '0.4rem',
         'r-0.9': '0.9rem',
         'r-1.1': '1.1rem',
+        'r-2': '2rem',
+      },
       lineHeight: {
         'r-3': '3rem',
         'r-3.5': '3.5rem',
@@ -54,12 +57,6 @@ module.exports = {
         'r-3': '3rem',
         'r-3.3': '3.3rem',
       },
-      borderRadius: {
-        'r-0.4': '0.4rem',
-        'r-2': '2rem',
-        'p-3': '0.3rem',
-        '50-p': '50%',
-      },
       backgroundSize: {
         'r-6': '6rem',
       },
@@ -74,6 +71,7 @@ module.exports = {
         'check-button': "url('https://res.kurly.com/mobile/service/common/2006/ico_checkbox.svg')",
         'checked-button':
           "url('https://res.kurly.com/mobile/service/common/2006/ico_checkbox_checked.svg')",
+        'conversation-btn': 'url(https://res.kurly.com/pc/ico/2011/ico_point_up_18x12.svg)',
       }),
       width: {
         formWidth: '64rem',
@@ -156,8 +154,6 @@ module.exports = {
         inputRadio: '#dddddd',
       },
       spacing: {
-        13: '52px',
-        370: '370px',
         'p-18': '1.8rem',
         'p-28': '2.8rem',
         'p-33': '3.3rem',
@@ -201,6 +197,7 @@ module.exports = {
         'r-1.8': '1.8rem',
         'r-1.9': '1.9rem',
         'r-2.2': '2.2rem',
+        'r-2.5': '2.5rem',
         'r-2.4': '2.4rem',
         'r-2.8': '2.8rem',
         'r-2.9': '2.9rem',
