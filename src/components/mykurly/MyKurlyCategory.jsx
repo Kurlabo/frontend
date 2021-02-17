@@ -13,7 +13,7 @@ const category = [
 ];
 
 const myKurly_menu =
-  'w-80 border border-kg-80 border-b-0  last:border text-r-1.4 text-kg-350 hover:text-kp-600 hover:bg-kg-50 leading-none';
+  'w-80 border border-kg-80 border-b-0 last:border text-r-1.4 text-kg-350 hover:text-kp-600 hover:bg-kg-50 leading-none';
 const MyKurlyCategory = () => {
   return (
     <div className="float-left">
@@ -23,7 +23,11 @@ const MyKurlyCategory = () => {
         <ul className="w-full ">
           {category.map(list => (
             <li className={`${myKurly_menu}`} key={list.id}>
-              <NavLink to={list.path} className="text-right inline-block pl-10 pr-6 py-6 w-full ">
+              <NavLink
+                to={list.path}
+                activeClassName="bg-kg-50 text-kp-600 font-medium"
+                className="text-right inline-block pl-10 pr-6 py-6 w-full "
+              >
                 <span className="inline-block text-left w-48 mr-8 leading-none align-middle">
                   {list.name}
                 </span>
@@ -34,7 +38,7 @@ const MyKurlyCategory = () => {
         </ul>
         <div className="cursor-pointer w-80 py-4 pl-10 rounded-r-full bg-kg-100 my-8">
           <p className="inline-block align-middle">
-            <strong className="text-r-1.4">도움이 필요하신가요?</strong>
+            <strong className="text-r-1.4 font-medium">도움이 필요하신가요?</strong>
             <span className="block text-r-1.2">1:1 문의하기</span>
           </p>
           <FiChevronRight className="inline-block text-r-1.8 ml-6 align-middle text-kp-600" />
