@@ -1,4 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
+import GoodsCartContainer from './containers/GoodsCartContainer';
 import LoginPage from './pages/LoginPage';
 import FindIdPage from './pages/FindIdPage';
 import FindPasswordPage from './pages/FindPasswordPage';
@@ -20,6 +21,8 @@ import SearchLocation from './components/common/SearchLocation';
 function App() {
   return (
     <Switch>
+      <Route path="/" exact component={MainContainer} />
+      <Route path="/goods_cart" component={GoodsCartContainer} />
       <Route path="/shop/account/signin" component={LoginPage} />
       <Route path="/shop/account/signup" component={SignupPage} />
       <Route path="/shop/account/find_id" component={FindIdPage} />
