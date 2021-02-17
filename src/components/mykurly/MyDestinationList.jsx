@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import MyKurlyHeader from './MyKurlyHeader';
+import MyKurlyHeader from './MykurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BiPencil } from 'react-icons/bi';

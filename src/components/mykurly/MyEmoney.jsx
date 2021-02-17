@@ -1,6 +1,6 @@
 import React from 'react';
 import MyKurlyPageNation from './MyKurlyPageNation';
-import MyKurlyHeader from './MyKurlyHeader';
+import MyKurlyHeader from './MykurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
 
 const MyEmoney = () => {

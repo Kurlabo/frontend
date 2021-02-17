@@ -1,5 +1,5 @@
 import React from 'react';
-import MyKurlyHeader from './MyKurlyHeader';
+import MyKurlyHeader from './MykurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
 import { HiOutlineChevronRight } from 'react-icons/hi';
 
