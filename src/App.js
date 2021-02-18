@@ -21,7 +21,7 @@ import CustomerService from './components/customerService/CustomerService';
 import NoticeDetail from './components/customerService/NoticeDetail';
 import Footer from './components/common/Footer';
 import WeekEvent from './components/weekEvent/WeekEvent';
-import Aside from './components/aside/Aside';
+import Sidebar from './components/common/Sidebar';
 import MyOrderViewPage from './pages/MyOrderViewPage';
 import OrderPage from './pages/OrderPage';
 import PayCompletePage from './pages/PayCompletePage';
@@ -66,7 +66,7 @@ function App() {
         <Route path="/" exact component={MainContainer} />
         <Route component={NotFoundPage} />
       </Switch>
-      <Aside />
+      <Sidebar />
       <Footer />
     </>
   );
