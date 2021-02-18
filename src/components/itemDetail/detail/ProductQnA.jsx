@@ -13,7 +13,7 @@ const ProductQnA = () => {
       <div className="py-4 flex justify-end">
         <div
           onClick={onClick}
-          className="text-white bg-klp-600 w-52 my-1 h-14 text-1.3 text-center pt-3 hover:bg-white hover:text-kp-600 border border-kp-600 cursor-pointer"
+          className="text-white bg-klp-600 w-52 my-1 h-14 text-r-1.3 text-center pt-3 hover:bg-white hover:text-kp-600 border border-kp-600 cursor-pointer"
         >
           상품문의
         </div>
