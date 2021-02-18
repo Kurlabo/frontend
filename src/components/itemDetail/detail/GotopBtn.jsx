@@ -27,9 +27,9 @@ const GotopBtn = () => {
     )
   );
 
-  // window scroll이 500 이상으로 내려갔을때만 렌더링
+  // window scroll이 1000 이상으로 내려갔을때만 렌더링
   function btnRender() {
-    if (window.pageYOffset > 500) {
+    if (window.pageYOffset > 1000) {
       setTopButton(true);
     } else {
       setTopButton(false);

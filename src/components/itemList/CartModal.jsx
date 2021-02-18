@@ -32,6 +32,7 @@ const modalStyles = {
   },
   overlay: {
     position: 'fixed',
+    zIndex: 999,
     top: 0,
     left: 0,
     right: 0,

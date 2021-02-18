@@ -76,7 +76,7 @@ const Notice = () => {
             key={data.no}
           >
             <span className="w-20">{data.no}</span>
-            <Link to="./NoticeDetail" className="w-r-54 text-left cursor-pointer py-8">
+            <Link to="./detail" className="w-r-54 text-left cursor-pointer py-8">
               {data.title}
             </Link>
             <span className="w-40">{data.writer}</span>
