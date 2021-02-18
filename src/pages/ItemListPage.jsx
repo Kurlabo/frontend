@@ -8,7 +8,6 @@ import PageContainer from '../components/itemList/PageContainer';
 const ItemListPage = () => {
   return (
     <div className="pb-12 flex flex-col justify-items-center items-center">
-      <Header />
       <ItemListHeader />
       <ItemCardContainer />
       <PageContainer />

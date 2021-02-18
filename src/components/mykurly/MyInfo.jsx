@@ -1,5 +1,5 @@
 import React, { useDispatch } from 'react';
-import MyKurlyHeader from './MyKurlyHeader';
+import MyKurlyHeader from './MykurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
 import MyInfoModify from './MyInfoModify';
 import Modal from '../login/Modal';

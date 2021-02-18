@@ -32,7 +32,7 @@ const ReviewContent = ({ review }) => {
       </div>
       <div
         className={
-          'p-4 text-1.2 border-b border-gray-300 overflow-hidden ' + (hidden ? 'hidden' : '')
+          'p-4 text-r-1.2 border-b border-gray-300 overflow-hidden ' + (hidden ? 'hidden' : '')
         }
       >
         <p className="font-medium p-6 ">{goodsName}</p>

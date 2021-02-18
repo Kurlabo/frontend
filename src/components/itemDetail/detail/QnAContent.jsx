@@ -18,7 +18,8 @@ const QnAContent = ({ post }) => {
       </div>
       <div
         className={
-          'px-4 py-8 text-1.2 border-b border-gray-300 overflow-hidden ' + (hidden ? 'hidden' : '')
+          'px-4 py-8 text-r-1.2 border-b border-gray-300 overflow-hidden ' +
+          (hidden ? 'hidden' : '')
         }
       >
         <p className="pl-6 text-gray-700">{content}</p>
