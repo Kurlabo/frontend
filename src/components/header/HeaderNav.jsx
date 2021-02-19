@@ -13,7 +13,7 @@ const navStyle = 'w-p-1050  mx-auto text-p-16 flex justify-between items-start t
 const headerFix =
   'w-full fixed bg-white top-0 z-100 transform duration-75 border-gray-50 border-b-4 pt-4 ';
 const headerRel = 'w-full bg-white z-100 transform duration-75 border-gray-50 border-b-4 relative';
-const categoryBtn = 'focus:outline-0 hover:text-kp-600 text-gray-800 pb-8 align-bottom';
+// const categoryBtn = 'focus:outline-0 hover:text-kp-600 text-gray-800 pb-8 align-bottom';
 
 const HeaderNav = () => {
   const [fix, setFix] = useState(false);
@@ -44,7 +44,7 @@ const HeaderNav = () => {
             <path fillRule="evenodd" d={svgD} clipRule="evenodd" />
           </svg>
           <span className="ml-4">전체 카테고리</span>
-          <Categories />
+          {category && <Categories />}
         </button>
         <ul className="flex flex-1 justify-evenly w-r-58 ">
           <li className={linkHover}>
