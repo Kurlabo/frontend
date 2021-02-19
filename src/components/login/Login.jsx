@@ -60,7 +60,7 @@ export default function Login({ onSubmit, onClick, value, open }) {
         <div className="mt-r-0.9 text-kg-300 text-r-1.3 leading-3">
           <CheckBox value="보안접속" />
           <Link to="/shop/account/find_id">
-            <span className="align-middle ">아이디 찾기</span>
+            <span className="align-middle ml-r-11">아이디 찾기</span>
           </Link>
           <span className="align-middle px-1">|</span>
           <Link to="/shop/account/find_pwd">

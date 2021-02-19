@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import MyKurlyHeader from './MyKurlyHeader';
+import MyKurlyHeader from './MykurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BiPencil } from 'react-icons/bi';
@@ -34,22 +34,24 @@ const MyDestinationBlock = () => {
         </div>
       </div>
       <div>
-        <ul>
-          <li>
-            <ul className="text-r-1.4 pb-8 border-b text-kg-400 border-kg-300 box-border leading-none">
-              <li className="w-16 text-center inline-block align-middle">선택</li>
-              <li className="w-p-370 text-center inline-block">주소</li>
-              <li className="w-32 text-center inline-block">받으실 분</li>
-              <li className="w-52 text-center inline-block">연락처</li>
-              <li className="w-48 text-center inline-block">배송유형</li>
-              <li className="w-16 text-center inline-block">수정</li>
+        <form>
+          <fieldset>
+            <ul>
+              <li>
+                <ul className="text-r-1.4 pb-8 border-b text-kg-400 border-kg-300 box-border leading-none">
+                  <li className="w-16 text-center inline-block align-middle">선택</li>
+                  <li className="w-p-370 text-center inline-block">주소</li>
+                  <li className="w-32 text-center inline-block">받으실 분</li>
+                  <li className="w-52 text-center inline-block">연락처</li>
+                  <li className="w-48 text-center inline-block">배송유형</li>
+                  <li className="w-16 text-center inline-block">수정</li>
+                </ul>
+              </li>
+              <MyDestinationListItem />
             </ul>
-          </li>
-          <MyDestinationListItem />
-          <MyDestinationListItem />
-        </ul>
+          </fieldset>
+        </form>
       </div>
-      <MyKurlyPageNation />
     </div>
   );
 };
@@ -62,29 +64,54 @@ const MyDestinationListItem = () => {
   //   }
 
   return (
-    <li className="h-40 border-b border-kg-80 box-border">
-      <ul className="text-r-1.4 ">
-        <li className="text-center inline-block leading-r-10">
-          <RoundCheckBox className="w-16" />
-        </li>
-        <li className="w-p-370 px-8 inline-block align-middle">
-          <p className="text-r-1.6">
-            {/* <span className="block text-r-1.2 w-r-7.9 bg-gray-100 rounded-full px-3 py-2 leading-none">
+    <>
+      <li className="h-40 border-b border-kg-80 box-border">
+        <ul className="text-r-1.4 ">
+          <li className="text-center inline-block leading-r-10">
+            <RoundCheckBox className="w-16" value="1" />
+          </li>
+          <li className="w-p-370 px-8 inline-block align-middle">
+            <p className="text-r-1.6">
+              {/* <span className="block text-r-1.2 w-r-7.9 bg-gray-100 rounded-full px-3 py-2 leading-none">
               기본배송지
             </span> */}
-            서울시 도봉로 136길 111
-          </p>
-        </li>
-        <li className="w-32 text-center inline-block align-middle leading-r-10">정세영</li>
-        <li className="w-52 text-center inline-block align-middle leading-r-10">010-8331-4362</li>
-        <li className="w-48 text-kp-600 text-center inline-block align-middle leading-r-10">
-          샛별배송
-        </li>
-        <li className="w-16 text-center inline-block align-middle leading-r-10">
-          <BiPencil className="w-16 text-r-2.8 text-kg-80 cursor-pointer" />
-        </li>
-      </ul>
-    </li>
+              서울시 도봉로 136길 111
+            </p>
+          </li>
+          <li className="w-32 text-center inline-block align-middle leading-r-10">정세영</li>
+          <li className="w-52 text-center inline-block align-middle leading-r-10">010-8331-4362</li>
+          <li className="w-48 text-kp-600 text-center inline-block align-middle leading-r-10">
+            샛별배송
+          </li>
+          <li className="w-16 text-center inline-block align-middle leading-r-10">
+            <BiPencil className="w-16 text-r-2.8 text-kg-80 cursor-pointer" />
+          </li>
+        </ul>
+      </li>
+      <li className="h-40 border-b border-kg-80 box-border">
+        <ul className="text-r-1.4 ">
+          <li className="text-center inline-block leading-r-10">
+            <RoundCheckBox className="w-16" value="2" />
+          </li>
+          <li className="w-p-370 px-8 inline-block align-middle">
+            <p className="text-r-1.6">
+              {/* <span className="block text-r-1.2 w-r-7.9 bg-gray-100 rounded-full px-3 py-2 leading-none">
+            기본배송지
+          </span> */}
+              서울시 도봉로 136길 111
+            </p>
+          </li>
+          <li className="w-32 text-center inline-block align-middle leading-r-10">정세영</li>
+          <li className="w-52 text-center inline-block align-middle leading-r-10">010-8331-4362</li>
+          <li className="w-48 text-kp-600 text-center inline-block align-middle leading-r-10">
+            샛별배송
+          </li>
+          <li className="w-16 text-center inline-block align-middle leading-r-10">
+            <BiPencil className="w-16 text-r-2.8 text-kg-80 cursor-pointer" />
+          </li>
+        </ul>
+      </li>
+    </>
   );
 };
 

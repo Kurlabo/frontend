@@ -8,7 +8,16 @@
     font-size: 10px;
   }
   body {
-    position: relative;
+    width: 100vw;
+    height:100vh,
+    overflow-x: hidden;
+  }
+
+  ul,
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 }
 * {
@@ -35,6 +44,21 @@
     font-size: 0;
     letter-spacing: 0;
     word-spacing: 0;
+  }
+  .multiline-ellipsis {
+    display: inline-block;
+    width: 60rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* 여러 줄 자르기 추가 스타일 */
+    white-space: normal;
+    line-height: 1.2;
+    height: 2.4em;
+    text-align: left;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
 }
 

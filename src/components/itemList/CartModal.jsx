@@ -32,6 +32,7 @@ const modalStyles = {
   },
   overlay: {
     position: 'fixed',
+    zIndex: 999,
     top: 0,
     left: 0,
     right: 0,
@@ -48,7 +49,7 @@ const CartModal = ({ modalIsOpen, closeModal }) => {
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       style={modalStyles}
-      contentLabel="장바구니창"
+      contentLabel="회원가입"
       ariaHideApp={false}
     >
       <h1 className="text-2xl ">친환경 대추방울토마토 500g</h1>

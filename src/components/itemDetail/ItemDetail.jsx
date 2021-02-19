@@ -214,7 +214,7 @@ const ItemDetail = () => {
 
   // window scroll이 500 이상으로 내려갔을때만 렌더링
   function cartOptionRender() {
-    if (window.pageYOffset > 500) {
+    if (window.pageYOffset > 1000) {
       setviewCartOption(true);
     } else {
       setviewCartOption(false);
