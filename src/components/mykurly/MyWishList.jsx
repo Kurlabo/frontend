@@ -1,5 +1,5 @@
 import React from 'react';
-import MyKurlyHeader from './MykurlyHeader';
+import MyKurlyHeader from './MyKurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
 import MyKurlyPageNation from './MyKurlyPageNation';
 import CheckBox from '../login/CheckBox';
