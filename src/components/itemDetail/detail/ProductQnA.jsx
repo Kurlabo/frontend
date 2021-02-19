@@ -1,4 +1,5 @@
 import React from 'react';
+import { useCallback } from 'react';
 import Pagination from './Pagination';
 import GoodsReviewList from './ProductQnAList';
 import ProductQnATitle from './ProductQnATitle';
@@ -6,6 +7,14 @@ import ProductQnATitle from './ProductQnATitle';
 const isLogin = false;
 
 const ProductQnA = () => {
+  const onClick = useCallback(() => {
+    if (isLogin) {
+      console.log('후기작성 페이지 이동');
+    } else {
+      console.log('로그인 후 작성 가능합니다. / 로그인 페이지이동');
+    }
+  }, []);
+
   return (
     <div>
       <ProductQnATitle />
@@ -21,14 +30,6 @@ const ProductQnA = () => {
       <Pagination />
     </div>
   );
-
-  function onClick() {
-    if (isLogin) {
-      console.log('후기작성 페이지 이동');
-    } else {
-      console.log('로그인 후 작성 가능합니다. / 로그인 페이지이동');
-    }
-  }
 };
 
 export default ProductQnA;

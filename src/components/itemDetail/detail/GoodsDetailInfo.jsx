@@ -13,4 +13,4 @@ const GoodsDetailInfo = ({ name }) => {
   );
 };
 
-export default GoodsDetailInfo;
+export default React.memo(GoodsDetailInfo);

@@ -8,4 +8,4 @@ const GoodsImg = ({ goods_detail_img }) => {
   );
 };
 
-export default GoodsImg;
+export default React.memo(GoodsImg);

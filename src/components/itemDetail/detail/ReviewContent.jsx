@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useCallback } from 'react';
 import UserGrade from './UserGrade';
 // {
 //   no: '1',
@@ -13,6 +14,10 @@ const ReviewContent = ({ review }) => {
   const { no, title, writer, date, helpful, views, goodsName, content, user_grade } = review;
 
   const [hidden, setHidden] = useState(true);
+
+  const onClick = useCallback(() => {
+    setHidden(hidden => !hidden);
+  }, []);
 
   return (
     <>
@@ -43,10 +48,6 @@ const ReviewContent = ({ review }) => {
       </div>
     </>
   );
-
-  function onClick() {
-    setHidden(hidden => !hidden);
-  }
 };
 
-export default ReviewContent;
+export default React.memo(ReviewContent);

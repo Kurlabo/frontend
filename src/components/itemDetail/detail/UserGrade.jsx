@@ -15,4 +15,4 @@ const UserGrade = ({ user_grade }) => {
   );
 };
 
-export default UserGrade;
+export default React.memo(UserGrade);
