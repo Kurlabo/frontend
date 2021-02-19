@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../components/common/Header';
 import GotopBtn from '../components/itemList/GotopBtn';
 import ItemCardContainer from '../components/itemList/ItemCardContainer';
 import ItemListHeader from '../components/itemList/ItemListHeader';
