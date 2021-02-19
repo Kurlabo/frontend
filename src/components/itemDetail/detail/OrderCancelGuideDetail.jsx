@@ -26,4 +26,4 @@ const RefundGuideDetail = ({ className }) => {
   );
 };
 
-export default RefundGuideDetail;
+export default React.memo(RefundGuideDetail);

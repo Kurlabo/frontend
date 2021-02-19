@@ -44,4 +44,4 @@ const InfoTab = ({ onClick, state }) => {
   );
 };
 
-export default InfoTab;
+export default React.memo(InfoTab);

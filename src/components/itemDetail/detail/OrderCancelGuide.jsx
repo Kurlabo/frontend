@@ -54,4 +54,4 @@ const OrderCancelGuide = ({ onClick, isClose }) => {
   );
 };
 
-export default OrderCancelGuide;
+export default React.memo(OrderCancelGuide);
