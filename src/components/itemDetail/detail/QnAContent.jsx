@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { useCallback } from 'react';
 
 const QnAContent = ({ post }) => {
   const { no, title, writer, date, content } = post;
 
   const [hidden, setHidden] = useState(true);
+
+  const onClick = useCallback(() => {
+    setHidden(hidden => !hidden);
+  }, []);
 
   return (
     <>
@@ -26,10 +31,6 @@ const QnAContent = ({ post }) => {
       </div>
     </>
   );
-
-  function onClick() {
-    setHidden(hidden => !hidden);
-  }
 };
 
-export default QnAContent;
+export default React.memo(QnAContent);

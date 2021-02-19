@@ -13,4 +13,4 @@ const GoodsDesc = ({ img, name, desc, long_desc }) => {
   );
 };
 
-export default GoodsDesc;
+export default React.memo(GoodsDesc);

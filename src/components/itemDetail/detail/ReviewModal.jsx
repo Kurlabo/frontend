@@ -58,4 +58,4 @@ const ReviewModal = ({ openModal, closeModal }) => {
   );
 };
 
-export default ReviewModal;
+export default React.memo(ReviewModal);

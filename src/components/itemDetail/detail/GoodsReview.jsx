@@ -5,11 +5,26 @@ import Pagination from './Pagination';
 import { useState } from 'react';
 import ReviewModal from './ReviewModal';
 import { withRouter } from 'react-router';
+import { useCallback } from 'react';
 
 const isLogin = false;
 
 const GoodsReview = ({ history }) => {
   const [openModal, setOpenModal] = useState(false);
+
+  const onClick = useCallback(() => {
+    if (isLogin) {
+      console.log('후기작성 페이지 이동');
+    } else {
+      console.log('상품후기는 상품을 구매하시고배송완료된 회원 분만 한 달 내 작성 가능합니다.');
+      setOpenModal(true);
+    }
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setOpenModal(false);
+    history.push('/shop/account/signin');
+  }, [history]);
 
   return (
     <div>
@@ -27,20 +42,6 @@ const GoodsReview = ({ history }) => {
       <ReviewModal openModal={openModal} closeModal={closeModal} />
     </div>
   );
-
-  function onClick() {
-    if (isLogin) {
-      console.log('후기작성 페이지 이동');
-    } else {
-      console.log('상품후기는 상품을 구매하시고배송완료된 회원 분만 한 달 내 작성 가능합니다.');
-      setOpenModal(true);
-    }
-  }
-
-  function closeModal() {
-    setOpenModal(false);
-    history.push('/shop/account/signin');
-  }
 };
 
-export default withRouter(GoodsReview);
+export default React.memo(withRouter(GoodsReview));
