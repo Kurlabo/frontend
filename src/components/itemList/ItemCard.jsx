@@ -5,6 +5,7 @@ const cartStyle = 'absolute right-6 bottom-48';
 
 const ItemCard = () => {
   const [modalIsOpen, setmodalIsOpen] = useState(false);
+
   return (
     <>
       <div className="pt-10 pl-14 relative cursor-pointer">

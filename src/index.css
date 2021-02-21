@@ -9,7 +9,7 @@
   }
   body {
     width: 100vw;
-    height:100vh,
+    height: 100vh;
     overflow-x: hidden;
   }
 
@@ -20,6 +20,7 @@
     padding: 0;
   }
 }
+
 * {
   box-sizing: border-box;
 }
@@ -40,6 +41,12 @@
     display: block;
     clear: both;
   }
+  .ReactModal__Body--open {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
   .none-white-space {
     font-size: 0;
     letter-spacing: 0;

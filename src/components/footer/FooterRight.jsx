@@ -14,7 +14,7 @@ const FooterRight = () => {
           <Link
             class="link"
             href="https://www.youtube.com/embed/WEep7BcboMQ?rel=0&amp;showinfo=0&amp;wmode=opaque&amp;enablejsapi=1"
-            onclick="window.open(this.href, 'pop', 'width=1330,height=660,scrollbars=yes');return false;"
+            onClick="window.open(this.href, 'pop', 'width=1330,height=660,scrollbars=yes');return false;"
           >
             컬리소개영상
           </Link>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 
 const quanWrapper =
@@ -27,7 +27,7 @@ const modalStyles = {
     paddingTop: '3rem',
     borderRadius: '6px',
     padding: '0px 30px',
-    overflowY: 'hidden',
+    overflow: 'hidden',
     boxSizing: 'border-box',
   },
   overlay: {
@@ -38,12 +38,27 @@ const modalStyles = {
     right: 0,
     bottom: 0,
     backgroundColor: 'rgba(32, 32, 32, 0.75)',
-    zIndex: 999,
   },
 };
 
 const CartModal = ({ modalIsOpen, closeModal }) => {
   const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    function handleTouchMove(e) {
+      if (modalIsOpen) {
+        e.preventDefault();
+      }
+      console.log('handle');
+    }
+    window.addEventListener('touchmove', handleTouchMove, {
+      passive: false,
+    });
+    return () => {
+      window.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, [modalIsOpen]);
+
   return (
     <Modal
       isOpen={modalIsOpen}

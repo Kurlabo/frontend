@@ -23,7 +23,7 @@ const CategoriesLi = ({
       {active === id && inUl ? (
         <>
           <img className="w-r-2.4 h-r-2.4 mr-4" src={`/img/category/${activeImg}`} alt={text} />
-          <ul className="text-gray-800 bg-kg-500 border-gray-200 border-t border-r border-b absolute top-0 left-r-21.2 h-full w-p-180">
+          <ul className="text-gray-800 bg-kg-500 border-gray-200 border-t border-r border-b absolute top-0 left-r-21.2 h-full w-r-22">
             {subdatas.map(subdata => {
               return <CategoriesSubLi key={subdata.id} subtext={subdata.text} />;
             })}
