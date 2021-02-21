@@ -5,22 +5,16 @@ import GoodsImg from './GoodsImg';
 import GoodsReview from './GoodsReview';
 import ProductQnA from './ProductQnA';
 import InfoTab from './InfoTab';
+import { useCallback } from 'react';
 
 const GoodsInfo = ({ img, name, desc, long_desc, goods_detail_img }) => {
   const [state, setState] = useState('상품설명');
 
-  return (
-    <div className="w-r-101 mt-20 mb-10">
-      <InfoTab onClick={onClick} state={state} />
-      {render()}
-    </div>
-  );
-
-  function onClick(e) {
+  const onClick = useCallback(e => {
     setState(e.target.firstChild.nodeValue);
-  }
+  }, []);
 
-  function render() {
+  const render = useCallback(() => {
     switch (state) {
       case '상품설명':
         return <GoodsDesc img={img} name={name} desc={desc} long_desc={long_desc} />;
@@ -35,7 +29,14 @@ const GoodsInfo = ({ img, name, desc, long_desc, goods_detail_img }) => {
       default:
         return;
     }
-  }
+  }, [desc, goods_detail_img, img, long_desc, name, state]);
+
+  return (
+    <div className="w-r-101 mt-20 mb-10">
+      <InfoTab onClick={onClick} state={state} />
+      {render()}
+    </div>
+  );
 };
 
-export default GoodsInfo;
+export default React.memo(GoodsInfo);
