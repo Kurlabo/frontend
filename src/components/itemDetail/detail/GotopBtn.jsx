@@ -13,7 +13,7 @@ const GotopBtn = () => {
 
   // window scroll이 1000 이상으로 내려갔을때만 렌더링
   const btnRender = useCallback(() => {
-    if (window.pageYOffset > 1000) {
+    if (window.pageYOffset > 1500) {
       setTopButton(true);
     } else {
       setTopButton(false);
