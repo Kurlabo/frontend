@@ -5,8 +5,12 @@ import GoodsInfo from './detail/GoodsInfo';
 import GotopBtn from './detail/GotopBtn';
 import CartOption from './detail/CartOption';
 import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { setCartCount } from '../../modules/cartAddOption';
 
 const ItemDetail = ({ itemDetail, loading, error }) => {
+  const dispatch = useDispatch();
+
   const [viewCartOption, setviewCartOption] = useState(false);
 
   const cartOptionRender = useCallback(() => {
@@ -18,11 +22,12 @@ const ItemDetail = ({ itemDetail, loading, error }) => {
   }, []);
 
   useEffect(() => {
+    dispatch(setCartCount(1));
     window.addEventListener('scroll', cartOptionRender);
     return () => {
       window.removeEventListener('scroll', cartOptionRender);
     };
-  }, [cartOptionRender]);
+  }, [cartOptionRender, dispatch]);
 
   return (
     <div>
@@ -32,7 +37,7 @@ const ItemDetail = ({ itemDetail, loading, error }) => {
         <GoodsInfo itemDetail={itemDetail} />
         <GotopBtn />
       </main>
-      {viewCartOption && <CartOption name={itemDetail.name} price={+itemDetail.original_price} />}
+      {viewCartOption && <CartOption itemDetail={itemDetail} />}
     </div>
   );
 };

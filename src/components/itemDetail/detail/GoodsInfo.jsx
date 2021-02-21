@@ -8,7 +8,7 @@ import InfoTab from './InfoTab';
 import { useCallback } from 'react';
 
 const GoodsInfo = ({ itemDetail }) => {
-  const { name, detail_context, short_description, detail_img_url, product_img_url } = itemDetail;
+  const { name, detail_context, short_description, main_image_url, product_img_url } = itemDetail;
   const [state, setState] = useState('상품설명');
 
   const onClick = useCallback(e => {
@@ -20,7 +20,7 @@ const GoodsInfo = ({ itemDetail }) => {
       case '상품설명':
         return (
           <GoodsDesc
-            img={detail_img_url}
+            img={main_image_url}
             name={name}
             desc={short_description}
             long_desc={detail_context}
@@ -37,7 +37,7 @@ const GoodsInfo = ({ itemDetail }) => {
       default:
         return;
     }
-  }, [detail_img_url, name, short_description, detail_context, product_img_url, state]);
+  }, [main_image_url, name, short_description, detail_context, product_img_url, state]);
 
   return (
     <div className="w-r-101 mt-20 mb-10">

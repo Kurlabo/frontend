@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Counter from '../common/Counter';
+import { setCartCount, setProductPrice } from '../../../modules/cartAddOption';
+
 // 공통 스타일 변수
 const dlStyle = 'py-p-18 border-b border-gray-100 flex';
 const dtStyle = 'w-p-150 text-gray-700';
@@ -18,20 +20,29 @@ const PurchaseInfo = ({ itemDetail }) => {
     expiration_date,
     guides,
     contactant,
+    discount_percent,
+    discounted_price,
   } = itemDetail;
-  const [state, setState] = useState({
-    count: 1,
-    total: original_price,
-  });
+
+  // 스토어에서 로그인 유무 상태데이터 가져와야함!!!!!!!!
+  const isLogin = true;
+
+  const dispatch = useDispatch();
+  const { count, productPrice } = useSelector(state => state.cartAddOption);
+
+  useEffect(() => {
+    dispatch(setProductPrice(isLogin ? itemDetail.discounted_price : itemDetail.original_price));
+  }, [dispatch, isLogin, itemDetail.discounted_price, itemDetail.original_price]);
 
   const increase = useCallback(() => {
-    setState(state => ({ count: state.count + 1, total: original_price * (state.count + 1) }));
-  }, [original_price]);
+    if (count > 99) return;
+    dispatch(setCartCount(count + 1));
+  }, [count, dispatch]);
 
   const decrease = useCallback(() => {
-    if (state.count < 1) return;
-    setState(state => ({ count: state.count - 1, total: original_price * (state.count - 1) }));
-  }, [state, original_price]);
+    if (count < 1) return;
+    dispatch(setCartCount(count - 1));
+  }, [count, dispatch]);
 
   return (
     <div className="flex justify-between py-p-18">
@@ -43,10 +54,42 @@ const PurchaseInfo = ({ itemDetail }) => {
             {short_description}
           </span>
         </p>
+        {!!discount_percent && <p className="text-r-1.4">회원할인가</p>}
         <p className="text-p-28 font-bold">
-          {original_price.toLocaleString()}
+          {discounted_price.toLocaleString()}
           <span className="font-medium text-3xl ml-1">원</span>
+          {!!discount_percent && (
+            <span className="ml-3 font-medium text-red-400">{discount_percent}%</span>
+          )}
         </p>
+        {!!discount_percent && (
+          <div className="flex items-center my-1">
+            <span className="line-through text-r-1.6 text-gray-500">
+              {original_price.toLocaleString()}원
+            </span>
+            <span>
+              <svg
+                className="text-gray-500 w-r-1.6 ml-3 mt-1"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </span>
+          </div>
+        )}
+        {!isLogin && !!discount_percent && (
+          <p className="text-r-1.4 font-normal text-kp-600 pt-3">
+            로그인 후, 회원할인 혜택이 제공됩니다.
+          </p>
+        )}
         <div className="mt-8 text-p-14">
           <dl className="pt-p-18 border-t border-gray-100 flex">
             <dt className={dtStyle}>판매단위</dt>
@@ -76,7 +119,7 @@ const PurchaseInfo = ({ itemDetail }) => {
               <dd className="w-p-410">{expiration_date}</dd>
             </dl>
           )}
-          {guides.length > 0 && (
+          {guides && guides.length > 0 && (
             <dl className={dlStyle}>
               <dt className={dtStyle}>안내사항</dt>
               <div>
@@ -88,14 +131,19 @@ const PurchaseInfo = ({ itemDetail }) => {
           )}
           <div className="py-7 border-b border-gray-100 flex">
             <span className="w-p-150">구매수량</span>
-            <Counter increase={increase} decrease={decrease} cartNum={state.count} />
+            <Counter increase={increase} decrease={decrease} cartNum={count} />
           </div>
           <div>
-            <p className="text-right py-8">
+            <p className="text-right py-7">
               <span className="text-p-13 font-medium">총 상품금액:</span>
-              <span className="text-p-32 font-bold ml-4">{state.total.toLocaleString()}</span>
+              <span className="text-p-32 font-bold ml-4">
+                {(productPrice * count).toLocaleString()}
+              </span>
               <span className="text-p-20 font-medium ml-3">원</span>
             </p>
+            {!isLogin && !!discount_percent && (
+              <p className="text-right pb-8 text-gray-500">로그인 후, 회원할인가가 적용됩니다.</p>
+            )}
           </div>
           <div className="flex justify-between">
             <div className={`${btnStyle + ' w-p-128 select-none text-gray-300 border-gray-300'}`}>

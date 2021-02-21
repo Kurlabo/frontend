@@ -4,7 +4,7 @@ const counterBtnStyle = 'w-12 h-11 text-center cursor-pointer select-none align-
 
 const Counter = ({ cartNum = 1, increase, decrease }) => {
   return (
-    <div className="w-88 h-12 flex justify-between bg-white border border-gray-300 rounded-p-3 text-p-14 box-border">
+    <div className="w-r-8.8 h-12 flex justify-between bg-white border border-gray-300 rounded-p-3 text-p-14 box-border">
       <span className={`${counterBtnStyle + ' text-5xl leading-9'}`} onClick={decrease}>
         -
       </span>
