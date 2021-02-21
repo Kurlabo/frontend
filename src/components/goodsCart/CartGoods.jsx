@@ -31,6 +31,7 @@ const CartGoods = ({ goods }) => {
           <div>
             <button
               onClick={() => {
+                if (itemCount.filter(item => item.id === id)[0].count === 1) return;
                 onClickItemCount(id, -1);
               }}
               className="inline-block w-12 h-12 border border-r-0 text-gray-300 focus:outline-none"

@@ -3,6 +3,7 @@ import { createAction, handleActions } from 'redux-actions';
 
 const IS_DROP_DOWN_FROZEN = 'cart/IS_DROP_DOWN_FROZEN';
 const IS_DROP_DOWN_AMBIENT = 'cart/IS_DROP_DOWN_AMBIENT';
+const IS_DROP_DOWN_COLD = 'cart/IS_DROP_DOWN_COLD';
 
 const SET_ALL_PRICES = 'cart/SET_ALL_PRICES';
 const SET_ITEMS_NUM = 'cart/ITEM_COUNT';
@@ -14,6 +15,7 @@ const SELECT_ALL_CHECK_BOX = 'cart/SELECT_ALL_CHECKEX_BOX';
 // 액션 생성함수
 export const isDropDownFrozen = createAction(IS_DROP_DOWN_FROZEN);
 export const isDropDownAmbient = createAction(IS_DROP_DOWN_AMBIENT);
+export const isDropDownCold = createAction(IS_DROP_DOWN_COLD);
 
 export const setAllPrices = createAction(SET_ALL_PRICES, idCheckedArr => idCheckedArr);
 
@@ -33,6 +35,7 @@ export const selectAllCheckBox = createAction(SELECT_ALL_CHECK_BOX, check => che
 const initialize = {
   frozen: false,
   ambient: false,
+  cold: false,
   selectAll: false,
   cart: [],
 };
@@ -48,6 +51,10 @@ const cart = handleActions(
     [IS_DROP_DOWN_AMBIENT]: (state, action) => ({
       ...state,
       ambient: !state.ambient,
+    }),
+    [IS_DROP_DOWN_COLD]: (state, action) => ({
+      ...state,
+      cold: !state.cold,
     }),
     [SET_ALL_PRICES]: (state, action) => ({
       ...state,

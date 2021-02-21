@@ -10,8 +10,10 @@ import rootReducer from './modules/index';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorPage from './pages/ErrorPage';
+import ReduxThunk from 'redux-thunk';
+import { applyMiddleware } from '../node_modules/redux';
 
-const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(ReduxThunk)));
 
 ReactDOM.render(
   <Provider store={store}>

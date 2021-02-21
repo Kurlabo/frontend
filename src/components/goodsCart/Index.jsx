@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getGoodsInfo } from '../../modules/goodsCart';
 import Adress from './Adress';
 import Cart from './Cart';
 import Notice from './Notice';
@@ -8,6 +10,13 @@ import Summit from './Summit';
 import Title from './Title';
 
 const GoodsCart = () => {
+  const dispatch = useDispatch();
+
+  // 그냥 이렇게 dispatch를 써도 되나?
+  useEffect(() => {
+    dispatch(getGoodsInfo());
+  });
+
   return (
     <div className="container">
       <Title />
