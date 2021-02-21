@@ -103,20 +103,20 @@ const RelatedProduct = ({ relatedProducts }) => {
         </svg>
         <div className="h-p-320 w-p-950 overflow-hidden relative my-0 mx-auto">
           <ul className="absolute w-per-500" ref={containerRef}>
-            {carouselArr.map((product, i) => {
+            {carouselArr.map(product => {
               return (
                 <li
                   className="cursor-pointer float-left w-p-180 h-p-320 mr-4 border border-gray-300"
-                  key={product.no + i}
+                  key={product.product_id}
                 >
                   <div className="h-p-230">
-                    <img src={product.img} alt="연관 상품 이미지" />
+                    <img className="w-full" src={product.name} alt="연관 상품 이미지" />
                   </div>
                   <div className="p-4">
                     <NameBox className="text-p-14 text-gray-800 h-14 leading-7">
-                      {product.name}
+                      {product['list_image_url']}
                     </NameBox>
-                    <p className="text-p-14">{(+product.price).toLocaleString()}원</p>
+                    <p className="text-p-14">{(+product['original_price']).toLocaleString()}원</p>
                   </div>
                 </li>
               );

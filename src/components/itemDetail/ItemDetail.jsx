@@ -14,7 +14,7 @@ const ItemDetail = ({ itemDetail, loading, error }) => {
   const [viewCartOption, setviewCartOption] = useState(false);
 
   const cartOptionRender = useCallback(() => {
-    if (window.pageYOffset > 1500) {
+    if (window.pageYOffset > 1100) {
       setviewCartOption(true);
     } else {
       setviewCartOption(false);
@@ -33,7 +33,7 @@ const ItemDetail = ({ itemDetail, loading, error }) => {
     <div>
       <main className="w-p-1050 pt-8 mx-auto my-0 text-gray-800">
         <PurchaseInfo itemDetail={itemDetail} />
-        {/* <RelatedProduct relatedProducts={itemDetail['related_product']} /> */}
+        <RelatedProduct relatedProducts={itemDetail['related_product']} />
         <GoodsInfo itemDetail={itemDetail} />
         <GotopBtn />
       </main>
