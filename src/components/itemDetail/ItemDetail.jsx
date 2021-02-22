@@ -7,11 +7,13 @@ import CartOption from './detail/CartOption';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCartCount } from '../../modules/cartAddOption';
+import CountCheckModal from './detail/CountCheckModal';
 
 const ItemDetail = ({ itemDetail, loading, error }) => {
   const dispatch = useDispatch();
 
   const [viewCartOption, setviewCartOption] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const cartOptionRender = useCallback(() => {
     if (window.pageYOffset > 1100) {
@@ -19,6 +21,14 @@ const ItemDetail = ({ itemDetail, loading, error }) => {
     } else {
       setviewCartOption(false);
     }
+  }, []);
+
+  const openModal = useCallback(() => {
+    setModalIsOpen(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setModalIsOpen(false);
   }, []);
 
   useEffect(() => {
@@ -32,12 +42,13 @@ const ItemDetail = ({ itemDetail, loading, error }) => {
   return (
     <div>
       <main className="w-p-1050 pt-8 mx-auto my-0 text-gray-800">
-        <PurchaseInfo itemDetail={itemDetail} />
+        <PurchaseInfo itemDetail={itemDetail} openModal={openModal} />
         <RelatedProduct relatedProducts={itemDetail['related_product']} />
         <GoodsInfo itemDetail={itemDetail} />
         <GotopBtn />
       </main>
-      {viewCartOption && <CartOption itemDetail={itemDetail} />}
+      {viewCartOption && <CartOption itemDetail={itemDetail} openModal={openModal} />}
+      <CountCheckModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
     </div>
   );
 };

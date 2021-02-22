@@ -32,8 +32,6 @@ const RelatedProduct = ({ relatedProducts }) => {
       containerRef.current.style.transform = 'translateX(-' + 950 * (curIndex + 2) + 'px)';
       ++curIndex;
     }
-    console.log('curIndex', curIndex);
-    console.log('translate', 950 * (curIndex + 1));
     if (curIndex === 3) {
       setTimeout(() => {
         containerRef.current.style.transition = 'all 0s';
@@ -103,11 +101,12 @@ const RelatedProduct = ({ relatedProducts }) => {
         </svg>
         <div className="h-p-320 w-p-950 overflow-hidden relative my-0 mx-auto">
           <ul className="absolute w-per-500" ref={containerRef}>
-            {carouselArr.map(product => {
+            {carouselArr.map((product, i) => {
               return (
                 <li
                   className="cursor-pointer float-left w-p-180 h-p-320 mr-4 border border-gray-300"
-                  key={product.product_id}
+                  id={product.product_id}
+                  key={product.product_id * i}
                 >
                   <div className="h-p-230">
                     <img className="w-full" src={product.name} alt="연관 상품 이미지" />

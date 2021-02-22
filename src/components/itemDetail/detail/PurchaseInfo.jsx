@@ -7,7 +7,7 @@ import { setCartCount, setProductPrice } from '../../../modules/cartAddOption';
 const dlStyle = 'py-p-18 border-b border-gray-100 flex';
 const dtStyle = 'w-p-150 text-gray-700';
 const btnStyle = 'h-p-56 font-medium border rounded-p-3 text-p-16 text-center pt-6';
-const PurchaseInfo = ({ itemDetail }) => {
+const PurchaseInfo = ({ itemDetail, openModal }) => {
   const {
     original_image_url,
     name,
@@ -25,7 +25,7 @@ const PurchaseInfo = ({ itemDetail }) => {
   } = itemDetail;
 
   // 스토어에서 로그인 유무 상태데이터 가져와야함!!!!!!!!
-  const isLogin = true;
+  const isLogin = false;
 
   const dispatch = useDispatch();
   const { count, productPrice } = useSelector(state => state.cartAddOption);
@@ -43,6 +43,16 @@ const PurchaseInfo = ({ itemDetail }) => {
     if (count < 1) return;
     dispatch(setCartCount(count - 1));
   }, [count, dispatch]);
+
+  const onClickAddCart = useCallback(() => {
+    console.log(count);
+    if (count === 0) {
+      openModal();
+      return;
+    }
+    // 장바구니 post 요청
+    console.log('post cart', count);
+  }, [openModal, count]);
 
   return (
     <div className="flex justify-between py-p-18">
@@ -95,10 +105,12 @@ const PurchaseInfo = ({ itemDetail }) => {
             <dt className={dtStyle}>판매단위</dt>
             <dd className="w-p-410">{unit_text}</dd>
           </dl>
-          <dl className={dlStyle}>
-            <dt className={dtStyle}>중량/용량</dt>
-            <dd className="w-p-410">{weight}</dd>
-          </dl>
+          {weight && (
+            <dl className={dlStyle}>
+              <dt className={dtStyle}>중량/용량</dt>
+              <dd className="w-p-410">{weight}</dd>
+            </dl>
+          )}
           <dl className={dlStyle}>
             <dt className={dtStyle}>배송구분</dt>
             <dd className="w-p-410">{delivery_time_type_text}</dd>
@@ -152,7 +164,10 @@ const PurchaseInfo = ({ itemDetail }) => {
             <div className={`${btnStyle + ' w-p-128 cursor-pointer text-kdp-400 border-kdp-400'}`}>
               늘 사는 것
             </div>
-            <div className={`${btnStyle + ' w-p-278 cursor-pointer text-white bg-kdp-400'}`}>
+            <div
+              className={`${btnStyle + ' w-p-278 cursor-pointer text-white bg-kdp-400'}`}
+              onClick={onClickAddCart}
+            >
               장바구니 담기
             </div>
           </div>

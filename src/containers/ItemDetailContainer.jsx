@@ -11,7 +11,7 @@ const ItemDetailContainer = () => {
 
   // const { productId } = match.params;
   // productId는 아무래도 스토어에서 가져와야 될것
-  const productId = 230;
+  const productId = 100;
 
   const { itemDetail, error, loading } = useSelector(({ itemDetail, loading }) => ({
     itemDetail: itemDetail.info,
@@ -30,7 +30,7 @@ const ItemDetailContainer = () => {
 
   console.log('데이터:', itemDetail);
 
-  return itemDetail && <ItemDetail itemDetail={itemDetail} loading={loading} error={error} />;
+  return loading ? <div>로딩중</div> : itemDetail && <ItemDetail itemDetail={itemDetail} />;
 };
 
 export default withRouter(ItemDetailContainer);

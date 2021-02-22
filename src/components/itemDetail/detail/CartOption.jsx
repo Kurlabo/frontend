@@ -6,9 +6,9 @@ import { setCartCount } from '../../../modules/cartAddOption';
 import Counter from '../common/Counter';
 
 const openStyle = 'fixed z-900 bottom-0 left-0 w-full bg-white';
-const closeStyle = 'fixed z-900 -bottom-r-25 left-0 w-full bg-white';
+const closeStyle = 'fixed z-900 left-0 w-full bg-white';
 
-const CartOption = ({ itemDetail }) => {
+const CartOption = ({ itemDetail, openModal }) => {
   const isLogin = true;
   const { name, original_price, discount_percent } = itemDetail;
 
@@ -23,7 +23,9 @@ const CartOption = ({ itemDetail }) => {
   }, [count, dispatch]);
 
   const decrease = useCallback(() => {
-    if (count < 1) return;
+    if (count < 1) {
+      return;
+    }
     dispatch(setCartCount(count - 1));
   }, [count, dispatch]);
 
@@ -31,8 +33,19 @@ const CartOption = ({ itemDetail }) => {
     setOpen(open => !open);
   }, []);
 
+  const onClickAddCart = useCallback(() => {
+    console.log(count);
+    if (count === 0) {
+      openModal();
+      return;
+    }
+    // 장바구니 post 요청
+    console.log('post cart', count);
+  }, [openModal, count]);
   return (
-    <div className={open ? openStyle : closeStyle}>
+    <div
+      className={open ? openStyle : `${closeStyle} ${isLogin ? '-bottom-r-25' : '-bottom-r-28.4'}`}
+    >
       <div className=" border-t-2 pt-8 border-klp-600 pb-4">
         <div
           className="absolute ml-p-278 left-1/2 text-p-14 w-r-17 h-r-4.8 pt-5 bg-klp-600 rounded-t -top-r-4.8 cursor-pointer text-center text-white"
@@ -100,7 +113,10 @@ const CartOption = ({ itemDetail }) => {
           <div className="border border-klp-600 rounded select-none text-klp-600 w-r-21.2 h-p-56 text-p-16 text-center pt-6 font-medium cursor-pointer">
             늘 사는 것
           </div>
-          <div className="border border-klp-600 rounded select-none text-white w-r-45 h-p-56 text-p-16 text-center pt-6 font-medium cursor-pointer bg-klp-600">
+          <div
+            className="border border-klp-600 rounded select-none text-white w-r-45 h-p-56 text-p-16 text-center pt-6 font-medium cursor-pointer bg-klp-600"
+            onClick={onClickAddCart}
+          >
             장바구니 담기
           </div>
         </div>
