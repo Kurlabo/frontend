@@ -13,7 +13,7 @@ const Aside = () => {
     'block h-12 border-solid border border-gray-400 border-t-0 text-center leading-3';
   return (
     <aside
-      className="absolute top-510 right-12 w-32 transition-all transform -translate-y-1/2 bg-white"
+      className="absolute top-r-71 right-12 w-32 transition-all transform -translate-y-1/2 bg-white"
       ref={aside}
     >
       <div className="mb-2">
@@ -60,7 +60,7 @@ const Aside = () => {
     if (window.scrollY > 410) {
       aside.current.style.top = `${window.scrollY + window.innerHeight / 2}px`;
     } else {
-      aside.current.style.top = '510px';
+      aside.current.style.top = '710px';
     }
   }
 };

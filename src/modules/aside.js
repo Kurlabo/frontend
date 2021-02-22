@@ -21,7 +21,7 @@ const recent = handleActions(
   {
     [SET_RECENT]: (state, action) => [...state, action.payload],
   },
-  [],
+  initialize,
 );
 
 export default recent;
