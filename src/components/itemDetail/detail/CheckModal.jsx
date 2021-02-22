@@ -30,7 +30,7 @@ const modalStyles = {
   },
 };
 
-const CountCheckModal = ({ modalIsOpen, closeModal }) => {
+const CheckModal = ({ modalIsOpen, closeModal, msg }) => {
   return (
     <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={modalStyles} ariaHideApp={false}>
       <div className="px-8 pt-8">
@@ -40,7 +40,7 @@ const CountCheckModal = ({ modalIsOpen, closeModal }) => {
             <IoCloseOutline />
           </button>
         </div>
-        <p className="py-20 text-r-1.4 text-center">수량은 반드시 1 이상이어야 합니다.</p>
+        <p className="py-20 text-r-1.4 text-center">{msg}</p>
       </div>
       <div className="bg-modalBg py-12 text-center">
         <button
@@ -54,4 +54,4 @@ const CountCheckModal = ({ modalIsOpen, closeModal }) => {
   );
 };
 
-export default CountCheckModal;
+export default CheckModal;

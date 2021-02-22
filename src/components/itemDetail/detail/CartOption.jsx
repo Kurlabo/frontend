@@ -8,7 +8,7 @@ import Counter from '../common/Counter';
 const openStyle = 'fixed z-900 bottom-0 left-0 w-full bg-white';
 const closeStyle = 'fixed z-900 left-0 w-full bg-white';
 
-const CartOption = ({ itemDetail, openModal }) => {
+const CartOption = ({ itemDetail, openModal, onClickWishList }) => {
   const isLogin = true;
   const { name, original_price, discount_percent } = itemDetail;
 
@@ -110,7 +110,10 @@ const CartOption = ({ itemDetail, openModal }) => {
           <div className="border border-gray-300 rounded select-none text-gray-400 w-r-21.2 h-p-56 text-p-16 text-center pt-6 font-medium">
             재입고 알림
           </div>
-          <div className="border border-klp-600 rounded select-none text-klp-600 w-r-21.2 h-p-56 text-p-16 text-center pt-6 font-medium cursor-pointer">
+          <div
+            className="border border-klp-600 rounded select-none text-klp-600 w-r-21.2 h-p-56 text-p-16 text-center pt-6 font-medium cursor-pointer"
+            onClickWishList={onClickWishList}
+          >
             늘 사는 것
           </div>
           <div

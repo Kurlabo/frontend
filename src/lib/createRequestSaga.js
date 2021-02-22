@@ -12,7 +12,6 @@ export default function createRequestSaga(type, request) {
   const FAILURE = `${type}_FAILURE`;
 
   return function* (action) {
-    console.log('빵상총222');
     yield put(startLoading(type)); // 로딩 시작
     try {
       const response = yield call(request, action.payload);

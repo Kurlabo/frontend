@@ -2,12 +2,13 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Counter from '../common/Counter';
 import { setCartCount, setProductPrice } from '../../../modules/cartAddOption';
+import { withRouter } from 'react-router';
 
 // 공통 스타일 변수
 const dlStyle = 'py-p-18 border-b border-gray-100 flex';
 const dtStyle = 'w-p-150 text-gray-700';
 const btnStyle = 'h-p-56 font-medium border rounded-p-3 text-p-16 text-center pt-6';
-const PurchaseInfo = ({ itemDetail, openModal }) => {
+const PurchaseInfo = ({ itemDetail, openModal, onClickWishList }) => {
   const {
     original_image_url,
     name,
@@ -161,7 +162,10 @@ const PurchaseInfo = ({ itemDetail, openModal }) => {
             <div className={`${btnStyle + ' w-p-128 select-none text-gray-300 border-gray-300'}`}>
               재입고 알림
             </div>
-            <div className={`${btnStyle + ' w-p-128 cursor-pointer text-kdp-400 border-kdp-400'}`}>
+            <div
+              className={`${btnStyle + ' w-p-128 cursor-pointer text-kdp-400 border-kdp-400'}`}
+              onClick={onClickWishList}
+            >
               늘 사는 것
             </div>
             <div
