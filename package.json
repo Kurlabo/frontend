@@ -10,7 +10,9 @@
     "@testing-library/user-event": "^12.6.2",
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.1",
+    "concurrently": "^5.3.0",
     "connected-react-router": "^6.8.0",
+    "history": "^4.10.1",
     "json-server": "^0.16.3",
     "node-sass": "^4.14.1",
     "postcss": "^7.0.35",
@@ -34,12 +36,14 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
+    "json-server": "json-server ./db.json --port 5000",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "dev": "concurrently \"npm start\" \"npm run json-server\""
   },
   "browserslist": {
     "production": [
@@ -63,5 +67,6 @@
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
     "redux-devtools": "^3.7.0"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

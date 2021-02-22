@@ -30,7 +30,7 @@ import Header from './components/common/Header';
 function App() {
   return (
     <>
-      <Header />
+      {window.location.pathname !== '/kakao/destination' ? <Header /> : null}
       <Switch>
         <Route path="/goods_cart" component={GoodsCartContainer} />
 
@@ -62,12 +62,12 @@ function App() {
         <Route path="/shop/mypage/mypage_coupon" component={MyCouponPage} />
         <Route path="/shop/member/myinfo" component={MyInfoPage} />
         <Route path="/shop/member/" component={MyInfoPage} />
-        <Route path="/kakao/destination" component={SearchLocation} />
         <Route path="/" exact component={MainContainer} />
+        <Route path="/kakao/destination" component={SearchLocation} />
         <Route component={NotFoundPage} />
       </Switch>
-      <Sidebar />
-      <Footer />
+      {window.location.pathname !== '/kakao/destination' ? <Sidebar /> : null}
+      {window.location.pathname !== '/kakao/destination' ? <Footer /> : null}
     </>
   );
 }

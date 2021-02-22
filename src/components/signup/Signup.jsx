@@ -9,7 +9,7 @@ import PassInput from './PassInput';
 import SignupButton from './SignupButton';
 import SignupModal from './SignupModal';
 
-const Signup = ({ myinfo = false }) => {
+const Signup = ({ signUpStart }) => {
   const formTitle = 'pt-28 font-bold text-5xl text-center';
   const regForm = 'text-kg-400 text-r-1.4';
   const regTitle = 'font-bold text-left align-top pt-7 ';
@@ -95,23 +95,19 @@ const Signup = ({ myinfo = false }) => {
                 휴대폰
               </FormInput>
             </tr>
-            {myinfo ? (
-              <></>
-            ) : (
-              <tr>
-                <th className={regTitle}>
-                  주소<span className="text-formStar">*</span>
-                </th>
-                <td className="py-4">
-                  <SignupButton big={true} onClick={clickButton}>
-                    <FiSearch className="inline-block" />
-                    주소검색
-                  </SignupButton>
-                  <p className={subText}>배송지에 따라 상품 정보가 달라질 수 있습니다.</p>
-                </td>
-                <td></td>
-              </tr>
-            )}
+            <tr>
+              <th className={regTitle}>
+                주소<span className="text-formStar">*</span>
+              </th>
+              <td className="py-4">
+                <SignupButton big={true} onClick={clickButton}>
+                  <FiSearch className="inline-block" />
+                  주소검색
+                </SignupButton>
+                <p className={subText}>배송지에 따라 상품 정보가 달라질 수 있습니다.</p>
+              </td>
+              <td></td>
+            </tr>
             <tr>
               <th className={regTitle}>
                 성별<span className="text-formStar">*</span>
@@ -157,23 +153,6 @@ const Signup = ({ myinfo = false }) => {
               </td>
               <td></td>
             </tr>
-            {myinfo ? (
-              <tr>
-                <th className={(regTitle, borderBottom)}>선택약관동의</th>
-                <td colSpan="2" className={borderBottom}>
-                  <CheckBox
-                    id="agree2"
-                    state={agree2}
-                    ref={agree2Ref}
-                    onChange={() => setAgree2(!agree2)}
-                  >
-                    개인정보 수집·이용 동의 <span className="sub">(선택)</span>
-                  </CheckBox>
-                </td>
-              </tr>
-            ) : (
-              <></>
-            )}
             <tr>
               <th className={regTitle}>
                 이용약관동의<span className="text-formStar">*</span>
@@ -264,19 +243,8 @@ const Signup = ({ myinfo = false }) => {
   }
 
   function onSubmit(e) {
-    if (myinfo) return false;
     e.preventDefault();
-    const valid = [
-      validId1,
-      validId2,
-      validPass1,
-      validPass2,
-      validPass3,
-      validRePass,
-      agree1,
-      agree2,
-      age,
-    ];
+    const valid = [validId1, validPass1, validPass2, validPass3, validRePass, agree1, agree2, age];
     const newUser = { date_of_birth: '' };
     const formData = new FormData(formRef.current);
     for (let [key, value] of formData) {
@@ -309,7 +277,8 @@ const Signup = ({ myinfo = false }) => {
         }
       }
     }
-    console.log(newUser);
+    signUpStart(newUser);
+    // console.log(newUser);
   }
   function checkPhone(e) {
     const { value } = e.target;
@@ -326,9 +295,7 @@ const Signup = ({ myinfo = false }) => {
       e.target.value = value.substring(0, value.length - 1);
     }
   }
-  function openModal() {
-    setSignup(true);
-  }
+
   function closeModal() {
     setSignup(false);
   }
