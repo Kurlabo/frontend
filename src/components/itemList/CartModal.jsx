@@ -41,7 +41,7 @@ const modalStyles = {
   },
 };
 
-const CartModal = ({ modalIsOpen, closeModal }) => {
+const CartModal = ({ modalIsOpen, closeModal, productName, originalPrice }) => {
   const [count, setCount] = useState(1);
 
   useEffect(() => {
@@ -67,9 +67,9 @@ const CartModal = ({ modalIsOpen, closeModal }) => {
       contentLabel="회원가입"
       ariaHideApp={false}
     >
-      <h1 className="text-2xl ">친환경 대추방울토마토 500g</h1>
+      <h1 className="text-2xl ">{productName}</h1>
       <div className={priceWrapper}>
-        <div className="inline-block text-2xl font-bold">5,000원</div>
+        <div className="inline-block text-2xl font-bold">{originalPrice.toLocaleString()}원</div>
         <div className={quanWrapper}>
           <button className="w-p-28 focus:outline-0" onClick={onMinus}>
             <img src="/img/ico_minus_on.svg" alt="수량내리기" />
@@ -82,7 +82,7 @@ const CartModal = ({ modalIsOpen, closeModal }) => {
       </div>
       <div className={sumWrapper}>
         <span>합계</span>
-        <span className="text-p-24 font-bold">5,000원</span>
+        <span className="text-p-24 font-bold">{(+originalPrice * count).toLocaleString()}원</span>
       </div>
       <div className="text-right text-2xl pb-8">
         <span className={accum}>적립</span>
