@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router';
 import { getItemsThunk } from '../../modules/itemlist';
 import ItemCard from './ItemCard';
 
@@ -11,12 +12,11 @@ const ItemCardContainer = () => {
     dispatch(getItemsThunk());
   }, [dispatch]);
 
-  console.log(items);
   return (
     <div className="w-p-1050 mx-auto overflow-y-auto">
       <ul className="flex flex-wrap pb-24">
         {items.map(item => (
-          <li key={item.product_id}>
+          <li key={item.product_id} className="w-1/3 h-r-65">
             <ItemCard
               imgUrl={item.original_image_url}
               productName={item.name}
@@ -31,4 +31,4 @@ const ItemCardContainer = () => {
   );
 };
 
-export default ItemCardContainer;
+export default withRouter(ItemCardContainer);

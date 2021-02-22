@@ -4,6 +4,8 @@ import CategoriesSubLi from './CategoriesSubLi';
 
 const liWrapper =
   'pl-r-1.4 pt-r-0.8 flex h-r-3.8 text-r-1.4 hover:bg-kg-500 hover:text-kp-600 text-gray-800 w-80';
+const ulWrapper =
+  'text-gray-800 bg-kg-500 border-gray-200 border-t border-r border-b absolute top-0 left-r-21.2 h-full w-r-22';
 
 const CategoriesLi = ({
   text,
@@ -13,7 +15,6 @@ const CategoriesLi = ({
   active,
   onActive,
   id,
-  change,
   inUl,
   inActive,
 }) => {
@@ -23,16 +24,23 @@ const CategoriesLi = ({
       {active === id && inUl ? (
         <>
           <img className="w-r-2.4 h-r-2.4 mr-4" src={`/img/category/${activeImg}`} alt={text} />
-          <ul className="text-gray-800 bg-kg-500 border-gray-200 border-t border-r border-b absolute top-0 left-r-21.2 h-full w-r-22">
+          <ul className={ulWrapper}>
             {subdatas.map(subdata => {
-              return <CategoriesSubLi key={subdata.id} subtext={subdata.text} />;
+              return (
+                <CategoriesSubLi
+                  key={subdata.id}
+                  subtext={subdata.text}
+                  id={id}
+                  subid={subdata.id}
+                />
+              );
             })}
           </ul>
         </>
       ) : (
         <img className="w-r-2.4 h-r-2.4 mr-4" src={`/img/category/${inactiveImg}`} alt={text} />
       )}
-      <Link to="/">{text}</Link>
+      <Link to={`/shop/goods/item_list/category=${id}`}>{text}</Link>
     </li>
   );
 };
