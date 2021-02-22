@@ -11,11 +11,12 @@ export const getItems = createAction(GET_ITEMS);
 export const getItemsSuccess = createAction(GET_ITEMS_SUCCESS, res => res);
 export const getItemsFail = createAction(GET_ITEMS_FAIL, error => error);
 
-export const getItemsThunk = id => async dispatch => {
+export const getItemsThunk = (id, subid) => async dispatch => {
   try {
-    const res = await axios.get(`http://3.35.221.9:8080/api/goods/goods_list/`);
+    const res = subid
+      ? await axios.get(`http://3.35.221.9:8080/api/goods/goods_list/${subid}`)
+      : await axios.get(`http://3.35.221.9:8080/api/goods/goods_list/${id}`);
     dispatch(getItemsSuccess(res.data));
-    console.log(res.data);
   } catch (e) {
     dispatch(getItemsFail(e));
   }

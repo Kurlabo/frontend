@@ -1,5 +1,4 @@
 import { Route, Switch } from 'react-router-dom';
-import GoodsCartContainer from './containers/GoodsCartContainer';
 import LoginPage from './pages/LoginPage';
 import FindIdPage from './pages/FindIdPage';
 import FindPasswordPage from './pages/FindPasswordPage';
@@ -23,7 +22,6 @@ import WeekEvent from './components/weekEvent/WeekEvent';
 import Aside from './components/aside/Aside';
 import MyOrderViewPage from './pages/MyOrderViewPage';
 import OrderPage from './pages/OrderPage';
-import PayCompletePage from './pages/PayCompletePage';
 import TypeUserInfo from './components/order/TypeUserInfo';
 import Header from './components/common/Header';
 import ItemDetailPage from './pages/ItemDetailPage';
@@ -39,7 +37,7 @@ function App() {
         <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
 
         <Route path="/shop/goods/goods_view" component={ItemDetailPage} />
-        <Route path="/shop/goods/item_list/:id" component={ItemListPage} />
+        <Route path="/shop/goods/item_list/:category" component={ItemListPage} />
         <Route path="/shop/goods/event" component={WeekEvent} />
 
         <Route path="/order/input_reception" exact component={TypeUserInfo} />

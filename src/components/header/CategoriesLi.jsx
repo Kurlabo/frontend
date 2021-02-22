@@ -18,7 +18,6 @@ const CategoriesLi = ({
   inUl,
   inActive,
 }) => {
-  console.log(inUl, active);
   return (
     <li className={liWrapper} onMouseEnter={onActive} onMouseLeave={inActive} id={id}>
       {active === id && inUl ? (

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { VscClose } from 'react-icons/vsc';
 export default function Modal({ closeModal, modal, value }) {
   return (
