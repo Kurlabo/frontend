@@ -1,3 +1,5 @@
+import React from 'react';
+import { useCallback } from 'react';
 import { useState } from 'react';
 import Counter from '../common/Counter';
 
@@ -10,6 +12,25 @@ const CartOption = ({ name, price }) => {
     count: 1,
     total: price,
   });
+
+  const increase = useCallback(() => {
+    setOption(state => ({
+      count: state.count + 1,
+      total: price * (state.count + 1),
+    }));
+  }, [price]);
+
+  const decrease = useCallback(() => {
+    if (option.count < 1) return;
+    setOption(state => ({
+      count: state.count - 1,
+      total: price * (state.count - 1),
+    }));
+  }, [option.count, price]);
+
+  const onClick = useCallback(() => {
+    setOpen(open => !open);
+  }, []);
 
   return (
     <div className={open ? openStyle : closeStyle}>
@@ -73,23 +94,6 @@ const CartOption = ({ name, price }) => {
       </div>
     </div>
   );
-
-  function increase() {
-    setOption(state => ({
-      count: state.count + 1,
-      total: price * (state.count + 1),
-    }));
-  }
-  function decrease() {
-    if (option.count < 1) return;
-    setOption(state => ({
-      count: state.count - 1,
-      total: price * (state.count - 1),
-    }));
-  }
-  function onClick() {
-    setOpen(open => !open);
-  }
 };
 
-export default CartOption;
+export default React.memo(CartOption);

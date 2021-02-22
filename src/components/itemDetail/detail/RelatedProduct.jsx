@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useCallback } from 'react';
 import styled from 'styled-components';
 const btnStyle = 'w-12 text-gray-700 cursor-pointer absolute inset-y-1/2';
 let onAnimate = false;
@@ -18,10 +19,12 @@ const RelatedProduct = ({ relatedProducts }) => {
     ...relatedProducts,
     ...relatedProducts.slice(0, 5),
   ];
+
   useEffect(() => {
     containerRef.current.style.transform = 'translateX(-' + 950 + 'px)';
   }, [relatedProducts]);
-  const slideNext = () => {
+
+  const slideNext = useCallback(() => {
     if (onAnimate) return;
     onAnimate = true;
     if (curIndex <= 3) {
@@ -50,8 +53,9 @@ const RelatedProduct = ({ relatedProducts }) => {
     setTimeout(() => {
       onAnimate = false;
     }, 500);
-  };
-  const slidePrev = () => {
+  }, []);
+
+  const slidePrev = useCallback(() => {
     if (onAnimate) return;
     if (curIndex >= 0) {
       onAnimate = true;
@@ -70,7 +74,8 @@ const RelatedProduct = ({ relatedProducts }) => {
     setTimeout(() => {
       onAnimate = false;
     }, 500);
-  };
+  }, []);
+
   return (
     <div>
       <div className="w-8 h-2 bg-gray-800" />
@@ -122,4 +127,4 @@ const RelatedProduct = ({ relatedProducts }) => {
     </div>
   );
 };
-export default RelatedProduct;
+export default React.memo(RelatedProduct);

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useCallback } from 'react';
 import OrderCancelGuide from './OrderCancelGuide';
 import OrderCancelGuideDetail from './OrderCancelGuideDetail';
 import RefundGuide from './RefundGuide';
@@ -10,16 +11,17 @@ const ConsumerGuide = () => {
     refundGuide: true,
   });
 
-  const onClickOrderCancel = () => {
+  const onClickOrderCancel = useCallback(() => {
     setHidden(hidden => ({ ...hidden, orederCancel: !hidden.orederCancel }));
-  };
+  }, []);
 
-  const onClickRefundGuide = () => {
+  const onClickRefundGuide = useCallback(() => {
     setHidden(hidden => ({
       ...hidden,
       refundGuide: !hidden.refundGuide,
     }));
-  };
+  }, []);
+
   return (
     <div>
       <OrderCancelGuide onClick={onClickOrderCancel} isClose={hidden.orederCancel} />
