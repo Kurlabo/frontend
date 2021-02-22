@@ -29,6 +29,7 @@ const ItemCard = ({ imgUrl, productName, originalPrice, shortDesc, stickerImageU
           <div className="text-gray-400 text-xl pt-r-0.8">{shortDesc}</div>
         </div>
       </div>
+
       <CartModal
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
@@ -37,6 +38,7 @@ const ItemCard = ({ imgUrl, productName, originalPrice, shortDesc, stickerImageU
       />
     </>
   );
+
   function openModal() {
     setmodalIsOpen(true);
   }
