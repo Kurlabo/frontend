@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAllCheckBox } from '../../modules/cart';
+import { selectAllCheckBox } from '../../modules/goodsCart';
 
 const Select = ({ bottom }) => {
   const dispatch = useDispatch();
-  const selectAll = useSelector(state => state.cart.selectAll);
+  const selectAll = useSelector(state => state.goodsCart.selectAll);
   return (
     <div
       className={

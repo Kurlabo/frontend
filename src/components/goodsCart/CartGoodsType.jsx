@@ -18,9 +18,9 @@ const CartGoodsType = ({
           className="w-12 h-12 inline-block mr-2.5"
           src={
             // https://res.kurly.com/pc/service/cart/2007/ico_frozen.svg
-            cold
+            frozen
               ? 'https://res.kurly.com/pc/service/cart/2007/ico_cold.svg'
-              : frozen
+              : cold
               ? 'https://res.kurly.com/pc/service/cart/2007/ico_frozen.svg'
               : 'https://res.kurly.com/pc/service/cart/2009/ico_room_v2.svg?v=1'
           }
