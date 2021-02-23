@@ -19,6 +19,8 @@ export default function Login({ onSubmit, onClick, value, open }) {
     u_id: '',
     u_password: '',
   });
+  const [checked, setchecked] = useState(true);
+
   const idInput = useRef();
   const pwdInput = useRef();
 
@@ -58,16 +60,16 @@ export default function Login({ onSubmit, onClick, value, open }) {
           required
         />
         <div className="mt-r-0.9 text-kg-300 text-r-1.3 leading-3">
-          <CheckBox value="보안접속" />
+          <CheckBox value="보안접속" onClick={onClickCheckBox} checked={checked} />
           <Link to="/shop/account/find_id">
-            <span className="align-middle ">아이디 찾기</span>
+            <span className="align-middle ml-r-11">아이디 찾기</span>
           </Link>
           <span className="align-middle px-1">|</span>
           <Link to="/shop/account/find_pwd">
             <span className="align-middle">비밀번호 찾기</span>
           </Link>
         </div>
-        <Button type="submit" form="signin" as={Link} to="">
+        <Button type="submit" form="signin" as={Link} to="/">
           로그인
         </Button>
       </form>
@@ -83,4 +85,7 @@ export default function Login({ onSubmit, onClick, value, open }) {
       )}
     </LoginFormStyle>
   );
+  function onClickCheckBox() {
+    setchecked(!checked);
+  }
 }
