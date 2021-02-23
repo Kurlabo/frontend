@@ -11,7 +11,7 @@ const ItemDetailContainer = () => {
 
   // const { productId } = match.params;
   // productId는 아무래도 스토어에서 가져와야 될것
-  const productId = 30;
+  const productId = 1;
 
   const { itemDetail, error, loading } = useSelector(({ itemDetail, loading }) => ({
     itemDetail: itemDetail.info,

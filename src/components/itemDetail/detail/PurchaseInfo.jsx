@@ -2,13 +2,12 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Counter from '../common/Counter';
 import { setCartCount, setProductPrice } from '../../../modules/cartAddOption';
-import { withRouter } from 'react-router';
 
 // 공통 스타일 변수
 const dlStyle = 'py-p-18 border-b border-gray-100 flex';
 const dtStyle = 'w-p-150 text-gray-700';
 const btnStyle = 'h-p-56 font-medium border rounded-p-3 text-p-16 text-center pt-6';
-const PurchaseInfo = ({ itemDetail, openModal, onClickWishList }) => {
+const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList }) => {
   const {
     original_image_url,
     name,
@@ -44,16 +43,6 @@ const PurchaseInfo = ({ itemDetail, openModal, onClickWishList }) => {
     if (count < 1) return;
     dispatch(setCartCount(count - 1));
   }, [count, dispatch]);
-
-  const onClickAddCart = useCallback(() => {
-    console.log(count);
-    if (count === 0) {
-      openModal();
-      return;
-    }
-    // 장바구니 post 요청
-    console.log('post cart', count);
-  }, [openModal, count]);
 
   return (
     <div className="flex justify-between py-p-18">

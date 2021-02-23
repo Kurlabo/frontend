@@ -11,11 +11,12 @@ import CheckModal from './detail/CheckModal';
 import WishListLoginModal from './detail/WishListLoginModal';
 import { withRouter } from 'react-router';
 import { postWishList, setModuleMsg, setModuleMsgEmpty } from '../../modules/itemDetail';
+import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
 
 const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
   const dispatch = useDispatch();
 
-  const isLogin = false;
+  const isLogin = true;
   const { count } = useSelector(state => state.cartAddOption);
   const { isOpen, msg } = useSelector(state => state.itemDetail.modalInfo);
   const [viewCartOption, setviewCartOption] = useState(false);
@@ -29,9 +30,18 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
     }
   }, []);
 
-  const openModalCheckCount = useCallback(() => {
-    dispatch(setModuleMsg('수량은 반드시 1 이상이어야 합니다.'));
-  }, [dispatch]);
+  const onClickAddCart = useCallback(() => {
+    if (count < 1) {
+      dispatch(setModuleMsg('수량은 반드시 1 이상이어야 합니다.'));
+      return;
+    }
+    if (!isLogin) {
+      console.log('로그인 창으로 이동!!!');
+      return;
+    }
+    // 장바구니에 post
+    dispatch(postGoodsToCart({ product_id: productId, cnt: count }));
+  }, [count, dispatch, isLogin, productId]);
 
   const closeModal = useCallback(() => {
     dispatch(setModuleMsgEmpty());
@@ -45,8 +55,7 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
       dispatch(setModuleMsg('하나 이상의 패키지 구성품을 선택하셔야됩니다!'));
       return;
     } else {
-      console.log('api 요청!!!!!!');
-      dispatch(postWishList({ product_id: productId, member_id: 1 }));
+      dispatch(postWishList({ product_id: productId }));
     }
   }, [count, isLogin, dispatch, productId]);
 
@@ -70,7 +79,7 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
       <main className="w-p-1050 pt-8 mx-auto my-0 text-gray-800">
         <PurchaseInfo
           itemDetail={itemDetail}
-          openModal={openModalCheckCount}
+          onClickAddCart={onClickAddCart}
           onClickWishList={onClickWishList}
         />
         <RelatedProduct relatedProducts={itemDetail['related_product']} />
@@ -80,7 +89,7 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
       {viewCartOption && (
         <CartOption
           itemDetail={itemDetail}
-          openModal={openModalCheckCount}
+          onClickAddCart={onClickAddCart}
           onClickWishList={onClickWishList}
         />
       )}

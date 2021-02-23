@@ -19,6 +19,7 @@ export default function createRequestSaga(type, request) {
         type: SUCCESS,
         payload: response.data,
       });
+      console.log('api요청 결과!!!!:', response.data);
     } catch (e) {
       yield put({
         type: FAILURE,

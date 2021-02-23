@@ -8,7 +8,7 @@ import Counter from '../common/Counter';
 const openStyle = 'fixed z-900 bottom-0 left-0 w-full bg-white';
 const closeStyle = 'fixed z-900 left-0 w-full bg-white';
 
-const CartOption = ({ itemDetail, openModal, onClickWishList }) => {
+const CartOption = ({ itemDetail, onClickAddCart, onClickWishList }) => {
   const isLogin = true;
   const { name, original_price, discount_percent } = itemDetail;
 
@@ -33,15 +33,6 @@ const CartOption = ({ itemDetail, openModal, onClickWishList }) => {
     setOpen(open => !open);
   }, []);
 
-  const onClickAddCart = useCallback(() => {
-    console.log(count);
-    if (count === 0) {
-      openModal();
-      return;
-    }
-    // 장바구니 post 요청
-    console.log('post cart', count);
-  }, [openModal, count]);
   return (
     <div
       className={open ? openStyle : `${closeStyle} ${isLogin ? '-bottom-r-25' : '-bottom-r-28.4'}`}
@@ -112,7 +103,7 @@ const CartOption = ({ itemDetail, openModal, onClickWishList }) => {
           </div>
           <div
             className="border border-klp-600 rounded select-none text-klp-600 w-r-21.2 h-p-56 text-p-16 text-center pt-6 font-medium cursor-pointer"
-            onClickWishList={onClickWishList}
+            onClick={onClickWishList}
           >
             늘 사는 것
           </div>
