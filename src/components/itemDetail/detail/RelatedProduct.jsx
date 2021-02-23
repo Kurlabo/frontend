@@ -32,8 +32,6 @@ const RelatedProduct = ({ relatedProducts }) => {
       containerRef.current.style.transform = 'translateX(-' + 950 * (curIndex + 2) + 'px)';
       ++curIndex;
     }
-    console.log('curIndex', curIndex);
-    console.log('translate', 950 * (curIndex + 1));
     if (curIndex === 3) {
       setTimeout(() => {
         containerRef.current.style.transition = 'all 0s';
@@ -107,16 +105,17 @@ const RelatedProduct = ({ relatedProducts }) => {
               return (
                 <li
                   className="cursor-pointer float-left w-p-180 h-p-320 mr-4 border border-gray-300"
-                  key={product.no + i}
+                  id={product.product_id}
+                  key={product.product_id * i}
                 >
                   <div className="h-p-230">
-                    <img src={product.img} alt="연관 상품 이미지" />
+                    <img className="w-full" src={product.name} alt="연관 상품 이미지" />
                   </div>
                   <div className="p-4">
                     <NameBox className="text-p-14 text-gray-800 h-14 leading-7">
-                      {product.name}
+                      {product['list_image_url']}
                     </NameBox>
-                    <p className="text-p-14">{(+product.price).toLocaleString()}원</p>
+                    <p className="text-p-14">{(+product['original_price']).toLocaleString()}원</p>
                   </div>
                 </li>
               );

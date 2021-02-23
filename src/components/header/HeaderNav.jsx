@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import AddCartModal from './AddCartModal';
 import Categories from './Categories';
 import HeaderSearch from './HeaderSearch';
 const svgD =
@@ -60,6 +61,7 @@ const HeaderNav = () => {
           </li>
         </ul>
         <HeaderSearch />
+        <AddCartModal />
       </nav>
     </div>
   );
