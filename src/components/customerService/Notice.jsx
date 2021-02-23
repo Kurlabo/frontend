@@ -9,6 +9,7 @@ import BoardSearch from './NoticeBoardSearch';
 const Notice = () => {
   const dispatch = useDispatch();
   const noticeData = useSelector(state => state.notice);
+
   useEffect(() => {
     dispatch(getNotice());
   }, []);
