@@ -48,16 +48,16 @@ const HeaderNav = () => {
         </button>
         <ul className="flex flex-1 justify-evenly w-r-58 ">
           <li className={linkHover}>
-            <NavLink to="/">신상품</NavLink>
+            <NavLink to="/shop/goods/item_list">신상품</NavLink>
           </li>
           <li className={linkHover}>
-            <NavLink to="/">베스트</NavLink>
+            <NavLink to="/shop/goods/item_list">베스트</NavLink>
           </li>
           <li className={linkHover}>
-            <NavLink to="/">알뜰쇼핑</NavLink>
+            <NavLink to="/shop/goods/item_list">알뜰쇼핑</NavLink>
           </li>
           <li className={linkHover}>
-            <NavLink to="/">금주혜택</NavLink>
+            <NavLink to="/shop/goods/item_list">금주혜택</NavLink>
           </li>
         </ul>
         <HeaderSearch />

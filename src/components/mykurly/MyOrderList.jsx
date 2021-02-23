@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import MyKurlyHeader from './MykurlyHeader';
+import MyKurlyHeader from './MyKurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
 import MyKurlyPageNation from './MyKurlyPageNation';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
