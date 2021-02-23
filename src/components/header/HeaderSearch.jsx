@@ -8,10 +8,12 @@ import { IoMdCloseCircle } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 
 const inputStyle =
-  'inline-block focus:outline-0 focus:bg-gray-50 w-r-24.2 h-r-3.6 rounded-3xl shadow-2xl pl-8 pr-24 bg-gray-100 text-1.2';
+  'inline-block focus:outline-0 focus:bg-gray-50 w-r-24.2 h-r-3.6 rounded-3xl shadow-sm pl-8 pr-24 bg-gray-100 text-1.2';
 const closeBtn =
   'inline-block transform -translate-x-32 translate-y-4 text-gray-300 cursor-pointer absolute';
 const searchBtn = 'inline text-4xl transform -translate-x-20 cursor-pointer';
+const dropDownStyle =
+  'cursor-pointer bg-conversation-btn bg-no-repeat absolute w-32 h-36 bg-center -top-r-0.4 -left-r-2.5 ';
 
 const HeaderSearch = () => {
   const [dropDown, setDropDown] = useState(false);
@@ -48,7 +50,7 @@ const HeaderSearch = () => {
           {dropDown && (
             <>
               <LoginDropDown />
-              <div className="cursor-pointer bg-conversation-btn bg-no-repeat absolute w-32 h-36 bg-center -top-r-0.4 -left-r-2.5 "></div>
+              <div className={dropDownStyle}></div>
             </>
           )}
         </div>

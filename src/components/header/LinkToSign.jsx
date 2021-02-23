@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { GoTriangleDown } from 'react-icons/go';
 import HeaderDropDown from './HeaderDropDown';
@@ -11,9 +11,11 @@ const LinkToSign = () => {
     loginService: false,
     customerService: false,
   });
+  const [loginSuccess, setLogin] = useState('');
 
-  const loginSuccess = 'd';
-
+  useEffect(() => {
+    setLogin('');
+  }, []);
   const { loginService, customerService } = dropMenu;
   return (
     <div className={signWrapper}>

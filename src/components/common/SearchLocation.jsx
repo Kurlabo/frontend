@@ -1,5 +1,6 @@
 import React from 'react';
 import { BiSearch } from 'react-icons/bi';
+import RoundCheckBox from '../mykurly/RoundCheckBox';
 
 const container = 'flex flex-col justify-center items-center font-body px-12';
 const searchInput =
@@ -14,6 +15,7 @@ const mainTextWrap = 'font-medium text-p-24 pt-16 pb-4 text-center';
 const subTextWrap = 'text-left w-full text-gray-400 text-1.2';
 
 const SearchLocation = () => {
+  const modalClose = false;
   return (
     <div className={container}>
       <p className={mainTextWrap}>
@@ -32,6 +34,9 @@ const SearchLocation = () => {
           </button>
         </div>
         <input type="text" className={addInput} placeholder="나머지 주소를 입력해주세요" />
+      </div>
+      <div className="w-full text-left mb-3">
+        <RoundCheckBox value="기본 배송지로 저장" modalClose="modalClose" />
       </div>
       <div className={subTextWrap}>
         &#8251;
