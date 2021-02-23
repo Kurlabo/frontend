@@ -21,7 +21,6 @@ export const getItemsThunk = (id, subid) => async dispatch => {
       ? await axios.get(`http://3.35.221.9:8080/api/goods/goods_list?category=${subid}`)
       : await axios.get(`http://3.35.221.9:8080/api/goods/goods_list?category=${id}`);
     dispatch(getItemsSuccess(res.data, id, subid));
-    console.log(res.data);
   } catch (e) {
     dispatch(getItemsFail(e));
   }

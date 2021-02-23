@@ -43,6 +43,8 @@ const ItemCardContainer = () => {
               originalPrice={+item.original_price}
               shortDesc={item.short_description}
               stickerImageUrl={item.sticker_image_url}
+              discount_percent={item.discount_percent}
+              discounted_price={+item.discounted_price}
             />
           </li>
         ))}
