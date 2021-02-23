@@ -37,6 +37,7 @@ const ItemCardContainer = () => {
         {items.map((item, idx) => (
           <li key={item.product_id + idx * 10} className="w-1/3 h-r-65">
             <ItemCard
+              product_id={item.product_id}
               imgUrl={item.original_image_url}
               productName={item.name}
               originalPrice={+item.original_price}
