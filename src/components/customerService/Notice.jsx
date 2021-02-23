@@ -1,56 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import axios from '../../../node_modules/axios/index';
+import { getNotice } from '../../modules/notice';
 import Pagination from './common/Pagination';
 import BoardSearch from './NoticeBoardSearch';
 
-// Dummy data
-
-const noticeData = [
-  {
-    no: '1',
-    title: '후기 작성 이벤트 당첨자 발표',
-    writer: 'MarketKurly',
-    date: '2021-01-27',
-    views: '112',
-  },
-  {
-    no: '2',
-    title: '배송료 인상 안내',
-    writer: 'MarketKurly',
-    date: '2021-01-27',
-    views: '112',
-  },
-  {
-    no: '3',
-    title: '후기 작성 이벤트 당첨자 발표',
-    writer: 'MarketKurly',
-    date: '2021-01-27',
-    views: '112',
-  },
-  {
-    no: '4',
-    title: '개인정보처리방침 개정 내용 사전 안내',
-    writer: 'MarketKurly',
-    date: '2021-01-27',
-    views: '112',
-  },
-  {
-    no: '5',
-    title: '후기 작성 이벤트 당첨자 발표',
-    writer: 'MarketKurly',
-    date: '2021-01-27',
-    views: '112',
-  },
-  {
-    no: '6',
-    title: '후기 작성 이벤트 당첨자 발표',
-    writer: 'MarketKurly',
-    date: '2021-01-27',
-    views: '112',
-  },
-];
-
 const Notice = () => {
+  const dispatch = useDispatch();
+  const noticeData = useSelector(state => state.notice);
+  useEffect(() => {
+    dispatch(getNotice());
+  }, []);
+
   return (
     <div className="w-r-82">
       <div className="pt-2 pb-r-3.4">
@@ -69,18 +31,21 @@ const Notice = () => {
         </div>
       </div>
       <ul className="flex flex-col pb-8">
-        {noticeData.map(data => (
+        {noticeData.map((data, i) => (
           <li
-            className="flex items-center midd px-8 text-r-1.2 text-center justify-between border-gray-200 text-gray-700 border-b"
+            className="flex items-center midd text-r-1.2 text-center justify-between border-gray-200 text-gray-700 border-b"
             onClick={onClick}
             key={data.no}
           >
-            <span className="w-20">{data.no}</span>
-            <Link to="./detail" className="w-r-54 text-left cursor-pointer py-8">
+            <span className="w-20">{data.id}</span>
+            <Link
+              to={`/shop/customer/board/${data.id}`}
+              className="w-r-54 text-left cursor-pointer py-8"
+            >
               {data.title}
             </Link>
             <span className="w-40">{data.writer}</span>
-            <span className="w-40 text-gray-400">{data.date}</span>
+            <span className="w-40 text-gray-400">{data.regdate}</span>
             <span className="w-12 text-gray-400">{data.views}</span>
           </li>
         ))}
@@ -97,4 +62,4 @@ const Notice = () => {
   function onClick(e) {}
 };
 
-export default Notice;
+export default withRouter(Notice);

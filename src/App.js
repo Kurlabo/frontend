@@ -53,8 +53,9 @@ function App() {
           path="/shop/mypage/mypage_orderview/ordno=:orderNumber"
           component={MyOrderViewPage}
         />
+
+        <Route path="/shop/customer/board/:id" component={NoticeDetail} />
         <Route path="/shop/customer/board" component={CustomerService} />
-        <Route path="/shop/customer/board/detail" component={NoticeDetail} />
         <Route path="/shop/mypage/destination/list" component={MyDestinationLIstPage} />
         <Route path="/shop/mypage/mypage_wishlist" component={MyWishListPage} />
         <Route path="/shop/mypage/mypage_review" component={MyReviewPage} />
