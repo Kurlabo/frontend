@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CartGoods from './CartGoods';
+import Product from './Product';
 import CartGoodsType from './CartGoodsType';
 import NoGoods from './NoGoods';
 import { isDropDownAmbient, isDropDownCold, isDropDownFrozen } from '../../modules/cart';
@@ -21,80 +21,32 @@ const Cart = () => {
   const frozen = goods.filter(good => good.packing_type_text === '냉동/종이포장');
   const cold = goods.filter(good => good.packing_type_text === '냉장/종이포장');
 
-  console.log('ambient', ambient);
-  console.log('cold', cold);
-  console.log('frozen', frozen);
-
   useEffect(() => {
     dispatch(getGoodsInfo());
   }, [dispatch]);
 
-  // 상온 상품
-  // const goods = [
-  //   {
-  //     id: 1,
-  //     url: 'https://img-cf.kurly.com/shop/data/goods/1611646838140i0.jpg',
-  //     title: '[닥터포헤어] 폴리젠 트리트먼트 냉동',
-  //     prices: 28000,
-  //     packing_type_text: '냉동/종이포장',
-  //   },
-  //   {
-  //     id: 2,
-  //     url: 'https://img-cf.kurly.com/shop/data/goods/1611646838140i0.jpg',
-  //     title: '[닥터포헤어] 폴리젠 트리트먼트 냉장',
-  //     prices: 28000,
-  //     packing_type_text: '냉장/종이포장',
-  //   },
-  //   {
-  //     id: 3,
-  //     url: 'https://img-cf.kurly.com/shop/data/goods/1611646838140i0.jpg',
-  //     title: '[닥터포헤어] 폴리젠 트리트먼트 상온',
-  //     prices: 28000,
-  //     packing_type_text: '상온/종이포장',
-  //   },
-  //   {
-  //     id: 4,
-  //     url: 'https://img-cf.kurly.com/shop/data/goods/1611646838140i0.jpg',
-  //     title: '[닥터포헤어] 폴리젠 트리트먼트 상온',
-  //     prices: 28000,
-  //     packing_type_text: '상온/종이포장',
-  //   },
-  // ];
-
-  // "냉동/종이포장",
-  // "냉장/종이포장",
-  // "상온/종이포장"
-
-  // const dispatchPrams = goods.map(goods => ({
-  //   id: goods.id,
-  //   select: false,
-  //   count: 1,
-  //   prices: goods.prices,
-  //   initalPrices: goods.prices,
-  // }));
-
-  // useEffect(() => {
-  //   dispatch(setAllPrices(dispatchPrams));
-  // });
-
   return (
     <div>
-      {!loading && frozen.length !== 0 && (
+      {!loading && cold.length !== 0 && (
         <div>
-          <CartGoodsType isDropdownFrozen={isDropdownFrozen} dropdownFrozen={dropdownFrozen} cold />
-          <div className={isDropdownFrozen ? 'hidden' : ''}>
-            <CartGoods goods={cold} />
+          <CartGoodsType isDropdownCold={isDropdownCold} dropdownCold={dropdownCold} cold />
+          <div className={isDropdownCold ? 'hidden' : ''}>
+            <Product isDropdownCold={isDropdownCold} goods={cold} />
           </div>
         </div>
       )}
       {!loading && frozen.length === 0 && ambient.length === 0 && cold.length === 0 && (
         <div className="border-t pt-6 border-black" />
       )}
-      {!loading && cold.length !== 0 && (
+      {!loading && frozen.length !== 0 && (
         <div>
-          <CartGoodsType isDropdownCold={isDropdownCold} dropdownCold={dropdownCold} frozen />
-          <div className={isDropdownCold ? 'hidden' : ''}>
-            <CartGoods isDropdownCold={isDropdownCold} goods={frozen} />
+          <CartGoodsType
+            isDropdownFrozen={isDropdownFrozen}
+            dropdownFrozen={dropdownFrozen}
+            frozen
+          />
+          <div className={isDropdownFrozen ? 'hidden' : ''}>
+            <Product isDropdownFrozen={isDropdownFrozen} goods={frozen} />
           </div>
         </div>
       )}
@@ -102,11 +54,11 @@ const Cart = () => {
         <div>
           <CartGoodsType isDropdownAmbient={isDropdownAmbient} dropdownAmbient={dropdownAmbient} />
           <div className={isDropdownAmbient ? 'hidden' : ''}>
-            <CartGoods isDropdownAmbient={isDropdownAmbient} goods={ambient} />
+            <Product isDropdownAmbient={isDropdownAmbient} goods={ambient} />
           </div>
         </div>
       )}
-      {!loading && !ambient.length && !frozen.length && <NoGoods />}
+      {!loading && !ambient.length && !frozen.length && !cold.length && <NoGoods />}
     </div>
   );
 

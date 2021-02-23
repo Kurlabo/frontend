@@ -2,12 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectGoods, setItemsNum } from '../../modules/goodsCart';
+import {
+  requestForModificationGoodsAmount,
+  requestServerToDeleteProducInfo,
+  selectGoods,
+} from '../../modules/goodsCart';
 
 const CartGoods = ({ goods }) => {
   const dispatch = useDispatch();
   const itemCount = useSelector(state => state.goodsCart.cart);
-
   return (
     <div>
       {goods &&
@@ -30,11 +33,11 @@ const CartGoods = ({ goods }) => {
               itemCount.filter(item => item.product_id === product_id)[0].select === true
                 ? 'bg-checked-button'
                 : 'bg-check-button'
-            } mr-r-1.6`}
+            } mr-r-2.8`}
             />
-            <Link to="">
+            <Link to={`shop/goods/goods_view/${product_id}`} className="inline-block w-r-42.6">
               <img alt="" src={list_image_url} className="inline-block w-r-6 h-r-7.9 mr-r-1.6" />
-              <span className="inline-block pr-64">{name}</span>
+              <span className="inline-block">{name}</span>
             </Link>
             <div>
               <button
@@ -58,17 +61,23 @@ const CartGoods = ({ goods }) => {
                 +
               </button>
             </div>
-            <div className="pl-20">
+            <div className="w-r-10.3 text-right">
               <span>
                 {itemCount
                   .filter(item => item.product_id === product_id)[0]
                   .productTotalPrices.toLocaleString()}
               </span>
               <span>원</span>
-              <button className="pl-11 text-gray-300 focus:outline-none">
-                <AiOutlineClose />
-              </button>
             </div>
+            <button
+              onClick={() => {
+                console.log(product_id);
+                onClickButton(product_id);
+              }}
+              className="pl-11 text-gray-300 focus:outline-none"
+            >
+              <AiOutlineClose />
+            </button>
           </div>
         ))}
     </div>
@@ -78,8 +87,12 @@ const CartGoods = ({ goods }) => {
     dispatch(selectGoods(id, check));
   }
 
-  function onClickItemCount(id, cnt) {
-    dispatch(setItemsNum(id, cnt));
+  function onClickItemCount(product_id, variation) {
+    dispatch(requestForModificationGoodsAmount(product_id, variation));
+  }
+
+  function onClickButton(product_id) {
+    dispatch(requestServerToDeleteProducInfo(product_id));
   }
 };
 

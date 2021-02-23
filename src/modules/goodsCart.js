@@ -12,12 +12,17 @@ const SET_ITEMS_NUM = 'goodsCart/SET_ITEMS_NUM';
 
 const SELECT_ALL_CHECK_BOX = 'goodsCart/SELECT_ALL_CHECKEX_BOX';
 
+const MODIFY_PRODUCT_CNT_INFO = 'goodsCart/MODIFY_PRODUCT_CNT_INFO';
+
+const DELETE_PRODCUT_INFO = 'goodsCart/DELELTE_PRODCUT_INFO';
+
+// 액션 생성함수
+
 export const setItemsNum = createAction(SET_ITEMS_NUM, (product_id, cnt) => ({
   product_id,
   cnt,
 }));
 
-// 액션 생성함수
 export const addGoodsInfoToCartState = createAction(
   ADD_GOODS_INFO_TO_CART_STATE,
   goodsInfo => goodsInfo,
@@ -34,6 +39,15 @@ export const selectGoods = createAction(SELECT_GOODS, (product_id, select) => ({
 
 export const selectAllCheckBox = createAction(SELECT_ALL_CHECK_BOX, check => check);
 
+export const modifyProductCntInfo = createAction(
+  MODIFY_PRODUCT_CNT_INFO,
+  productInfo => productInfo,
+);
+
+export const deleteProdcutInfo = createAction(DELETE_PRODCUT_INFO, res => res);
+
+// 떵크
+// 상품 수량 변경
 export const getGoodsInfo = () => async dispatch => {
   dispatch(startLoading());
   try {
@@ -44,6 +58,32 @@ export const getGoodsInfo = () => async dispatch => {
     dispatch(failureLoading(e));
   }
   dispatch(finishLoading());
+};
+
+// 상품데이터 받아오기
+export const requestForModificationGoodsAmount = (product_id, variation) => async dispatch => {
+  try {
+    const res = await axios.patch(`http://3.35.221.9:8080/api/goods/goods_cart/${product_id}`, {
+      member_id: 1,
+      product_id,
+      variation,
+    });
+    dispatch(modifyProductCntInfo(res.data));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// 상품데이터 삭제
+export const requestServerToDeleteProducInfo = product_id => async dispatch => {
+  try {
+    const res = await axios.post('http://3.35.221.9:8080/api/goods/goods_cart/delete', {
+      product_id,
+    });
+    dispatch(deleteProdcutInfo(res.data.deleted_product_id));
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 // 초기값
@@ -104,6 +144,26 @@ const goodsCart = handleActions(
         select: payload,
       })),
     }),
+    [MODIFY_PRODUCT_CNT_INFO]: (state, { payload }) => ({
+      ...state,
+      cart: state.cart.map(item =>
+        item.product_id === payload.product_id
+          ? {
+              ...item,
+              cnt: payload.cnt,
+              select: item.select,
+              productTotalPrices: item.cnt * item.original_price,
+            }
+          : item,
+      ),
+    }),
+    [DELETE_PRODCUT_INFO]: (state, { payload }) => {
+      console.log(state.cart.filter(item => item.product_id !== payload));
+      return {
+        ...state,
+        cart: state.cart.filter(item => item.product_id !== payload),
+      };
+    },
   },
   initialize,
 );

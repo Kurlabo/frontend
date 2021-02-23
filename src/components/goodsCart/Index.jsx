@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getGoodsInfo } from '../../modules/goodsCart';
+import React from 'react';
 import Adress from './Adress';
 import Cart from './Cart';
 import Notice from './Notice';

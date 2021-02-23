@@ -1,5 +1,4 @@
 import { Route, Switch } from 'react-router-dom';
-import GoodsCartContainer from './containers/GoodsCartContainer';
 import LoginPage from './pages/LoginPage';
 import FindIdPage from './pages/FindIdPage';
 import FindPasswordPage from './pages/FindPasswordPage';
@@ -12,7 +11,6 @@ import MyInfoPage from './pages/MyInfoPage';
 import MyWishListPage from './pages/MyWishListPage';
 import SignupPage from './pages/SignupPage';
 import Modal from './components/login/Modal';
-import MainContainer from './containers/MainContainer';
 import NotFoundPage from './pages/NotFoundPage';
 import ItemListPage from './pages/ItemListPage';
 import ItemDetail from './components/itemDetail/ItemDetail';
@@ -20,12 +18,14 @@ import SearchLocation from './components/common/SearchLocation';
 import OrderPage from './pages/OrderPage';
 import PayCompletePage from './pages/PayCompletePage';
 import TypeUserInfo from './components/order/TypeUserInfo';
+import MainPage from './pages/MainPage';
+import GoodsCartPage from './pages/GoodsCartPage';
 
 function App() {
   return (
     <Switch>
-      <Route path="/" exact component={MainContainer} />
-      <Route path="/goods_cart" component={GoodsCartContainer} />
+      <Route path="/" exact component={MainPage} />
+      <Route path="/goods_cart" component={GoodsCartPage} />
       <Route path="/shop/account/signin" component={LoginPage} />
       <Route path="/shop/account/signup" component={SignupPage} />
       <Route path="/shop/account/find_id" component={FindIdPage} />
@@ -44,7 +44,6 @@ function App() {
       <Route path="/shop/mypage/mypage_coupon" component={MyCouponPage} />
       <Route path="/shop/member/myinfo" component={MyInfoPage} />
       <Route path="/kakao/destination" component={SearchLocation} />
-      <Route path="/" exact component={MainContainer} />
       <Route component={NotFoundPage} />
     </Switch>
   );
