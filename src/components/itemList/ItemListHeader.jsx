@@ -16,7 +16,7 @@ const ItemListHeader = ({ imgUrl, desc, text, subdatas, id }) => {
           />
           <div className={titleStyle}>{text}</div>
         </div>
-        <ItemNavigation subdatas={subdatas} />
+        <ItemNavigation subdatas={subdatas} id={id} />
       </header>
     </div>
   );

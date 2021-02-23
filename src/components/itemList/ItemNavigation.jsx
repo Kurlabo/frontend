@@ -16,7 +16,7 @@ const ItemNavigation = ({ subdatas, id }) => {
       <nav className="w-p-870">
         <ul className="text-xl ml-2 ">
           {subdatas.map((data, index) => (
-            <ItemNavLink text={data.text} key={data.id + index * 10} />
+            <ItemNavLink text={data.text} key={data.id + index * 13} subid={data.id} id={id} />
           ))}
         </ul>
       </nav>
