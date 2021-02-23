@@ -18,7 +18,7 @@ import CustomerService from './components/customerService/CustomerService';
 import NoticeDetail from './components/customerService/NoticeDetail';
 import Footer from './components/common/Footer';
 import WeekEvent from './components/weekEvent/WeekEvent';
-import Aside from './components/aside/Aside';
+import Sidebar from './components/common/Sidebar';
 import MyOrderViewPage from './pages/MyOrderViewPage';
 import OrderPage from './pages/OrderPage';
 import TypeUserInfo from './components/order/TypeUserInfo';
@@ -29,8 +29,11 @@ import ItemListPage from './pages/ItemListPage';
 function App() {
   return (
     <>
-      <Header />
+      {window.location.pathname !== '/kakao/destination' ? <Header /> : null}
       <Switch>
+        <Route path="/goods_cart" component={GoodsCartContainer} />
+
+        <Route path="/shop/account/modal" component={Modal} />
         <Route path="/shop/account/signin" component={LoginPage} />
         <Route path="/shop/account/signup" component={SignupPage} />
         <Route path="/shop/account/find_id" component={FindIdPage} />
@@ -43,7 +46,6 @@ function App() {
         <Route path="/order/input_reception" exact component={TypeUserInfo} />
         <Route path="/order" component={OrderPage} />
 
-        <Route path="/shop/account/modal" component={Modal} />
         <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />
         <Route
           path="/shop/mypage/mypage_orderview/ordno=:orderNumber"
@@ -59,14 +61,13 @@ function App() {
         <Route path="/shop/mypage/mypage_coupon" component={MyCouponPage} />
         <Route path="/shop/member/myinfo" component={MyInfoPage} />
         <Route path="/shop/member/" component={MyInfoPage} />
-        <Route path="/kakao/destination" component={SearchLocation} />
         <Route path="/" exact component={MainContainer} />
+        <Route path="/kakao/destination" component={SearchLocation} />
         <Route component={NotFoundPage} />
       </Switch>
-      <Aside />
-      <Footer />
+      {window.location.pathname !== '/kakao/destination' ? <Sidebar /> : null}
+      {window.location.pathname !== '/kakao/destination' ? <Footer /> : null}
     </>
   );
 }
-
 export default App;

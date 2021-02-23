@@ -11,15 +11,22 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorPage from './pages/ErrorPage';
 import ReduxThunk from 'redux-thunk';
+import { createBrowserHistory } from 'history';
+import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(ReduxThunk)));
+const history = createBrowserHistory();
+
+const store = createStore(
+  rootReducer(history),
+  composeWithDevTools(applyMiddleware(routerMiddleware(history), ReduxThunk)),
+);
 
 ReactDOM.render(
   <Provider store={store}>
     <ErrorBoundary FallbackComponent={ErrorPage}>
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         <App />
-      </BrowserRouter>
+      </ConnectedRouter>
     </ErrorBoundary>
   </Provider>,
   document.getElementById('root'),

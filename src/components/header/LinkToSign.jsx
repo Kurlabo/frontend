@@ -20,19 +20,19 @@ const LinkToSign = () => {
       <nav>
         <ul className="flex">
           <li className="inline-block text-kp-600">
-            <NavLink to="/" className="px-3">
+            <NavLink to="/shop/account/signup" className="px-3">
               회원가입
             </NavLink>
             <span className="text-gray-300">ㅣ</span>
           </li>
           <li className="inline-block">
-            <NavLink to="/" className="px-3">
+            <NavLink to="/shop/account/signin" className="px-3">
               로그인
             </NavLink>
             <span className="text-gray-300">ㅣ</span>
           </li>
           <li className="inline-block h-8 " onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <NavLink to="/" className="px-3 inline-block">
+            <NavLink to="/shop/customer/board" className="px-3 inline-block">
               고객센터
             </NavLink>
             <GoTriangleDown className="inline-block cursor-pointer" />
