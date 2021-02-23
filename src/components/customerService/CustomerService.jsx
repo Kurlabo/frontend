@@ -6,7 +6,6 @@ import Notice from './Notice';
 
 const CustomerService = () => {
   const [state, setState] = useState('공지사항');
-
   return (
     <div className="flex w-r-105 pt-r-6.5 mx-auto justify-between">
       <NavBar state={state} onClick={clickNav} />
