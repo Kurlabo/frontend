@@ -3,14 +3,17 @@ import { useRef } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { IoChevronUpOutline, IoChevronDownOutline } from 'react-icons/io5';
+import { useSelector } from 'react-redux';
 
 const Aside = () => {
   useEffect(() => {
     window.onscroll = scrollSlider;
   }, []);
+  const recentList = useSelector(state => state.recentItem);
   const aside = useRef();
   const asideLink =
     'block h-12 border-solid border border-gray-400 border-t-0 text-center leading-3';
+  console.log(recentList);
   return (
     <aside
       className="absolute top-r-71 right-12 w-32 transition-all transform -translate-y-1/2 bg-white"
@@ -44,15 +47,27 @@ const Aside = () => {
           </Link>
         </li>
       </ul>
-      <div className="border-gray-400 border-t-1 text-r-1.2">
-        <button className="block w-full h-7 text-center">
-          <IoChevronUpOutline className="inline-block text-gray-300" />
-        </button>
-        <h6 className="text-center leading-3'">최근 본 상품</h6>
-        <button className="block w-full h-7 text-center">
-          <IoChevronDownOutline className="inline-block text-gray-300" />
-        </button>
-      </div>
+      {recentList.length !== 0 && (
+        <div className="border-gray-400 border-t-1 text-r-1.2">
+          <button className="block w-full h-7 text-center">
+            <IoChevronUpOutline className="inline-block text-gray-300" />
+          </button>
+          <h6 className="text-center leading-3'">최근 본 상품</h6>
+          <ul>
+            {recentList.map(item => {
+              <li>
+                <Link to={item.url}>
+                  <img src={item.url} alt="" />
+                  {item.title}
+                </Link>
+              </li>;
+            })}
+          </ul>
+          <button className="block w-full h-7 text-center">
+            <IoChevronDownOutline className="inline-block text-gray-300" />
+          </button>
+        </div>
+      )}
     </aside>
   );
 
