@@ -53,4 +53,4 @@ const GetSupport = ({ history }) => {
   }
 };
 
-export default withRouter(GetSupport);
+export default withRouter(React.memo(GetSupport));
