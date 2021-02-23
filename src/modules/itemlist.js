@@ -8,15 +8,19 @@ const GET_ITEMS_FAIL = 'itemlist/GET_ITEMS_FAIL';
 
 // 액션 생성함수
 export const getItems = createAction(GET_ITEMS);
-export const getItemsSuccess = createAction(GET_ITEMS_SUCCESS, res => res);
+export const getItemsSuccess = createAction(GET_ITEMS_SUCCESS, (res, id, subid) => ({
+  res,
+  id,
+  subid,
+}));
 export const getItemsFail = createAction(GET_ITEMS_FAIL, error => error);
 
 export const getItemsThunk = (id, subid) => async dispatch => {
   try {
     const res = subid
-      ? await axios.get(`http://3.35.221.9:8080/api/goods/goods_list/${subid}`)
-      : await axios.get(`http://3.35.221.9:8080/api/goods/goods_list/${id}`);
-    dispatch(getItemsSuccess(res.data));
+      ? await axios.get(`http://3.35.221.9:8080/api/goods/goods_list?category=${subid}`)
+      : await axios.get(`http://3.35.221.9:8080/api/goods/goods_list?category=${id}`);
+    dispatch(getItemsSuccess(res.data, id, subid));
   } catch (e) {
     dispatch(getItemsFail(e));
   }
@@ -27,14 +31,19 @@ const initialState = {
   loading: true,
   error: '',
   itemList: [],
+  firstParams: '1000',
+  secondParams: '',
 };
 
 // 리듀서
 const itemList = handleActions(
   {
-    [GET_ITEMS_SUCCESS]: (state, action) => {
-      return { ...state, itemList: action.payload };
-    },
+    [GET_ITEMS_SUCCESS]: (state, { payload }) => ({
+      ...state,
+      itemList: payload.res,
+      firstParams: payload.id,
+      secondParams: payload.subid,
+    }),
     [GET_ITEMS_FAIL]: (state, action) => ({ ...state, error: action.payload }),
   },
   initialState,

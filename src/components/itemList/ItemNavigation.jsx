@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
 import DropDownMenu from './DropDownMenu';
 import ItemNavLink from './ItemNavLink';
 export const listStyle =
@@ -7,25 +8,16 @@ export const listStyle =
 const btnStyle =
   'text-xl text-gray-900 pr-5 pb-5 mr-3 border-none text-right inline-block focus:outline-0';
 
-const ItemNavigation = () => {
+const ItemNavigation = ({ subdatas, id }) => {
   const [dropDown, setDropDown] = useState(false);
 
   return (
     <div className="flex justify-between pt-3">
       <nav className="w-p-870">
         <ul className="text-xl ml-2 ">
-          <ItemNavLink />
-          <li className={listStyle}>제철과일</li>
-          <li className={listStyle}>국산과일</li>
-          <li className={listStyle}>수입과일</li>
-          <li className={listStyle}>간편과일</li>
-          <li className={listStyle}>
-            냉동<span>&#183;</span>건과일
-          </li>
-          <li className={listStyle}>견과류</li>
-          <li className={listStyle}>
-            쌀<span>&#183;</span>잡곡
-          </li>
+          {subdatas.map((data, index) => (
+            <ItemNavLink text={data.text} key={data.id + index * 10} />
+          ))}
         </ul>
       </nav>
       <div className="relative">

@@ -13,7 +13,6 @@ import SignupPage from './pages/SignupPage';
 import Modal from './components/login/Modal';
 import MainContainer from './containers/MainContainer';
 import NotFoundPage from './pages/NotFoundPage';
-import ItemListPage from './pages/ItemListPage';
 import SearchLocation from './components/common/SearchLocation';
 import CustomerService from './components/customerService/CustomerService';
 import NoticeDetail from './components/customerService/NoticeDetail';
@@ -25,6 +24,7 @@ import OrderPage from './pages/OrderPage';
 import TypeUserInfo from './components/order/TypeUserInfo';
 import Header from './components/common/Header';
 import ItemDetailPage from './pages/ItemDetailPage';
+import ItemListPage from './pages/ItemListPage';
 
 function App() {
   return (
