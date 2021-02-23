@@ -1,17 +1,17 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { withRouter } from 'react-router';
+import { withRouter, matchPath } from 'react-router';
 import ItemDetail from '../components/itemDetail/ItemDetail';
 import { initCartOption, setProductId } from '../modules/cartAddOption';
 import { getProductInfo, unloadProductInfo } from '../modules/itemDetail';
 
-const ItemDetailContainer = () => {
+const ItemDetailContainer = ({ match }) => {
   const dispatch = useDispatch();
 
   // const { productId } = match.params;
   // productId는 아무래도 스토어에서 가져와야 될것
-  const productId = 1;
+  const productId = match.params.productId;
 
   const { itemDetail, error, loading } = useSelector(({ itemDetail, loading }) => ({
     itemDetail: itemDetail.info,
@@ -21,12 +21,12 @@ const ItemDetailContainer = () => {
 
   useEffect(() => {
     dispatch(getProductInfo(productId));
-    dispatch(setProductId(productId));
+    dispatch(setProductId({ productId }));
     return () => {
       dispatch(unloadProductInfo());
       dispatch(initCartOption());
     };
-  }, [dispatch]);
+  }, [dispatch, productId]);
 
   console.log('데이터:', itemDetail);
 

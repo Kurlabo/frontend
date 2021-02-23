@@ -1,5 +1,8 @@
 import { createAction, handleActions } from 'redux-actions';
-import createRequestSaga, { createRequestActionType } from '../../lib/createRequestSaga';
+import createRequestSaga, {
+  createAddGoodsRequestSaga,
+  createRequestActionType,
+} from '../../lib/createRequestSaga';
 import * as addGoodsToCartAPI from '../../lib/api/productInfo';
 import { takeEvery } from 'redux-saga/effects';
 
@@ -17,7 +20,10 @@ export const postGoodsToCart = createAction(ADD_GOODS_TO_CART, goodsInfo => good
 export const initializeResult = createAction(INITIALIZE_RESULT);
 
 // 사가
-const postGoodsToCartSaga = createRequestSaga(ADD_GOODS_TO_CART, addGoodsToCartAPI.postAddCart);
+const postGoodsToCartSaga = createAddGoodsRequestSaga(
+  ADD_GOODS_TO_CART,
+  addGoodsToCartAPI.postAddCart,
+);
 
 export function* addGoodsToCartSaga() {
   yield takeEvery(ADD_GOODS_TO_CART, postGoodsToCartSaga);
@@ -40,6 +46,7 @@ const addGoodsToCart = handleActions(
       ...state,
       error,
     }),
+    [INITIALIZE_RESULT]: state => initialState,
   },
   initialState,
 );
