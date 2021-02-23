@@ -28,15 +28,15 @@ const ItemCard = ({
               </div>
             )}
           </div>
-          <div className="relative">
-            <button className="absolute -top-32 right-r-2.2 focus:outline-0">
-              <img src="/img/cart.svg" alt="장바구니 이미지" onClick={openModal} />
-            </button>
+          <div>
             <div className="text-gray-900 text-r-2 ">{productName}</div>
             <div className="font-bold text-3xl pt-r-0.8">{originalPrice.toLocaleString()}원</div>
             <div className="text-gray-400 text-xl pt-r-0.8">{shortDesc}</div>
           </div>
         </Link>
+        <button className="absolute top-r-35.5 right-r-2.2 focus:outline-0">
+          <img src="/img/cart.svg" alt="장바구니 이미지" onClick={openModal} />
+        </button>
       </div>
 
       <CartModal
