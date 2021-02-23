@@ -5,12 +5,17 @@ import { Link } from 'react-router-dom';
 import { IoChevronUpOutline, IoChevronDownOutline } from 'react-icons/io5';
 
 const Aside = () => {
+  const pathname = window.location.pathname;
+
   useEffect(() => {
     window.onscroll = scrollSlider;
   }, []);
   const aside = useRef();
   const asideLink =
     'block h-12 border-solid border border-gray-400 border-t-0 text-center leading-3';
+  if (pathname === '/kakao/destination') return null;
+  else if (pathname === '/shop/mypage/desination/modify_form') return null;
+  else if (pathname === '/shop/mypage/desination/modify_form/') return null;
   return (
     <aside
       className="absolute top-510 right-12 w-32 transition-all transform -translate-y-1/2 bg-white"
