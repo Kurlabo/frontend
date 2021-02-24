@@ -25,6 +25,7 @@ import TypeUserInfo from './components/order/TypeUserInfo';
 import Header from './components/common/Header';
 import ItemDetailPage from './pages/ItemDetailPage';
 import ItemListPage from './pages/ItemListPage';
+import GoodsCartContainer from './containers/GoodsCartContainer';
 
 function App() {
   return (
