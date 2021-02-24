@@ -8,6 +8,7 @@ const ItemCardContainer = () => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.itemList.itemList.content);
   const { category } = useParams();
+  console.log(items);
 
   useEffect(() => {
     const categoryArray = category.split('=');
@@ -37,11 +38,14 @@ const ItemCardContainer = () => {
         {items.map((item, idx) => (
           <li key={item.product_id + idx * 10} className="w-1/3 h-r-65">
             <ItemCard
+              product_id={item.product_id}
               imgUrl={item.original_image_url}
               productName={item.name}
               originalPrice={+item.original_price}
               shortDesc={item.short_description}
               stickerImageUrl={item.sticker_image_url}
+              discount_percent={item.discount_percent}
+              discounted_price={+item.discounted_price}
             />
           </li>
         ))}

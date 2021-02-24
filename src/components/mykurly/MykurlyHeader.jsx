@@ -1,6 +1,5 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
-import { MdKeyboardArrowRight } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import { BsChevronRight } from 'react-icons/bs';
 import mykurlybanner from '../../img/mykurlybanner.jpg';
 const li_sm = 'float-left align-middle w-r-19.7 h-r-17.8 bg-white p-12';

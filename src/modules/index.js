@@ -5,6 +5,7 @@ import goodsCart from './goodsCart';
 import itemList from './itemlist';
 import user from './user';
 import notice from './notice';
+import recentItem from './aside';
 import cartAddOption from './cartAddOption';
 import itemDetail, { itemDetailSaga } from './itemDetail';
 import loading from './loading';
@@ -17,6 +18,7 @@ const rootReducer = history =>
     goodsCart,
     user,
     notice,
+    recentItem,
     itemList,
     cartAddOption,
     itemDetail,
