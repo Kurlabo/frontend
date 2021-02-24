@@ -22,6 +22,7 @@ const ItemDetailContainer = ({ match }) => {
   useEffect(() => {
     dispatch(getProductInfo(productId));
     dispatch(setProductId({ productId }));
+    window.scrollTo(0, 0);
     return () => {
       dispatch(unloadProductInfo());
       dispatch(initCartOption());

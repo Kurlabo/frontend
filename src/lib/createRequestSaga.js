@@ -44,7 +44,7 @@ export function createAddGoodsRequestSaga(type, request) {
         type: SUCCESS,
         payload: response.data,
       });
-      yield delay(2000);
+      yield delay(1500);
       yield put({
         type: 'common/INITIALIZE_RESULT',
       });
