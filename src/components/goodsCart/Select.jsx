@@ -1,10 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAllCheckBox } from '../../modules/cart';
+import { selectAllCheckBox } from '../../modules/goodsCart';
 
 const Select = ({ bottom }) => {
   const dispatch = useDispatch();
-  const selectAll = useSelector(state => state.cart.selectAll);
+  const selectAll = useSelector(state => state.goodsCart.selectAll);
+  const GoodsInfo = useSelector(state => state.goodsCart.cart);
+  const selectNum = GoodsInfo.filter(item => item.select).length;
   return (
     <div
       className={
@@ -27,10 +29,10 @@ const Select = ({ bottom }) => {
           selectAll === true ? 'bg-checked-button' : 'bg-check-button'
         } `}
       >
-        전체선택 (0/0)
+        {`전체선택 (${selectNum}/${GoodsInfo.length})`}
       </label>
       <span className="px-8 text-gray-400">|</span>
-      <span className="py-7">선택삭제</span>
+      <span className="py-7 cursor-pointer">선택삭제</span>
     </div>
   );
 

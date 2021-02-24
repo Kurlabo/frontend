@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import cart from './cart';
-import cartGoods from './cartGoods';
+import goodsCart from './goodsCart';
 import itemList from './itemlist';
 import user from './user';
 import notice from './notice';
@@ -14,7 +14,7 @@ import { connectRouter } from 'connected-react-router';
 const rootReducer = history =>
   combineReducers({
     cart,
-    cartGoods,
+    goodsCart,
     user,
     notice,
     itemList,

@@ -67,5 +67,6 @@
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
     "redux-devtools": "^3.7.0"
-  }
+  },
+  "proxy": "http://3.35.221.9:8080"
 }
