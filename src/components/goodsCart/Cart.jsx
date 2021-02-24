@@ -18,7 +18,9 @@ const Cart = () => {
   const isDropdownCold = useSelector(state => state.cart.cold);
 
   const ambient = goods.filter(good => good.packing_type_text === '상온/종이포장');
-  const frozen = goods.filter(good => good.packing_type_text === '냉동/종이포장');
+  const frozen = goods.filter(
+    good => good.packing_type_text === '냉동/종이포장' || good.packing_type_text === '기타',
+  );
   const cold = goods.filter(good => good.packing_type_text === '냉장/종이포장');
 
   useEffect(() => {

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   requestForModificationGoodsAmount,
   requestServerToDeleteProducInfo,
-  selectGoods,
+  CountselectedCheckBox,
 } from '../../modules/goodsCart';
 
 const CartGoods = ({ goods }) => {
@@ -71,7 +71,6 @@ const CartGoods = ({ goods }) => {
             </div>
             <button
               onClick={() => {
-                console.log(product_id);
                 onClickButton(product_id);
               }}
               className="pl-11 text-gray-300 focus:outline-none"
@@ -83,8 +82,9 @@ const CartGoods = ({ goods }) => {
     </div>
   );
 
-  function onClickCheckbox(id, check) {
-    dispatch(selectGoods(id, check));
+  function onClickCheckbox(product_id, check) {
+    console.log(check);
+    dispatch(CountselectedCheckBox(product_id, check));
   }
 
   function onClickItemCount(product_id, variation) {

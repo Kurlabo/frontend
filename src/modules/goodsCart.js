@@ -16,8 +16,9 @@ const MODIFY_PRODUCT_CNT_INFO = 'goodsCart/MODIFY_PRODUCT_CNT_INFO';
 
 const DELETE_PRODCUT_INFO = 'goodsCart/DELELTE_PRODCUT_INFO';
 
-// 액션 생성함수
+const CHANGE_ONLY_SELECT_ALL_STATE = 'goodsCart/CHANGE_ONLY_SELECT_ALL_STATE';
 
+// 액션 생성함수
 export const setItemsNum = createAction(SET_ITEMS_NUM, (product_id, cnt) => ({
   product_id,
   cnt,
@@ -37,7 +38,7 @@ export const selectGoods = createAction(SELECT_GOODS, (product_id, select) => ({
   select,
 }));
 
-export const selectAllCheckBox = createAction(SELECT_ALL_CHECK_BOX, check => check);
+export const selectAllCheckBox = createAction(SELECT_ALL_CHECK_BOX, (check, checkAllBox) => check);
 
 export const modifyProductCntInfo = createAction(
   MODIFY_PRODUCT_CNT_INFO,
@@ -45,6 +46,8 @@ export const modifyProductCntInfo = createAction(
 );
 
 export const deleteProdcutInfo = createAction(DELETE_PRODCUT_INFO, res => res);
+
+export const changeOnlySelectAllState = createAction(CHANGE_ONLY_SELECT_ALL_STATE, check => check);
 
 // 떵크
 // 상품 수량 변경
@@ -86,6 +89,23 @@ export const requestServerToDeleteProducInfo = product_id => async dispatch => {
   }
 };
 
+// 상품별로 모든 체크박스가 체크시에 전체선택버튼 선택되어짐
+export const CountselectedCheckBox = (product_id, check) => async (dispatch, getState) => {
+  try {
+    dispatch(selectGoods(product_id, check));
+    if (
+      getState().goodsCart.cart.length ===
+      getState().goodsCart.cart.filter(item => item.select).length
+    ) {
+      dispatch(changeOnlySelectAllState(true));
+    } else {
+      dispatch(changeOnlySelectAllState(false));
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 // 초기값
 const initialize = {
   loading: true,
@@ -103,7 +123,7 @@ const goodsCart = handleActions(
       cart: payload.map(info => ({
         ...info,
         select: false,
-        productTotalPrices: info.cnt * info.original_price,
+        productTotalPrices: info.cnt * info.discounted_price,
       })),
     }),
     [START_LOADING]: (state, action) => ({
@@ -123,6 +143,7 @@ const goodsCart = handleActions(
       cart: state.cart.map(item =>
         item.product_id === payload.product_id ? { ...item, select: payload.select } : item,
       ),
+      selectAll: state.cart.filter(item => item.select).length === state.cart.length ? true : false,
     }),
     [SET_ITEMS_NUM]: (state, { payload }) => ({
       ...state,
@@ -131,7 +152,7 @@ const goodsCart = handleActions(
           ? {
               ...item,
               cnt: item.cnt + payload.cnt,
-              productTotalPrices: item.original_price * (item.cnt + payload.cnt),
+              productTotalPrices: item.discounted_price * (item.cnt + payload.cnt),
             }
           : item,
       ),
@@ -146,16 +167,17 @@ const goodsCart = handleActions(
     }),
     [MODIFY_PRODUCT_CNT_INFO]: (state, { payload }) => ({
       ...state,
-      cart: state.cart.map(item =>
-        item.product_id === payload.product_id
+      cart: state.cart.map(item => {
+        console.log(`${item.name}`, item.discounted_price);
+        return item.product_id === payload.product_id
           ? {
               ...item,
               cnt: payload.cnt,
               select: item.select,
-              productTotalPrices: item.cnt * item.original_price,
+              productTotalPrices: item.cnt * item.discounted_price,
             }
-          : item,
-      ),
+          : item;
+      }),
     }),
     [DELETE_PRODCUT_INFO]: (state, { payload }) => {
       console.log(state.cart.filter(item => item.product_id !== payload));
@@ -164,6 +186,10 @@ const goodsCart = handleActions(
         cart: state.cart.filter(item => item.product_id !== payload),
       };
     },
+    [CHANGE_ONLY_SELECT_ALL_STATE]: (state, { payload }) => ({
+      ...state,
+      selectAll: payload,
+    }),
   },
   initialize,
 );
