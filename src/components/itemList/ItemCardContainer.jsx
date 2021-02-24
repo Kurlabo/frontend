@@ -6,7 +6,7 @@ import ItemCard from './ItemCard';
 
 const ItemCardContainer = () => {
   const dispatch = useDispatch();
-  const items = useSelector(state => state.itemList.itemList);
+  const items = useSelector(state => state.itemList.itemList.content);
   const { category } = useParams();
 
   useEffect(() => {
