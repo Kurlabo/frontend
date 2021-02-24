@@ -30,7 +30,7 @@ export const getItemsThunk = (id, subid) => async dispatch => {
 const initialState = {
   loading: true,
   error: '',
-  itemList: [],
+  itemList: { content: [] },
   firstParams: '1000',
   secondParams: '',
 };
