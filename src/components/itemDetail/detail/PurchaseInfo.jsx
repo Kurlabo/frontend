@@ -44,6 +44,15 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList }) => {
     dispatch(setCartCount(count - 1));
   }, [count, dispatch]);
 
+  const alexCode = contactant.split('<br />').map(line => {
+    return (
+      <span>
+        {line}
+        <br />
+      </span>
+    );
+  });
+
   return (
     <div className="flex justify-between py-p-18">
       <img className="block w-p-430 h-p-552" src={original_image_url} alt="상품 대표 이미지" />
@@ -91,28 +100,35 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList }) => {
           </p>
         )}
         <div className="mt-8 text-p-14">
-          <dl className="pt-p-18 border-t border-gray-100 flex">
-            <dt className={dtStyle}>판매단위</dt>
-            <dd className="w-p-410">{unit_text}</dd>
-          </dl>
+          {unit_text && (
+            <dl className="pt-p-18 border-t border-gray-100 flex">
+              <dt className={dtStyle}>판매단위</dt>
+              <dd className="w-p-410">{unit_text}</dd>
+            </dl>
+          )}
           {weight && (
             <dl className={dlStyle}>
               <dt className={dtStyle}>중량/용량</dt>
               <dd className="w-p-410">{weight}</dd>
             </dl>
           )}
-          <dl className={dlStyle}>
-            <dt className={dtStyle}>배송구분</dt>
-            <dd className="w-p-410">{delivery_time_type_text}</dd>
-          </dl>
-          <dl className={dlStyle}>
-            <dt className={dtStyle}>포장타입</dt>
-            <dd className="w-p-410">{packing_type_text}</dd>
-          </dl>
+          {delivery_time_type_text && (
+            <dl className={dlStyle}>
+              <dt className={dtStyle}>배송구분</dt>
+              <dd className="w-p-410">{delivery_time_type_text}</dd>
+            </dl>
+          )}
+          {packing_type_text && (
+            <dl className={dlStyle}>
+              <dt className={dtStyle}>포장타입</dt>
+              <dd className="w-p-410">{packing_type_text}</dd>
+            </dl>
+          )}
           {contactant && (
             <dl className={dlStyle}>
               <dt className={`${dtStyle + ' align-middle'}`}>알레르기 정보</dt>
-              <dd className="w-p-410">{contactant}</dd>
+              {/* <dd className="w-p-410" dangerouslySetInnerHTML={{ __html: contactant }}></dd> */}
+              <dd className="w-p-410">{alexCode}</dd>
             </dl>
           )}
           {expiration_date && (
