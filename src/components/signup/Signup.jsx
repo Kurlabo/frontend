@@ -16,7 +16,6 @@ const Signup = ({ signUpStart }) => {
   const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
   const subText = 'text-r-1.2 text-gray-600';
   const submitBtn = 'bg-kp-600 text-white w-96 h-20 rounded-md';
-  const borderBottom = 'border-b border-solid border-kg-400';
 
   const [validId1, setValidId1] = useState(false);
   const [validId2, setValidId2] = useState(false);

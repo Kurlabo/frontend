@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import axios from '../../../node_modules/axios/index';
 import { getNotice } from '../../modules/notice';
 import Pagination from './common/Pagination';
 import BoardSearch from './NoticeBoardSearch';
@@ -12,7 +11,7 @@ const Notice = () => {
 
   useEffect(() => {
     dispatch(getNotice());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="w-r-82">
@@ -32,7 +31,7 @@ const Notice = () => {
         </div>
       </div>
       <ul className="flex flex-col pb-8">
-        {noticeData.map((data, i) => (
+        {noticeData.map(data => (
           <li
             className="flex items-center midd text-r-1.2 text-center justify-between border-gray-200 text-gray-700 border-b"
             onClick={onClick}

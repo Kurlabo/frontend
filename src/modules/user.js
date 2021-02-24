@@ -1,5 +1,4 @@
 import { createAction, handleActions } from 'redux-actions';
-import axios from 'axios';
 import { push } from 'connected-react-router';
 
 // 액션 타입

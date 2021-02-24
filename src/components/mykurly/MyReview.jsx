@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-// import MyKurlyPageNation from './MyKurlyPageNation';
 import MyKurlyHeader from './MyKurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
-import { NavLink, Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 const MyReview = () => {
   return (
     <>
