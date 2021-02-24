@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, withRouter } from 'react-router';
 import { getItemsThunk } from '../../modules/itemlist';
 import ItemCard from './ItemCard';
-import { FaSpinner } from 'react-icons/fa';
 import Loading from '../common/Loading';
 
 const ItemCardContainer = () => {
