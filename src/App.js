@@ -40,7 +40,7 @@ function App() {
         <Route path="/shop/account/find_id" component={FindIdPage} />
         <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
 
-        <Route path="/shop/goods/goods_view" component={ItemDetailPage} />
+        <Route path="/shop/goods/goods_view/:productId" component={ItemDetailPage} />
         <Route path="/shop/goods/item_list/:category" component={ItemListPage} />
         <Route path="/shop/goods/event" component={WeekEvent} />
 

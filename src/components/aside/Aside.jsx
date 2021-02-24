@@ -7,17 +7,18 @@ import { useSelector } from 'react-redux';
 
 const Aside = () => {
   useEffect(() => {
-    window.onscroll = scrollSlider;
+    console.log(asideRef.current.style);
+    // window.onscroll = scrollSlider;
   }, []);
   const recentList = useSelector(state => state.recentItem);
-  const aside = useRef();
+  const asideRef = useRef();
   const asideLink =
     'block h-12 border-solid border border-gray-400 border-t-0 text-center leading-3';
   console.log(recentList);
   return (
     <aside
       className="absolute top-r-71 right-12 w-32 transition-all transform -translate-y-1/2 bg-white"
-      ref={aside}
+      ref={asideRef}
     >
       <div className="mb-2">
         <Link to="/shop/board/view.php?id=notice&amp;no=64">
@@ -75,9 +76,9 @@ const Aside = () => {
 
   function scrollSlider() {
     if (window.scrollY > 410) {
-      aside.current.style.top = `${window.scrollY + window.innerHeight / 2}px`;
+      asideRef.current.style.top = `${window.scrollY + window.innerHeight / 2}px`;
     } else {
-      aside.current.style.top = '710px';
+      asideRef.current.style.top = '710px';
     }
   }
 };
