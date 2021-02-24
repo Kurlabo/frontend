@@ -11,7 +11,6 @@ import MyInfoPage from './pages/MyInfoPage';
 import MyWishListPage from './pages/MyWishListPage';
 import SignupPage from './pages/SignupPage';
 import Modal from './components/login/Modal';
-import MainContainer from './containers/MainContainer';
 import NotFoundPage from './pages/NotFoundPage';
 import SearchLocation from './components/common/SearchLocation';
 import CustomerService from './components/customerService/CustomerService';
@@ -25,16 +24,16 @@ import TypeUserInfo from './components/order/TypeUserInfo';
 import Header from './components/common/Header';
 import ItemDetailPage from './pages/ItemDetailPage';
 import ItemListPage from './pages/ItemListPage';
-import GoodsCartContainer from './containers/GoodsCartContainer';
+import MainPage from './pages/MainPage';
+import GoodsCartPage from './pages/GoodsCartPage';
 import MyReviewRegisterPage from './pages/MyReviewRegisterPage';
-
 function App() {
   return (
     <>
       {window.location.pathname !== '/kakao/destination' ? <Header /> : null}
       <Switch>
-        <Route path="/goods_cart" component={GoodsCartContainer} />
-
+        <Route path="/" exact component={MainPage} />
+        <Route path="/goods_cart" component={GoodsCartPage} />
         <Route path="/shop/account/modal" component={Modal} />
         <Route path="/shop/account/signin" component={LoginPage} />
         <Route path="/shop/account/signup" component={SignupPage} />
@@ -65,7 +64,6 @@ function App() {
         <Route path="/shop/mypage/mypage_coupon" component={MyCouponPage} />
         <Route path="/shop/member/myinfo" component={MyInfoPage} />
         <Route path="/shop/member/" component={MyInfoPage} />
-        <Route path="/" exact component={MainContainer} />
         <Route path="/kakao/destination" component={SearchLocation} />
         <Route component={NotFoundPage} />
       </Switch>
