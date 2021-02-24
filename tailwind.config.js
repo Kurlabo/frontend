@@ -90,6 +90,7 @@ module.exports = {
         'checked-button':
           "url('https://res.kurly.com/mobile/service/common/2006/ico_checkbox_checked.svg')",
         'conversation-btn': 'url(https://res.kurly.com/pc/ico/2011/ico_point_up_18x12.svg)',
+        cartTriangle: 'url(https://res.kurly.com/pc/ico/1903/ico_layer_point_x2.png)',
       }),
       width: {
         formWidth: '64rem',
@@ -236,6 +237,7 @@ module.exports = {
         'r-4.5': '4.5rem',
         'r-4.6': '4.6rem',
         'r-4.8': '4.8rem',
+        'r-5.2': '5.2rem',
         'r-5.5': '5.5rem',
         'r-5.6': '5.6rem',
         'r-5.75': '5.75rem',
@@ -244,6 +246,7 @@ module.exports = {
         'r-7.4': '7.4rem',
         'r-7.9': '7.9rem',
         'r-8.2': '8.2rem',
+        'r-8.8': '8.8rem',
         'r-10.3': '10.3rem',
         'r-11': '11rem',
         'r-11.5': '11.5rem',

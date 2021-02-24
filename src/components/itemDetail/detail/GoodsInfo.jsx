@@ -7,7 +7,8 @@ import ProductQnA from './ProductQnA';
 import InfoTab from './InfoTab';
 import { useCallback } from 'react';
 
-const GoodsInfo = ({ img, name, desc, long_desc, goods_detail_img }) => {
+const GoodsInfo = ({ itemDetail }) => {
+  const { name, detail_context, detail_image_url, short_description, product_img_url } = itemDetail;
   const [state, setState] = useState('상품설명');
 
   const onClick = useCallback(e => {
@@ -17,9 +18,16 @@ const GoodsInfo = ({ img, name, desc, long_desc, goods_detail_img }) => {
   const render = useCallback(() => {
     switch (state) {
       case '상품설명':
-        return <GoodsDesc img={img} name={name} desc={desc} long_desc={long_desc} />;
+        return (
+          <GoodsDesc
+            img={detail_image_url}
+            name={name}
+            desc={short_description}
+            long_desc={detail_context}
+          />
+        );
       case '상품이미지':
-        return <GoodsImg goods_detail_img={goods_detail_img} />;
+        return <GoodsImg goods_detail_img={product_img_url} />;
       case '상세정보':
         return <GoodsDetailInfo name={name} />;
       case '고객후기':
@@ -29,7 +37,7 @@ const GoodsInfo = ({ img, name, desc, long_desc, goods_detail_img }) => {
       default:
         return;
     }
-  }, [desc, goods_detail_img, img, long_desc, name, state]);
+  }, [detail_image_url, name, short_description, detail_context, product_img_url, state]);
 
   return (
     <div className="w-r-101 mt-20 mb-10">

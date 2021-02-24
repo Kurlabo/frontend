@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './modules/index';
+import createSagaMiddleware from 'redux-saga';
+import rootReducer, { rootSaga } from './modules/index';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorPage from './pages/ErrorPage';
@@ -16,14 +16,14 @@ import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
 import { actionStorageMiddleware, createStorageListener } from 'redux-state-sync';
 
 const history = createBrowserHistory();
+const sagaMiddleWare = createSagaMiddleware();
 
-const middlewares = [ReduxThunk, actionStorageMiddleware, routerMiddleware(history)];
 const store = createStore(
   rootReducer(history),
-  composeWithDevTools(applyMiddleware(...middlewares)),
+  composeWithDevTools(applyMiddleware(routerMiddleware(history), ReduxThunk, sagaMiddleWare)),
 );
 
-createStorageListener(store);
+sagaMiddleWare.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
