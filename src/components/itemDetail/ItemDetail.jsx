@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import RelatedProduct from './detail/RelatedProduct';
 import PurchaseInfo from './detail/PurchaseInfo';
 import GoodsInfo from './detail/GoodsInfo';
@@ -15,6 +15,7 @@ import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
 
 const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
   const dispatch = useDispatch();
+  let onPopUp = useRef(false);
 
   const isLogin = true;
   const { count } = useSelector(state => state.cartAddOption);
@@ -31,6 +32,7 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
   }, []);
 
   const onClickAddCart = useCallback(() => {
+    if (onPopUp.current) return;
     if (count < 1) {
       dispatch(setModuleMsg('수량은 반드시 1 이상이어야 합니다.'));
       return;
@@ -39,9 +41,13 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
       console.log('로그인 창으로 이동!!!');
       return;
     }
+    onPopUp.current = true;
     // 장바구니에 post
     dispatch(postGoodsToCart({ product_id: productId, cnt: count }));
-  }, [count, dispatch, isLogin, productId]);
+    setTimeout(() => {
+      onPopUp.current = false;
+    }, 3000);
+  }, [count, dispatch, isLogin, productId, onPopUp]);
 
   const closeModal = useCallback(() => {
     dispatch(setModuleMsgEmpty());

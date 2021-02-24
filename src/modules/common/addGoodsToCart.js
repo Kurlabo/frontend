@@ -1,8 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
-import createRequestSaga, {
-  createAddGoodsRequestSaga,
-  createRequestActionType,
-} from '../../lib/createRequestSaga';
+import { createAddGoodsRequestSaga, createRequestActionType } from '../../lib/createRequestSaga';
 import * as addGoodsToCartAPI from '../../lib/api/productInfo';
 import { takeEvery } from 'redux-saga/effects';
 
