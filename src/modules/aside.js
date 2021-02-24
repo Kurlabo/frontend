@@ -17,11 +17,11 @@ const initialize = [];
 
 // 리듀서
 
-const recent = handleActions(
+const recentItem = handleActions(
   {
     [SET_RECENT]: (state, action) => [...state, action.payload],
   },
   initialize,
 );
 
-export default recent;
+export default recentItem;

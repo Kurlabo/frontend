@@ -4,7 +4,6 @@ import { useRef } from 'react';
 const BigCarousel = () => {
   let isStop = false;
   let onAnimate = false;
-  // let cur = 1;
   let cur = useRef(1);
   const containerRef = useRef(null);
 
@@ -31,7 +30,7 @@ const BigCarousel = () => {
         containerRef.current.style.transform = `translateX(-${cur.current - 1}00%)`;
         --cur.current;
       }
-    }, 100000);
+    }, 3000);
     return () => {
       console.log('clearInterval');
       clearInterval(timerId);

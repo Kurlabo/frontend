@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import MyKurlyHeader from './MyKurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BiPencil } from 'react-icons/bi';
 import RoundCheckBox from './RoundCheckBox';
-import MyKurlyPageNation from './MyKurlyPageNation';
 const MyDestinationList = () => {
   return (
     <>

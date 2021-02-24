@@ -232,9 +232,6 @@ const MyInfoForm = () => {
       e.target.value = value.substring(0, value.length - 1);
     }
   }
-  function openModal() {
-    setSignup(true);
-  }
   function closeModal() {
     setSignup(false);
   }
