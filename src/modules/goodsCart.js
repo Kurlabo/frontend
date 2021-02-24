@@ -167,25 +167,21 @@ const goodsCart = handleActions(
     }),
     [MODIFY_PRODUCT_CNT_INFO]: (state, { payload }) => ({
       ...state,
-      cart: state.cart.map(item => {
-        console.log(`${item.name}`, item.discounted_price);
-        return item.product_id === payload.product_id
+      cart: state.cart.map(item =>
+        item.product_id === payload.product_id
           ? {
               ...item,
               cnt: payload.cnt,
               select: item.select,
               productTotalPrices: item.cnt * item.discounted_price,
             }
-          : item;
-      }),
+          : item,
+      ),
     }),
-    [DELETE_PRODCUT_INFO]: (state, { payload }) => {
-      console.log(state.cart.filter(item => item.product_id !== payload));
-      return {
-        ...state,
-        cart: state.cart.filter(item => item.product_id !== payload),
-      };
-    },
+    [DELETE_PRODCUT_INFO]: (state, { payload }) => ({
+      ...state,
+      cart: state.cart.filter(item => item.product_id !== payload),
+    }),
     [CHANGE_ONLY_SELECT_ALL_STATE]: (state, { payload }) => ({
       ...state,
       selectAll: payload,

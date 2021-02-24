@@ -32,7 +32,7 @@ const Select = ({ bottom }) => {
         {`전체선택 (${selectNum}/${GoodsInfo.length})`}
       </label>
       <span className="px-8 text-gray-400">|</span>
-      <span className="py-7">선택삭제</span>
+      <span className="py-7 cursor-pointer">선택삭제</span>
     </div>
   );
 
