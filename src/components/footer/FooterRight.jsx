@@ -68,9 +68,9 @@ const FooterRight = () => {
         </Link>
         <br />
         팩스: 070 - 7500 - 6098 <span className="bar">I</span> 이메일 :{' '}
-        <a href="mailto:help@kurlycorp.com" className="text-kp-600">
+        <Link href="mailto:help@kurlycorp.com" className="text-kp-600">
           help@kurlycorp.com
-        </a>
+        </Link>
         <em className="block pt-6 text-r-1 not-italic">© KURLY CORP. ALL RIGHTS RESERVED</em>
       </div>
       <ul className="flex pt-6">

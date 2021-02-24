@@ -1,19 +1,8 @@
 import React from 'react';
-import Header from '../components/common/Header';
-import GotopBtn from '../components/itemList/GotopBtn';
-import ItemCardContainer from '../components/itemList/ItemCardContainer';
-import ItemListHeader from '../components/itemList/ItemListHeader';
-import PageContainer from '../components/itemList/PageContainer';
+import ItemListWrapper from '../components/itemList/ItemListWrapper';
 
 const ItemListPage = () => {
-  return (
-    <div className="pb-12 flex flex-col justify-items-center items-center">
-      <ItemListHeader />
-      <ItemCardContainer />
-      <PageContainer />
-      <GotopBtn />
-    </div>
-  );
+  return <ItemListWrapper />;
 };
 
 export default ItemListPage;

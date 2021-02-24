@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { VscClose } from 'react-icons/vsc';
 
 // 모달창 스타일 정의
-const modalStyles = {
+const quantityModal = {
   content: {
     top: '50%',
     left: '50%',
@@ -25,7 +25,7 @@ const modalStyles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(32, 32, 32, 0.75)',
+    backgroundColor: 'rgba(32, 32, 32, 0.5)',
     zIndex: 999,
   },
 };
@@ -35,11 +35,11 @@ const noticeMsgWrapper =
   'text-1.4 text-kp-600 flex justify-between pb-4 font-medium border-b border-gray-300 items-center';
 const confirmBtn = 'mx-auto w-60 h-r-4.4 bg-kp-600 text-white text-1.3 text-center focus:outline-0';
 
-const AgreeModal = ({ isopen, closeModal }) => {
+const CheckQuantityModal = ({ checkQuantity, close }) => {
   return (
     <Modal
-      isOpen={isopen}
-      style={modalStyles}
+      isOpen={checkQuantity}
+      style={quantityModal}
       contentLabel="결제진행동의"
       ariaHideApp={false}
       shouldCloseOnOverlayClick={false}
@@ -48,16 +48,16 @@ const AgreeModal = ({ isopen, closeModal }) => {
         <div className="px-8 pt-8">
           <div className={noticeMsgWrapper}>
             <p>알림메세지</p>
-            <button className="focus:outline-0" onClick={closeModal}>
+            <button className="focus:outline-0" onClick={close}>
               <VscClose className="text-6xl text-gray-300" />
             </button>
           </div>
           <p className="text-center text-1.3 text-gray-600 my-20">
-            결제 진행을 위해 결제 진행 필수 동의에 체크해주세요.
+            수량은 반드시 1 이상이어야 합니다.
           </p>
         </div>
         <div className=" w-full py-12 flex items-center bg-kg-500">
-          <button className={confirmBtn} onClick={closeModal}>
+          <button className={confirmBtn} onClick={close}>
             확인
           </button>
         </div>
@@ -66,4 +66,4 @@ const AgreeModal = ({ isopen, closeModal }) => {
   );
 };
 
-export default AgreeModal;
+export default CheckQuantityModal;

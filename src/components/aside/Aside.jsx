@@ -55,12 +55,14 @@ const Aside = () => {
           <h6 className="text-center leading-3'">최근 본 상품</h6>
           <ul>
             {recentList.map(item => {
-              <li>
-                <Link to={item.url}>
-                  <img src={item.url} alt="" />
-                  {item.title}
-                </Link>
-              </li>;
+              return (
+                <li key={item.url}>
+                  <Link to={item.url}>
+                    <img src={item.url} alt="" />
+                    {item.title}
+                  </Link>
+                </li>
+              );
             })}
           </ul>
           <button className="block w-full h-7 text-center">

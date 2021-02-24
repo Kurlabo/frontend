@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import cart from './cart';
 import cartGoods from './cartGoods';
+import itemList from './itemlist';
 import user from './user';
 import notice from './notice';
 import recentItem from './aside';
@@ -13,6 +14,7 @@ const rootReducer = history =>
     user,
     notice,
     recentItem,
+    itemList,
     router: connectRouter(history),
   });
 
