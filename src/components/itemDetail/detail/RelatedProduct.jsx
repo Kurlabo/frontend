@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react';
+import { useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 const btnStyle = 'w-12 text-gray-700 cursor-pointer absolute inset-y-1/2';
 let onAnimate = false;
@@ -18,10 +20,12 @@ const RelatedProduct = ({ relatedProducts }) => {
     ...relatedProducts,
     ...relatedProducts.slice(0, 5),
   ];
+
   useEffect(() => {
     containerRef.current.style.transform = 'translateX(-' + 950 + 'px)';
   }, [relatedProducts]);
-  const slideNext = () => {
+
+  const slideNext = useCallback(() => {
     if (onAnimate) return;
     onAnimate = true;
     if (curIndex <= 3) {
@@ -29,8 +33,6 @@ const RelatedProduct = ({ relatedProducts }) => {
       containerRef.current.style.transform = 'translateX(-' + 950 * (curIndex + 2) + 'px)';
       ++curIndex;
     }
-    console.log('curIndex', curIndex);
-    console.log('translate', 950 * (curIndex + 1));
     if (curIndex === 3) {
       setTimeout(() => {
         containerRef.current.style.transition = 'all 0s';
@@ -50,8 +52,9 @@ const RelatedProduct = ({ relatedProducts }) => {
     setTimeout(() => {
       onAnimate = false;
     }, 500);
-  };
-  const slidePrev = () => {
+  }, []);
+
+  const slidePrev = useCallback(() => {
     if (onAnimate) return;
     if (curIndex >= 0) {
       onAnimate = true;
@@ -70,7 +73,8 @@ const RelatedProduct = ({ relatedProducts }) => {
     setTimeout(() => {
       onAnimate = false;
     }, 500);
-  };
+  }, []);
+
   return (
     <div>
       <div className="w-8 h-2 bg-gray-800" />
@@ -100,20 +104,23 @@ const RelatedProduct = ({ relatedProducts }) => {
           <ul className="absolute w-per-500" ref={containerRef}>
             {carouselArr.map((product, i) => {
               return (
-                <li
-                  className="cursor-pointer float-left w-p-180 h-p-320 mr-4 border border-gray-300"
-                  key={product.no + i}
-                >
-                  <div className="h-p-230">
-                    <img src={product.img} alt="연관 상품 이미지" />
-                  </div>
-                  <div className="p-4">
-                    <NameBox className="text-p-14 text-gray-800 h-14 leading-7">
-                      {product.name}
-                    </NameBox>
-                    <p className="text-p-14">{(+product.price).toLocaleString()}원</p>
-                  </div>
-                </li>
+                <Link to={`/shop/goods/goods_view/${product.product_id}`}>
+                  <li
+                    className="cursor-pointer float-left w-p-180 h-p-320 mr-4 border border-gray-300"
+                    id={product.product_id}
+                    key={product.product_id * i}
+                  >
+                    <div className="h-p-230">
+                      <img className="w-full" src={product.name} alt="연관 상품 이미지" />
+                    </div>
+                    <div className="p-4">
+                      <NameBox className="text-p-14 text-gray-800 h-14 leading-7">
+                        {product['list_image_url']}
+                      </NameBox>
+                      <p className="text-p-14">{(+product['original_price']).toLocaleString()}원</p>
+                    </div>
+                  </li>
+                </Link>
               );
             })}
           </ul>
@@ -122,4 +129,4 @@ const RelatedProduct = ({ relatedProducts }) => {
     </div>
   );
 };
-export default RelatedProduct;
+export default React.memo(RelatedProduct);

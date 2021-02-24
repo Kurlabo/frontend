@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { useCallback } from 'react';
 
 const QnAContent = ({ post }) => {
   const { no, title, writer, date, content } = post;
 
   const [hidden, setHidden] = useState(true);
+
+  const onClick = useCallback(() => {
+    setHidden(hidden => !hidden);
+  }, []);
 
   return (
     <>
@@ -18,17 +23,14 @@ const QnAContent = ({ post }) => {
       </div>
       <div
         className={
-          'px-4 py-8 text-1.2 border-b border-gray-300 overflow-hidden ' + (hidden ? 'hidden' : '')
+          'px-4 py-8 text-r-1.2 border-b border-gray-300 overflow-hidden ' +
+          (hidden ? 'hidden' : '')
         }
       >
         <p className="pl-6 text-gray-700">{content}</p>
       </div>
     </>
   );
-
-  function onClick() {
-    setHidden(hidden => !hidden);
-  }
 };
 
-export default QnAContent;
+export default React.memo(QnAContent);

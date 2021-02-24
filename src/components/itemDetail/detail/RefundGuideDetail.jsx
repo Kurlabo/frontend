@@ -69,4 +69,4 @@ const OrderCancelGuideDetail = ({ className }) => {
     </div>
   );
 };
-export default OrderCancelGuideDetail;
+export default React.memo(OrderCancelGuideDetail);

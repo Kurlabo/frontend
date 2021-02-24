@@ -11,7 +11,14 @@ const subText = 'text-r-1.2 text-gray-600';
 const CheckBox = forwardRef(({ id, state, onChange, children, sub = false }, ref) => {
   return (
     <div className={`${sub ? 'inline-block py-0' : 'py-4'}`}>
-      <input type="checkBox" id={id} className="hidden" onChange={onChange} ref={ref} />
+      <input
+        type="checkBox"
+        id={id}
+        className="hidden"
+        onChange={onChange}
+        ref={ref}
+        checked={state}
+      />
       <label htmlFor={id} style={radioLabel} className={id === 'sns' ? 'mr-32' : ''}>
         {state ? (
           <IoIosCheckmarkCircle className={formRadioIcon} />

@@ -36,4 +36,4 @@ const GoodsInfoTable = ({ name }) => {
   );
 };
 
-export default GoodsInfoTable;
+export default React.memo(GoodsInfoTable);

@@ -4,12 +4,12 @@ const regTitle = 'font-bold text-left align-top pt-7 ';
 const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
 
 const FormInput = forwardRef(
-  ({ name, type = 'text', onChange, onFocus, children, placeholder }, ref) => {
+  ({ name, type = 'text', onChange, onFocus, children, placeholder }, ref, info) => {
     return (
       <>
         <th className={regTitle}>
           {children}
-          <span className="text-formStar">*</span>
+          {info ? <span className="text-formStar">*</span> : <></>}
         </th>
         <td className="py-4">
           <input

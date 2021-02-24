@@ -2,25 +2,34 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import rootReducer from './modules/index';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootReducer, { rootSaga } from './modules/index';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorPage from './pages/ErrorPage';
 import ReduxThunk from 'redux-thunk';
-import { applyMiddleware } from '../node_modules/redux';
+import { createBrowserHistory } from 'history';
+import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(ReduxThunk)));
+const history = createBrowserHistory();
+const sagaMiddleWare = createSagaMiddleware();
+
+const store = createStore(
+  rootReducer(history),
+  composeWithDevTools(applyMiddleware(routerMiddleware(history), ReduxThunk, sagaMiddleWare)),
+);
+
+sagaMiddleWare.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
     <ErrorBoundary FallbackComponent={ErrorPage}>
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         <App />
-      </BrowserRouter>
+      </ConnectedRouter>
     </ErrorBoundary>
   </Provider>,
   document.getElementById('root'),

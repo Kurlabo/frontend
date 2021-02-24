@@ -39,4 +39,4 @@ const RefundGuide = ({ onClick, isClose }) => {
   );
 };
 
-export default RefundGuide;
+export default React.memo(RefundGuide);

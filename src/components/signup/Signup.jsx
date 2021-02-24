@@ -7,14 +7,16 @@ import InputDate from './InputDate';
 import InputGender from './InputGender';
 import PassInput from './PassInput';
 import SignupButton from './SignupButton';
+import SignupModal from './SignupModal';
 
-const Signup = () => {
-  const formTitle = 'pt-28 font-black text-5xl text-center';
-  const regForm = 'text-r-1.4';
+const Signup = ({ signUpStart }) => {
+  const formTitle = 'pt-28 font-bold text-5xl text-center';
+  const regForm = 'text-kg-400 text-r-1.4';
   const regTitle = 'font-bold text-left align-top pt-7 ';
   const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
   const subText = 'text-r-1.2 text-gray-600';
   const submitBtn = 'bg-kp-600 text-white w-96 h-20 rounded-md';
+  const borderBottom = 'border-b border-solid border-kg-400';
 
   const [validId1, setValidId1] = useState(false);
   const [validId2, setValidId2] = useState(false);
@@ -23,7 +25,7 @@ const Signup = () => {
   const [validPass3, setValidPass3] = useState(false);
   const [validRePass, setValidRePass] = useState(false);
 
-  const [gender, setGender] = useState(false);
+  const [gender, setGender] = useState('none');
 
   const [allagree, setAllAgree] = useState(false);
   const [agree1, setAgree1] = useState(false);
@@ -32,6 +34,9 @@ const Signup = () => {
   const [sns, setSns] = useState(false);
   const [email, setEmail] = useState(false);
   const [age, setAge] = useState(false);
+
+  const [signup, setSignup] = useState(false);
+  const [modalValue, setModalValue] = useState('');
 
   const formRef = useRef();
   const emailRef = useRef();
@@ -48,11 +53,13 @@ const Signup = () => {
   return (
     <div className="w-r-64 ml-auto mr-auto pb-48">
       <h1 className={formTitle}>회원가입</h1>
-      <p className="text-right pt-9 pb-4 ">
+      <p className="text-right pt-9 pb-4 pb- ">
         <span className="text-formStar">*</span>
         필수입력사항
       </p>
-      <form className={regForm} onSubmit={onSubmit} ref={formRef}>
+      <form className={regForm} onSubmit={onSubmit} ref={formRef} autoComplete="off">
+        <input style={{ display: 'none' }} aria-hidden="true" />
+        <input type="password" style={{ display: 'none' }} aria-hidden="true" />
         <table className="ml-auto mr-auto">
           <colgroup>
             <col width="160px" />
@@ -170,7 +177,7 @@ const Signup = () => {
                 >
                   개인정보처리방침 동의<span className="sub">(필수)</span>
                 </CheckBox>
-                <CheckBox id="info" state={info} ref={infoRef} onChange={() => setInfo(!info)}>
+                <CheckBox id="info" state={info} ref={infoRef} onChange={onSnsAll}>
                   무료배송, 할인쿠폰 등 혜택/정보 수신 동의<span className="sub">(선택))</span>
                 </CheckBox>
                 <div className="pl-14">
@@ -206,7 +213,7 @@ const Signup = () => {
               <td></td>
             </tr>
             <tr>
-              <td colSpan="3" className="text-center pt-16">
+              <td colSpan="3" className="text-center pt-16 w-">
                 <button type="submit" className={submitBtn}>
                   가입하기
                 </button>
@@ -215,13 +222,12 @@ const Signup = () => {
           </tbody>
         </table>
       </form>
+      <SignupModal modalIsOpen={signup} closeModal={closeModal} value={modalValue} />
     </div>
   );
-
   function clickButton(params) {
     console.log(1);
   }
-
   function onChangeAll(e) {
     setAllAgree(e.target.checked);
     [agree1Ref, agree2Ref, infoRef, snsRef, emailRef2, ageRef].forEach((ref, i) => {
@@ -230,22 +236,50 @@ const Signup = () => {
     });
   }
 
+  function onSnsAll(e) {
+    setInfo(!info);
+    setSns(!info);
+    setEmail(!info);
+  }
+
   function onSubmit(e) {
     e.preventDefault();
-    const valid = validId1 && validId2 && validPass1 && validPass2 && validPass3 && validRePass;
-    const valid2 = agree1 && agree2 && age;
-    if (!valid && !valid2) return false;
+    const valid = [validId1, validPass1, validPass2, validPass3, validRePass, agree1, agree2, age];
     const newUser = { date_of_birth: '' };
     const formData = new FormData(formRef.current);
     for (let [key, value] of formData) {
-      if (!value) return false;
+      if (!value) {
+        setSignup(true);
+        setModalValue(key);
+        return false;
+      }
       if (key === 'birthY' || key === 'birthM' || key === 'birthD')
         newUser['date_of_birth'] += value;
       else newUser[key] = value;
     }
-    console.log(newUser);
+    for (let i = 0; i < valid.length; i++) {
+      if (!valid[i]) {
+        if (i < 2) {
+          setSignup(true);
+          setModalValue('아이디를 제대로 입력해 주세요');
+        } else if (i >= 2 && i < 5) {
+          setSignup(true);
+          setModalValue('비밀번호를 제대로 입력해 주세요');
+        } else if (i === 5) {
+          setSignup(true);
+          setModalValue('동일한 비밀번호 입력해 주세요');
+        } else if (i > 5 && i < 8) {
+          setSignup(true);
+          setModalValue('필수사항을 체크해 주세요');
+        } else if (i === 8) {
+          setSignup(true);
+          setModalValue('14세 이상 항목을 체크해 주세요');
+        }
+      }
+    }
+    signUpStart(newUser);
+    // console.log(newUser);
   }
-
   function checkPhone(e) {
     const { value } = e.target;
     const lastChar = value.slice(-1);
@@ -261,6 +295,9 @@ const Signup = () => {
       e.target.value = value.substring(0, value.length - 1);
     }
   }
-};
 
+  function closeModal() {
+    setSignup(false);
+  }
+};
 export default Signup;
