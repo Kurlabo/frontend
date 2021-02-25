@@ -141,8 +141,10 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList }) => {
             <dl className={dlStyle}>
               <dt className={dtStyle}>안내사항</dt>
               <div>
-                {guides.map(guide => (
-                  <dd className="w-p-410">- {guide}</dd>
+                {guides.map((guide, i) => (
+                  <dd key={i} className="w-p-410">
+                    - {guide}
+                  </dd>
                 ))}
               </div>
             </dl>
