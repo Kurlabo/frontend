@@ -15,8 +15,8 @@ const mainTextWrap = 'font-medium text-p-24 pt-16 pb-4 text-center';
 const subTextWrap = 'text-left w-full text-gray-400 text-1.2';
 
 const SearchLocation = () => {
-  const address = useSelector(state => state.location.address);
-  console.log(address);
+  // const address = useSelector(state => state.location.address);
+  const address = localStorage.getItem('address');
 
   return (
     <div className={container}>
@@ -29,7 +29,7 @@ const SearchLocation = () => {
       </p>
       <div className="w-full text-1.4">
         <div className="flex">
-          <input type="text" className={searchInput} />
+          <input type="text" className={searchInput} value={address} />
           <button className={research}>
             <BiSearch className="inline-block mr-2" />
             재검색

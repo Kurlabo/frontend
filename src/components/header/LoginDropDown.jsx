@@ -40,7 +40,8 @@ const LoginDropDown = () => {
         console.log(2);
 
         const addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
-        dispatch(getAddress(addr));
+        localStorage.setItem('address', addr);
+        // dispatch(getAddress(addr));
 
         window.open(
           '/kakao/destination',
