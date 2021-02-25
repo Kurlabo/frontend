@@ -137,7 +137,7 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList }) => {
               <dd className="w-p-410">{expiration_date}</dd>
             </dl>
           )}
-          {guides && guides.length > 0 && (
+          {guides && guides.length > 0 && guides[0].length > 0 && (
             <dl className={dlStyle}>
               <dt className={dtStyle}>안내사항</dt>
               <div>
