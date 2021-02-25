@@ -19,7 +19,7 @@ const ItemCard = ({
   return (
     <>
       <div className="pt-10 pl-14 relative cursor-pointer mb-52">
-        <Link to={`shop/goods/goods_view/${product_id}`}>
+        <Link to={`/shop/goods/goods_view/${product_id}`}>
           <div className="overflow-hidden mb-6">
             <img src={imgUrl} alt="avocado" className={imgStyle} />
             {stickerImageUrl === 'None' ? (

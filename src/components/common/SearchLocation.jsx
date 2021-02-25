@@ -1,6 +1,5 @@
 import React from 'react';
 import { BiSearch } from 'react-icons/bi';
-import { useSelector } from 'react-redux';
 
 const container = 'flex flex-col justify-center items-center font-body px-12';
 const searchInput =
@@ -14,14 +13,16 @@ const research =
 const mainTextWrap = 'font-medium text-p-24 pt-16 pb-4 text-center';
 const subTextWrap = 'text-left w-full text-gray-400 text-1.2';
 
-const SearchLocation = () => {
-  const address = useSelector(state => state.location.address);
-  console.log(address);
+/*global daum*/
+
+const SearchLocation = ({ history }) => {
+  const address = sessionStorage.getItem('address');
+  const buildingName = sessionStorage.getItem('buildingName');
 
   return (
     <div className={container}>
       <p className={mainTextWrap}>
-        <span className="text-kp-600 mr-2">{address}배송가능</span>
+        <span className="text-kp-600 mr-2">배송가능</span>
         <span>지역입니다.</span>
         <span className="block text-gray-400 text-p-16 mt-3 mb-9">
           매일 아침 문 앞까지 신선함을 전해드려요.
@@ -29,9 +30,18 @@ const SearchLocation = () => {
       </p>
       <div className="w-full text-1.4">
         <div className="flex">
-          <input type="text" className={searchInput} />
-          <button className={research}>
-            <BiSearch className="inline-block mr-2" />
+          <input
+            type="text"
+            className={searchInput}
+            value={`${address} ${buildingName && '(' + buildingName + ')'}`}
+          />
+          <button
+            className={research}
+            onClick={() => {
+              history.push();
+            }}
+          >
+            <BiSearch className="inline-block mr-2 focus:outline-0" />
             재검색
           </button>
         </div>
@@ -45,10 +55,15 @@ const SearchLocation = () => {
         <p>로그인 할 경우, 회원님의 배송지 목록에 추가됩니다.</p>
       </div>
       <form className="w-full">
-        <button className={saveBtn}>저장</button>
+        <button className={saveBtn} onClick={onClose}>
+          저장
+        </button>
       </form>
     </div>
   );
+  function onClose() {
+    window.close();
+  }
 };
 
 export default SearchLocation;
