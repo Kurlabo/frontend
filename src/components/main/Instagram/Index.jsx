@@ -7,7 +7,7 @@ import { getInstagramInfo } from '../../../modules/instagram';
 
 const Instagram = () => {
   const dispatch = useDispatch();
-  const instagram = useSelector(state => state.instagram);
+  const instagram = useSelector(state => state.instagram.instaSrcDto);
 
   const imgArr = [];
 
@@ -17,7 +17,7 @@ const Instagram = () => {
   const prevButtonRef = useRef(null);
   const nextButtonRef = useRef(null);
 
-  if (instagram.thumbnail_img_list.length !== 0) {
+  if (instagram !== undefined) {
     for (let i = 0; i < Math.ceil(instagram.thumbnail_img_list.length / 6); i++) {
       imgArr.push([]);
     }
