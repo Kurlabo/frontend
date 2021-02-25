@@ -1,15 +1,5 @@
-const plugin = require('tailwindcss/plugin');
-
-const focusedSiblingPlugin = plugin(function ({ addVariant, e }) {
-  addVariant('focused-sibling', ({ container }) => {
-    container.walkRules(rule => {
-      rule.selector = `:checked + .focused-sibling\\:${rule.selector.slice(1)}`;
-    });
-  });
-});
-
 module.exports = {
-  purge: [],
+  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -341,8 +331,6 @@ module.exports = {
       },
     },
   },
-  // 포커스시 형제요소중 fucsed-sibling이 있는 클래스 요소클릭
-  plugins: [focusedSiblingPlugin],
   variants: {
     extend: {
       borderWidth: ['last'],
@@ -354,4 +342,5 @@ module.exports = {
       display: ['focused-sibling'],
     },
   },
+  plugins: [],
 };
