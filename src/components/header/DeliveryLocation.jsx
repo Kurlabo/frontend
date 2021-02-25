@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { loginWrapper } from './LoginDropDown';
 
@@ -10,14 +10,14 @@ const locationBtn =
   'bg-white text-kp-600 flex border border-kp-600 w-full justify-center py-4 rounded-md focus:outline-0';
 
 const DeliveryLocation = () => {
-  let addr = localStorage.getItem('address');
-  let buildingName = localStorage.getItem('buildingName');
+  let addr = sessionStorage.getItem('address');
+  let buildingName = sessionStorage.getItem('buildingName');
 
   return (
     <div>
       <div className={loginWrapper}>
         <div className="font-medium mb-2 leading-9">
-          {addr}({buildingName})
+          {`${addr} ${buildingName && '(' + buildingName + ')'}`}
         </div>
         <div className="text-1.2 mt-7 ">
           <p className="pt-r-0.4 text-r-1.4 text-kp-600 font-medium mb-5">배송 가능</p>
@@ -39,8 +39,8 @@ const DeliveryLocation = () => {
         const buildingName = data.buildingName ? data.buildingName : '';
 
         // localStorage에 주소 값 저장
-        localStorage.setItem('address', addr);
-        localStorage.setItem('buildingName', buildingName);
+        sessionStorage.setItem('address', addr);
+        sessionStorage.setItem('buildingName', buildingName);
 
         window.open(
           '/kakao/destination',

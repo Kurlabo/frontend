@@ -41,8 +41,8 @@ const LoginDropDown = () => {
         const buildingName = data.buildingName ? data.buildingName : '';
 
         // localStorage에 주소 값 저장
-        localStorage.setItem('address', addr);
-        localStorage.setItem('buildingName', buildingName);
+        sessionStorage.setItem('address', addr);
+        sessionStorage.setItem('buildingName', buildingName);
 
         window.open(
           '/kakao/destination',

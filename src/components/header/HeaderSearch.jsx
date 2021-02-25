@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { GrLocation } from 'react-icons/gr';
 import { FiShoppingCart } from 'react-icons/fi';
 import { BiSearch } from 'react-icons/bi';
@@ -19,8 +19,14 @@ const dropDownStyle =
 const HeaderSearch = () => {
   const [dropDown, setDropDown] = useState(false);
   const [search, setSearch] = useState({ search: '', toggle: false });
+  const [location, setLocation] = useState(sessionStorage.getItem('address'));
+
   // input Ref
   const searchRef = useRef();
+
+  useEffect(() => {
+    setLocation(sessionStorage.getItem('address'));
+  }, [sessionStorage.getItem('address')]);
 
   return (
     <div className="flex ">
@@ -48,16 +54,19 @@ const HeaderSearch = () => {
           onMouseLeave={onMouseLeave}
         >
           <GrLocation className="cursor-pointer" />
-          {dropDown && (
-            <>
-              <LoginDropDown />
-              <div className={dropDownStyle}></div>
-            </>
-          )}
-          {/* <>
-            <DeliveryLocation />
-            <div className={dropDownStyle}></div>
-          </> */}
+          {location
+            ? dropDown && (
+                <>
+                  <DeliveryLocation />
+                  <div className={dropDownStyle}></div>
+                </>
+              )
+            : dropDown && (
+                <>
+                  <LoginDropDown />
+                  <div className={dropDownStyle}></div>
+                </>
+              )}
         </div>
 
         <Link to="/" className="inline-block text-5xl cursor-pointer">
@@ -66,6 +75,7 @@ const HeaderSearch = () => {
       </div>
     </div>
   );
+
   // 배송지, 로그인 정보 창
   function onMouseEnter() {
     setDropDown(true);

@@ -13,9 +13,11 @@ const research =
 const mainTextWrap = 'font-medium text-p-24 pt-16 pb-4 text-center';
 const subTextWrap = 'text-left w-full text-gray-400 text-1.2';
 
-const SearchLocation = () => {
-  const address = localStorage.getItem('address');
-  const buildingName = localStorage.getItem('buildingName');
+/*global daum*/
+
+const SearchLocation = ({ history }) => {
+  const address = sessionStorage.getItem('address');
+  const buildingName = sessionStorage.getItem('buildingName');
 
   return (
     <div className={container}>
@@ -28,8 +30,17 @@ const SearchLocation = () => {
       </p>
       <div className="w-full text-1.4">
         <div className="flex">
-          <input type="text" className={searchInput} value={`${address}(${buildingName})`} />
-          <button className={research}>
+          <input
+            type="text"
+            className={searchInput}
+            value={`${address} ${buildingName && '(' + buildingName + ')'}`}
+          />
+          <button
+            className={research}
+            onClick={() => {
+              history.push();
+            }}
+          >
             <BiSearch className="inline-block mr-2 focus:outline-0" />
             재검색
           </button>
@@ -44,10 +55,15 @@ const SearchLocation = () => {
         <p>로그인 할 경우, 회원님의 배송지 목록에 추가됩니다.</p>
       </div>
       <form className="w-full">
-        <button className={saveBtn}>저장</button>
+        <button className={saveBtn} onClick={onClose}>
+          저장
+        </button>
       </form>
     </div>
   );
+  function onClose() {
+    window.close();
+  }
 };
 
 export default SearchLocation;
