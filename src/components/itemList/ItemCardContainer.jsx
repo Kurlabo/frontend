@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, withRouter } from 'react-router';
 import { getItemsThunk } from '../../modules/itemlist';
 import ItemCard from './ItemCard';
+import { FaSpinner } from 'react-icons/fa';
+import Loading from '../common/Loading';
 
 const ItemCardContainer = () => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.itemList.itemList.content);
+  const isLoading = useSelector(state => state.itemList.loading);
   const { category } = useParams();
-  console.log(items);
 
   useEffect(() => {
     const categoryArray = category.split('=');
@@ -35,6 +37,7 @@ const ItemCardContainer = () => {
   return (
     <div className="w-p-1050 mx-auto overflow-y-auto">
       <ul className="flex flex-wrap pb-24">
+        {isLoading && <Loading />}
         {items.map((item, idx) => (
           <li key={item.product_id + idx * 10} className="w-1/3 h-r-65">
             <ItemCard
