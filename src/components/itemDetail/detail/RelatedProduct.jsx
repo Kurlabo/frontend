@@ -108,14 +108,18 @@ const RelatedProduct = ({ relatedProducts }) => {
                   <li
                     className="cursor-pointer float-left w-p-180 h-p-320 mr-4 border border-gray-300"
                     id={product.product_id}
-                    key={product.product_id * i}
+                    key={product.product_id + i * 10}
                   >
                     <div className="h-p-230">
-                      <img className="w-full" src={product.name} alt="연관 상품 이미지" />
+                      <img
+                        className="w-full"
+                        src={product.original_image_url}
+                        alt="연관 상품 이미지"
+                      />
                     </div>
                     <div className="p-4">
                       <NameBox className="text-p-14 text-gray-800 h-14 leading-7">
-                        {product['list_image_url']}
+                        {product.name}
                       </NameBox>
                       <p className="text-p-14">{(+product['original_price']).toLocaleString()}원</p>
                     </div>
