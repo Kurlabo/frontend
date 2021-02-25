@@ -3,17 +3,20 @@ import { useState } from 'react';
 import { categoryDatas } from '../../common_style/common';
 import CategoriesLi from './CategoriesLi';
 
+const ulStyle =
+  'h-r-49.6 bg-white w-r-21.2 border-gray-200 border-t border-l border-b overflow-x-hidden overflow-y-auto';
+
 const Categories = () => {
   const [inUl, setInUl] = useState(false);
   const [active, setactive] = useState('');
 
   return (
     <div
-      className={`absolute top-r-4.5 border-gray-200 border ${active ? 'w-r-44.6' : 'w-r-21.2'}`}
+      className={`absolute top-r-4.5 ${active ? 'w-r-44.6' : 'w-r-21.2'}`}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}
     >
-      <ul className="h-r-44.6 bg-white w-r-21.2 overflow-x-hidden overflow-y-auto">
+      <ul className={ulStyle}>
         {categoryDatas.map(data => {
           return (
             <CategoriesLi

@@ -1,6 +1,6 @@
 import React from 'react';
 import MyKurlyPageNation from './MyKurlyPageNation';
-import MyKurlyHeader from './MykurlyHeader';
+import MyKurlyHeader from './MyKurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
 import { GoPrimitiveSquare } from 'react-icons/go';
 const MyCoupon = () => {
@@ -53,29 +53,30 @@ const MyCouponBlock = () => {
           <EmptyCoupon />
           {/* <MyCouponItem /> */}
         </ul>
+        <MyKurlyPageNation pageNumber="5" />
       </div>
     </div>
   );
 };
 
-const MyCouponItem = () => {
-  return (
-    <li className="py-7 text-r-1.4 font-medium border-b border-kg-300">
-      <ul>
-        <li className="w-p-410 inline-block text-left px-6 align-middle ">
-          <div>
-            <p>[미트클레버] 한돈 떡갈비 100% 행복쿠폰</p>
-            <span>5/31(일) 23:59까지 사용 가능</span>
-          </div>
-        </li>
-        <li className="w-r-5.6 align-middle text-center inline-block ">할인</li>
-        <li className="w-r-7.9 align-middle inline-block text-center">3000원</li>
-        <li className="w-r-16.3 align-middle inline-block text-center">2020.12.9~2020.12.31</li>
-        <li className="w-r-7.9 align-middle inline-block text-center text-klp-600">미사용</li>
-      </ul>
-    </li>
-  );
-};
+// const MyCouponItem = () => {
+//   return (
+//     <li className="py-7 text-r-1.4 font-medium border-b border-kg-300">
+//       <ul>
+//         <li className="w-p-410 inline-block text-left px-6 align-middle ">
+//           <div>
+//             <p>[미트클레버] 한돈 떡갈비 100% 행복쿠폰</p>
+//             <span>5/31(일) 23:59까지 사용 가능</span>
+//           </div>
+//         </li>
+//         <li className="w-r-5.6 align-middle text-center inline-block ">할인</li>
+//         <li className="w-r-7.9 align-middle inline-block text-center">3000원</li>
+//         <li className="w-r-16.3 align-middle inline-block text-center">2020.12.9~2020.12.31</li>
+//         <li className="w-r-7.9 align-middle inline-block text-center text-klp-600">미사용</li>
+//       </ul>
+//     </li>
+//   );
+// };
 
 const EmptyCoupon = () => {
   return (

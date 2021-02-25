@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { useEffect } from 'react';
 
 const regTitle = 'font-bold text-left align-top pt-7 ';
 const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
@@ -8,6 +7,7 @@ const subText = 'text-r-1.2 text-gray-600';
 const PassInput = ({
   state: [validPass1, validPass2, validPass3, validRePass],
   setState: [setValidPass1, setValidPass2, setValidPass3, setValidRePass],
+  info,
 }) => {
   const passRef = useRef();
   const rePassRef = useRef();
@@ -17,9 +17,25 @@ const PassInput = ({
 
   return (
     <>
+      {info ? (
+        <tr>
+          <th className={regTitle}>현재 비밀번호</th>
+          <td className="py-4">
+            <input type="password" name="curPassword" className={regInput} />
+          </td>
+        </tr>
+      ) : (
+        <></>
+      )}
       <tr>
         <th className={regTitle}>
-          비밀번호<span className="text-formStar">*</span>
+          {info ? (
+            '새 비밀번호'
+          ) : (
+            <>
+              비밀번호<span className="text-formStar">*</span>
+            </>
+          )}
         </th>
         <td className="py-4" colSpan="2">
           <input
@@ -29,8 +45,9 @@ const PassInput = ({
             onChange={checkPass}
             onFocus={onFocusPass}
             ref={passRef}
-            placeholder="비밀번호를 입력해주세요"
+            placeholder={info ? '' : '비밀번호를 입력해주세요'}
             autoComplete="new-password"
+            onKeyDown={keyPress}
           />
           <div className="hidden" ref={passSub}>
             <p className={`${subText} ${validPass1 ? 'text-green-700' : 'text-red-800'}`}>
@@ -47,7 +64,13 @@ const PassInput = ({
       </tr>
       <tr>
         <th className={regTitle}>
-          비밀번호 확인<span className="text-formStar">*</span>
+          {info ? (
+            '새 비밀번호 확인'
+          ) : (
+            <>
+              비밀번호 확인<span className="text-formStar">*</span>
+            </>
+          )}
         </th>
         <td className="py-4" colSpan="2">
           <input
@@ -57,7 +80,8 @@ const PassInput = ({
             onChange={checkPass}
             onFocus={onFocusRePass}
             ref={rePassRef}
-            placeholder="비밀번호를 한번 더 입력해주세요"
+            placeholder={info ? '' : '비밀번호를 한번 더 입력해주세요'}
+            onKeyDown={keyPress}
           />
           <div className="hidden" ref={rePassSub}>
             <p className={`${subText} ${validRePass ? 'text-green-700' : 'text-red-800'}`}>
@@ -98,6 +122,9 @@ const PassInput = ({
       default:
         break;
     }
+  }
+  function keyPress(e) {
+    if (e.keyCode === 13) e.preventDefault();
   }
 };
 

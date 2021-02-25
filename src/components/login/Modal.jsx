@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { VscClose } from 'react-icons/vsc';
 export default function Modal({ closeModal, modal, value }) {
   return (
@@ -11,7 +11,7 @@ export default function Modal({ closeModal, modal, value }) {
     >
       <div
         onClick={closeModal}
-        className="absolute left-0 top-0 w-full h-full bg-black bg-opacity-40 -z-1"
+        className="fixed left-0 top-0 w-full h-full bg-black bg-opacity-40"
       ></div>
       <div tabIndex="-1" className="relative w-1/3 h-p-350  bg-gray-200 mx-auto text-center">
         <h2 className="py-8 px-8 border-b bg-white border-gray-200 text-r-1.4 text-left text-kp-600 font-medium">

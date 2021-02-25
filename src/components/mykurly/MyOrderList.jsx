@@ -1,10 +1,10 @@
-import React from 'react';
-import MyKurlyHeader from './MykurlyHeader';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import MyKurlyHeader from './MyKurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
-import { TiArrowSortedDown } from 'react-icons/ti';
-import { VscChevronRight } from 'react-icons/vsc';
 import MyKurlyPageNation from './MyKurlyPageNation';
+import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
+import { VscChevronRight } from 'react-icons/vsc';
 
 const MyOrderList = () => {
   return (
@@ -19,6 +19,7 @@ const MyOrderList = () => {
 };
 
 const MyOrderListBlock = () => {
+  const [open, setOpen] = useState(false);
   return (
     <div className="float-left align-middle w-r-85 h-full mt-20 mb-14 px-12 pb-32">
       <h1 className="a11y-hidden">주문 내역 확인 </h1>
@@ -27,15 +28,38 @@ const MyOrderListBlock = () => {
         <p className="inline-block mr-96 align-middle text-r-1.4 text-kg-150">
           지난 3년간의 주문 내역 조회가 가능합니다
         </p>
-        <div className="inline-block ml-20 align-middle w-60 border border-kg-250">
-          <button className="w-full text-left text-r-1.4 py-r-1.1 px-6">
-            <span>전체기간</span>
-            <TiArrowSortedDown className="inline-block ml-20" />
+        <div
+          className={`relative inline-block text-kg-350 overflow-hidden ml-20 border border-kg-80 align-middle w-60 h-16 ${
+            open ? 'overflow-visible' : 'overflow-hidden'
+          }`}
+        >
+          <button
+            className="absolute  pl-4 text-r-1.4 w-full h-full z-20 left-0 top-0 text-left bg-white focus:outline-0"
+            onClick={onClick}
+          >
+            <span className="w-full h-full">전체기간</span>
+            {open ? (
+              <TiArrowSortedUp className="inline-block ml-20" />
+            ) : (
+              <TiArrowSortedDown className="inline-block ml-20" />
+            )}
           </button>
-          <ul className="text-kg-350 hidden">
-            <li>2021년</li>
-            <li>2020년</li>
-            <li>2019년</li>
+          <ul
+            className={`bg-white w-60 absolute z-0 transition-all border border-kg-80 border-t-0 text-r-1.2 transform -top-r-0.1 -left-r-0.1 
+            ${open ? 'translate-y-16' : '-translate-y-0 '}`}
+          >
+            <li className=" border-b py-3 pl-4  active:bg-kg-100">
+              <NavLink to="">전체기간</NavLink>
+            </li>
+            <li className=" border-b py-3 pl-4 active:bg-kg-100">
+              <NavLink to="">2021년</NavLink>
+            </li>
+            <li className=" border-b py-3 pl-4 active:bg-kg-100">
+              <NavLink to="">2020년</NavLink>
+            </li>
+            <li className=" py-3 pl-4 active:bg-kg-100">
+              <NavLink to="">2019년</NavLink>
+            </li>
           </ul>
         </div>
       </div>
@@ -45,10 +69,14 @@ const MyOrderListBlock = () => {
           <MyOrderListItem />
           <MyOrderListItem />
         </ul>
-        <MyKurlyPageNation />
+        <MyKurlyPageNation pageNumber="4" />
       </div>
     </div>
   );
+
+  function onClick() {
+    setOpen(!open);
+  }
 };
 const MyOrderListItem = () => {
   const qa_button =
@@ -61,7 +89,7 @@ const MyOrderListItem = () => {
         </p>
         <div className="pt-10 px-8 border border-kg-80">
           <h3 className="cursor-pointer clear-fix text-r-1.6 pb-6 font-medium">
-            <Link to="">
+            <Link to="/shop/mypage/mypage_orderview/ordno=123">
               [리치몬드 과자점] 쉬폰 4종 외 4건
               <VscChevronRight className="float-right inline-block text-r-2" />
             </Link>

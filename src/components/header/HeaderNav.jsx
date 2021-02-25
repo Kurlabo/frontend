@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import AddCartModal from './AddCartModal';
 import Categories from './Categories';
 import HeaderSearch from './HeaderSearch';
 const svgD =
@@ -13,7 +14,6 @@ const navStyle = 'w-p-1050  mx-auto text-p-16 flex justify-between items-start t
 const headerFix =
   'w-full fixed bg-white top-0 z-100 transform duration-75 border-gray-50 border-b-4 pt-4 ';
 const headerRel = 'w-full bg-white z-100 transform duration-75 border-gray-50 border-b-4 relative';
-const categoryBtn = 'focus:outline-0 hover:text-kp-600 text-gray-800 pb-8 align-bottom';
 
 const HeaderNav = () => {
   const [fix, setFix] = useState(false);
@@ -44,23 +44,24 @@ const HeaderNav = () => {
             <path fillRule="evenodd" d={svgD} clipRule="evenodd" />
           </svg>
           <span className="ml-4">전체 카테고리</span>
-          <Categories />
+          {category && <Categories />}
         </button>
         <ul className="flex flex-1 justify-evenly w-r-58 ">
           <li className={linkHover}>
-            <NavLink to="/">신상품</NavLink>
+            <NavLink to="/shop/goods/item_list">신상품</NavLink>
           </li>
           <li className={linkHover}>
-            <NavLink to="/">베스트</NavLink>
+            <NavLink to="/shop/goods/item_list">베스트</NavLink>
           </li>
           <li className={linkHover}>
-            <NavLink to="/">알뜰쇼핑</NavLink>
+            <NavLink to="/shop/goods/item_list">알뜰쇼핑</NavLink>
           </li>
           <li className={linkHover}>
-            <NavLink to="/">금주혜택</NavLink>
+            <NavLink to="/shop/goods/item_list">금주혜택</NavLink>
           </li>
         </ul>
         <HeaderSearch />
+        <AddCartModal />
       </nav>
     </div>
   );

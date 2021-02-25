@@ -1,64 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CartGoods from './CartGoods';
+import Product from './Product';
 import CartGoodsType from './CartGoodsType';
 import NoGoods from './NoGoods';
-import { isDropDownAmbient, isDropDownFrozen } from '../../modules/cart';
-import { setAllPrices } from '../../modules/cart';
+import { isDropDownAmbient, isDropDownCold, isDropDownFrozen } from '../../modules/cart';
+import { getGoodsInfo } from '../../modules/goodsCart';
 
 const Cart = () => {
   const dispatch = useDispatch();
 
-  // 상온 상품
-  const goods = [
-    {
-      id: 1,
-      url: 'https://img-cf.kurly.com/shop/data/goods/1611646838140i0.jpg',
-      title: '[닥터포헤어] 폴리젠 트리트먼트',
-      prices: 28000,
-      ambient: false,
-    },
-    {
-      id: 2,
-      url: 'https://img-cf.kurly.com/shop/data/goods/1611646838140i0.jpg',
-      title: '[닥터포헤어] 폴리젠 트리트먼트',
-      prices: 28000,
-      ambient: true,
-    },
-    {
-      id: 3,
-      url: 'https://img-cf.kurly.com/shop/data/goods/1611646838140i0.jpg',
-      title: '[닥터포헤어] 폴리젠 트리트먼트',
-      prices: 28000,
-      ambient: false,
-    },
-    {
-      id: 4,
-      url: 'https://img-cf.kurly.com/shop/data/goods/1611646838140i0.jpg',
-      title: '[닥터포헤어] 폴리젠 트리트먼트',
-      prices: 28000,
-      ambient: false,
-    },
-  ];
-
-  const ambient = goods.filter(good => good.ambient);
-  const frozen = goods.filter(good => !good.ambient);
+  // 업데이트 할때마다 변수가 다시 호출되는 문제 해결하는 리팩토링
+  const goods = useSelector(state => state.goodsCart.cart);
+  const loading = useSelector(state => state.goodsCart.loading);
 
   const isDropdownFrozen = useSelector(state => state.cart.frozen);
   const isDropdownAmbient = useSelector(state => state.cart.ambient);
+  const isDropdownCold = useSelector(state => state.cart.cold);
 
-  const dispatchPrams = goods.map(goods => ({
-    id: goods.id,
-    select: false,
-    count: 1,
-    prices: goods.prices,
-    initalPrices: goods.prices,
-  }));
-  dispatch(setAllPrices(dispatchPrams));
+  const ambient = goods.filter(good => good.packing_type_text === '상온/종이포장');
+  const frozen = goods.filter(
+    good => good.packing_type_text === '냉동/종이포장' || good.packing_type_text === '기타',
+  );
+  const cold = goods.filter(good => good.packing_type_text === '냉장/종이포장');
+
+  useEffect(() => {
+    dispatch(getGoodsInfo());
+  }, [dispatch]);
 
   return (
     <div>
-      {frozen.length !== 0 && (
+      {!loading && cold.length !== 0 && (
+        <div>
+          <CartGoodsType isDropdownCold={isDropdownCold} dropdownCold={dropdownCold} cold />
+          <div className={isDropdownCold ? 'hidden' : ''}>
+            <Product isDropdownCold={isDropdownCold} goods={cold} />
+          </div>
+        </div>
+      )}
+      {!loading && frozen.length === 0 && ambient.length === 0 && cold.length === 0 && (
+        <div className="border-t pt-6 border-black" />
+      )}
+      {!loading && frozen.length !== 0 && (
         <div>
           <CartGoodsType
             isDropdownFrozen={isDropdownFrozen}
@@ -66,22 +48,19 @@ const Cart = () => {
             frozen
           />
           <div className={isDropdownFrozen ? 'hidden' : ''}>
-            <CartGoods goods={frozen} />
+            <Product isDropdownFrozen={isDropdownFrozen} goods={frozen} />
           </div>
         </div>
       )}
-      {frozen.length === 0 && ambient.length === 0 && (
-        <div className="border-t pt-6 border-black" />
-      )}
-      {ambient.length !== 0 && (
+      {!loading && ambient.length !== 0 && (
         <div>
           <CartGoodsType isDropdownAmbient={isDropdownAmbient} dropdownAmbient={dropdownAmbient} />
           <div className={isDropdownAmbient ? 'hidden' : ''}>
-            <CartGoods isDropdownAmbient={isDropdownAmbient} goods={ambient} />
+            <Product isDropdownAmbient={isDropdownAmbient} goods={ambient} />
           </div>
         </div>
       )}
-      {!ambient.length && !frozen.length && <NoGoods />}
+      {!loading && !ambient.length && !frozen.length && !cold.length && <NoGoods />}
     </div>
   );
 
@@ -91,6 +70,9 @@ const Cart = () => {
 
   function dropdownAmbient() {
     dispatch(isDropDownAmbient());
+  }
+  function dropdownCold() {
+    dispatch(isDropDownCold());
   }
 };
 

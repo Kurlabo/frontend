@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
-import Aside from '../aside/Aside';
 import CheckBox from './CheckBox';
 import FormInput from './FormInput';
 import IdInput from './IdInput';
@@ -10,9 +9,9 @@ import PassInput from './PassInput';
 import SignupButton from './SignupButton';
 import SignupModal from './SignupModal';
 
-const Signup = () => {
-  const formTitle = 'pt-28 font-black text-5xl text-center';
-  const regForm = 'text-r-1.4';
+const Signup = ({ signUpStart }) => {
+  const formTitle = 'pt-28 font-bold text-5xl text-center';
+  const regForm = 'text-kg-400 text-r-1.4';
   const regTitle = 'font-bold text-left align-top pt-7 ';
   const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
   const subText = 'text-r-1.2 text-gray-600';
@@ -20,6 +19,7 @@ const Signup = () => {
 
   const [validId1, setValidId1] = useState(false);
   const [validId2, setValidId2] = useState(false);
+
   const [validPass1, setValidPass1] = useState(false);
   const [validPass2, setValidPass2] = useState(false);
   const [validPass3, setValidPass3] = useState(false);
@@ -53,7 +53,7 @@ const Signup = () => {
   return (
     <div className="w-r-64 ml-auto mr-auto pb-48">
       <h1 className={formTitle}>회원가입</h1>
-      <p className="text-right pt-9 pb-4 ">
+      <p className="text-right pt-9 pb-4 pb- ">
         <span className="text-formStar">*</span>
         필수입력사항
       </p>
@@ -100,7 +100,7 @@ const Signup = () => {
                 주소<span className="text-formStar">*</span>
               </th>
               <td className="py-4">
-                <SignupButton big={true} onClick={clickButton}>
+                <SignupButton big={true} onClick={openSearch}>
                   <FiSearch className="inline-block" />
                   주소검색
                 </SignupButton>
@@ -177,7 +177,7 @@ const Signup = () => {
                 >
                   개인정보처리방침 동의<span className="sub">(필수)</span>
                 </CheckBox>
-                <CheckBox id="info" state={info} ref={infoRef} onChange={() => setInfo(!info)}>
+                <CheckBox id="info" state={info} ref={infoRef} onChange={onSnsAll}>
                   무료배송, 할인쿠폰 등 혜택/정보 수신 동의<span className="sub">(선택))</span>
                 </CheckBox>
                 <div className="pl-14">
@@ -213,7 +213,7 @@ const Signup = () => {
               <td></td>
             </tr>
             <tr>
-              <td colSpan="3" className="text-center pt-16">
+              <td colSpan="3" className="text-center pt-16 w-">
                 <button type="submit" className={submitBtn}>
                   가입하기
                 </button>
@@ -223,20 +223,23 @@ const Signup = () => {
         </table>
       </form>
       <SignupModal modalIsOpen={signup} closeModal={closeModal} value={modalValue} />
-      <Aside />
     </div>
   );
-
   function clickButton(params) {
     console.log(1);
   }
-
   function onChangeAll(e) {
     setAllAgree(e.target.checked);
     [agree1Ref, agree2Ref, infoRef, snsRef, emailRef2, ageRef].forEach((ref, i) => {
       ref.current.checked = e.target.checked;
       setStates[i](e.target.checked);
     });
+  }
+
+  function onSnsAll(e) {
+    setInfo(!info);
+    setSns(!info);
+    setEmail(!info);
   }
 
   function onSubmit(e) {
@@ -252,10 +255,8 @@ const Signup = () => {
       agree2,
       age,
     ];
-
     const newUser = { date_of_birth: '' };
     const formData = new FormData(formRef.current);
-
     for (let [key, value] of formData) {
       if (!value) {
         setSignup(true);
@@ -286,9 +287,9 @@ const Signup = () => {
         }
       }
     }
-    console.log(newUser);
+    signUpStart(newUser);
+    // console.log(newUser);
   }
-
   function checkPhone(e) {
     const { value } = e.target;
     const lastChar = value.slice(-1);
@@ -304,12 +305,38 @@ const Signup = () => {
       e.target.value = value.substring(0, value.length - 1);
     }
   }
-  function openModal() {
-    setSignup(true);
-  }
+
   function closeModal() {
     setSignup(false);
   }
-};
+  function openSearch() {
+    const width = 500;
+    const height = 400;
 
+    // new daum.Postcode({
+    //   oncomplete: function (data) {
+    //     let left = Math.ceil((window.screen.width - width) / 2);
+    //     let top = Math.ceil((window.screen.height - height) / 2);
+
+    //     const addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
+    //     localStorage.setItem('address', addr);
+    //     // dispatch(getAddress(addr));
+    //     const buildingName = data.buildingName ? data.buildingName : '';
+
+    //     // localStorage에 주소 값 저장
+    //     sessionStorage.setItem('address', addr);
+    //     sessionStorage.setItem('buildingName', buildingName);
+
+    //     window.open(
+    //       '/kakao/destination',
+    //       '_blank',
+    //       `height=${height},width=${width}, top=${top}, left=${left}`,
+    //     );
+    //   },
+    // }).open({
+    //   left: Math.ceil((window.screen.width - width) / 2),
+    //   top: Math.ceil((window.screen.height - height) / 2),
+    // });
+  }
+};
 export default Signup;

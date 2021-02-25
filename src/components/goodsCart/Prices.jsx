@@ -2,11 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const Prices = () => {
-  const prices = useSelector(state => state.cart.cart);
+  const prices = useSelector(state => state.goodsCart.cart);
 
-  const totalPrices = prices.filter(item => item.select).reduce((acc, cur) => acc + cur.prices, 0);
+  const totalPrices = prices
+    .filter(item => item.select)
+    .reduce((acc, cur) => acc + cur.productTotalPrices, 0);
   return (
-    <div className="w-r-24.9 px-8 py-9 border text-r-1.6 bg-kg-500">
+    <div className="w-r-28.4 px-8 py-9 border text-r-1.6 bg-kg-500">
       <p className="pt-3">
         <span>상품 금액</span>
         <span className="float-right">{totalPrices.toLocaleString()}원</span>
