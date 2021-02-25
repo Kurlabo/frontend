@@ -11,17 +11,14 @@ export const addInstagramInfo = createAction(ADD_INSTAGRAM_INFO, res => res);
 export const getInstagramInfo = () => async dispatch => {
   try {
     const res = await axios.get('http://3.35.221.9:8080/api/shop/main');
-    dispatch(addInstagramInfo(res.data.instaSrcDto));
+    dispatch(addInstagramInfo(res.data));
   } catch (e) {
     console.log(e);
   }
 };
 
 // 초기값
-const initialize = {
-  landing_url_list: [],
-  thumbnail_img_list: [],
-};
+const initialize = {};
 
 // 리듀서
 const instagram = handleActions(

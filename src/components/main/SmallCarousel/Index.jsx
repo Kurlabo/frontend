@@ -1,32 +1,35 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getSmallCarouselInfo } from '../../../modules/smallCarousel';
 import MdButtons from './MdButtons/Index';
 
 const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   const [mdCurIndex, setMdCurIndex] = useState('채소');
   const dispatch = useDispatch();
+  const mainInfo = useSelector(state => state.instagram);
+
   let cur = useRef(0);
   let onAnimate = false;
   const containerRef = useRef(null);
   const prevButtonRef = useRef(null);
   const nextButtonRef = useRef(null);
 
-  const imgArr1 = [];
+  const imgArr = [];
 
-  if (title === '이 상품 어때요?') {
-    dispatch(getSmallCarouselInfo());
-  }
+  addCarouselInfoToArray('howAbout', '이 상품 어때요?');
+  addCarouselInfoToArray('frugality', '알뜰 상품 >');
+  addCarouselInfoToArray('todays', '오늘의 신상품 >');
+  addCarouselInfoToArray('hots', '지금 가장 핫한 상품>');
+
   useEffect(() => {
     containerRef.current.style.transitionDuration = '0.5s';
     containerRef.current.style.transitionProperty = 'all';
     containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-  });
+  }, [dispatch]);
 
-  const imgArr = [
+  const imgArr1 = [
     [
       'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
       'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
@@ -100,19 +103,30 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
           />
           <div className="overflow-hidden">
             <ul ref={containerRef} className="w-r-735">
-              {imgArr.map((imgs, index) => (
+              {imgArr.map((infos, index) => (
                 <li key={`${index}`} className="w-r-105 float-left">
-                  {imgs.map((img, index) => (
-                    <div key={`${index}`} className="inline-block h-r-49.6 w-r-24.9 mr-r-1.3 ">
-                      <Link to="">
-                        <img alt="" src={img} />
-                        <p className="text-r-1.6 mt-5 mb-4">[헤말린] 멸치 3종 (냉장)</p>
+                  {infos.map((info, index) => (
+                    <div
+                      key={`${index}`}
+                      className="inline-block h-r-49.6 w-r-24.9 mr-r-1.3 align-top"
+                    >
+                      <Link to="#">
+                        <img alt="" src={info.product_img} />
+                        <p className="text-r-1.6 mt-5 mb-4">{info.product_name}</p>
                       </Link>
                       <span className="font-bold">
-                        <span className="text-r-1.6 mr-3 text-discount-100">10%</span>
-                        <span className="text-r-1.6">7.470원</span>
+                        {info.discount_rate !== 0 && (
+                          <span className="text-r-1.6 mr-3 text-discount-100">
+                            {info.discount_rate}%
+                          </span>
+                        )}
+                        <span className="text-r-1.6">{info.original_price.toLocaleString()}원</span>
                       </span>
-                      <p className="text-r-1.4 mt-2 text-gray-400 line-through">8,300원</p>
+                      {info.discount_rate !== 0 && (
+                        <p className="text-r-1.4 mt-2 text-gray-400 line-through">
+                          ${info.discounted_price.toLocaleString()}원
+                        </p>
+                      )}
                     </div>
                   ))}
                 </li>
@@ -153,7 +167,6 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
       nextButtonRef.current.style.display = '';
       containerRef.current.style.transform = `translateX(-${(cur.current - 1) * 1050}px)`;
     }
-    // setcur(--cur);
     --cur.current;
 
     setTimeout(() => {
@@ -185,6 +198,15 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
     setTimeout(() => {
       onAnimate = false;
     }, 500);
+  }
+
+  function addCarouselInfoToArray(dataName, titleType) {
+    if (mainInfo[dataName] !== undefined && title === titleType) {
+      for (let i = 0; i < Math.ceil(mainInfo[dataName].length / 4); i++) {
+        imgArr.push([]);
+      }
+      mainInfo[dataName].map((info, i) => imgArr[Math.floor(i / 4)].push(info));
+    }
   }
 };
 
