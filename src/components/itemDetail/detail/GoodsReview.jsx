@@ -7,19 +7,19 @@ import ReviewModal from './ReviewModal';
 import { withRouter } from 'react-router';
 import { useCallback } from 'react';
 
-const isLogin = false;
+const isLogin = true;
 
-const GoodsReview = ({ history }) => {
+const GoodsReview = ({ history, reviews, name }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const onClick = useCallback(() => {
     if (isLogin) {
-      console.log('후기작성 페이지 이동');
+      history.push('/shop/mypage/mypage_review/register');
     } else {
       console.log('상품후기는 상품을 구매하시고배송완료된 회원 분만 한 달 내 작성 가능합니다.');
       setOpenModal(true);
     }
-  }, []);
+  }, [history]);
 
   const closeModal = useCallback(() => {
     setOpenModal(false);
@@ -29,7 +29,7 @@ const GoodsReview = ({ history }) => {
   return (
     <div>
       <GoodsReviewTitle />
-      <GoodsReviewList />
+      <GoodsReviewList reviews={reviews} name={name} />
       <div className="py-4 flex justify-end">
         <div
           onClick={onClick}

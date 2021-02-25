@@ -8,8 +8,7 @@ import Counter from '../common/Counter';
 const openStyle = 'fixed z-900 bottom-0 left-0 w-full bg-white';
 const closeStyle = 'fixed z-900 left-0 w-full bg-white';
 
-const CartOption = ({ itemDetail, onClickAddCart, onClickWishList }) => {
-  const isLogin = true;
+const CartOption = ({ itemDetail, onClickAddCart, onClickWishList, isLogin }) => {
   const { name, original_price, discount_percent } = itemDetail;
 
   const { count, productPrice } = useSelector(state => state.cartAddOption);

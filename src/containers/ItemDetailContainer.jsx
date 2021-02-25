@@ -1,7 +1,8 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { withRouter, matchPath } from 'react-router';
+import { withRouter } from 'react-router';
+import Loading from '../components/common/Loading';
 import ItemDetail from '../components/itemDetail/ItemDetail';
 import { initCartOption, setProductId } from '../modules/cartAddOption';
 import { getProductInfo, unloadProductInfo } from '../modules/itemDetail';
@@ -32,7 +33,7 @@ const ItemDetailContainer = ({ match }) => {
   console.log('데이터:', itemDetail);
 
   return loading ? (
-    <div>로딩중</div>
+    <Loading />
   ) : (
     itemDetail && <ItemDetail itemDetail={itemDetail} productId={productId} />
   );
