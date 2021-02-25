@@ -6,6 +6,7 @@ import { a11yHidden } from './HeaderNav';
 import LoginDropDown from './LoginDropDown';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { Link } from 'react-router-dom';
+import DeliveryLocation from './DeliveryLocation';
 
 const inputStyle =
   'inline-block focus:outline-0 focus:bg-gray-50 w-r-24.2 h-r-3.6 rounded-3xl shadow-2xl pl-8 pr-24 bg-gray-100 text-1.2';
@@ -53,6 +54,10 @@ const HeaderSearch = () => {
               <div className={dropDownStyle}></div>
             </>
           )}
+          {/* <>
+            <DeliveryLocation />
+            <div className={dropDownStyle}></div>
+          </> */}
         </div>
 
         <Link to="/" className="inline-block text-5xl cursor-pointer">
