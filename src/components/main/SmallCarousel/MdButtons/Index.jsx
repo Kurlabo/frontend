@@ -30,4 +30,4 @@ const MdButtons = ({ title, subtitle, suggestType, setMdCurIndex }) => {
   );
 };
 
-export default MdButtons;
+export default React.memo(MdButtons);

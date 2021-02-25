@@ -8,6 +8,7 @@ import notice from './notice';
 import cartAddOption from './cartAddOption';
 import itemDetail, { itemDetailSaga } from './itemDetail';
 import loading from './loading';
+import instagram from './instagram';
 import addGoodsToCart, { addGoodsToCartSaga } from './common/addGoodsToCart';
 import { connectRouter } from 'connected-react-router';
 
@@ -22,6 +23,7 @@ const rootReducer = history =>
     itemDetail,
     loading,
     addGoodsToCart,
+    instagram,
     router: connectRouter(history),
   });
 

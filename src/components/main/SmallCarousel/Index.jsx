@@ -1,19 +1,25 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getSmallCarouselInfo } from '../../../modules/smallCarousel';
 import MdButtons from './MdButtons/Index';
 
 const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
-  console.log(1);
   const [mdCurIndex, setMdCurIndex] = useState('채소');
-  // let mdCurIndex = '채소';
-  // let [cur, setcur] = useState(0);
+  const dispatch = useDispatch();
   let cur = useRef(0);
   let onAnimate = false;
   const containerRef = useRef(null);
   const prevButtonRef = useRef(null);
   const nextButtonRef = useRef(null);
 
+  const imgArr1 = [];
+
+  if (title === '이 상품 어때요?') {
+    dispatch(getSmallCarouselInfo());
+  }
   useEffect(() => {
     containerRef.current.style.transitionDuration = '0.5s';
     containerRef.current.style.transitionProperty = 'all';
@@ -94,11 +100,11 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
           />
           <div className="overflow-hidden">
             <ul ref={containerRef} className="w-r-735">
-              {imgArr.map(imgs => (
-                <li className="w-r-105 float-left">
-                  {imgs.map(img => (
-                    <div className="inline-block h-r-49.6 w-r-24.9 mr-r-1.3 ">
-                      <Link to>
+              {imgArr.map((imgs, index) => (
+                <li key={`${index}`} className="w-r-105 float-left">
+                  {imgs.map((img, index) => (
+                    <div key={`${index}`} className="inline-block h-r-49.6 w-r-24.9 mr-r-1.3 ">
+                      <Link to="">
                         <img alt="" src={img} />
                         <p className="text-r-1.6 mt-5 mb-4">[헤말린] 멸치 3종 (냉장)</p>
                       </Link>
@@ -182,4 +188,4 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   }
 };
 
-export default SmallCarousel;
+export default React.memo(SmallCarousel);
