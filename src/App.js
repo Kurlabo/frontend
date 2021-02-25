@@ -26,6 +26,7 @@ import ItemDetailPage from './pages/ItemDetailPage';
 import ItemListPage from './pages/ItemListPage';
 import MainPage from './pages/MainPage';
 import GoodsCartPage from './pages/GoodsCartPage';
+import MyReviewRegisterPage from './pages/MyReviewRegisterPage';
 function App() {
   return (
     <>
@@ -56,6 +57,7 @@ function App() {
         <Route path="/shop/customer/board" component={CustomerService} />
         <Route path="/shop/mypage/destination/list" component={MyDestinationLIstPage} />
         <Route path="/shop/mypage/mypage_wishlist" component={MyWishListPage} />
+        <Route path="/shop/mypage/mypage_review/register" component={MyReviewRegisterPage} />
         <Route path="/shop/mypage/mypage_review" component={MyReviewPage} />
         <Route path="/shop/mypage/mypage_review#tabid" component={MyReviewPage} />
         <Route path="/shop/mypage/mypage_emoney" component={MyEmoneyPage} />

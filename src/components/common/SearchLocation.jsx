@@ -13,11 +13,17 @@ const research =
 const mainTextWrap = 'font-medium text-p-24 pt-16 pb-4 text-center';
 const subTextWrap = 'text-left w-full text-gray-400 text-1.2';
 
+<<<<<<< HEAD
+const SearchLocation = () => {
+  // const address = useSelector(state => state.location.address);
+  const address = localStorage.getItem('address');
+=======
 /*global daum*/
 
 const SearchLocation = ({ history }) => {
   const address = sessionStorage.getItem('address');
   const buildingName = sessionStorage.getItem('buildingName');
+>>>>>>> 022481229a368000ea5f2ee1fb0f704942266408
 
   return (
     <div className={container}>
@@ -30,6 +36,11 @@ const SearchLocation = ({ history }) => {
       </p>
       <div className="w-full text-1.4">
         <div className="flex">
+<<<<<<< HEAD
+          <input type="text" className={searchInput} value={address} />
+          <button className={research}>
+            <BiSearch className="inline-block mr-2" />
+=======
           <input
             type="text"
             className={searchInput}
@@ -42,6 +53,7 @@ const SearchLocation = ({ history }) => {
             }}
           >
             <BiSearch className="inline-block mr-2 focus:outline-0" />
+>>>>>>> 022481229a368000ea5f2ee1fb0f704942266408
             재검색
           </button>
         </div>
