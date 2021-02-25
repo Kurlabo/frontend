@@ -25,6 +25,7 @@ const IdInput = ({ state, setState, readOnly }) => {
           placeholder={readOnly ? '' : '6자 이상의 영문 혹은 영문과 숫자를 조합'}
           autoComplete="uid"
           readOnly={readOnly}
+          onKeyDown={keyPress}
         />
         {readOnly ? (
           <></>
@@ -57,6 +58,9 @@ const IdInput = ({ state, setState, readOnly }) => {
     var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
 
     idReg.test(value) ? setState[0](true) : setState[0](false);
+  }
+  function keyPress(e) {
+    if (e.keyCode === 13) e.preventDefault();
   }
 };
 

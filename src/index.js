@@ -13,7 +13,6 @@ import ErrorPage from './pages/ErrorPage';
 import ReduxThunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
-import { actionStorageMiddleware, createStorageListener } from 'redux-state-sync';
 
 const history = createBrowserHistory();
 const sagaMiddleWare = createSagaMiddleware();
