@@ -38,16 +38,13 @@ const LoginDropDown = () => {
         let top = Math.ceil((window.screen.height - height) / 2);
 
         const addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
-<<<<<<< HEAD
         localStorage.setItem('address', addr);
         // dispatch(getAddress(addr));
-=======
         const buildingName = data.buildingName ? data.buildingName : '';
 
         // localStorage에 주소 값 저장
         sessionStorage.setItem('address', addr);
         sessionStorage.setItem('buildingName', buildingName);
->>>>>>> 022481229a368000ea5f2ee1fb0f704942266408
 
         window.open(
           '/kakao/destination',
