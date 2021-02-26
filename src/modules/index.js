@@ -13,6 +13,7 @@ import instagram from './instagram';
 import mdButtons from './mdButtons';
 import addGoodsToCart, { addGoodsToCartSaga } from './common/addGoodsToCart';
 import { connectRouter } from 'connected-react-router';
+import themeProductList from './themeProductList';
 
 const rootReducer = history =>
   combineReducers({
@@ -27,6 +28,7 @@ const rootReducer = history =>
     itemDetail,
     loading,
     addGoodsToCart,
+    themeProductList,
     instagram,
     router: connectRouter(history),
   });
