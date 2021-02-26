@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
 export default function CheckBox({ value, id, setAllCheck, checkAll, allCheck }) {
   const [check, setCheck] = useState();
