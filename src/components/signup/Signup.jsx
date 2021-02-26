@@ -9,6 +9,7 @@ import PassInput from './PassInput';
 import SignupButton from './SignupButton';
 import SignupModal from './SignupModal';
 
+/*global daum*/
 const Signup = ({ signUpStart }) => {
   const formTitle = 'pt-28 font-bold text-5xl text-center';
   const regForm = 'text-kg-400 text-r-1.4';
@@ -313,30 +314,29 @@ const Signup = ({ signUpStart }) => {
     const width = 500;
     const height = 400;
 
-    // new daum.Postcode({
-    //   oncomplete: function (data) {
-    //     let left = Math.ceil((window.screen.width - width) / 2);
-    //     let top = Math.ceil((window.screen.height - height) / 2);
+    new daum.Postcode({
+      oncomplete: function (data) {
+        let left = Math.ceil((window.screen.width - width) / 2);
+        let top = Math.ceil((window.screen.height - height) / 2);
 
-    //     const addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
-    //     localStorage.setItem('address', addr);
-    //     // dispatch(getAddress(addr));
-    //     const buildingName = data.buildingName ? data.buildingName : '';
+        const addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
+        localStorage.setItem('address', addr);
+        const buildingName = data.buildingName ? data.buildingName : '';
 
-    //     // localStorage에 주소 값 저장
-    //     sessionStorage.setItem('address', addr);
-    //     sessionStorage.setItem('buildingName', buildingName);
+        // localStorage에 주소 값 저장
+        sessionStorage.setItem('address', addr);
+        sessionStorage.setItem('buildingName', buildingName);
 
-    //     window.open(
-    //       '/kakao/destination',
-    //       '_blank',
-    //       `height=${height},width=${width}, top=${top}, left=${left}`,
-    //     );
-    //   },
-    // }).open({
-    //   left: Math.ceil((window.screen.width - width) / 2),
-    //   top: Math.ceil((window.screen.height - height) / 2),
-    // });
+        window.open(
+          '/kakao/destination',
+          '_blank',
+          `height=${height},width=${width}, top=${top}, left=${left}`,
+        );
+      },
+    }).open({
+      left: Math.ceil((window.screen.width - width) / 2),
+      top: Math.ceil((window.screen.height - height) / 2),
+    });
   }
 };
 export default Signup;
