@@ -26,6 +26,7 @@ import ItemDetailPage from './pages/ItemDetailPage';
 import ItemListPage from './pages/ItemListPage';
 import MainPage from './pages/MainPage';
 import GoodsCartPage from './pages/GoodsCartPage';
+import ThemeProductListPage from './pages/ThemeProductListPage';
 function App() {
   return (
     <>
@@ -41,6 +42,7 @@ function App() {
 
         <Route path="/shop/goods/goods_view/:productId" component={ItemDetailPage} />
         <Route path="/shop/goods/item_list/:category" component={ItemListPage} />
+        <Route path="/shop/goods/theme_list/:theme" component={ThemeProductListPage} />
         <Route path="/shop/goods/event" component={WeekEvent} />
 
         <Route path="/order/input_reception" exact component={TypeUserInfo} />
