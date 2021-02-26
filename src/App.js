@@ -22,17 +22,13 @@ import MyOrderViewPage from './pages/MyOrderViewPage';
 import OrderPage from './pages/OrderPage';
 import TypeUserInfo from './components/order/TypeUserInfo';
 import Header from './components/common/Header';
-<<<<<<< HEAD
 import KurlyPassPage from './pages/KurlyPassPage';
 import MyDestinationModify from './components/mykurly/MyDestinationModify';
-
-=======
 import ItemDetailPage from './pages/ItemDetailPage';
 import ItemListPage from './pages/ItemListPage';
 import MainPage from './pages/MainPage';
 import GoodsCartPage from './pages/GoodsCartPage';
 import MyReviewRegisterPage from './pages/MyReviewRegisterPage';
->>>>>>> bdce600c385ba0dc0e8fdef795c54389cc39cf2a
 function App() {
   return (
     <>
@@ -49,20 +45,10 @@ function App() {
         <Route path="/shop/goods/goods_view/:productId" component={ItemDetailPage} />
         <Route path="/shop/goods/item_list/:category" component={ItemListPage} />
         <Route path="/shop/goods/event" component={WeekEvent} />
-<<<<<<< HEAD
         <Route path="/shop/mypage/mypage_orderview/:orderNumber" component={MyOrderViewPage} />
-=======
-
         <Route path="/order/input_reception" exact component={TypeUserInfo} />
         <Route path="/order" component={OrderPage} />
-
->>>>>>> bdce600c385ba0dc0e8fdef795c54389cc39cf2a
         <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />
-        <Route
-          path="/shop/mypage/mypage_orderview/ordno=:orderNumber"
-          component={MyOrderViewPage}
-        />
-
         <Route path="/shop/customer/board/:id" component={NoticeDetail} />
         <Route path="/shop/customer/board" component={CustomerService} />
         <Route path="/shop/mypage/destination/list" component={MyDestinationLIstPage} />
@@ -74,13 +60,10 @@ function App() {
         <Route path="/shop/mypage/mypage_emoney" component={MyEmoneyPage} />
         <Route path="/shop/mypage/mypage_coupon" component={MyCouponPage} />
         <Route path="/shop/member/myinfo" component={MyInfoPage} />
-<<<<<<< HEAD
         <Route path="/shop/mypage/kurlypass" component={KurlyPassPage} />
         <Route path="/shop/mypage/desination/modify_form" component={MyDestinationModify} />
         <Route path="/shop/mypage/desination/modify_form?:dtn_id" component={MyDestinationModify} />
-=======
         <Route path="/shop/member/" component={MyInfoPage} />
->>>>>>> bdce600c385ba0dc0e8fdef795c54389cc39cf2a
         <Route path="/kakao/destination" component={SearchLocation} />
         <Route component={NotFoundPage} />
       </Switch>

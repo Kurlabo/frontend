@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import cart from './cart';
-import cartGoods from './cartGoods';
 import wish from './wishList';
 import order from './orderList';
 import goodsCart from './goodsCart';
