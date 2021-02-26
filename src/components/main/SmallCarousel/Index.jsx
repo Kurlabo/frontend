@@ -112,7 +112,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
                       key={`${index}`}
                       className="inline-block h-r-49.6 w-r-24.9 mr-r-1.3 align-top"
                     >
-                      <Link to="#">
+                      <Link to={`/shop/goods/goods_view/${info.product_id}`}>
                         <img alt="" src={info.product_img} />
                         <p className="text-r-1.6 mt-5 mb-4">{info.product_name}</p>
                       </Link>
@@ -143,7 +143,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
           {mdSuggest && (
             <div className="w-r-52 mx-auto">
               <Link
-                to=""
+                to={`/shop/goods/item_list/category=${1000 + +suggestType.indexOf(mdCurIndex)}`}
                 className="block h-r-5.6 pt-r-1.6 border-solid border-kmd-100 border text-r-1.6 leading-8 text-center"
               >
                 <span className="px-7 text-black">
