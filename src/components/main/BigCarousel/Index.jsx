@@ -1,16 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRef } from 'react';
+import { useSelector } from 'react-redux';
 
 const BigCarousel = () => {
-  let isStop = false;
   let onAnimate = false;
   let cur = useRef(1);
   const containerRef = useRef(null);
+  const [isStop, setIStop] = useState(false);
+
+  const imgArr = useSelector(state => state.instagram.slide_img_list);
 
   useEffect(() => {
     containerRef.current.style.transform = `translateX(-${cur.current}00%)`;
+    if (isStop) return;
     const timerId = setInterval(() => {
-      if (isStop) return;
       if (cur.current === 1) {
         setTimeout(() => {
           containerRef.current.style.transitionDuration = '';
@@ -37,42 +40,36 @@ const BigCarousel = () => {
     };
   }, [isStop]);
 
-  const imgArr = [
-    'https://img-cf.kurly.com/shop/data/main/1/pc_img_1610827181.jpg',
-    'https://img-cf.kurly.com/shop/data/main/1/pc_img_1610827181.jpg',
-    'https://img-cf.kurly.com/shop/data/main/1/pc_img_1610827181.jpg',
-    'https://img-cf.kurly.com/shop/data/main/1/pc_img_1610827181.jpg',
-    'https://img-cf.kurly.com/shop/data/main/1/pc_img_1610827181.jpg',
-  ];
-
   return (
     <div
       className="relative overflow-hidden"
-      onMouseOver={() => (isStop = true)}
-      onMouseOut={() => (isStop = false)}
+      onMouseOver={() => setIStop(true)}
+      onMouseOut={() => setIStop(false)}
     >
       <button
         onClick={prevButton}
         className="absolute z-50 w-p-52 h-p-52 bg-big-pre-button left-p-91 top-p-159 focus:outline-none"
       />
       <div ref={containerRef} className="relative h-p-370">
-        <ul className="absolute w-vw-700">
-          <li
-            className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${imgArr[imgArr.length - 1]})` }}
-          />
-          {imgArr.map((img, i) => (
+        {imgArr !== undefined && (
+          <ul className="absolute w-vw-700">
             <li
-              key={i}
               className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${img})` }}
+              style={{ backgroundImage: `url(${imgArr[imgArr.length - 1]})` }}
             />
-          ))}
-          <li
-            className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${imgArr[0]})` }}
-          />
-        </ul>
+            {imgArr.map((img, i) => (
+              <li
+                key={i}
+                className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${img})` }}
+              />
+            ))}
+            <li
+              className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
+              style={{ backgroundImage: `url(${imgArr[0]})` }}
+            />
+          </ul>
+        )}
       </div>
       <button
         onClick={nextButton}
