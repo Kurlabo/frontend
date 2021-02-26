@@ -19,6 +19,7 @@ const Signup = ({ signUpStart }) => {
 
   const [validId1, setValidId1] = useState(false);
   const [validId2, setValidId2] = useState(false);
+
   const [validPass1, setValidPass1] = useState(false);
   const [validPass2, setValidPass2] = useState(false);
   const [validPass3, setValidPass3] = useState(false);
@@ -99,7 +100,7 @@ const Signup = ({ signUpStart }) => {
                 주소<span className="text-formStar">*</span>
               </th>
               <td className="py-4">
-                <SignupButton big={true} onClick={clickButton}>
+                <SignupButton big={true} onClick={openSearch}>
                   <FiSearch className="inline-block" />
                   주소검색
                 </SignupButton>
@@ -243,7 +244,17 @@ const Signup = ({ signUpStart }) => {
 
   function onSubmit(e) {
     e.preventDefault();
-    const valid = [validId1, validPass1, validPass2, validPass3, validRePass, agree1, agree2, age];
+    const valid = [
+      validId1,
+      validId2,
+      validPass1,
+      validPass2,
+      validPass3,
+      validRePass,
+      agree1,
+      agree2,
+      age,
+    ];
     const newUser = { date_of_birth: '' };
     const formData = new FormData(formRef.current);
     for (let [key, value] of formData) {
@@ -297,6 +308,35 @@ const Signup = ({ signUpStart }) => {
 
   function closeModal() {
     setSignup(false);
+  }
+  function openSearch() {
+    const width = 500;
+    const height = 400;
+
+    // new daum.Postcode({
+    //   oncomplete: function (data) {
+    //     let left = Math.ceil((window.screen.width - width) / 2);
+    //     let top = Math.ceil((window.screen.height - height) / 2);
+
+    //     const addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
+    //     localStorage.setItem('address', addr);
+    //     // dispatch(getAddress(addr));
+    //     const buildingName = data.buildingName ? data.buildingName : '';
+
+    //     // localStorage에 주소 값 저장
+    //     sessionStorage.setItem('address', addr);
+    //     sessionStorage.setItem('buildingName', buildingName);
+
+    //     window.open(
+    //       '/kakao/destination',
+    //       '_blank',
+    //       `height=${height},width=${width}, top=${top}, left=${left}`,
+    //     );
+    //   },
+    // }).open({
+    //   left: Math.ceil((window.screen.width - width) / 2),
+    //   top: Math.ceil((window.screen.height - height) / 2),
+    // });
   }
 };
 export default Signup;

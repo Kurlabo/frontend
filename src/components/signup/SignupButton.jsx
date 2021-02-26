@@ -7,7 +7,7 @@ const formTdButton =
 
 const SignupButton = ({ big = false, onClick, children }) => {
   return (
-    <button className={big ? formTdButton : formButton} type="button">
+    <button className={big ? formTdButton : formButton} type="button" onClick={onClick}>
       {children}
     </button>
   );
