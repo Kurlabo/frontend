@@ -5,7 +5,7 @@ import FooterRight from '../footer/FooterRight';
 
 const Footer = () => {
   const pathname = window.location.pathname;
-  if (pathname === '/kakao/destination') return null;
+  if (pathname === '/kakao/destination' || pathname === '/order/input_reception') return null;
   else if (pathname === '/shop/mypage/desination/modify_form') return null;
   else if (pathname === '/shop/mypage/desination/modify_form/') return null;
   return (
