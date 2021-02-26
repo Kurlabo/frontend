@@ -104,12 +104,11 @@ const RelatedProduct = ({ relatedProducts }) => {
           <ul className="absolute w-per-500" ref={containerRef}>
             {carouselArr.map((product, i) => {
               return (
-                <Link to={`/shop/goods/goods_view/${product.product_id}`}>
-                  <li
-                    className="cursor-pointer float-left w-p-180 h-p-320 mr-4 border border-gray-300"
-                    id={product.product_id}
-                    key={product.product_id + i * 10}
-                  >
+                <li
+                  className="cursor-pointer float-left w-p-180 h-p-320 mr-4 border border-gray-300"
+                  key={i}
+                >
+                  <Link to={`/shop/goods/goods_view/${product.product_id}`}>
                     <div className="h-p-230">
                       <img
                         className="w-full"
@@ -123,8 +122,8 @@ const RelatedProduct = ({ relatedProducts }) => {
                       </NameBox>
                       <p className="text-p-14">{(+product['original_price']).toLocaleString()}원</p>
                     </div>
-                  </li>
-                </Link>
+                  </Link>
+                </li>
               );
             })}
           </ul>

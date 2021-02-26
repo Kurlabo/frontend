@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
 import WishListLoginModal from '../itemDetail/detail/WishListLoginModal';
 import CheckQuantityModal from './CheckQuantityModal';
@@ -56,16 +57,13 @@ const CartModal = ({
 }) => {
   const [count, setCount] = useState(1);
   const [checkQuantity, setCheckQuantity] = useState(false);
-  const { itemDetail, isNew, isOpen } = useSelector(({ itemDetail, addGoodsToCart }) => ({
-    itemDetail: itemDetail.info,
-    isNew: addGoodsToCart.result,
-    isOpen: addGoodsToCart.modalopen,
-  }));
+  const [iswishListModalOpen, setIsWishListModalOpen] = useState(false);
 
   // 로그인 유무 받아와야됨
   const isLogin = true;
 
   const dispatch = useDispatch();
+  const history = useHistory();
   let onPopUp = useRef(false);
 
   // 장바구니 담기 버튼
@@ -77,6 +75,8 @@ const CartModal = ({
     }
     if (!isLogin) {
       console.log('로그인 창으로 이동!!!');
+      setIsWishListModalOpen(true);
+      closeModal();
       return;
     }
     onPopUp.current = true;
@@ -89,6 +89,11 @@ const CartModal = ({
       onPopUp.current = false;
     }, 3000);
   }, [count, dispatch, isLogin, product_id, onPopUp, closeModal, productName]);
+
+  const closeWishListModal = useCallback(() => {
+    setIsWishListModalOpen(false);
+    history.push('/shop/account/signin');
+  }, [history]);
 
   return (
     <>
@@ -142,7 +147,7 @@ const CartModal = ({
           </button>
         </form>
       </Modal>
-      <WishListLoginModal />
+      <WishListLoginModal openModal={iswishListModalOpen} closeModal={closeWishListModal} />
       {checkQuantity && <CheckQuantityModal checkQuantity={checkQuantity} close={close} />}
     </>
   );
