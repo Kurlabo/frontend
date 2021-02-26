@@ -23,7 +23,7 @@ export const getItemsThunk = (id, subid) => async dispatch => {
       : await axios.get(`http://3.35.221.9:8080/api/goods/goods_list?category=${id}`);
     setTimeout(() => {
       dispatch(getItemsSuccess(res.data, id, subid));
-    }, 2000);
+    }, 1500);
   } catch (e) {
     dispatch(getItemsFail(e));
   }

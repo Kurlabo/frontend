@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
-import { useSelector } from 'react-redux';
 import DropDownMenu from './DropDownMenu';
 import ItemNavLink from './ItemNavLink';
 export const listStyle =
