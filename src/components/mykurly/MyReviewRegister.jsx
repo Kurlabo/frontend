@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { postReview } from '../../modules/myReviewRegister';
 import MyKurlyCategory from './MyKurlyCategory';
 import MyKurlyHeader from './MyKurlyHeader';
 
@@ -19,6 +21,11 @@ const MyKurlyTemplate = ({ children }) => {
 const MyReviewRegister = () => {
   const title = useRef();
   const textArea = useRef();
+  const dispatch = useDispatch();
+
+  const { itemDetail } = useSelector(({ itemDetail }) => ({
+    itemDetail: itemDetail.info,
+  }));
 
   const [isInputAll, setisInputAll] = useState(false);
   const [inputState, setInputState] = useState({
@@ -35,6 +42,23 @@ const MyReviewRegister = () => {
     }
   }, [inputState]);
 
+  const onClickSubmit = () => {
+    if (!isInputAll) return;
+    console.log('리뷰 작성 post api 요청~!!!!!!');
+    dispatch(
+      postReview({
+        review_id: null,
+        member_id: 1,
+        product_id: itemDetail.product_id,
+        title: inputState.title,
+        content: inputState.textArea,
+        regdate: '2021-02-26',
+        help: null,
+        cnt: null,
+      }),
+    );
+  };
+
   return (
     <MyKurlyTemplate>
       <div className="float-left align-middle w-r-85 h-full mt-20 mb-6 px-12 pb-32 box-border">
@@ -43,13 +67,9 @@ const MyReviewRegister = () => {
         </div>
         <div className="flex items-center mb-8">
           {/* 클릭한 상품에 해당하는 img */}
-          <img
-            className=" w-r-8.8 mx-8"
-            src="https://img-cf.kurly.com/shop/data/goods/1581052214202s0.jpg"
-            alt=""
-          />
+          <img className=" w-r-8.8 mx-8" src={itemDetail.list_image_url} alt="" />
           {/* 클릭한 상품에 해당하는 name */}
-          <p className="text-r-1.7">[은하수산] 문어 슬라이스 120g(냉장)</p>
+          <p className="text-r-1.7">{itemDetail.name}</p>
         </div>
         <form className="border-t-2 border-gray-200">
           <table width="100%">
@@ -95,11 +115,6 @@ const MyReviewRegister = () => {
       </div>
     </MyKurlyTemplate>
   );
-
-  function onClickSubmit() {
-    if (!isInputAll) return;
-    console.log('리뷰 작성 post api 요청~!!!!!!');
-  }
 
   function onChangeTitle(e) {
     setInputState(state => ({
