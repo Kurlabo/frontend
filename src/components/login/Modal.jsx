@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { VscClose } from 'react-icons/vsc';
-export default function Modal({ closeModal, modal, id, value }) {
+export default function Modal({ closeModal, modal, id, post, value }) {
   return (
     <div
       className={
@@ -16,7 +16,9 @@ export default function Modal({ closeModal, modal, id, value }) {
       ></div>
       <div
         tabIndex="-1"
-        className="fixed top-2/3 transform -translate-y-2/4 w-r-47 h-p-278 bg-gray-200 mx-auto text-center"
+        className={`fixed ${
+          post ? 'top-2/4' : 'top-2/3'
+        } transform -translate-y-2/4 w-r-47 h-p-278 bg-gray-200 mx-auto text-center`}
       >
         <h2 className="py-8 px-8 border-b bg-white border-gray-200 text-r-1.4 text-left text-kp-600 font-medium">
           알림메세지
