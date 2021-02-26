@@ -8,7 +8,14 @@ import InfoTab from './InfoTab';
 import { useCallback } from 'react';
 
 const GoodsInfo = ({ itemDetail }) => {
-  const { name, detail_context, short_description, product_img_url, detail_img_url } = itemDetail;
+  const {
+    name,
+    detail_context,
+    short_description,
+    product_img_url,
+    detail_img_url,
+    reviews,
+  } = itemDetail;
   const [state, setState] = useState('상품설명');
 
   const onClick = useCallback(e => {
@@ -31,13 +38,13 @@ const GoodsInfo = ({ itemDetail }) => {
       case '상세정보':
         return <GoodsDetailInfo name={name} />;
       case '고객후기':
-        return <GoodsReview />;
+        return <GoodsReview reviews={reviews} name={name} />;
       case '상품문의':
         return <ProductQnA />;
       default:
         return;
     }
-  }, [name, short_description, detail_context, product_img_url, detail_img_url, state]);
+  }, [name, short_description, detail_context, product_img_url, detail_img_url, reviews, state]);
 
   return (
     <div className="w-r-101 mt-20 mb-10">

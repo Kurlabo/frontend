@@ -16,20 +16,22 @@ const ItemCardContainer = () => {
     let categoryStr = categoryArray[1];
 
     // 카테고리 대분류, 소분류 라우팅
-    if (categoryStr.length < 5) {
-      dispatch(getItemsThunk(categoryStr));
-    } else if (categoryStr.length === 5) {
-      let firstString = divideFirst(categoryStr, 0, 4);
-      let secondString = divideFirst(categoryStr, 4, 5);
-      dispatch(getItemsThunk(firstString, secondString));
-    } else if (categoryStr.length === 6) {
-      let firstString = divideFirst(categoryStr, 0, 4);
-      let secondString = divideFirst(categoryStr, 4, 6);
-      dispatch(getItemsThunk(firstString, secondString));
-    } else if (categoryStr.length === 7) {
-      let firstString = divideFirst(categoryStr, 0, 4);
-      let secondString = divideFirst(categoryStr, 4, 7);
-      dispatch(getItemsThunk(firstString, secondString));
+    if (categoryStr !== undefined) {
+      if (categoryStr.length < 5) {
+        dispatch(getItemsThunk(categoryStr));
+      } else if (categoryStr.length === 5) {
+        let firstString = divideFirst(categoryStr, 0, 4);
+        let secondString = divideFirst(categoryStr, 4, 5);
+        dispatch(getItemsThunk(firstString, secondString));
+      } else if (categoryStr.length === 6) {
+        let firstString = divideFirst(categoryStr, 0, 4);
+        let secondString = divideFirst(categoryStr, 4, 6);
+        dispatch(getItemsThunk(firstString, secondString));
+      } else if (categoryStr.length === 7) {
+        let firstString = divideFirst(categoryStr, 0, 4);
+        let secondString = divideFirst(categoryStr, 4, 7);
+        dispatch(getItemsThunk(firstString, secondString));
+      }
     }
   }, [dispatch, category]);
 

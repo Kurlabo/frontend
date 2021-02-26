@@ -1,62 +1,49 @@
+import React from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getInstagramInfo } from '../../../modules/instagram';
 
-const Instagram = ({ title, subtitle }) => {
+const Instagram = () => {
+  const dispatch = useDispatch();
+  const instagram = useSelector(state => state.instagram.instaSrcDto);
+
+  const imgArr = [];
+
   let cur = 0;
   let onAnimate = false;
   const containerRef = useRef(null);
   const prevButtonRef = useRef(null);
   const nextButtonRef = useRef(null);
 
+  if (instagram !== undefined) {
+    for (let i = 0; i < Math.ceil(instagram.thumbnail_img_list.length / 6); i++) {
+      imgArr.push([]);
+    }
+    instagram.thumbnail_img_list.map((img, i) => imgArr[Math.floor(i / 6)].push({ img }));
+    instagram.landing_url_list.map(
+      (url, i) =>
+        (imgArr[Math.floor(i / 6)][i - Math.floor(i / 6) * 6] = {
+          ...imgArr[Math.floor(i / 6)][i - Math.floor(i / 6) * 6],
+          url,
+        }),
+    );
+  }
+
   useEffect(() => {
+    dispatch(getInstagramInfo());
     containerRef.current.style.transitionDuration = '0.5s';
     containerRef.current.style.transitionProperty = 'all';
     containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-  });
-
-  const imgArr = [
-    [
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/145829497_429910031618977_2686700364585205332_n.jpg?_nc_cat=101&ccb=2&_nc_sid=8ae9d6&_nc_ohc=-WkuqU3BZCYAX9V-8cf&_nc_oc=AQma5Jem99_iE8KN-5ZeuW8WTFP9Ffa0d88we6liTpfSpVtG-ZvhHI2xOFxZeupMS-Q&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=70036b1b024889031d3db2652ad738af&oe=6042CF55',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/145829497_429910031618977_2686700364585205332_n.jpg?_nc_cat=101&ccb=2&_nc_sid=8ae9d6&_nc_ohc=-WkuqU3BZCYAX9V-8cf&_nc_oc=AQma5Jem99_iE8KN-5ZeuW8WTFP9Ffa0d88we6liTpfSpVtG-ZvhHI2xOFxZeupMS-Q&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=70036b1b024889031d3db2652ad738af&oe=6042CF55',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/145829497_429910031618977_2686700364585205332_n.jpg?_nc_cat=101&ccb=2&_nc_sid=8ae9d6&_nc_ohc=-WkuqU3BZCYAX9V-8cf&_nc_oc=AQma5Jem99_iE8KN-5ZeuW8WTFP9Ffa0d88we6liTpfSpVtG-ZvhHI2xOFxZeupMS-Q&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=70036b1b024889031d3db2652ad738af&oe=6042CF55',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/145829497_429910031618977_2686700364585205332_n.jpg?_nc_cat=101&ccb=2&_nc_sid=8ae9d6&_nc_ohc=-WkuqU3BZCYAX9V-8cf&_nc_oc=AQma5Jem99_iE8KN-5ZeuW8WTFP9Ffa0d88we6liTpfSpVtG-ZvhHI2xOFxZeupMS-Q&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=70036b1b024889031d3db2652ad738af&oe=6042CF55',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/145829497_429910031618977_2686700364585205332_n.jpg?_nc_cat=101&ccb=2&_nc_sid=8ae9d6&_nc_ohc=-WkuqU3BZCYAX9V-8cf&_nc_oc=AQma5Jem99_iE8KN-5ZeuW8WTFP9Ffa0d88we6liTpfSpVtG-ZvhHI2xOFxZeupMS-Q&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=70036b1b024889031d3db2652ad738af&oe=6042CF55',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/145829497_429910031618977_2686700364585205332_n.jpg?_nc_cat=101&ccb=2&_nc_sid=8ae9d6&_nc_ohc=-WkuqU3BZCYAX9V-8cf&_nc_oc=AQma5Jem99_iE8KN-5ZeuW8WTFP9Ffa0d88we6liTpfSpVtG-ZvhHI2xOFxZeupMS-Q&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=70036b1b024889031d3db2652ad738af&oe=6042CF55',
-    ],
-
-    [
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/128220068_196694071941486_3097690952273694776_n.jpg?_nc_cat=107&ccb=2&_nc_sid=8ae9d6&_nc_ohc=3ZibqS_Ls3wAX8YmxoY&_nc_oc=AQl7_n_3ylMz59Z8AQmnb9xgnqN2yp4rsUkZw6LHXgIs51RD_2WHmDuB-TJGGSzqd5g&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=e411049f99cfb18ad44fb26821556012&oe=6043D535',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/128220068_196694071941486_3097690952273694776_n.jpg?_nc_cat=107&ccb=2&_nc_sid=8ae9d6&_nc_ohc=3ZibqS_Ls3wAX8YmxoY&_nc_oc=AQl7_n_3ylMz59Z8AQmnb9xgnqN2yp4rsUkZw6LHXgIs51RD_2WHmDuB-TJGGSzqd5g&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=e411049f99cfb18ad44fb26821556012&oe=6043D535',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/128220068_196694071941486_3097690952273694776_n.jpg?_nc_cat=107&ccb=2&_nc_sid=8ae9d6&_nc_ohc=3ZibqS_Ls3wAX8YmxoY&_nc_oc=AQl7_n_3ylMz59Z8AQmnb9xgnqN2yp4rsUkZw6LHXgIs51RD_2WHmDuB-TJGGSzqd5g&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=e411049f99cfb18ad44fb26821556012&oe=6043D535',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/128220068_196694071941486_3097690952273694776_n.jpg?_nc_cat=107&ccb=2&_nc_sid=8ae9d6&_nc_ohc=3ZibqS_Ls3wAX8YmxoY&_nc_oc=AQl7_n_3ylMz59Z8AQmnb9xgnqN2yp4rsUkZw6LHXgIs51RD_2WHmDuB-TJGGSzqd5g&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=e411049f99cfb18ad44fb26821556012&oe=6043D535',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/128220068_196694071941486_3097690952273694776_n.jpg?_nc_cat=107&ccb=2&_nc_sid=8ae9d6&_nc_ohc=3ZibqS_Ls3wAX8YmxoY&_nc_oc=AQl7_n_3ylMz59Z8AQmnb9xgnqN2yp4rsUkZw6LHXgIs51RD_2WHmDuB-TJGGSzqd5g&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=e411049f99cfb18ad44fb26821556012&oe=6043D535',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/128220068_196694071941486_3097690952273694776_n.jpg?_nc_cat=107&ccb=2&_nc_sid=8ae9d6&_nc_ohc=3ZibqS_Ls3wAX8YmxoY&_nc_oc=AQl7_n_3ylMz59Z8AQmnb9xgnqN2yp4rsUkZw6LHXgIs51RD_2WHmDuB-TJGGSzqd5g&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=e411049f99cfb18ad44fb26821556012&oe=6043D535',
-    ],
-
-    [
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/126878305_1760178970816236_6835341633307214033_n.jpg?_nc_cat=109&ccb=2&_nc_sid=8ae9d6&_nc_ohc=6TbgCDPYO9IAX873UxT&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=bf4208964e0321f7b15f31c39b95b9c1&oe=60434F39',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/126878305_1760178970816236_6835341633307214033_n.jpg?_nc_cat=109&ccb=2&_nc_sid=8ae9d6&_nc_ohc=6TbgCDPYO9IAX873UxT&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=bf4208964e0321f7b15f31c39b95b9c1&oe=60434F39',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/126878305_1760178970816236_6835341633307214033_n.jpg?_nc_cat=109&ccb=2&_nc_sid=8ae9d6&_nc_ohc=6TbgCDPYO9IAX873UxT&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=bf4208964e0321f7b15f31c39b95b9c1&oe=60434F39',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/126878305_1760178970816236_6835341633307214033_n.jpg?_nc_cat=109&ccb=2&_nc_sid=8ae9d6&_nc_ohc=6TbgCDPYO9IAX873UxT&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=bf4208964e0321f7b15f31c39b95b9c1&oe=60434F39',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/126878305_1760178970816236_6835341633307214033_n.jpg?_nc_cat=109&ccb=2&_nc_sid=8ae9d6&_nc_ohc=6TbgCDPYO9IAX873UxT&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=bf4208964e0321f7b15f31c39b95b9c1&oe=60434F39',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/126878305_1760178970816236_6835341633307214033_n.jpg?_nc_cat=109&ccb=2&_nc_sid=8ae9d6&_nc_ohc=6TbgCDPYO9IAX873UxT&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=bf4208964e0321f7b15f31c39b95b9c1&oe=60434F39',
-    ],
-
-    [
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/129722677_200004505003591_6157755695462520982_n.jpg?_nc_cat=104&ccb=2&_nc_sid=8ae9d6&_nc_ohc=-ovGINGcSZAAX-K96WY&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=5a26c8b59de208e0b78128c51b6f1efe&oe=604340EC',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/129722677_200004505003591_6157755695462520982_n.jpg?_nc_cat=104&ccb=2&_nc_sid=8ae9d6&_nc_ohc=-ovGINGcSZAAX-K96WY&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=5a26c8b59de208e0b78128c51b6f1efe&oe=604340EC',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/129722677_200004505003591_6157755695462520982_n.jpg?_nc_cat=104&ccb=2&_nc_sid=8ae9d6&_nc_ohc=-ovGINGcSZAAX-K96WY&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=5a26c8b59de208e0b78128c51b6f1efe&oe=604340EC',
-      'https://scontent-nrt1-1.cdninstagram.com/v/t51.29350-15/129722677_200004505003591_6157755695462520982_n.jpg?_nc_cat=104&ccb=2&_nc_sid=8ae9d6&_nc_ohc=-ovGINGcSZAAX-K96WY&_nc_ht=scontent-nrt1-1.cdninstagram.com&oh=5a26c8b59de208e0b78128c51b6f1efe&oe=604340EC',
-    ],
-  ];
+  }, [dispatch]);
 
   return (
     <div>
       <div className="container h-auto">
-        <Link to="" className="block font-bold text-r-2.8 text-center pt-r-7.9 pb-r-3.5">
+        <p to="" className="block font-bold text-r-2.8 text-center pt-r-7.9 pb-r-3.5">
           인스타그램 고객 후기
-        </Link>
+        </p>
         <div className="relative">
           <button
             onClick={e => prevButton(e)}
@@ -66,17 +53,18 @@ const Instagram = ({ title, subtitle }) => {
           />
           <div className="overflow-hidden">
             <ul ref={containerRef} className="w-r-735">
-              {imgArr.map(imgs => (
-                <li className="w-r-105 float-left">
-                  {imgs.map(img => (
-                    <div className="inline-block ">
-                      <Link to>
-                        <img className="h-r-17.5 w-r-17.5" alt="" src={img} />
-                      </Link>
-                    </div>
-                  ))}
-                </li>
-              ))}
+              {imgArr &&
+                imgArr.map(imgs => (
+                  <li className="w-r-105 float-left">
+                    {imgs.map(({ img, url }) => (
+                      <div className="inline-block ">
+                        <a rel="noreferrer" target="_blank" href={url}>
+                          <img className="h-r-17.5 w-r-17.5" alt="" src={img} />
+                        </a>
+                      </div>
+                    ))}
+                  </li>
+                ))}
             </ul>
           </div>
           <button
@@ -141,4 +129,4 @@ const Instagram = ({ title, subtitle }) => {
   }
 };
 
-export default Instagram;
+export default React.memo(Instagram);
