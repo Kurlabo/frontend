@@ -25,7 +25,18 @@ export const getThemeItemsThunk = params => async dispatch => {
 
 // 초기값
 const initialState = {
-  productList: [],
+  productList: [
+    {
+      product_id: '',
+      name: '',
+      original_image_url: '',
+      original_price: '',
+      short_description: '',
+      sticker_image_url: '',
+      discount_percent: '',
+      discounted_price: '',
+    },
+  ],
   loading: false,
   error: '',
 };

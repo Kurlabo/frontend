@@ -51,10 +51,23 @@ const initialState = {
 
 const itemDetail = handleActions(
   {
-    [GET_PRODUCT_INFO_SUCCESS]: (state, { payload: itemDetail }) => ({
-      ...state,
-      info: itemDetail,
-    }),
+    [GET_PRODUCT_INFO_SUCCESS]: (state, { payload: itemDetail }) => {
+      let count = 20 - itemDetail.related_product.length;
+      if (itemDetail.related_product.length < 20) {
+        for (let i = 0; i < count; i++) {
+          itemDetail.related_product.push(itemDetail.related_product[i]);
+        }
+      }
+
+      // 부족한 개수만큼 객체 정보를 넣어준다.
+      return {
+        ...state,
+        info: {
+          ...itemDetail,
+          related_product: itemDetail.related_product,
+        },
+      };
+    },
     [GET_PRODUCT_INFO_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error,
