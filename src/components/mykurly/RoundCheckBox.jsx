@@ -3,48 +3,43 @@ import Modalform from '../login/Modalform';
 import Modal from '../login/Modal';
 import { IoIosCheckmarkCircle, IoIosCheckmarkCircleOutline } from 'react-icons/io';
 
-const RoundCheckBox = () => {
-  const [form, setform] = useState({
-    checkform: false,
-    modal: false,
-  });
-  const { checkform, modal } = form;
-
-  const onClick = () => {
-    setform({
-      ...form,
-      checkform: !checkform,
-      modal: !modal,
-    });
-  };
-
+const RoundCheckBox = ({ id, value, onChange, onClick, modalClose, closeModal, form }) => {
   return (
     <>
-      <input id="inputRadio" type="radio" className="invisible absolute" />
-      <label htmlFor="inputRadio" onClick={onClick} className="inline-block ">
-        {checkform ? (
-          <IoIosCheckmarkCircle className="inline-block align-middle w-12 h-12 leading-none text-klp-600" />
+      <input
+        onChange={onChange}
+        id={id}
+        type="radio"
+        value={value}
+        className="invisible absolute"
+      />
+      <label onClick={onClick} htmlFor={id} className="inline-block align-middle w-full">
+        {!(`${id}` === form.checkLabel) ? (
+          <IoIosCheckmarkCircleOutline className="cursor-pointer inline-block align-middle w-12 h-12 leading-none text-kg-200" />
         ) : (
-          <IoIosCheckmarkCircleOutline className="inline-block align-middle w-12 h-12 leading-none text-kg-200" />
+          <IoIosCheckmarkCircle className="cursor-pointer inline-block align-middle w-12 h-12 leading-none text-kp-600" />
+        )}
+        {window.location.pathname === '/shop/mypage/destination/list' || (
+          <span className="inline-block align-middle text-r-1.4 text-kg-350">{value}</span>
         )}
       </label>
-      {checkform ? (
-        <Modalform id="modal">
-          <Modal modal={modal} closeModal={closeModal} value="배송지로 선택이 완료되었습니다" />
-        </Modalform>
+      {form.checked ? (
+        modalClose === 'modalClose' ? (
+          ''
+        ) : (
+          <Modalform id="modal">
+            <Modal
+              modal={form.modal}
+              closeModal={closeModal}
+              value="배송지로 선택이 완료되었습니다"
+            />
+          </Modalform>
+        )
       ) : (
         ''
       )}
     </>
   );
-  //모달창 닫기
-  function closeModal() {
-    setform({
-      ...form,
-      checkform: true,
-      modal: false,
-    });
-  }
 };
 
 export default RoundCheckBox;

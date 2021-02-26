@@ -11,6 +11,8 @@ import itemDetail, { itemDetailSaga } from './itemDetail';
 import loading from './loading';
 import instagram from './instagram';
 import mdButtons from './mdButtons';
+import order from './orderList';
+import wish from './wishList';
 import addGoodsToCart, { addGoodsToCartSaga } from './common/addGoodsToCart';
 import { connectRouter } from 'connected-react-router';
 import themeProductList from './themeProductList';
@@ -19,6 +21,8 @@ const rootReducer = history =>
   combineReducers({
     mdButtons,
     cart,
+    wish,
+    order,
     goodsCart,
     user,
     notice,
