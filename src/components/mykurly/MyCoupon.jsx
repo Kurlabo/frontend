@@ -53,7 +53,6 @@ const MyCouponBlock = () => {
           <EmptyCoupon />
           {/* <MyCouponItem /> */}
         </ul>
-        <MyKurlyPageNation pageNumber="5" />
       </div>
     </div>
   );

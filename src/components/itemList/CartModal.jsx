@@ -51,8 +51,8 @@ const CartModal = ({
   closeModal,
   productName,
   originalPrice,
-  discounted_price,
-  discount_percent,
+  discounted_price = 0,
+  discount_percent = 0,
   product_id,
 }) => {
   const [count, setCount] = useState(1);

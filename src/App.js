@@ -37,6 +37,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={MainPage} />
         <Route path="/goods_cart" component={GoodsCartPage} />
+        <Route path="/shop/mypage/mypage_orderview/:orderNumber" component={MyOrderViewPage} />
         <Route path="/shop/account/modal" component={Modal} />
         <Route path="/shop/account/signin" component={LoginPage} />
         <Route path="/shop/account/signup" component={SignupPage} />
@@ -47,7 +48,6 @@ function App() {
         <Route path="/shop/goods/item_list/:category" component={ItemListPage} />
         <Route path="/shop/goods/theme_list/:theme" component={ThemeProductListPage} />
         <Route path="/shop/goods/event" component={WeekEvent} />
-        <Route path="/shop/mypage/mypage_orderview/:orderNumber" component={MyOrderViewPage} />
         <Route path="/order/input_reception" exact component={TypeUserInfo} />
         <Route path="/order" component={OrderPage} />
         <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />

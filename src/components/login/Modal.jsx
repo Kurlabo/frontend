@@ -12,13 +12,13 @@ export default function Modal({ closeModal, modal, id, post, value }) {
     >
       <div
         onClick={closeModal}
-        className="fixed left-0 top-0 w-full h-full bg-kg-400 bg-opacity-20"
+        className="fixed left-0 top-0 w-full h-full bg-kg-400 bg-opacity-20 z-900"
       ></div>
       <div
         tabIndex="-1"
         className={`fixed ${
           post ? 'top-2/4' : 'top-2/3'
-        } transform -translate-y-2/4 w-r-47 h-p-278 bg-gray-200 mx-auto text-center`}
+        } z-50 transform -translate-y-2/4 w-r-47 h-p-278 bg-gray-200 mx-auto text-center z-990`}
       >
         <h2 className="py-8 px-8 border-b bg-white border-gray-200 text-r-1.4 text-left text-kp-600 font-medium">
           알림메세지
