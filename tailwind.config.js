@@ -13,6 +13,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      boxShadow: {
+        sm: '0 1px 3px 0 rgba(0, 0, 0, 0.05)',
+      },
       fontFamily: {
         body: ['Noto Sans KR'],
       },
@@ -28,6 +31,8 @@ module.exports = {
         3: '3rem',
         4: '4rem',
         5: '5rem',
+        'r-1.2': '1.2rem',
+        'r-1.5': '1.5rem',
         'r-3': '3rem',
         'r-3.5': '3.5rem',
         'r-5': '5rem',
@@ -79,6 +84,8 @@ module.exports = {
         'checked-button':
           "url('https://res.kurly.com/mobile/service/common/2006/ico_checkbox_checked.svg')",
         'conversation-btn': 'url(https://res.kurly.com/pc/ico/2011/ico_point_up_18x12.svg)',
+        'kurlypass-on': 'url(https://res.kurly.com/pc/service/pass/1806/btn_pass_on.png)',
+        'kurlypass-off': 'url(https://res.kurly.com/pc/service/pass/1806/btn_pass_off.png)',
       }),
       width: {
         formWidth: '64rem',
@@ -137,6 +144,7 @@ module.exports = {
         discount: {
           100: '#FA622F',
         },
+        kurlypass: '#cac8c4',
         kdp: {
           100: '#31123D',
           200: '#401351',
@@ -277,12 +285,13 @@ module.exports = {
         'r-105': '105rem',
         'r-150': '150rem',
         'r-735': '735rem',
-        'vw-700': '700vw',
-        510: '510px',
+        'vh-50': '50vh',
         'vw-99': '99vw',
-        700: '700vw',
+        'vw-700': '700vw',
         13: '52px',
         370: '370px',
+        510: '510px',
+        700: '700vw',
       },
       translate: {
         'r-7.2': '7.2rem',
@@ -315,7 +324,7 @@ module.exports = {
       borderWidth: ['last'],
       fontWeight: ['hover', 'focus', 'focused-sibling'],
       backgroundColor: ['focused-sibling', 'active'],
-      backgroundImage: ['focused-sibling'],
+      backgroundImage: ['focused-sibling', 'hover'],
       textColor: ['focused-sibling'],
     },
   },

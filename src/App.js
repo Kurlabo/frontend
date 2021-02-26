@@ -25,6 +25,8 @@ import OrderPage from './pages/OrderPage';
 import PayCompletePage from './pages/PayCompletePage';
 import TypeUserInfo from './components/order/TypeUserInfo';
 import Header from './components/common/Header';
+import KurlyPassPage from './pages/KurlyPassPage';
+import MyDestinationModify from './components/mykurly/MyDestinationModify';
 
 function App() {
   return (
@@ -42,13 +44,18 @@ function App() {
         <Route path="/shop/goods/item_list/detail" component={ItemDetail} />
         <Route path="/shop/goods/item_list" component={ItemListPage} />
         <Route path="/shop/goods/event" component={WeekEvent} />
+        <Route path="/shop/mypage/mypage_orderview/:orderNumber" component={MyOrderViewPage} />
         <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />
         <Route path="/shop/mypage/destination/list" component={MyDestinationLIstPage} />
+        <Route path="/shop/mypage/mypage_wishlist:page" component={MyWishListPage} />
         <Route path="/shop/mypage/mypage_wishlist" component={MyWishListPage} />
         <Route path="/shop/mypage/mypage_review" component={MyReviewPage} />
         <Route path="/shop/mypage/mypage_emoney" component={MyEmoneyPage} />
         <Route path="/shop/mypage/mypage_coupon" component={MyCouponPage} />
         <Route path="/shop/member/myinfo" component={MyInfoPage} />
+        <Route path="/shop/mypage/kurlypass" component={KurlyPassPage} />
+        <Route path="/shop/mypage/desination/modify_form" component={MyDestinationModify} />
+        <Route path="/shop/mypage/desination/modify_form?:dtn_id" component={MyDestinationModify} />
         <Route path="/kakao/destination" component={SearchLocation} />
         <Route path="/" exact component={MainContainer} />
         <Route component={NotFoundPage} />
