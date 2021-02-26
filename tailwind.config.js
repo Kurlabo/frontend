@@ -17,12 +17,14 @@ module.exports = {
         body: ['Noto Sans KR'],
       },
       borderRadius: {
+        'r-2': '2rem',
         'p-3': '0.3rem',
         '50-p': '50%',
+        'r-3': '3rem',
+        'r-3.3': '3.3rem',
         'r-0.4': '0.4rem',
         'r-0.9': '0.9rem',
         'r-1.1': '1.1rem',
-        'r-2': '2rem',
       },
       lineHeight: {
         3: '3rem',
@@ -275,6 +277,7 @@ module.exports = {
         'r-30.9': '30.9rem',
         'r-32': '32rem',
         'r-35.5': '35.5rem',
+        'r-39.6': '39.6rem',
         'r-40': '40rem',
         'r-42.6': '42.6rem',
         'r-44.6': '44.6rem',

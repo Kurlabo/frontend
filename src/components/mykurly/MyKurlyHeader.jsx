@@ -1,6 +1,5 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
-import { MdKeyboardArrowRight } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import { BsChevronRight } from 'react-icons/bs';
 import mykurlybanner from '../../img/mykurlybanner.jpg';
 const li_sm = 'float-left align-middle w-r-19.7 h-r-17.8 bg-white p-12';
@@ -56,7 +55,7 @@ const MyKurlyHeader = () => {
               <h3 className="text-r-1.4">컬리패스</h3>
 
               <p className={`${detail_wrapper}`}>
-                <Link>
+                <Link to="#">
                   <span className={`${detail_text}`}>알아보기</span>
                   <BsChevronRight className={`${arr_icon}`} />
                 </Link>

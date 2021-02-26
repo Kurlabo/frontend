@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, withRouter } from 'react-router';
 import { getItemsThunk } from '../../modules/itemlist';
 import ItemCard from './ItemCard';
+import Loading from '../common/Loading';
 
 const ItemCardContainer = () => {
   const dispatch = useDispatch();
-  const items = useSelector(state => state.itemList.itemList);
+  const items = useSelector(state => state.itemList.itemList.content);
+  const isLoading = useSelector(state => state.itemList.loading);
   const { category } = useParams();
 
   useEffect(() => {
@@ -34,14 +36,18 @@ const ItemCardContainer = () => {
   return (
     <div className="w-p-1050 mx-auto overflow-y-auto">
       <ul className="flex flex-wrap pb-24">
+        {isLoading && <Loading />}
         {items.map((item, idx) => (
           <li key={item.product_id + idx * 10} className="w-1/3 h-r-65">
             <ItemCard
+              product_id={item.product_id}
               imgUrl={item.original_image_url}
               productName={item.name}
               originalPrice={+item.original_price}
               shortDesc={item.short_description}
               stickerImageUrl={item.sticker_image_url}
+              discount_percent={item.discount_percent}
+              discounted_price={+item.discounted_price}
             />
           </li>
         ))}

@@ -17,7 +17,7 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
   const dispatch = useDispatch();
   let onPopUp = useRef(false);
 
-  const isLogin = true;
+  const isLogin = false;
   const { count } = useSelector(state => state.cartAddOption);
   const { isOpen, msg } = useSelector(state => state.itemDetail.modalInfo);
   const [viewCartOption, setviewCartOption] = useState(false);
@@ -39,6 +39,7 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
     }
     if (!isLogin) {
       console.log('로그인 창으로 이동!!!');
+      setIsWishListModalOpen(true);
       return;
     }
     onPopUp.current = true;
