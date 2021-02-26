@@ -25,6 +25,7 @@ const modalStyles = {
     left: 0,
     right: 0,
     bottom: 0,
+    zIndex: 999,
     backgroundColor: 'rgba(32, 32, 32, 0.75)',
   },
 };
@@ -33,7 +34,7 @@ const SignupModal = ({ modalIsOpen, closeModal, value }) => {
   let modalText = '';
   switch (value) {
     case 'uid':
-      modalText = '아이다를';
+      modalText = '아이디를';
       break;
     case 'password':
       modalText = '비밀번호를';

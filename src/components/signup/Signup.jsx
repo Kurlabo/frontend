@@ -9,17 +9,17 @@ import PassInput from './PassInput';
 import SignupButton from './SignupButton';
 import SignupModal from './SignupModal';
 
-const Signup = ({ myinfo = false }) => {
+const Signup = ({ signUpStart }) => {
   const formTitle = 'pt-28 font-bold text-kg-300 text-5xl text-center';
   const regForm = 'text-r-1.4';
   const regTitle = 'font-medium text-left align-top pt-7 text-kg-400 ';
   const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
   const subText = 'text-r-1.2 text-gray-600';
   const submitBtn = 'bg-kp-600 text-white w-96 h-20 rounded-md';
-  const borderBottom = 'border-b border-solid border-kg-400';
 
   const [validId1, setValidId1] = useState(false);
   const [validId2, setValidId2] = useState(false);
+
   const [validPass1, setValidPass1] = useState(false);
   const [validPass2, setValidPass2] = useState(false);
   const [validPass3, setValidPass3] = useState(false);
@@ -95,23 +95,19 @@ const Signup = ({ myinfo = false }) => {
                 휴대폰
               </FormInput>
             </tr>
-            {myinfo ? (
-              <></>
-            ) : (
-              <tr>
-                <th className={regTitle}>
-                  주소<span className="text-formStar">*</span>
-                </th>
-                <td className="py-4">
-                  <SignupButton big={true} onClick={clickButton}>
-                    <FiSearch className="inline-block" />
-                    주소검색
-                  </SignupButton>
-                  <p className={subText}>배송지에 따라 상품 정보가 달라질 수 있습니다.</p>
-                </td>
-                <td></td>
-              </tr>
-            )}
+            <tr>
+              <th className={regTitle}>
+                주소<span className="text-formStar">*</span>
+              </th>
+              <td className="py-4">
+                <SignupButton big={true} onClick={openSearch}>
+                  <FiSearch className="inline-block" />
+                  주소검색
+                </SignupButton>
+                <p className={subText}>배송지에 따라 상품 정보가 달라질 수 있습니다.</p>
+              </td>
+              <td></td>
+            </tr>
             <tr>
               <th className={regTitle}>
                 성별<span className="text-formStar">*</span>
@@ -157,23 +153,6 @@ const Signup = ({ myinfo = false }) => {
               </td>
               <td></td>
             </tr>
-            {myinfo ? (
-              <tr>
-                <th className={(regTitle, borderBottom)}>선택약관동의</th>
-                <td colSpan="2" className={borderBottom}>
-                  <CheckBox
-                    id="agree2"
-                    state={agree2}
-                    ref={agree2Ref}
-                    onChange={() => setAgree2(!agree2)}
-                  >
-                    개인정보 수집·이용 동의 <span className="sub">(선택)</span>
-                  </CheckBox>
-                </td>
-              </tr>
-            ) : (
-              <></>
-            )}
             <tr>
               <th className={regTitle}>
                 이용약관동의<span className="text-formStar">*</span>
@@ -264,7 +243,6 @@ const Signup = ({ myinfo = false }) => {
   }
 
   function onSubmit(e) {
-    if (myinfo) return false;
     e.preventDefault();
     const valid = [
       validId1,
@@ -309,7 +287,8 @@ const Signup = ({ myinfo = false }) => {
         }
       }
     }
-    console.log(newUser);
+    signUpStart(newUser);
+    // console.log(newUser);
   }
   function checkPhone(e) {
     const { value } = e.target;
@@ -326,11 +305,38 @@ const Signup = ({ myinfo = false }) => {
       e.target.value = value.substring(0, value.length - 1);
     }
   }
-  function openModal() {
-    setSignup(true);
-  }
+
   function closeModal() {
     setSignup(false);
+  }
+  function openSearch() {
+    const width = 500;
+    const height = 400;
+
+    // new daum.Postcode({
+    //   oncomplete: function (data) {
+    //     let left = Math.ceil((window.screen.width - width) / 2);
+    //     let top = Math.ceil((window.screen.height - height) / 2);
+
+    //     const addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
+    //     localStorage.setItem('address', addr);
+    //     // dispatch(getAddress(addr));
+    //     const buildingName = data.buildingName ? data.buildingName : '';
+
+    //     // localStorage에 주소 값 저장
+    //     sessionStorage.setItem('address', addr);
+    //     sessionStorage.setItem('buildingName', buildingName);
+
+    //     window.open(
+    //       '/kakao/destination',
+    //       '_blank',
+    //       `height=${height},width=${width}, top=${top}, left=${left}`,
+    //     );
+    //   },
+    // }).open({
+    //   left: Math.ceil((window.screen.width - width) / 2),
+    //   top: Math.ceil((window.screen.height - height) / 2),
+    // });
   }
 };
 export default Signup;

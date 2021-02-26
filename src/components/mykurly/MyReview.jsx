@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import MyKurlyPageNation from './MyKurlyPageNation';
 import MyKurlyHeader from './MyKurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
 import { Link } from 'react-router-dom';

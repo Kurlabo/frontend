@@ -79,7 +79,7 @@ const MyInfoForm = () => {
                 이메일
               </FormInput>
               <td>
-                <SignupButton onclick={clickButton}>중복확인</SignupButton>
+                <SignupButton onClick={clickButton}>중복확인</SignupButton>
               </td>
             </tr>
             <tr>
@@ -93,7 +93,7 @@ const MyInfoForm = () => {
                 휴대폰
               </FormInput>
               <td>
-                <SignupButton onclick={clickButton}>다른 번호인증</SignupButton>
+                <SignupButton onClick={clickButton}>다른 번호인증</SignupButton>
               </td>
             </tr>
             <tr>
@@ -188,7 +188,7 @@ const MyInfoForm = () => {
             </tr>
             <tr>
               <td colSpan="3" className="text-center pt-16">
-                <button className={secesstBtn} onclick={secession}>
+                <button className={secesstBtn} onClick={secession}>
                   탈퇴하기
                 </button>
                 <button type="submit" className={infoBtn}>
@@ -231,9 +231,6 @@ const MyInfoForm = () => {
     if (isNaN(+lastChar) || value.length > num) {
       e.target.value = value.substring(0, value.length - 1);
     }
-  }
-  function openModal() {
-    setSignup(true);
   }
   function closeModal() {
     setSignup(false);

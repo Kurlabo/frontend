@@ -47,6 +47,7 @@ const PassInput = ({
             ref={passRef}
             placeholder={info ? '' : '비밀번호를 입력해주세요'}
             autoComplete="new-password"
+            onKeyDown={keyPress}
           />
           <div className="hidden" ref={passSub}>
             <p className={`${subText} ${validPass1 ? 'text-green-700' : 'text-red-800'}`}>
@@ -80,6 +81,7 @@ const PassInput = ({
             onFocus={onFocusRePass}
             ref={rePassRef}
             placeholder={info ? '' : '비밀번호를 한번 더 입력해주세요'}
+            onKeyDown={keyPress}
           />
           <div className="hidden" ref={rePassSub}>
             <p className={`${subText} ${validRePass ? 'text-green-700' : 'text-red-800'}`}>
@@ -120,6 +122,9 @@ const PassInput = ({
       default:
         break;
     }
+  }
+  function keyPress(e) {
+    if (e.keyCode === 13) e.preventDefault();
   }
 };
 

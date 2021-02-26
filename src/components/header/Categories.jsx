@@ -3,15 +3,20 @@ import { useState } from 'react';
 import { categoryDatas } from '../../common_style/common';
 import CategoriesLi from './CategoriesLi';
 
+const ulStyle =
+  'h-r-49.6 bg-white w-r-21.2 border-gray-200 border-t border-l border-b overflow-x-hidden overflow-y-auto';
+
 const Categories = () => {
-  const [active, setactive] = useState({
-    activeId: '',
-    change: false,
-  });
+  const [inUl, setInUl] = useState(false);
+  const [active, setactive] = useState('');
 
   return (
-    <div className="absolute top-r-4.5 hidden">
-      <ul className="relative bg-white">
+    <div
+      className={`absolute top-r-4.5 ${active ? 'w-r-44.6' : 'w-r-21.2'}`}
+      onMouseOver={onMouseOver}
+      onMouseLeave={onMouseLeave}
+    >
+      <ul className={ulStyle}>
         {categoryDatas.map(data => {
           return (
             <CategoriesLi
@@ -21,31 +26,30 @@ const Categories = () => {
               inactiveImg={data.inactiveImg}
               activeImg={data.activeImg}
               subdatas={data.sub}
-              active={active.activeId}
-              change={active.change}
+              active={active}
               onActive={onActive}
               inActive={inActive}
+              inUl={inUl}
             />
           );
         })}
       </ul>
     </div>
   );
+  function onMouseOver(e) {
+    setInUl(true);
+  }
+  function onMouseLeave(e) {
+    setInUl(false);
+  }
+
   // onMouseOver
   function onActive(e) {
-    setactive({
-      ...active,
-      activeId: e.target.id,
-      change: true,
-    });
-    console.log(e.target.id);
+    setactive(e.currentTarget.id);
   }
   // onMouseLeave
   function inActive(e) {
-    setactive({
-      ...active,
-      change: false,
-    });
+    if (!inUl) setactive('');
   }
 };
 

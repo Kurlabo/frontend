@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Carousel from './BigCarousel/Index';
+import BigCarousel from './BigCarousel/Index';
 import Instagram from './Instagram/Index';
 import SmallCarousel from './SmallCarousel/Index';
 
 const Main = () => {
   return (
     <div>
-      <Carousel />
+      <BigCarousel />
       <SmallCarousel title="이 상품 어때요?" />
       <SmallCarousel title="알뜰 상품 >" />
       <SmallCarousel title="MD의 추천" mdSuggest />
