@@ -81,7 +81,7 @@ export const requestForModificationGoodsAmount = (product_id, variation) => asyn
 export const requestServerToDeleteProducInfo = product_id => async dispatch => {
   try {
     const res = await axios.post('http://3.35.221.9:8080/api/goods/goods_cart/delete', {
-      product_id,
+      product_id: [...product_id],
     });
     dispatch(deleteProdcutInfo(res.data.deleted_product_id));
   } catch (e) {
@@ -180,7 +180,7 @@ const goodsCart = handleActions(
     }),
     [DELETE_PRODCUT_INFO]: (state, { payload }) => ({
       ...state,
-      cart: state.cart.filter(item => item.product_id !== payload),
+      cart: state.cart.filter(item => !payload.includes(item.product_id)),
     }),
     [CHANGE_ONLY_SELECT_ALL_STATE]: (state, { payload }) => ({
       ...state,
