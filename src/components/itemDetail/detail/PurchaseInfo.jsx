@@ -7,7 +7,7 @@ import { setCartCount, setProductPrice } from '../../../modules/cartAddOption';
 const dlStyle = 'py-p-18 border-b border-gray-100 flex';
 const dtStyle = 'w-p-150 text-gray-700';
 const btnStyle = 'h-p-56 font-medium border rounded-p-3 text-p-16 text-center pt-6';
-const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList }) => {
+const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList, isLogin }) => {
   const {
     original_image_url,
     name,
@@ -23,9 +23,6 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList }) => {
     discount_percent,
     discounted_price,
   } = itemDetail;
-
-  // 스토어에서 로그인 유무 상태데이터 가져와야함!!!!!!!!
-  const isLogin = false;
 
   const dispatch = useDispatch();
   const { count, productPrice } = useSelector(state => state.cartAddOption);
