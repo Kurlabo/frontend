@@ -9,9 +9,9 @@ import SignupButton from '../signup/SignupButton';
 import SignupModal from '../signup/SignupModal';
 
 const MyInfoForm = () => {
-  const formTitle = 'pb-14 border-b border-solid border-kg-400 font-bold text-r-24';
-  const regForm = 'text-r-1.4';
-  const regTitle = 'font-bold text-left align-top pt-7 ';
+  const formTitle = 'pb-14 border-b-2 border-solid border-kg-400 font-medium text-r-24';
+  const regForm = 'text-r-1.4 mt-4';
+  const regTitle = 'text-left align-top pt-7 ';
   const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
   const subText = 'text-r-1.2 text-gray-600';
   const secesstBtn = 'border border-kp-600 mr-4 text-kp-600 w-48 h-20 rounded-md';
@@ -46,7 +46,7 @@ const MyInfoForm = () => {
   const ageRef = useRef();
 
   return (
-    <div className="w-r-64 ml-auto mr-auto pb-48">
+    <div className="w-r-85 h-full mt-20 mb-14 font-normal">
       <h1 className={formTitle}>개인 정보 수정</h1>
       <form className={regForm} onSubmit={onSubmit} ref={formRef} autoComplete="off">
         <input style={{ display: 'none' }} aria-hidden="true" />
