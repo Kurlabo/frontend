@@ -4,7 +4,7 @@ import axios from '../../../node_modules/axios/index';
 import SignupButton from './SignupButton';
 import SignupModal from './SignupModal';
 
-const regTitle = 'font-bold text-left align-top pt-7 ';
+const regTitle = 'font-medium text-kg-400 text-left align-top pt-7 ';
 const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
 const subText = 'text-r-1.2 text-gray-600';
 

@@ -7,7 +7,7 @@ import Modalform from '../login/Modalform';
 
 const MyInfo = () => {
   const confirm = {
-    state: true,
+    state: false,
     modal: false,
   };
   // const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const MyInfoBlock = () => {
       </div>
       <div className="text-center text-r-1.4">
         <form onSubmit={onSubmit}>
-          <div className="-ml-32 border-b border-kg-80 py-6 mb-16">
+          <div className="border-b border-kg-80 py-6 mb-16">
             <label className="block my-4">
               <span className="text-left inline-block w-48 font-medium">로그인</span>
               <input
