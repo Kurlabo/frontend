@@ -25,7 +25,7 @@ const ItemDetailContainer = ({ match }) => {
     dispatch(setProductId({ productId }));
     window.scrollTo(0, 0);
     return () => {
-      dispatch(unloadProductInfo());
+      // dispatch(unloadProductInfo());
       dispatch(initCartOption());
     };
   }, [dispatch, productId]);
