@@ -8,11 +8,14 @@ import notice from './notice';
 import cartAddOption from './cartAddOption';
 import itemDetail, { itemDetailSaga } from './itemDetail';
 import loading from './loading';
+import instagram from './instagram';
+import mdButtons from './mdButtons';
 import addGoodsToCart, { addGoodsToCartSaga } from './common/addGoodsToCart';
 import { connectRouter } from 'connected-react-router';
 
 const rootReducer = history =>
   combineReducers({
+    mdButtons,
     cart,
     goodsCart,
     user,
@@ -22,6 +25,7 @@ const rootReducer = history =>
     itemDetail,
     loading,
     addGoodsToCart,
+    instagram,
     router: connectRouter(history),
   });
 

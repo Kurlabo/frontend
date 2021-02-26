@@ -1,49 +1,60 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MdButtons from './MdButtons/Index';
 
 const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
-  console.log(1);
   const [mdCurIndex, setMdCurIndex] = useState('채소');
-  // let mdCurIndex = '채소';
-  // let [cur, setcur] = useState(0);
+  const dispatch = useDispatch();
+  const mainInfo = useSelector(state => state.instagram);
+  const MdGoodsInfo = useSelector(state => state.mdButtons.GoodsInfo);
+
   let cur = useRef(0);
   let onAnimate = false;
   const containerRef = useRef(null);
   const prevButtonRef = useRef(null);
   const nextButtonRef = useRef(null);
 
+  const imgArr = [];
+
+  addCarouselInfoToArray('howAbout', '이 상품 어때요?');
+  addCarouselInfoToArray('frugality', '알뜰 상품 >');
+  addCarouselInfoToArray('todays', '오늘의 신상품 >');
+  addCarouselInfoToArray('hots', '지금 가장 핫한 상품>');
+  addCarouselInfoToArray('', 'MD의 추천', 'mdSuggestion');
+
   useEffect(() => {
     containerRef.current.style.transitionDuration = '0.5s';
     containerRef.current.style.transitionProperty = 'all';
     containerRef.current.style.transitionTimingFunction = 'ease-in-out';
-  });
+  }, [dispatch]);
 
-  const imgArr = [
-    [
-      'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
-    ],
+  // const imgArr1 = [
+  //   [
+  //     'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
+  //   ],
 
-    [
-      'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
-    ],
+  //   [
+  //     'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
+  //   ],
 
-    [
-      'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
-    ],
+  //   [
+  //     'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
+  //   ],
 
-    ['https://img-cf.kurly.com/shop/data/goods/1523522504728l0.jpg'],
-  ];
+  //   ['https://img-cf.kurly.com/shop/data/goods/1523522504728l0.jpg'],
+  // ];
 
   const suggestType = [
     '채소',
@@ -69,12 +80,12 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
     <div className={`${bgGray ? 'bg-kg-500' : ''}`}>
       <div className="container h-auto">
         {!mdSuggest && (
-          <Link to="" className="block font-bold text-r-2.8 text-center pt-r-7.9 pb-r-3.5">
+          <h2 to="" className="block font-bold text-r-2.8 text-center pt-r-7.9 pb-r-3.5">
             {title}
             {subtitle && (
               <p className="pt-4 font-normal text-r-1.6 text-gray-400 leading-8">{subtitle}</p>
             )}
-          </Link>
+          </h2>
         )}
         {mdSuggest && (
           <MdButtons
@@ -94,19 +105,30 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
           />
           <div className="overflow-hidden">
             <ul ref={containerRef} className="w-r-735">
-              {imgArr.map(imgs => (
-                <li className="w-r-105 float-left">
-                  {imgs.map(img => (
-                    <div className="inline-block h-r-49.6 w-r-24.9 mr-r-1.3 ">
-                      <Link to>
-                        <img alt="" src={img} />
-                        <p className="text-r-1.6 mt-5 mb-4">[헤말린] 멸치 3종 (냉장)</p>
+              {imgArr.map((infos, index) => (
+                <li key={`${index}`} className="w-r-105 float-left">
+                  {infos.map((info, index) => (
+                    <div
+                      key={`${index}`}
+                      className="inline-block h-r-49.6 w-r-24.9 mr-r-1.3 align-top"
+                    >
+                      <Link to={`/shop/goods/goods_view/${info.product_id}`}>
+                        <img alt="" src={info.product_img} />
+                        <p className="text-r-1.6 mt-5 mb-4">{info.product_name}</p>
                       </Link>
                       <span className="font-bold">
-                        <span className="text-r-1.6 mr-3 text-discount-100">10%</span>
-                        <span className="text-r-1.6">7.470원</span>
+                        {info.discount_rate !== 0 && (
+                          <span className="text-r-1.6 mr-3 text-discount-100">
+                            {info.discount_rate}%
+                          </span>
+                        )}
+                        <span className="text-r-1.6">{info.original_price.toLocaleString()}원</span>
                       </span>
-                      <p className="text-r-1.4 mt-2 text-gray-400 line-through">8,300원</p>
+                      {info.discount_rate !== 0 && (
+                        <p className="text-r-1.4 mt-2 text-gray-400 line-through">
+                          {info.discounted_price.toLocaleString()}원
+                        </p>
+                      )}
                     </div>
                   ))}
                 </li>
@@ -121,7 +143,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
           {mdSuggest && (
             <div className="w-r-52 mx-auto">
               <Link
-                to=""
+                to={`/shop/goods/item_list/category=${1000 + +suggestType.indexOf(mdCurIndex)}`}
                 className="block h-r-5.6 pt-r-1.6 border-solid border-kmd-100 border text-r-1.6 leading-8 text-center"
               >
                 <span className="px-7 text-black">
@@ -147,7 +169,6 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
       nextButtonRef.current.style.display = '';
       containerRef.current.style.transform = `translateX(-${(cur.current - 1) * 1050}px)`;
     }
-    // setcur(--cur);
     --cur.current;
 
     setTimeout(() => {
@@ -173,13 +194,30 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
       prevButtonRef.current.disabled = false;
       prevButtonRef.current.style.display = '';
     }
-    // setcur(++cur);
     ++cur.current;
 
     setTimeout(() => {
       onAnimate = false;
     }, 500);
   }
+
+  function addCarouselInfoToArray(dataName, titleType, mdSuggestion) {
+    if (mdSuggestion === 'mdSuggestion') {
+      if (MdGoodsInfo.length !== 0 && title === titleType) {
+        for (let i = 0; i < Math.ceil(MdGoodsInfo.length / 4); i++) {
+          imgArr.push([]);
+        }
+        MdGoodsInfo.map((info, i) => imgArr[Math.floor(i / 4)].push(info));
+      }
+      return;
+    }
+    if (mainInfo[dataName] !== undefined && title === titleType) {
+      for (let i = 0; i < Math.ceil(mainInfo[dataName].length / 4); i++) {
+        imgArr.push([]);
+      }
+      mainInfo[dataName].map((info, i) => imgArr[Math.floor(i / 4)].push(info));
+    }
+  }
 };
 
-export default SmallCarousel;
+export default React.memo(SmallCarousel);
