@@ -9,6 +9,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   const [mdCurIndex, setMdCurIndex] = useState('채소');
   const dispatch = useDispatch();
   const mainInfo = useSelector(state => state.instagram);
+  const MdGoodsInfo = useSelector(state => state.mdButtons.GoodsInfo);
 
   let cur = useRef(0);
   let onAnimate = false;
@@ -22,6 +23,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   addCarouselInfoToArray('frugality', '알뜰 상품 >');
   addCarouselInfoToArray('todays', '오늘의 신상품 >');
   addCarouselInfoToArray('hots', '지금 가장 핫한 상품>');
+  addCarouselInfoToArray('', 'MD의 추천', 'mdSuggestion');
 
   useEffect(() => {
     containerRef.current.style.transitionDuration = '0.5s';
@@ -29,30 +31,30 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
     containerRef.current.style.transitionTimingFunction = 'ease-in-out';
   }, [dispatch]);
 
-  const imgArr1 = [
-    [
-      'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
-    ],
+  // const imgArr1 = [
+  //   [
+  //     'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
+  //   ],
 
-    [
-      'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
-    ],
+  //   [
+  //     'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
+  //   ],
 
-    [
-      'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
-      'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
-    ],
+  //   [
+  //     'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
+  //     'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
+  //   ],
 
-    ['https://img-cf.kurly.com/shop/data/goods/1523522504728l0.jpg'],
-  ];
+  //   ['https://img-cf.kurly.com/shop/data/goods/1523522504728l0.jpg'],
+  // ];
 
   const suggestType = [
     '채소',
@@ -78,12 +80,12 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
     <div className={`${bgGray ? 'bg-kg-500' : ''}`}>
       <div className="container h-auto">
         {!mdSuggest && (
-          <Link to="" className="block font-bold text-r-2.8 text-center pt-r-7.9 pb-r-3.5">
+          <h2 to="" className="block font-bold text-r-2.8 text-center pt-r-7.9 pb-r-3.5">
             {title}
             {subtitle && (
               <p className="pt-4 font-normal text-r-1.6 text-gray-400 leading-8">{subtitle}</p>
             )}
-          </Link>
+          </h2>
         )}
         {mdSuggest && (
           <MdButtons
@@ -124,7 +126,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
                       </span>
                       {info.discount_rate !== 0 && (
                         <p className="text-r-1.4 mt-2 text-gray-400 line-through">
-                          ${info.discounted_price.toLocaleString()}원
+                          {info.discounted_price.toLocaleString()}원
                         </p>
                       )}
                     </div>
@@ -192,7 +194,6 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
       prevButtonRef.current.disabled = false;
       prevButtonRef.current.style.display = '';
     }
-    // setcur(++cur);
     ++cur.current;
 
     setTimeout(() => {
@@ -200,7 +201,16 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
     }, 500);
   }
 
-  function addCarouselInfoToArray(dataName, titleType) {
+  function addCarouselInfoToArray(dataName, titleType, mdSuggestion) {
+    if (mdSuggestion === 'mdSuggestion') {
+      if (MdGoodsInfo.length !== 0 && title === titleType) {
+        for (let i = 0; i < Math.ceil(MdGoodsInfo.length / 4); i++) {
+          imgArr.push([]);
+        }
+        MdGoodsInfo.map((info, i) => imgArr[Math.floor(i / 4)].push(info));
+      }
+      return;
+    }
     if (mainInfo[dataName] !== undefined && title === titleType) {
       for (let i = 0; i < Math.ceil(mainInfo[dataName].length / 4); i++) {
         imgArr.push([]);
