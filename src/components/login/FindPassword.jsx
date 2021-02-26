@@ -6,7 +6,7 @@ import Button from './Button';
 import { VscCheck } from 'react-icons/vsc';
 import Modalform from './Modalform';
 import Modal from './Modal';
-export default function FindPassword({ onSubmit }) {
+export default function FindPassword({ onSubmit, changeSuccess }) {
   const [form, setform] = useState({
     findform: false,
     modal: false,
@@ -24,18 +24,36 @@ export default function FindPassword({ onSubmit }) {
     <LoginFormStyle>
       <form onSubmit={onSubmit}>
         {!findform ? (
-          <FindPassword1 onChange={onChange} u_name={u_name} u_id={u_id} u_email={u_email} />
+          <>
+            <FindPassword1 onChange={onChange} u_name={u_name} u_id={u_id} u_email={u_email} />
+            <Button type="submit" onClick={onClick} form="find">
+              비밀번호 찾기
+            </Button>
+          </>
         ) : (
-          <FindPassword2 />
+          <>
+            <FindPassword2 />
+            <Button type="submit" onClick={onClick2} form="find">
+              비밀번호 변경
+            </Button>
+          </>
         )}
-        <Button type="submit" onClick={onClick} form="find">
-          {!findform ? '비밀번호 찾기' : '비밀번호 변경'}
-        </Button>
       </form>
       {modal ? (
-        <Modalform id="modal">
-          <Modal closeModal={closeModal} modal={modal} value="이메일형식이 잘못되었습니다" />
-        </Modalform>
+        changeSuccess ? (
+          <Modalform id="modal">
+            <Modal
+              closeModal={closeModal}
+              modal={modal}
+              id="changepwd"
+              value="비밀번호 변경이 완료되었습니다."
+            />
+          </Modalform>
+        ) : (
+          <Modalform id="modal">
+            <Modal closeModal={closeModal} modal={modal} value="이메일형식이 잘못되었습니다" />
+          </Modalform>
+        )
       ) : (
         ''
       )}
@@ -66,6 +84,13 @@ export default function FindPassword({ onSubmit }) {
         modal: false,
       });
     }
+  }
+
+  function onClick2() {
+    setform({
+      ...form,
+      modal: true,
+    });
   }
 
   //모달창 닫기

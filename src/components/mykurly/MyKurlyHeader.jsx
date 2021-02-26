@@ -35,8 +35,10 @@ const MyKurlyHeader = () => {
             <section className="h-full">
               <h3 className="text-r-1.4">적립금</h3>
               <p className={`${detail_wrapper}`}>
-                <span className={`${detail_text}`}>100 원</span>
-                <BsChevronRight className={`${arr_icon}`} />
+                <Link to="/shop/mypage/mypage_emoney">
+                  <span className={`${detail_text}`}>100 원</span>
+                  <BsChevronRight className={`${arr_icon}`} />
+                </Link>
               </p>
               <span className="inline-block mt-8 text-r-1.2 text-kg-150">소멸예정 0원</span>
             </section>
@@ -45,17 +47,18 @@ const MyKurlyHeader = () => {
             <section className="h-full">
               <h3 className="text-r-1.4">쿠폰</h3>
               <p className={`${detail_wrapper}`}>
-                <span className={`${detail_text}`}>0 개</span>
-                <BsChevronRight className={`${arr_icon}`} />
+                <Link to="/shop/mypage/mypage_coupon">
+                  <span className={`${detail_text}`}>0 개</span>
+                  <BsChevronRight className={`${arr_icon}`} />
+                </Link>
               </p>
             </section>
           </li>
           <li className={li_sm}>
             <section className="h-full">
               <h3 className="text-r-1.4">컬리패스</h3>
-
               <p className={`${detail_wrapper}`}>
-                <Link to="#">
+                <Link to="/shop/mypage/kurlypass">
                   <span className={`${detail_text}`}>알아보기</span>
                   <BsChevronRight className={`${arr_icon}`} />
                 </Link>
@@ -63,7 +66,7 @@ const MyKurlyHeader = () => {
             </section>
           </li>
         </ul>
-        <Link to="/shop/goods/goods_list.php?category=423">
+        <Link to="/">
           <article
             className="mt-8 h-24 bg-contain  bg-no-repeat bg-center"
             style={{ backgroundImage: `url(${mykurlybanner})` }}

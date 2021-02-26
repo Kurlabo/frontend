@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRef } from 'react';
 import { BiSearch } from 'react-icons/bi';
+import RoundCheckBox from '../mykurly/RoundCheckBox';
 
 const container = 'flex flex-col justify-center items-center font-body px-12';
 const searchInput =
@@ -13,8 +14,6 @@ const research =
   'border border-kp-600 rounded-p-3 text-kp-600 w-48 bg-transparent h-r-4.4 font-bold ml-4';
 const mainTextWrap = 'font-medium text-p-24 pt-16 pb-4 text-center';
 const subTextWrap = 'text-left w-full text-gray-400 text-1.2';
-
-/*global daum*/
 
 const SearchLocation = ({ history }) => {
   const address = sessionStorage.getItem('address');
@@ -53,6 +52,9 @@ const SearchLocation = ({ history }) => {
           placeholder="나머지 주소를 입력해주세요"
           ref={resAddress}
         />
+      </div>
+      <div className="w-full text-left mb-3">
+        <RoundCheckBox value="기본 배송지로 저장" modalClose="modalClose" />
       </div>
       <div className={subTextWrap}>
         &#8251;
