@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRef } from 'react';
 import { BiSearch } from 'react-icons/bi';
 
 const container = 'flex flex-col justify-center items-center font-body px-12';
@@ -18,7 +19,8 @@ const subTextWrap = 'text-left w-full text-gray-400 text-1.2';
 const SearchLocation = ({ history }) => {
   const address = sessionStorage.getItem('address');
   const buildingName = sessionStorage.getItem('buildingName');
-
+  const resAddress = useRef();
+  console.log(resAddress.current);
   return (
     <div className={container}>
       <p className={mainTextWrap}>
@@ -45,7 +47,12 @@ const SearchLocation = ({ history }) => {
             재검색
           </button>
         </div>
-        <input type="text" className={addInput} placeholder="나머지 주소를 입력해주세요" />
+        <input
+          type="text"
+          className={addInput}
+          placeholder="나머지 주소를 입력해주세요"
+          ref={resAddress}
+        />
       </div>
       <div className={subTextWrap}>
         &#8251;
@@ -62,6 +69,7 @@ const SearchLocation = ({ history }) => {
     </div>
   );
   function onClose() {
+    sessionStorage.setItem('res', resAddress.current.value);
     window.close();
   }
 };
