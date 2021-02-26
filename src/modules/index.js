@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import cart from './cart';
-import wish from './wishList';
-import order from './orderList';
 import goodsCart from './goodsCart';
 import itemList from './itemlist';
 import user from './user';
@@ -11,14 +9,19 @@ import recentItem from './aside';
 import cartAddOption from './cartAddOption';
 import itemDetail, { itemDetailSaga } from './itemDetail';
 import loading from './loading';
+import instagram from './instagram';
+import mdButtons from './mdButtons';
+import order from './orderList';
+import wish from './wishList';
 import addGoodsToCart, { addGoodsToCartSaga } from './common/addGoodsToCart';
 import { connectRouter } from 'connected-react-router';
 
 const rootReducer = history =>
   combineReducers({
-    order,
-    wish,
+    mdButtons,
     cart,
+    wish,
+    order,
     goodsCart,
     user,
     notice,
@@ -28,6 +31,7 @@ const rootReducer = history =>
     itemDetail,
     loading,
     addGoodsToCart,
+    instagram,
     router: connectRouter(history),
   });
 

@@ -22,13 +22,14 @@ import MyOrderViewPage from './pages/MyOrderViewPage';
 import OrderPage from './pages/OrderPage';
 import TypeUserInfo from './components/order/TypeUserInfo';
 import Header from './components/common/Header';
-import KurlyPassPage from './pages/KurlyPassPage';
-import MyDestinationModify from './components/mykurly/MyDestinationModify';
 import ItemDetailPage from './pages/ItemDetailPage';
 import ItemListPage from './pages/ItemListPage';
 import MainPage from './pages/MainPage';
 import GoodsCartPage from './pages/GoodsCartPage';
+import ThemeProductListPage from './pages/ThemeProductListPage';
 import MyReviewRegisterPage from './pages/MyReviewRegisterPage';
+import KurlyPassPage from './pages/KurlyPassPage';
+import MyDestinationModify from './components/mykurly/MyDestinationModify';
 function App() {
   return (
     <>
@@ -41,7 +42,7 @@ function App() {
         <Route path="/shop/account/signup" component={SignupPage} />
         <Route path="/shop/account/find_id" component={FindIdPage} />
         <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
-
+        <Route path="/shop/goods/theme_list/:theme" component={ThemeProductListPage} />
         <Route path="/shop/goods/goods_view/:productId" component={ItemDetailPage} />
         <Route path="/shop/goods/item_list/:category" component={ItemListPage} />
         <Route path="/shop/goods/event" component={WeekEvent} />
@@ -61,8 +62,8 @@ function App() {
         <Route path="/shop/mypage/mypage_coupon" component={MyCouponPage} />
         <Route path="/shop/member/myinfo" component={MyInfoPage} />
         <Route path="/shop/mypage/kurlypass" component={KurlyPassPage} />
-        <Route path="/shop/mypage/desination/modify_form" component={MyDestinationModify} />
         <Route path="/shop/mypage/desination/modify_form?:dtn_id" component={MyDestinationModify} />
+        <Route path="/shop/mypage/desination/modify_form" component={MyDestinationModify} />
         <Route path="/shop/member/" component={MyInfoPage} />
         <Route path="/kakao/destination" component={SearchLocation} />
         <Route component={NotFoundPage} />

@@ -7,7 +7,7 @@ import CartModal from '../itemList/CartModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { getWishItems } from '../../modules/wishList';
 import MyWishListItem from './MyWishListItem';
-import { withRouter, useParams } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const MyWishList = () => {
   return (
