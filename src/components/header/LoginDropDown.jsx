@@ -38,6 +38,8 @@ const LoginDropDown = () => {
         let top = Math.ceil((window.screen.height - height) / 2);
 
         const addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
+        localStorage.setItem('address', addr);
+        // dispatch(getAddress(addr));
         const buildingName = data.buildingName ? data.buildingName : '';
 
         // localStorage에 주소 값 저장

@@ -9,12 +9,15 @@ import recentItem from './aside';
 import cartAddOption from './cartAddOption';
 import itemDetail, { itemDetailSaga } from './itemDetail';
 import loading from './loading';
+import instagram from './instagram';
+import mdButtons from './mdButtons';
 import addGoodsToCart, { addGoodsToCartSaga } from './common/addGoodsToCart';
 import { connectRouter } from 'connected-react-router';
 import themeProductList from './themeProductList';
 
 const rootReducer = history =>
   combineReducers({
+    mdButtons,
     cart,
     goodsCart,
     user,
@@ -25,7 +28,11 @@ const rootReducer = history =>
     itemDetail,
     loading,
     addGoodsToCart,
+<<<<<<< HEAD
     themeProductList,
+=======
+    instagram,
+>>>>>>> fefdcb1045b6a8cb3e64b8aefeea2bd13ad3e257
     router: connectRouter(history),
   });
 

@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
+import WishListLoginModal from '../itemDetail/detail/WishListLoginModal';
 import CheckQuantityModal from './CheckQuantityModal';
 
 const quanWrapper =
@@ -11,7 +15,7 @@ const btnStyle =
 const btnStyleP =
   'border-gray-400 border borders-solid text-3xl rounded-p-3 w-full bg-kp-600 text-white pt-8 pb-8 rounded-md box-border focus:outline-0';
 const sumWrapper = 'text-p-16 flex justify-between text-gray-800';
-const priceWrapper = 'flex justify-between pt-3 pb-32';
+const priceWrapper = 'flex justify-between pt-3 pb-28 ';
 
 // 모달창 스타일 정의
 const cartModalStyles = {
@@ -42,9 +46,54 @@ const cartModalStyles = {
   },
 };
 
-const CartModal = ({ modalIsOpen, closeModal, productName, originalPrice }) => {
+const CartModal = ({
+  modalIsOpen,
+  closeModal,
+  productName,
+  originalPrice,
+  discounted_price,
+  discount_percent,
+  product_id,
+}) => {
   const [count, setCount] = useState(1);
   const [checkQuantity, setCheckQuantity] = useState(false);
+  const [iswishListModalOpen, setIsWishListModalOpen] = useState(false);
+
+  // 로그인 유무 받아와야됨
+  const isLogin = true;
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+  let onPopUp = useRef(false);
+
+  // 장바구니 담기 버튼
+  const onClickAddCart = useCallback(() => {
+    if (onPopUp.current) return;
+    if (count === 0) {
+      setCheckQuantity(true);
+      return;
+    }
+    if (!isLogin) {
+      console.log('로그인 창으로 이동!!!');
+      setIsWishListModalOpen(true);
+      closeModal();
+      return;
+    }
+    onPopUp.current = true;
+    console.log('모래반지빵야빵야:', productName);
+    // 장바구니에 post
+    closeModal();
+    dispatch(postGoodsToCart({ product_id: product_id, cnt: count }));
+    setCount(1);
+    setTimeout(() => {
+      onPopUp.current = false;
+    }, 3000);
+  }, [count, dispatch, isLogin, product_id, onPopUp, closeModal, productName]);
+
+  const closeWishListModal = useCallback(() => {
+    setIsWishListModalOpen(false);
+    history.push('/shop/account/signin');
+  }, [history]);
 
   return (
     <>
@@ -57,7 +106,16 @@ const CartModal = ({ modalIsOpen, closeModal, productName, originalPrice }) => {
       >
         <h1 className="text-2xl ">{productName}</h1>
         <div className={priceWrapper}>
-          <div className="inline-block text-2xl font-bold">{originalPrice.toLocaleString()}원</div>
+          <div>
+            <div className="inline-block text-2xl font-bold pt-2">
+              {discounted_price.toLocaleString()}원
+            </div>
+            {discount_percent === 0 || (
+              <div className="inline-block text-2xl pt-2 pl-3 font-normal text-gray-400 line-through">
+                {originalPrice.toLocaleString()}원
+              </div>
+            )}
+          </div>
           <div className={quanWrapper}>
             <button className="w-p-28 focus:outline-0" onClick={onMinus}>
               <img src="/img/ico_minus_on.svg" alt="수량내리기" />
@@ -69,22 +127,27 @@ const CartModal = ({ modalIsOpen, closeModal, productName, originalPrice }) => {
           </div>
         </div>
         <div className={sumWrapper}>
-          <span>합계</span>
-          <span className="text-p-24 font-bold">{(+originalPrice * count).toLocaleString()}원</span>
+          <span className="pt-4">합계</span>
+          <span className="text-p-24 font-bold pb-4">
+            {(discounted_price * count).toLocaleString()}원
+          </span>
         </div>
-        <div className="text-right text-2xl pb-8">
-          <span className={accum}>적립</span>
-          <span>로그인 후, 적립혜택 제공</span>
-        </div>
+        {!isLogin && (
+          <div className="text-right text-2xl pb-8">
+            <span className={accum}>적립</span>
+            <span>로그인 후, 적립혜택 제공</span>
+          </div>
+        )}
         <form className="pb-8 flex">
           <button type="button" className={btnStyle} onClick={closeModal}>
             취소
           </button>
-          <button type="button" className={btnStyleP} onClick={addItem}>
+          <button type="button" className={btnStyleP} onClick={onClickAddCart}>
             장바구니 담기
           </button>
         </form>
       </Modal>
+      <WishListLoginModal openModal={iswishListModalOpen} closeModal={closeWishListModal} />
       {checkQuantity && <CheckQuantityModal checkQuantity={checkQuantity} close={close} />}
     </>
   );
@@ -98,13 +161,6 @@ const CartModal = ({ modalIsOpen, closeModal, productName, originalPrice }) => {
   // 수량 증가
   function onPlus(e) {
     setCount(count => count + 1);
-  }
-
-  // 장바구니 담기 버튼 클릭
-  function addItem() {
-    if (count === 0) {
-      setCheckQuantity(true);
-    }
   }
 
   // 모달 닫기

@@ -18,6 +18,7 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
   let onPopUp = useRef(false);
 
   const isLogin = true;
+
   const { count } = useSelector(state => state.cartAddOption);
   const { isOpen, msg } = useSelector(state => state.itemDetail.modalInfo);
   const [viewCartOption, setviewCartOption] = useState(false);
@@ -39,6 +40,7 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
     }
     if (!isLogin) {
       console.log('로그인 창으로 이동!!!');
+      setIsWishListModalOpen(true);
       return;
     }
     onPopUp.current = true;
@@ -84,6 +86,7 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
     <div>
       <main className="w-p-1050 pt-8 mx-auto my-0 text-gray-800">
         <PurchaseInfo
+          isLogin={isLogin}
           itemDetail={itemDetail}
           onClickAddCart={onClickAddCart}
           onClickWishList={onClickWishList}
@@ -94,6 +97,7 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
       </main>
       {viewCartOption && (
         <CartOption
+          isLogin={isLogin}
           itemDetail={itemDetail}
           onClickAddCart={onClickAddCart}
           onClickWishList={onClickWishList}

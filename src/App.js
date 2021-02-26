@@ -13,10 +13,10 @@ import SignupPage from './pages/SignupPage';
 import Modal from './components/login/Modal';
 import NotFoundPage from './pages/NotFoundPage';
 import SearchLocation from './components/common/SearchLocation';
-import CustomerService from './components/customerService/CustomerService';
-import NoticeDetail from './components/customerService/NoticeDetail';
 import Footer from './components/common/Footer';
 import WeekEvent from './components/weekEvent/WeekEvent';
+import CustomerService from './components/customerService/CustomerService';
+import NoticeDetail from './components/customerService/NoticeDetail';
 import Sidebar from './components/common/Sidebar';
 import MyOrderViewPage from './pages/MyOrderViewPage';
 import OrderPage from './pages/OrderPage';
@@ -26,7 +26,11 @@ import ItemDetailPage from './pages/ItemDetailPage';
 import ItemListPage from './pages/ItemListPage';
 import MainPage from './pages/MainPage';
 import GoodsCartPage from './pages/GoodsCartPage';
+<<<<<<< HEAD
 import ThemeProductListPage from './pages/ThemeProductListPage';
+=======
+import MyReviewRegisterPage from './pages/MyReviewRegisterPage';
+>>>>>>> fefdcb1045b6a8cb3e64b8aefeea2bd13ad3e257
 function App() {
   return (
     <>
@@ -58,6 +62,7 @@ function App() {
         <Route path="/shop/customer/board" component={CustomerService} />
         <Route path="/shop/mypage/destination/list" component={MyDestinationLIstPage} />
         <Route path="/shop/mypage/mypage_wishlist" component={MyWishListPage} />
+        <Route path="/shop/mypage/mypage_review/register" component={MyReviewRegisterPage} />
         <Route path="/shop/mypage/mypage_review" component={MyReviewPage} />
         <Route path="/shop/mypage/mypage_review#tabid" component={MyReviewPage} />
         <Route path="/shop/mypage/mypage_emoney" component={MyEmoneyPage} />

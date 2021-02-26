@@ -20,6 +20,7 @@ const AddCartModal = () => {
     isNew: addGoodsToCart.result,
     isOpen: addGoodsToCart.modalopen,
   }));
+
   return (
     <div className={AddCartModalStyle + (isOpen ? '' : ' transform scale-0 opacity-0')}>
       <div className=" bg-cartTriangle bg-no-repeat absolute bg-contain w-r-1.9 h-36 bg-center -top-r-5.2 right-r-1.4 " />
