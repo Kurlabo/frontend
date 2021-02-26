@@ -11,6 +11,7 @@ const ThemeProductContainer = () => {
   const isLoading = useSelector(state => state.themeProductList.loading);
   const { theme } = useParams();
 
+  console.log(items);
   useEffect(() => {
     const params = theme.split('=')[1];
     dispatch(getThemeItemsThunk(params));
@@ -22,6 +23,7 @@ const ThemeProductContainer = () => {
         {isLoading && <Loading />}
         {items.map((item, idx) => (
           <li className="w-1/3 h-r-65" key={item.product_id * idx}>
+            {console.log(item)}
             <ThemeProductCard
               product_id={item.product_id}
               imgUrl={item.original_image_url}

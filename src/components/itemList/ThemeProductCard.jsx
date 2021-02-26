@@ -15,7 +15,6 @@ const ThemeProductCard = ({
   discounted_price,
 }) => {
   const [modalIsOpen, setmodalIsOpen] = useState(false);
-
   return (
     <>
       <div className="pt-10 pl-14 relative cursor-pointer mb-52">
@@ -63,6 +62,8 @@ const ThemeProductCard = ({
         closeModal={closeModal}
         productName={productName}
         originalPrice={+originalPrice}
+        discounted_price={+discounted_price}
+        discount_percent={+discount_percent}
       />
     </>
   );
