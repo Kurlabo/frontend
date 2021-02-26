@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAllCheckBox } from '../../modules/goodsCart';
+import { requestServerToDeleteProducInfo, selectAllCheckBox } from '../../modules/goodsCart';
 
 const Select = ({ bottom }) => {
   const dispatch = useDispatch();
   const selectAll = useSelector(state => state.goodsCart.selectAll);
   const GoodsInfo = useSelector(state => state.goodsCart.cart);
-  const selectNum = GoodsInfo.filter(item => item.select).length;
+  const selectGoods = GoodsInfo.filter(item => item.select);
+  const selectGoodsIds = selectGoods.map(product => product.product_id);
+
+  const onClickSpan = useCallback(() => {
+    dispatch(requestServerToDeleteProducInfo(selectGoodsIds));
+  }, [dispatch, selectGoodsIds]);
+
+  const onChangeRadio = useCallback(
+    check => {
+      dispatch(selectAllCheckBox(check));
+    },
+    [dispatch],
+  );
+
+  // function onChangeRadio(check) {
+  //   dispatch(selectAllCheckBox(check));
+  // }
+
   return (
     <div
       className={
@@ -29,16 +46,14 @@ const Select = ({ bottom }) => {
           selectAll === true ? 'bg-checked-button' : 'bg-check-button'
         } `}
       >
-        {`전체선택 (${selectNum}/${GoodsInfo.length})`}
+        {`전체선택 (${selectGoods.length}/${GoodsInfo.length})`}
       </label>
       <span className="px-8 text-gray-400">|</span>
-      <span className="py-7 cursor-pointer">선택삭제</span>
+      <span onClick={onClickSpan} className="py-7 cursor-pointer">
+        선택삭제
+      </span>
     </div>
   );
-
-  function onChangeRadio(check) {
-    dispatch(selectAllCheckBox(check));
-  }
 };
 
 export default Select;

@@ -71,7 +71,7 @@ const CartGoods = ({ goods }) => {
             </div>
             <button
               onClick={() => {
-                onClickButton(product_id);
+                onClickButton([product_id]);
               }}
               className="pl-11 text-gray-300 focus:outline-none"
             >
@@ -83,7 +83,6 @@ const CartGoods = ({ goods }) => {
   );
 
   function onClickCheckbox(product_id, check) {
-    console.log(check);
     dispatch(CountselectedCheckBox(product_id, check));
   }
 
