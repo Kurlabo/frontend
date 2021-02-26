@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 const Aside = () => {
   useEffect(() => {
     console.log(asideRef.current.style);
-    // window.onscroll = scrollSlider;
+    window.onscroll = scrollSlider;
   }, []);
   const recentList = useSelector(state => state.recentItem);
   const asideRef = useRef();
