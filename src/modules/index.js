@@ -28,11 +28,8 @@ const rootReducer = history =>
     itemDetail,
     loading,
     addGoodsToCart,
-<<<<<<< HEAD
     themeProductList,
-=======
     instagram,
->>>>>>> fefdcb1045b6a8cb3e64b8aefeea2bd13ad3e257
     router: connectRouter(history),
   });
 

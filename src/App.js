@@ -26,11 +26,8 @@ import ItemDetailPage from './pages/ItemDetailPage';
 import ItemListPage from './pages/ItemListPage';
 import MainPage from './pages/MainPage';
 import GoodsCartPage from './pages/GoodsCartPage';
-<<<<<<< HEAD
 import ThemeProductListPage from './pages/ThemeProductListPage';
-=======
 import MyReviewRegisterPage from './pages/MyReviewRegisterPage';
->>>>>>> fefdcb1045b6a8cb3e64b8aefeea2bd13ad3e257
 function App() {
   return (
     <>
