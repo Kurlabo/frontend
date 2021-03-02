@@ -18,7 +18,7 @@ const PageContainer = ({ firstParams }) => {
   const totalPages = useSelector(state => state.itemList.totalPages);
 
   return (
-    <div className="pagenation-container text-gray-900 text-xl  border border-gray-300 inline-block">
+    <div className="text-gray-900 text-xl  border border-gray-300 inline-block">
       <button className={pageFStyle}>
         <AiOutlineDoubleLeft />
       </button>
