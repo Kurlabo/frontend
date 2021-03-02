@@ -20,8 +20,6 @@ const HeaderNav = () => {
   const [category, setCategory] = useState(false);
   const { theme } = useParams();
 
-  console.log(theme);
-
   useEffect(() => {
     window.addEventListener('scroll', changePos);
     return () => {
