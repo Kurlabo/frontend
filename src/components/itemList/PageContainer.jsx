@@ -34,7 +34,7 @@ const PageContainer = ({ firstParams }) => {
                 <Link
                   to={`/shop/goods/item_list/category=${firstParams}?page=${i - 1}`}
                   style={{ verticalAlign: '-webkit-baseline-middle' }}
-                  className="pr-6 pl-6"
+                  className="pr-6 pl-6  transform translate-y-r-0.9 inline-block h-14 "
                 >
                   {i}
                 </Link>
