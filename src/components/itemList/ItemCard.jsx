@@ -33,7 +33,7 @@ const ItemCard = ({
       <div className="pt-10 pl-14 relative cursor-pointer mb-52">
         <Link to={`/shop/goods/goods_view/${product_id}`}>
           <div className="overflow-hidden mb-6">
-            <img src={imgUrl} alt="avocado" className={imgStyle} />
+            <img src={imgUrl} alt={productName} className={imgStyle} onError={handleImgError} />
             {stickerImageUrl === 'None' ? (
               <></>
             ) : (
@@ -81,6 +81,9 @@ const ItemCard = ({
       />
     </>
   );
+  function handleImgError(e) {
+    e.target.src = '/img/commingsoonresize.png';
+  }
 };
 
 export default ItemCard;
