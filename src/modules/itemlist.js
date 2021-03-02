@@ -8,21 +8,23 @@ const GET_ITEMS_FAIL = 'itemlist/GET_ITEMS_FAIL';
 
 // 액션 생성함수
 export const getLoading = createAction(GET_LOADING);
-export const getItemsSuccess = createAction(GET_ITEMS_SUCCESS, (res, id, subid) => ({
+export const getItemsSuccess = createAction(GET_ITEMS_SUCCESS, (res, id, subid, totalPages) => ({
   res,
   id,
   subid,
+  totalPages,
 }));
 export const getItemsFail = createAction(GET_ITEMS_FAIL, error => error);
 
-export const getItemsThunk = (id, subid) => async dispatch => {
+export const getItemsThunk = (id, subid, page) => async dispatch => {
   dispatch(getLoading());
   try {
     const res = subid
       ? await axios.get(`http://3.35.221.9:8080/api/goods/goods_list?category=${subid}`)
-      : await axios.get(`http://3.35.221.9:8080/api/goods/goods_list?category=${id}`);
+      : await axios.get(`http://3.35.221.9:8080/api/goods/goods_list?category=${id}&page=${page}`);
+    console.log(1);
     setTimeout(() => {
-      dispatch(getItemsSuccess(res.data, id, subid));
+      dispatch(getItemsSuccess(res.data, id, subid, res.data.totalPages));
     }, 1500);
   } catch (e) {
     dispatch(getItemsFail(e));
@@ -35,7 +37,7 @@ const initialState = {
   error: '',
   itemList: { content: [] },
   firstParams: '1000',
-  secondParams: '',
+  totalPages: '',
 };
 
 // 리듀서
@@ -45,7 +47,7 @@ const itemList = handleActions(
       ...state,
       itemList: payload.res,
       firstParams: payload.id,
-      secondParams: payload.subid,
+      totalPages: payload.totalPages,
       loading: false,
     }),
     [GET_ITEMS_FAIL]: (state, action) => ({ ...state, error: action.payload }),
