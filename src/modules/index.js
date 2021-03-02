@@ -12,6 +12,7 @@ import loading from './loading';
 import instagram from './instagram';
 import mdButtons from './mdButtons';
 import order from './orderList';
+import myReviewRegister, { myReviewSaga } from './myReviewRegister';
 import wish from './wishList';
 import addGoodsToCart, { addGoodsToCartSaga } from './common/addGoodsToCart';
 import { connectRouter } from 'connected-react-router';
@@ -34,11 +35,12 @@ const rootReducer = history =>
     addGoodsToCart,
     themeProductList,
     instagram,
+    myReviewRegister,
     router: connectRouter(history),
   });
 
 export function* rootSaga() {
-  yield all([itemDetailSaga(), addGoodsToCartSaga()]);
+  yield all([itemDetailSaga(), addGoodsToCartSaga(), myReviewSaga()]);
 }
 
 export default rootReducer;
