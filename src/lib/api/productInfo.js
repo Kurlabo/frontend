@@ -12,5 +12,9 @@ export const postAddCart = addProductInfo =>
   axios.post(`http://3.35.221.9:8080/api/goods/goods_cart`, addProductInfo);
 
 // 리뷰 작성 등록
-export const postReview = reviewInfo =>
-  axios.post(`http://3.35.221.9:8080/api/mypage_review`, reviewInfo);
+export const postReview = reviewInfo => {
+  return axios.post(
+    `http://3.35.221.9:8080/api/mypage/mypage_review/${reviewInfo.product_id}`,
+    reviewInfo,
+  );
+};

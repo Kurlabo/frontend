@@ -5,7 +5,6 @@ const MyDestinationModify = ({ history }) => {
   const address2 = '206-2304';
   const addressee = '세영';
   const phoneNumber = '010-1234-1234';
-  console.log(history.location);
   return (
     <div className="my-10 px-10 text-r-1.4 font-medium text-kg-350">
       <form>

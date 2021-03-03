@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CartModal from './CartModal';
-import { getProductInfo, unloadProductInfo } from '../../modules/itemDetail';
+import { getProductInfo } from '../../modules/itemDetail';
 
 import { useDispatch } from 'react-redux';
 

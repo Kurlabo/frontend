@@ -13,6 +13,13 @@ import { withRouter } from 'react-router';
 import { postWishList, setModuleMsg, setModuleMsgEmpty } from '../../modules/itemDetail';
 import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
 
+function getCookie(name) {
+  let matches = document.cookie.match(
+    new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'),
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
 const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
   const dispatch = useDispatch();
   let onPopUp = useRef(false);
@@ -23,6 +30,10 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
   const { isOpen, msg } = useSelector(state => state.itemDetail.modalInfo);
   const [viewCartOption, setviewCartOption] = useState(false);
   const [iswishListModalOpen, setIsWishListModalOpen] = useState(false);
+
+  // 쿠키에 넣을 key와 value
+  const name = 'recentlyViewed';
+  const existingValue = getCookie(name);
 
   const cartOptionRender = useCallback(() => {
     if (window.pageYOffset > 1100) {
@@ -39,7 +50,6 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
       return;
     }
     if (!isLogin) {
-      console.log('로그인 창으로 이동!!!');
       setIsWishListModalOpen(true);
       return;
     }
@@ -79,8 +89,20 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
 
     return () => {
       window.removeEventListener('scroll', cartOptionRender);
+
+      let value = existingValue ? [...JSON.parse(existingValue)] : [];
+      value = value.filter(item => +item.product_id !== +productId);
+      value.unshift({ product_id: productId, thumbnailUrl: itemDetail.list_image_url });
+      if (value.length > 10) {
+        value.pop();
+      }
+      document.cookie =
+        encodeURIComponent(name) +
+        '=' +
+        encodeURIComponent(JSON.stringify(value)) +
+        '; max-age=3600';
     };
-  }, [cartOptionRender, dispatch]);
+  }, [cartOptionRender, dispatch, existingValue, itemDetail.list_image_url, productId]);
 
   return (
     <div>

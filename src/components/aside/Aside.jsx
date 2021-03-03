@@ -8,17 +8,17 @@ import { useSelector } from 'react-redux';
 const Aside = () => {
   const pathname = window.location.pathname;
 
-  useEffect(() => {
-    console.log(asideRef.current.style);
-    window.onscroll = scrollSlider;
-  }, []);
   const recentList = useSelector(state => state.recentItem);
   const asideRef = useRef();
   const asideLink =
     'block h-12 border-solid border border-gray-400 border-t-0 text-center leading-3';
-  if (pathname === '/kakao/destination') return null;
+  useEffect(() => {
+    window.onscroll = scrollSlider;
+  }, []);
+  if (pathname === '/kakao/destination' || pathname === '/order/input_reception') return null;
   else if (pathname === '/shop/mypage/desination/modify_form') return null;
   else if (pathname === '/shop/mypage/desination/modify_form/') return null;
+
   return (
     <aside
       className="absolute top-r-71 right-12 w-32 transition-all transform -translate-y-1/2 bg-white"

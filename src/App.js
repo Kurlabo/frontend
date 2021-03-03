@@ -30,6 +30,7 @@ import ThemeProductListPage from './pages/ThemeProductListPage';
 import MyReviewRegisterPage from './pages/MyReviewRegisterPage';
 import KurlyPassPage from './pages/KurlyPassPage';
 import MyDestinationModify from './components/mykurly/MyDestinationModify';
+import GetSupportWritingPage from './pages/GetSupportWritingPage';
 function App() {
   return (
     <>
@@ -37,6 +38,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={MainPage} />
         <Route path="/goods_cart" component={GoodsCartPage} />
+        <Route path="/shop/mypage/mypage_orderview/:orderNumber" component={MyOrderViewPage} />
         <Route path="/shop/account/modal" component={Modal} />
         <Route path="/shop/account/signin" component={LoginPage} />
         <Route path="/shop/account/signup" component={SignupPage} />
@@ -44,13 +46,13 @@ function App() {
         <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
         <Route path="/shop/goods/theme_list/:theme" component={ThemeProductListPage} />
         <Route path="/shop/goods/goods_view/:productId" component={ItemDetailPage} />
-        <Route path="/shop/goods/item_list/:category" component={ItemListPage} />
+        <Route path="/shop/goods/item_list/:category:page" component={ItemListPage} />
         <Route path="/shop/goods/theme_list/:theme" component={ThemeProductListPage} />
         <Route path="/shop/goods/event" component={WeekEvent} />
-        <Route path="/shop/mypage/mypage_orderview/:orderNumber" component={MyOrderViewPage} />
         <Route path="/order/input_reception" exact component={TypeUserInfo} />
         <Route path="/order" component={OrderPage} />
         <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />
+        <Route path="/shop/customer/board/get_support_writing" component={GetSupportWritingPage} />
         <Route path="/shop/customer/board/:id" component={NoticeDetail} />
         <Route path="/shop/customer/board" component={CustomerService} />
         <Route path="/shop/mypage/destination/list" component={MyDestinationLIstPage} />

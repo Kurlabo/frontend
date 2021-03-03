@@ -69,7 +69,7 @@ const HeaderSearch = () => {
               )}
         </div>
 
-        <Link to="/" className="inline-block text-5xl cursor-pointer">
+        <Link to="/goods_cart" className="inline-block text-5xl cursor-pointer">
           <FiShoppingCart className="hover:text-kp-600" />
         </Link>
       </div>

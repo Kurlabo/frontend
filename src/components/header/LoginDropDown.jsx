@@ -42,7 +42,7 @@ const LoginDropDown = () => {
         // dispatch(getAddress(addr));
         const buildingName = data.buildingName ? data.buildingName : '';
 
-        // localStorage에 주소 값 저장
+        // sessionStorage 주소 값 저장
         sessionStorage.setItem('address', addr);
         sessionStorage.setItem('buildingName', buildingName);
 

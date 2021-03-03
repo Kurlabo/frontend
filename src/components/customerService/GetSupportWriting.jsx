@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useState } from 'react';
+import { withRouter } from 'react-router';
 import MyModal from './common/MyModal';
 import OrderCheck from './OrderCheck';
 
@@ -8,7 +9,7 @@ const userInfo = {
   phone: '010-2323-7878',
 };
 
-const GetSupportWriting = ({ setPage }) => {
+const GetSupportWriting = ({ history }) => {
   const [checkClicked, setCheckClicked] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
   const [openModal, setOpenModal] = useState(false);
@@ -183,7 +184,7 @@ const GetSupportWriting = ({ setPage }) => {
     setOpenModal(false);
     // 작성한 문의글 post 하고 다시 1:1문의로!!!!!!!!!!!!!!
     // 문의글 Post하는 로직
-    setPage(false);
+    history.push('/shop/customer/board');
   }
 
   function setClickedTrue() {
@@ -204,4 +205,4 @@ const GetSupportWriting = ({ setPage }) => {
   }
 };
 
-export default GetSupportWriting;
+export default withRouter(GetSupportWriting);
