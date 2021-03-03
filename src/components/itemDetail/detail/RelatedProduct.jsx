@@ -13,7 +13,7 @@ const NameBox = styled.p`
   -webkit-box-orient: vertical;
 `;
 const RelatedProduct = ({ relatedProducts }) => {
-  let curIndex = 0;
+  let curIndex = useRef(0);
   const containerRef = useRef();
   const carouselArr = [
     ...relatedProducts.slice(15),
@@ -28,18 +28,18 @@ const RelatedProduct = ({ relatedProducts }) => {
   const slideNext = useCallback(() => {
     if (onAnimate) return;
     onAnimate = true;
-    if (curIndex <= 3) {
+    if (curIndex.current <= 3) {
       containerRef.current.style.transition = 'all 0.5s ease-in-out';
-      containerRef.current.style.transform = 'translateX(-' + 950 * (curIndex + 2) + 'px)';
-      ++curIndex;
+      containerRef.current.style.transform = 'translateX(-' + 950 * (curIndex.current + 2) + 'px)';
+      ++curIndex.current;
     }
-    if (curIndex === 3) {
+    if (curIndex.current === 3) {
       setTimeout(() => {
         containerRef.current.style.transition = 'all 0s';
         containerRef.current.style.transform = 'translateX(-' + 0 + 'px)';
       }, 500);
-      curIndex = -1;
-    } else if (curIndex === 4) {
+      curIndex.current = -1;
+    } else if (curIndex.current === 4) {
       setTimeout(() => {
         containerRef.current.style.transition = 'all 0s';
         containerRef.current.style.transform = 'translateX(-' + 950 + 'px)';
@@ -47,7 +47,7 @@ const RelatedProduct = ({ relatedProducts }) => {
       containerRef.current.style.transition = 'all 0.5s ease-in-out';
       containerRef.current.style.transform = 'translateX(-' + 950 * 5 + 'px)';
       console.log(950 * 4);
-      curIndex = 0;
+      curIndex.current = 0;
     }
     setTimeout(() => {
       onAnimate = false;
@@ -56,19 +56,19 @@ const RelatedProduct = ({ relatedProducts }) => {
 
   const slidePrev = useCallback(() => {
     if (onAnimate) return;
-    if (curIndex >= 0) {
+    if (curIndex.current >= 0) {
       onAnimate = true;
       containerRef.current.style.transition = 'all 0.5s ease-in-out';
-      containerRef.current.style.transform = 'translateX(-' + 950 * curIndex + 'px)';
-      --curIndex;
+      containerRef.current.style.transform = 'translateX(-' + 950 * curIndex.current + 'px)';
+      --curIndex.current;
     }
-    if (curIndex === -1) {
+    if (curIndex.current === -1) {
       setTimeout(() => {
         onAnimate = true;
         containerRef.current.style.transition = 'all 0s';
         containerRef.current.style.transform = 'translateX(-' + 950 * 4 + 'px)';
       }, 500);
-      curIndex = 3;
+      curIndex.current = 3;
     }
     setTimeout(() => {
       onAnimate = false;

@@ -41,9 +41,9 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList, isLogin }) 
     dispatch(setCartCount(count - 1));
   }, [count, dispatch]);
 
-  const alexCode = contactant.split('<br />').map(line => {
+  const alexCode = contactant.split('<br />').map((line, i) => {
     return (
-      <span>
+      <span key={i}>
         {line}
         <br />
       </span>

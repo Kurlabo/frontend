@@ -1,20 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import FrequentQuestion from './FrequentQuestion';
 import GetSupport from './GetSupport';
 import NavBar from './NavBar';
 import Notice from './Notice';
 
 const CustomerService = () => {
-  const [state, setState] = useState('공지사항');
+  const { navState } = useSelector(state => state.customerService);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="flex w-r-105 pt-r-6.5 mx-auto justify-between">
-      <NavBar state={state} onClick={clickNav} />
+      <NavBar />
       {render()}
     </div>
   );
 
   function render() {
-    switch (state) {
+    switch (navState) {
       case '공지사항':
         return <Notice />;
       case '자주하는 질문':
@@ -26,10 +32,6 @@ const CustomerService = () => {
       default:
         return;
     }
-  }
-
-  function clickNav(e) {
-    setState(e.currentTarget.firstChild.nodeValue);
   }
 };
 
