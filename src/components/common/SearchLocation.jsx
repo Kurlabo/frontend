@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRef } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import RoundCheckBox from '../mykurly/RoundCheckBox';
@@ -19,6 +19,10 @@ const SearchLocation = ({ history }) => {
   const address = sessionStorage.getItem('address');
   const buildingName = sessionStorage.getItem('buildingName');
   const resAddress = useRef();
+  const [form, setform] = useState({
+    checked: false,
+    checkLabel: '',
+  });
   console.log(resAddress.current);
   return (
     <div className={container}>
@@ -54,7 +58,13 @@ const SearchLocation = ({ history }) => {
         />
       </div>
       <div className="w-full text-left mb-3">
-        <RoundCheckBox value="기본 배송지로 저장" modalClose="modalClose" />
+        <RoundCheckBox
+          id="selectDefault"
+          onClick={onClickCheckBox}
+          form={form}
+          value="기본 배송지로 저장"
+          modalClose="modalClose"
+        />
       </div>
       <div className={subTextWrap}>
         &#8251;
@@ -73,6 +83,12 @@ const SearchLocation = ({ history }) => {
   function onClose() {
     sessionStorage.setItem('res', resAddress.current.value);
     window.close();
+  }
+  function onClickCheckBox(e) {
+    setform({
+      ...form,
+      checkLabel: e.currentTarget.htmlFor,
+    });
   }
 };
 
