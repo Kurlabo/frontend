@@ -21,8 +21,11 @@ const NameBoxLong = styled.p`
 const OrderCheckList = ({ orderList, onSetOrderNumber }) => {
   return (
     <>
-      {orderList.map(list => (
-        <tr className="text-center text-r-1.3 text-gray-600 h-p-40 border-b border-gray-200 odd:bg-gray-100">
+      {orderList.map((list, i) => (
+        <tr
+          key={i}
+          className="text-center text-r-1.3 text-gray-600 h-p-40 border-b border-gray-200 odd:bg-gray-100"
+        >
           <td>{list['order-number']}</td>
           <td>{list['order-date']}</td>
           <td>
