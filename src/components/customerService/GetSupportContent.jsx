@@ -1,11 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
+import { withRouter } from 'react-router';
 import MyModal from './common/MyModal';
 import Pagination from './common/Pagination';
 import GetSupportEmpty from './GetSupportEmpty';
 import GetSupportList from './GetSupportList';
 
-const GetSupportContent = ({ pQData, setPage }) => {
+const GetSupportContent = ({ pQData, history }) => {
   const [state, setState] = useState({
     currentId: 0,
     selectedState: pQData.map(data => ({ id: data.no, selected: false })),
@@ -56,14 +57,13 @@ const GetSupportContent = ({ pQData, setPage }) => {
   );
 
   function onClick() {
-    setPage(true);
+    history.push('/shop/customer/board/get_support_writing');
   }
 
   function closeModal() {
     // 데이터 삭제 처리
-
     setOpenModal(false);
   }
 };
 
-export default GetSupportContent;
+export default withRouter(GetSupportContent);

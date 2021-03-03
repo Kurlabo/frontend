@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import Loading from '../components/common/Loading';
 import ItemDetail from '../components/itemDetail/ItemDetail';
 import { initCartOption, setProductId } from '../modules/cartAddOption';
-import { getProductInfo, unloadProductInfo } from '../modules/itemDetail';
+import { getProductInfo } from '../modules/itemDetail';
 
 const ItemDetailContainer = ({ match }) => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const ItemDetailContainer = ({ match }) => {
   // productId는 아무래도 스토어에서 가져와야 될것
   const productId = match.params.productId;
 
-  const { itemDetail, error, loading } = useSelector(({ itemDetail, loading }) => ({
+  const { itemDetail, loading } = useSelector(({ itemDetail, loading }) => ({
     itemDetail: itemDetail.info,
     error: itemDetail.error,
     loading: loading['itemDetail/GET_PRODUCT_INFO'],
