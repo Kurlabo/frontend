@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router';
+import { setNavState } from '../../modules/customerService';
 
 const navList = ['공지사항', '자주하는 질문', '1:1문의'];
 
@@ -8,7 +11,18 @@ const listStyle =
 const unselectedStyle = ' text-gray-500';
 const selectedStyle = ' text-kp-600 bg-gray-100';
 
-const NavBar = ({ state, onClick }) => {
+const NavBar = ({ history }) => {
+  const dispatch = useDispatch();
+  const { navState } = useSelector(state => state.customerService);
+
+  const onClick = useCallback(
+    e => {
+      dispatch(setNavState(e.currentTarget.firstChild.nodeValue));
+      history.push('/shop/customer/board');
+    },
+    [dispatch, history],
+  );
+
   return (
     <div className="flex flex-col">
       <h2 className="text-r-3 pt-r-0.8 pb-p-33 text-gray-800 font-medium">고객센터</h2>
@@ -19,7 +33,7 @@ const NavBar = ({ state, onClick }) => {
               className={
                 listStyle +
                 (i === navList.length - 1 ? ' border-b' : '') +
-                (state === nav ? selectedStyle : unselectedStyle)
+                (navState === nav ? selectedStyle : unselectedStyle)
               }
               onClick={onClick}
               key={i}
@@ -47,4 +61,4 @@ const NavBar = ({ state, onClick }) => {
   );
 };
 
-export default NavBar;
+export default withRouter(NavBar);

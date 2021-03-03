@@ -10,6 +10,7 @@ import cartAddOption from './cartAddOption';
 import itemDetail, { itemDetailSaga } from './itemDetail';
 import loading from './loading';
 import instagram from './instagram';
+import customerService from './customerService';
 import mdButtons from './mdButtons';
 import order from './orderList';
 import myReviewRegister, { myReviewSaga } from './myReviewRegister';
@@ -32,6 +33,7 @@ const rootReducer = history =>
     cartAddOption,
     itemDetail,
     loading,
+    customerService,
     addGoodsToCart,
     themeProductList,
     instagram,
