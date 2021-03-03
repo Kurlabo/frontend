@@ -22,7 +22,7 @@ const MyWishListItem = ({ openModal, wishList, onClick }) => {
               </li>
               <li className="w-48 text-center inline-block align-middle">
                 <button
-                  name={product_id}
+                  id={`button_${product_id}`}
                   onClick={openModal}
                   className="text-r-1.3 py-2 w-40 mb-2 border border-kp-600 bg-kp-550 text-white"
                 >
