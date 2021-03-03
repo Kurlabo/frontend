@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getMdSuggestionGoodsInfo } from '../../../../modules/mdButtons';
 
-const MdButtons = ({ mdCurIndex, title, subtitle, suggestType, setMdCurIndex }) => {
+const MdButtons = ({ title, subtitle, suggestType, setMdCurIndex }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMdSuggestionGoodsInfo(0));
