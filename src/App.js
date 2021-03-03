@@ -46,7 +46,7 @@ function App() {
         <Route path="/shop/account/find_pwd" component={FindPasswordPage} />
         <Route path="/shop/goods/theme_list/:theme" component={ThemeProductListPage} />
         <Route path="/shop/goods/goods_view/:productId" component={ItemDetailPage} />
-        <Route path="/shop/goods/item_list/:category" component={ItemListPage} />
+        <Route path="/shop/goods/item_list/:category:page" component={ItemListPage} />
         <Route path="/shop/goods/theme_list/:theme" component={ThemeProductListPage} />
         <Route path="/shop/goods/event" component={WeekEvent} />
         <Route path="/order/input_reception" exact component={TypeUserInfo} />
