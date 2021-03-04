@@ -1,18 +1,31 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  requestForModificationGoodsAmount,
-  requestServerToDeleteProducInfo,
-  CountselectedCheckBox,
-} from '../../modules/goodsCart';
+import { requestForModificationGoodsAmount, CountselectedCheckBox } from '../../modules/goodsCart';
+import GoodsCartModal from './GoodsCartModal';
+import { setActiveModal } from '../../modules/cart';
 
 const CartGoods = ({ goods }) => {
   const dispatch = useDispatch();
+
   const itemCount = useSelector(state => state.goodsCart.cart);
+  const activeModal = useSelector(state => state.cart.modal);
+
+  const onClickButton = useCallback(() => {
+    dispatch(setActiveModal());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (activeModal === true) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [activeModal]);
+
   return (
-    <div>
+    <div className={`${activeModal === true ? 'overflow-hidden' : ''}`}>
       {goods &&
         goods.map(({ product_id, list_image_url, name }) => (
           <div
@@ -69,14 +82,20 @@ const CartGoods = ({ goods }) => {
               </span>
               <span>원</span>
             </div>
-            <button
-              onClick={() => {
-                onClickButton([product_id]);
-              }}
-              className="pl-11 text-gray-300 focus:outline-none"
-            >
+            <button onClick={onClickButton} className="pl-11 text-gray-300 focus:outline-none">
               <AiOutlineClose />
             </button>
+            {activeModal === true && (
+              <>
+                <GoodsCartModal product_id={product_id} />
+                <div
+                  onClick={() => {
+                    dispatch(setActiveModal());
+                  }}
+                  className="fixed left-0 top-0 w-screen h-screen z-900 bg-gray-600 bg-opacity-30"
+                />
+              </>
+            )}
           </div>
         ))}
     </div>
@@ -88,10 +107,6 @@ const CartGoods = ({ goods }) => {
 
   function onClickItemCount(product_id, variation) {
     dispatch(requestForModificationGoodsAmount(product_id, variation));
-  }
-
-  function onClickButton(product_id) {
-    dispatch(requestServerToDeleteProducInfo(product_id));
   }
 };
 

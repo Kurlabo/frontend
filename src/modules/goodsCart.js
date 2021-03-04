@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import axios from '../../node_modules/axios';
+import { setActiveModal } from './cart';
 
 // 액션타입
 const ADD_GOODS_INFO_TO_CART_STATE = 'goodsCart/ADD_GOODS_INFO_TO_CART_STATE';
@@ -87,6 +88,7 @@ export const requestServerToDeleteProducInfo = product_id => async dispatch => {
   } catch (e) {
     console.log(e);
   }
+  dispatch(setActiveModal());
 };
 
 // 상품별로 모든 체크박스가 체크시에 전체선택버튼 선택되어짐

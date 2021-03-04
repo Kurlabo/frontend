@@ -23,9 +23,6 @@ const Submit = () => {
         {addressData === '' && selectedProduct.length !== 0 && (
           <span to="#">배송지를 입력해주세요</span>
         )}
-        {/* {cart.length !== 0 && selectedProduct.length !== 0 && addressData !== '' && (
-          <Link to="/order">주문하기</Link>
-        )} */}
       </div>
       {cart.length !== 0 && selectedProduct.length !== 0 && addressData !== '' && (
         <Link
