@@ -1,20 +1,21 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { setActiveModal } from '../../modules/cart';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActiveModalProdcut } from '../../modules/cart';
 import { requestServerToDeleteProducInfo } from '../../modules/goodsCart';
 
-const GoodsCartModal = ({ product_id }) => {
+const GoodsCartModal = () => {
   const dispatch = useDispatch();
+  const productId = useSelector(state => state.cart.modalProduct.productId);
 
   const onClickButtonConfirm = useCallback(
-    product_id => {
-      dispatch(requestServerToDeleteProducInfo([product_id]));
+    productId => {
+      dispatch(requestServerToDeleteProducInfo([productId]));
     },
     [dispatch],
   );
 
   const onClickButtonCancel = useCallback(() => {
-    dispatch(setActiveModal());
+    dispatch(setActiveModalProdcut());
   }, [dispatch]);
 
   return (
@@ -26,7 +27,7 @@ const GoodsCartModal = ({ product_id }) => {
       <div className="bg-gray-200 py-10 flex justify-center">
         <button
           onClick={() => {
-            onClickButtonConfirm(product_id);
+            onClickButtonConfirm(productId);
           }}
           className="w-r-15.5 bg-kp-600 py-4 text-white text-r-1.2 mr-10"
         >

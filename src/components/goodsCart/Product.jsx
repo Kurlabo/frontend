@@ -4,28 +4,31 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestForModificationGoodsAmount, CountselectedCheckBox } from '../../modules/goodsCart';
 import GoodsCartModal from './GoodsCartModal';
-import { setActiveModal } from '../../modules/cart';
+import { setActiveModalProdcut } from '../../modules/cart';
 
 const CartGoods = ({ goods }) => {
   const dispatch = useDispatch();
 
   const itemCount = useSelector(state => state.goodsCart.cart);
-  const activeModal = useSelector(state => state.cart.modal);
+  const activeModalProduct = useSelector(state => state.cart.modalProduct);
 
-  const onClickButton = useCallback(() => {
-    dispatch(setActiveModal());
-  }, [dispatch]);
+  const onClickButton = useCallback(
+    product_id => {
+      dispatch(setActiveModalProdcut(product_id));
+    },
+    [dispatch],
+  );
 
   useEffect(() => {
-    if (activeModal === true) {
+    if (activeModalProduct.isActive === true) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
-  }, [activeModal]);
+  }, [activeModalProduct]);
 
   return (
-    <div className={`${activeModal === true ? 'overflow-hidden' : ''}`}>
+    <div className={`${activeModalProduct.isActive === true ? 'overflow-hidden' : ''}`}>
       {goods &&
         goods.map(({ product_id, list_image_url, name }) => (
           <div
@@ -82,15 +85,21 @@ const CartGoods = ({ goods }) => {
               </span>
               <span>원</span>
             </div>
-            <button onClick={onClickButton} className="pl-11 text-gray-300 focus:outline-none">
+            <button
+              onClick={() => {
+                console.log('product_id', product_id);
+                onClickButton(product_id);
+              }}
+              className="pl-11 text-gray-300 focus:outline-none"
+            >
               <AiOutlineClose />
             </button>
-            {activeModal === true && (
+            {activeModalProduct.isActive === true && (
               <>
-                <GoodsCartModal product_id={product_id} />
+                <GoodsCartModal />
                 <div
                   onClick={() => {
-                    dispatch(setActiveModal());
+                    dispatch(setActiveModalProdcut());
                   }}
                   className="fixed left-0 top-0 w-screen h-screen z-900 bg-gray-600 bg-opacity-30"
                 />
