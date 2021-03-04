@@ -27,8 +27,6 @@ const OrderContainer = () => {
     dispatch(getOrderInfo());
   }, [dispatch]);
 
-  console.log(products_list);
-
   return (
     <>
       {isLoading && <Loading />}
@@ -47,7 +45,7 @@ const OrderContainer = () => {
         />
         <div className="flex flex-wrap mx-auto w-p-1050">
           <Coupon />
-          <PayHistory />
+          <PayHistory products_list={products_list} />
           <PaySelection />
         </div>
         <PersonalAgree

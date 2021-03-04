@@ -6,10 +6,12 @@ import { useState } from 'react';
 export const borderBottom = 'border-b border-gray-800';
 const productWrapper = `flex justify-between w-p-1050 mx-auto text-2 ${borderBottom}`;
 
-const OrderProduct = ({ products_list }) => {
+const OrderProduct = ({ products_list = [] }) => {
   const [btnSwitch, setBtnSwitch] = useState(false);
-  const firstProduct = products_list.find((product, index) => index === 0);
-  console.log(firstProduct);
+  let firstProduct = [];
+  if (products_list !== undefined) {
+    firstProduct = products_list.find((product, index) => index === 0);
+  }
 
   return (
     <>
@@ -35,8 +37,13 @@ const OrderProduct = ({ products_list }) => {
           </ul>
         ) : (
           <p className="text-center font-medium pt-12">
-            {firstProduct.product_name}외
-            <span className="text-kp-600 ml-2">{products_list.length - 1}개</span>상품을 주문합니다.
+            {firstProduct !== undefined && firstProduct.product_name}외
+            {firstProduct !== undefined && (
+              <>
+                <span className="text-kp-600 ml-2">{products_list.length - 1}개</span>상품을
+                주문합니다.
+              </>
+            )}
           </p>
         )}
       </div>
