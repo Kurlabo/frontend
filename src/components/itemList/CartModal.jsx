@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Modal from 'react-modal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
 import WishListLoginModal from '../itemDetail/detail/WishListLoginModal';

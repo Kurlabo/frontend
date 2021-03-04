@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+import TypeUserInfo from './TypeUserInfo';
 
 const tdStyle = 'pt-r-1.9 text-1.4 font-normal pb-10';
 const defaultDeliver =
@@ -7,6 +8,14 @@ const modifyBtn =
   'w-24 h-12 text-1.2 font-medium rounded-p-3 border border-kp-600 text-kp-600 focus:outline-0';
 
 const DeliveryTable = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const openModal = useCallback(() => {
+    setModalIsOpen(true);
+  }, []);
+  const closeModal = useCallback(() => {
+    setModalIsOpen(false);
+  }, []);
+
   return (
     <table className="w-full">
       <tbody className="text-gray-900 text-left">
@@ -24,27 +33,15 @@ const DeliveryTable = () => {
           <th className="pt-r-1.9 text-1.4 font-medium">상세 정보</th>
           <td className={tdStyle}>
             <p className="pb-6 ">조재연, 01098063260</p>
-            <button className={modifyBtn} onClick={typeDeliveryInfo}>
+            <button className={modifyBtn} onClick={openModal}>
               입력
             </button>
           </td>
         </tr>
       </tbody>
+      <TypeUserInfo modalIsOpen={modalIsOpen} closeModal={closeModal} />
     </table>
   );
-
-  function typeDeliveryInfo() {
-    const width = 500;
-    const height = 800;
-    var left = Math.ceil((window.screen.width - width) / 2);
-    var top = Math.ceil((window.screen.height - height) / 2);
-
-    window.open(
-      '/order/input_reception',
-      '_blank',
-      `height=${height},width=${width}, top=${top}, left=${left}`,
-    );
-  }
 };
 
 export default DeliveryTable;

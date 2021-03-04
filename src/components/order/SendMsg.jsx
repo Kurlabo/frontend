@@ -7,7 +7,7 @@ import { formRadioIcon, formRadioIcon2 } from '../../common_style/common';
 const cancelBtn = 'w-1/2 h-r-4.4 rounded-p-3 border border-gray-300 mr-4 focus:outline-0';
 const saveBtn = 'w-1/2 bg-kp-600 text-white h-r-4.4 rounded-p-3';
 
-const SendMsg = ({ title }) => {
+const SendMsg = ({ title, closeModal }) => {
   const [messageTime, setMessageTime] = useState('afterDelivery');
 
   return (
@@ -58,7 +58,7 @@ const SendMsg = ({ title }) => {
       </fieldset>
 
       <div className="pt-r-2.9 pb-16 text-1.4 flex justify-between">
-        <button className={cancelBtn} onClick={cancel}>
+        <button className={cancelBtn} onClick={closeModal}>
           취소
         </button>
         <button className={saveBtn}>저장</button>
@@ -67,9 +67,6 @@ const SendMsg = ({ title }) => {
   );
   function changeMsgTime(e) {
     setMessageTime(e.target.id);
-  }
-  function cancel() {
-    window.close();
   }
 };
 
