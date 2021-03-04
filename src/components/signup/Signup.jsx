@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
+import axios from '../../../node_modules/axios/index';
 import CheckBox from './CheckBox';
 import FormInput from './FormInput';
 import IdInput from './IdInput';
@@ -28,12 +29,16 @@ const Signup = ({ signUpStart }) => {
 
   const [gender, setGender] = useState('none');
 
+  const [emailValue, setEmailValue] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
+  const [checkOverLapEmail, setCheckOverLapEmail] = useState(false);
+
   const [allagree, setAllAgree] = useState(false);
   const [agree1, setAgree1] = useState(false);
   const [agree2, setAgree2] = useState(false);
   const [info, setInfo] = useState(false);
-  const [sns, setSns] = useState(false);
   const [email, setEmail] = useState(false);
+  const [sns, setSns] = useState(false);
   const [age, setAge] = useState(false);
 
   const [signup, setSignup] = useState(false);
@@ -79,11 +84,21 @@ const Signup = ({ signUpStart }) => {
               </FormInput>
             </tr>
             <tr>
-              <FormInput name="email" placeholder="예: marketkurly@kurly.com" ref={emailRef}>
+              <FormInput
+                name="email"
+                placeholder="예: marketkurly@kurly.com"
+                ref={emailRef}
+                onChange={onChangeEmail}
+              >
                 이메일
               </FormInput>
               <td>
-                <SignupButton onclick={clickButton}>중복확인</SignupButton>
+                <SignupButton onClick={overlapkEmail}>중복확인</SignupButton>
+                <SignupModal
+                  modalIsOpen={checkOverLapEmail}
+                  closeModal={closeModalEmail}
+                  value={modalValue}
+                />
               </td>
             </tr>
             <tr>
@@ -101,7 +116,7 @@ const Signup = ({ signUpStart }) => {
                 주소<span className="text-formStar">*</span>
               </th>
               <td className="py-4">
-                <SignupButton big={true} onClick={openSearch}>
+                <SignupButton big={true}>
                   <FiSearch className="inline-block" />
                   주소검색
                 </SignupButton>
@@ -115,7 +130,7 @@ const Signup = ({ signUpStart }) => {
               </th>
               <td className="py-4">
                 <InputGender
-                  id="man"
+                  id="남자"
                   name="gender"
                   onChange={e => setGender(e.target.id)}
                   state={gender}
@@ -123,7 +138,7 @@ const Signup = ({ signUpStart }) => {
                   남자
                 </InputGender>
                 <InputGender
-                  id="woman"
+                  id="여자"
                   name="gender"
                   onChange={e => setGender(e.target.id)}
                   state={gender}
@@ -131,7 +146,7 @@ const Signup = ({ signUpStart }) => {
                   여자
                 </InputGender>
                 <InputGender
-                  id="none"
+                  id="선택안함"
                   name="gender"
                   onChange={e => setGender(e.target.id)}
                   state={gender}
@@ -226,8 +241,25 @@ const Signup = ({ signUpStart }) => {
       <SignupModal modalIsOpen={signup} closeModal={closeModal} value={modalValue} />
     </div>
   );
-  function clickButton(params) {
+  async function overlapkEmail() {
     console.log(1);
+    try {
+      const res = await axios.post('http://3.35.221.9:8080/api/member/signup/checkemail', {
+        checkEmail: emailValue,
+      });
+      console.log(res.data);
+      if (res.data === 'EXISTED UID') {
+        setValidEmail(false);
+        setCheckOverLapEmail(true);
+        setModalValue('중복된 이메일 입니다.');
+      } else {
+        setValidEmail(true);
+        setCheckOverLapEmail(true);
+        setModalValue('사용가능한 이메일 입니다.');
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
   function onChangeAll(e) {
     setAllAgree(e.target.checked);
@@ -256,7 +288,16 @@ const Signup = ({ signUpStart }) => {
       agree2,
       age,
     ];
-    const newUser = { date_of_birth: '' };
+    const newUser = {
+      uid: '',
+      email: '',
+      password: '',
+      CheckPassword: '',
+      name: '',
+      gender: '',
+      date_of_birth: '',
+      address: '서울시 은평구 은평동 은평아파트 111동 1111호',
+    };
     const formData = new FormData(formRef.current);
     for (let [key, value] of formData) {
       if (!value) {
@@ -265,14 +306,17 @@ const Signup = ({ signUpStart }) => {
         return false;
       }
       if (key === 'birthY' || key === 'birthM' || key === 'birthD')
-        newUser['date_of_birth'] += value;
+        newUser['date_of_birth'] += key === 'birthY' ? value : `-${value}`;
       else newUser[key] = value;
     }
     for (let i = 0; i < valid.length; i++) {
       if (!valid[i]) {
-        if (i < 2) {
+        if (i === 0) {
           setSignup(true);
           setModalValue('아이디를 제대로 입력해 주세요');
+        } else if (i === 1) {
+          setSignup(true);
+          setModalValue('아이디 중복검사를 해주세요');
         } else if (i >= 2 && i < 5) {
           setSignup(true);
           setModalValue('비밀번호를 제대로 입력해 주세요');
@@ -294,7 +338,7 @@ const Signup = ({ signUpStart }) => {
   function checkPhone(e) {
     const { value } = e.target;
     const lastChar = value.slice(-1);
-    if (isNaN(+lastChar) || value.length > 12) {
+    if (isNaN(+lastChar) || value.length > 11) {
       e.target.value = value.substring(0, value.length - 1);
     }
   }
@@ -306,37 +350,14 @@ const Signup = ({ signUpStart }) => {
       e.target.value = value.substring(0, value.length - 1);
     }
   }
-
+  function onChangeEmail(e) {
+    setEmailValue(e.target.value);
+  }
+  function closeModalEmail() {
+    setCheckOverLapEmail(false);
+  }
   function closeModal() {
     setSignup(false);
-  }
-  function openSearch() {
-    const width = 500;
-    const height = 400;
-
-    new daum.Postcode({
-      oncomplete: function (data) {
-        let left = Math.ceil((window.screen.width - width) / 2);
-        let top = Math.ceil((window.screen.height - height) / 2);
-
-        const addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
-        localStorage.setItem('address', addr);
-        const buildingName = data.buildingName ? data.buildingName : '';
-
-        // localStorage에 주소 값 저장
-        sessionStorage.setItem('address', addr);
-        sessionStorage.setItem('buildingName', buildingName);
-
-        window.open(
-          '/kakao/destination',
-          '_blank',
-          `height=${height},width=${width}, top=${top}, left=${left}`,
-        );
-      },
-    }).open({
-      left: Math.ceil((window.screen.width - width) / 2),
-      top: Math.ceil((window.screen.height - height) / 2),
-    });
   }
 };
 export default Signup;
