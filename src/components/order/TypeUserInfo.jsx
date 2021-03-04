@@ -46,7 +46,7 @@ const TypeUserInfo = ({ modalIsOpen, closeModal }) => {
   return (
     <Modal
       isOpen={modalIsOpen}
-      onRequestClose={true}
+      onRequestClose={closeModal}
       style={DeliveryModalStyles}
       contentLabel="회원가입"
       ariaHideApp={false}
