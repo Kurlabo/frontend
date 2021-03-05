@@ -12,7 +12,7 @@ import Modal from 'react-modal';
 
 const container = 'flex flex-col pt-12 pl-12 pr-12';
 
-const TypeUserInfo = ({ modalIsOpen, closeModal }) => {
+const TypeUserInfo = ({ modalIsOpen, closeModal, deliveryInfo, setDeliveryInfo }) => {
   const [check, setCheck] = useState(true);
   const [receiveDelivery, setreceiveDelivery] = useState('door');
   const DeliveryModalStyles = {
@@ -69,8 +69,20 @@ const TypeUserInfo = ({ modalIsOpen, closeModal }) => {
               </div>
             </div>
           </div>
-          <ReceiverInput title="받으실 분" placeholder="이름을 입력해 주세요" />
-          <ReceiverInput title="휴대폰" placeholder="숫자만 입력해주세요" />
+          <ReceiverInput
+            title="받으실 분"
+            placeholder="이름을 입력해 주세요"
+            name="reciever"
+            deliveryInfo={deliveryInfo.reciever}
+            setDeliveryInfo={setDeliveryInfo}
+          />
+          <ReceiverInput
+            title="휴대폰"
+            placeholder="숫자만 입력해주세요"
+            name="phone"
+            deliveryInfo={deliveryInfo.phone}
+            setDeliveryInfo={setDeliveryInfo}
+          />
           <ReceiveDelivery
             title="받으실 장소"
             state={receiveDelivery}

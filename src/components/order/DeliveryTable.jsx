@@ -9,6 +9,7 @@ const modifyBtn =
 
 const DeliveryTable = ({ orderer_name, orderer_phone, orderer_address }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [deliveryInfo, setDeliveryInfo] = useState({});
   const openModal = useCallback(() => {
     setModalIsOpen(true);
   }, []);
@@ -39,7 +40,12 @@ const DeliveryTable = ({ orderer_name, orderer_phone, orderer_address }) => {
           </td>
         </tr>
       </tbody>
-      <TypeUserInfo modalIsOpen={modalIsOpen} closeModal={closeModal} />
+      <TypeUserInfo
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        deliveryInfo={deliveryInfo}
+        setDeliveryInfo={setDeliveryInfo}
+      />
     </table>
   );
 };
