@@ -1,18 +1,40 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  requestForModificationGoodsAmount,
-  requestServerToDeleteProducInfo,
-  CountselectedCheckBox,
-} from '../../modules/goodsCart';
+import { requestForModificationGoodsAmount, CountselectedCheckBox } from '../../modules/goodsCart';
+import GoodsCartModal from './GoodsCartModal';
+import { setActiveModalProdcut } from '../../modules/cart';
 
 const CartGoods = ({ goods }) => {
   const dispatch = useDispatch();
+
   const itemCount = useSelector(state => state.goodsCart.cart);
+  const activeModalProduct = useSelector(state => state.cart.modalProduct);
+  const activeModalGoods = useSelector(state => state.cart.modalGoods);
+
+  const onClickButton = useCallback(
+    product_id => {
+      dispatch(setActiveModalProdcut(product_id));
+    },
+    [dispatch],
+  );
+
+  useEffect(() => {
+    if (activeModalProduct.isActive === true) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [activeModalProduct]);
   return (
-    <div>
+    <div
+      className={`${
+        activeModalProduct.isActive === true || activeModalGoods.isActive === true
+          ? 'overflow-hidden'
+          : ''
+      }`}
+    >
       {goods &&
         goods.map(({ product_id, list_image_url, name }) => (
           <div
@@ -37,7 +59,9 @@ const CartGoods = ({ goods }) => {
             />
             <Link to={`shop/goods/goods_view/${product_id}`} className="inline-block w-r-42.6">
               <img alt="" src={list_image_url} className="inline-block w-r-6 h-r-7.9 mr-r-1.6" />
-              <span className="inline-block">{name}</span>
+              <span className="w-r-30.9 inline-block whitespace-nowrap overflow-ellipsis overflow-hidden">
+                {name}
+              </span>
             </Link>
             <div>
               <button
@@ -71,12 +95,23 @@ const CartGoods = ({ goods }) => {
             </div>
             <button
               onClick={() => {
-                onClickButton([product_id]);
+                onClickButton(product_id);
               }}
               className="pl-11 text-gray-300 focus:outline-none"
             >
               <AiOutlineClose />
             </button>
+            {activeModalProduct.isActive === true && (
+              <>
+                <GoodsCartModal />
+                <div
+                  onClick={() => {
+                    dispatch(setActiveModalProdcut());
+                  }}
+                  className="fixed left-0 top-0 w-screen h-screen z-900 bg-gray-600 bg-opacity-30"
+                />
+              </>
+            )}
           </div>
         ))}
     </div>
@@ -88,10 +123,6 @@ const CartGoods = ({ goods }) => {
 
   function onClickItemCount(product_id, variation) {
     dispatch(requestForModificationGoodsAmount(product_id, variation));
-  }
-
-  function onClickButton(product_id) {
-    dispatch(requestServerToDeleteProducInfo(product_id));
   }
 };
 

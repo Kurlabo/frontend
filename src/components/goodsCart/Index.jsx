@@ -4,7 +4,7 @@ import Cart from './Cart';
 import Notice from './Notice';
 import Prices from './Prices';
 import Select from './Select';
-import Summit from './Summit';
+import Submit from './Submit';
 import Title from './Title';
 
 const GoodsCart = () => {
@@ -20,7 +20,7 @@ const GoodsCart = () => {
         <div className="inline-block mt-r-4.5">
           <Adress />
           <Prices />
-          <Summit />
+          <Submit />
           <Notice />
         </div>
       </div>
