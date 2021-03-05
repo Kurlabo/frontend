@@ -39,26 +39,20 @@ const cart = handleActions(
       ...state,
       cold: !state.cold,
     }),
-    [SET_ACTIVE_MODAL_PRODUCT]: (state, { payload }) => {
-      console.log('payload', payload);
-      return {
-        ...state,
-        modalProduct: {
-          isActive: !state.modalProduct.isActive,
-          productId: payload,
-        },
-      };
-    },
-    [SET_ACTIVE_MODAL_GOODS]: (state, { payload }) => {
-      console.log('payload', payload);
-      return {
-        ...state,
-        modalGoods: {
-          isActive: !state.modalGoods.isActive,
-          GoodsId: payload,
-        },
-      };
-    },
+    [SET_ACTIVE_MODAL_PRODUCT]: (state, { payload }) => ({
+      ...state,
+      modalProduct: {
+        isActive: !state.modalProduct.isActive,
+        productId: payload,
+      },
+    }),
+    [SET_ACTIVE_MODAL_GOODS]: (state, { payload }) => ({
+      ...state,
+      modalGoods: {
+        isActive: !state.modalGoods.isActive,
+        GoodsId: payload,
+      },
+    }),
   },
   initialize,
 );

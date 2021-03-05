@@ -11,6 +11,7 @@ const CartGoods = ({ goods }) => {
 
   const itemCount = useSelector(state => state.goodsCart.cart);
   const activeModalProduct = useSelector(state => state.cart.modalProduct);
+  const activeModalGoods = useSelector(state => state.cart.modalGoods);
 
   const onClickButton = useCallback(
     product_id => {
@@ -26,9 +27,14 @@ const CartGoods = ({ goods }) => {
       document.body.style.overflow = '';
     }
   }, [activeModalProduct]);
-
   return (
-    <div className={`${activeModalProduct.isActive === true ? 'overflow-hidden' : ''}`}>
+    <div
+      className={`${
+        activeModalProduct.isActive === true || activeModalGoods.isActive === true
+          ? 'overflow-hidden'
+          : ''
+      }`}
+    >
       {goods &&
         goods.map(({ product_id, list_image_url, name }) => (
           <div
@@ -53,7 +59,9 @@ const CartGoods = ({ goods }) => {
             />
             <Link to={`shop/goods/goods_view/${product_id}`} className="inline-block w-r-42.6">
               <img alt="" src={list_image_url} className="inline-block w-r-6 h-r-7.9 mr-r-1.6" />
-              <span className="inline-block">{name}</span>
+              <span className="w-r-30.9 inline-block whitespace-nowrap overflow-ellipsis overflow-hidden">
+                {name}
+              </span>
             </Link>
             <div>
               <button
@@ -87,7 +95,6 @@ const CartGoods = ({ goods }) => {
             </div>
             <button
               onClick={() => {
-                console.log('product_id', product_id);
                 onClickButton(product_id);
               }}
               className="pl-11 text-gray-300 focus:outline-none"
