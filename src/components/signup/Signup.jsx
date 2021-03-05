@@ -244,6 +244,7 @@ const Signup = ({ signUpStart }) => {
   async function overlapkEmail() {
     console.log(1);
     try {
+      console.log(emailValue);
       const res = await axios.post('http://3.35.221.9:8080/api/member/signup/checkemail', {
         checkEmail: emailValue,
       });
