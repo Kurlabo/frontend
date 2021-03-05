@@ -9,7 +9,6 @@ let discount = 0;
 let originalPrice = 0;
 
 const PayHistory = ({ products_list }) => {
-  console.log(products_list);
   if (products_list !== undefined) {
     originalPrice = products_list.reduce((acc, curr) => acc + curr.product_price, 0);
     discountedSum = products_list.reduce(

@@ -15,7 +15,6 @@ const ReceiverInput = ({ title, placeholder, deliveryInfo, setDeliveryInfo, name
         placeholder={placeholder}
         className={inputStyle}
         onChange={onChange}
-        onKeyDown={onKeydown}
         value={deliveryInfo}
       />
     </div>
@@ -30,11 +29,6 @@ const ReceiverInput = ({ title, placeholder, deliveryInfo, setDeliveryInfo, name
         break;
       default:
         break;
-    }
-  }
-  function onKeydown({ key }) {
-    if (isNaN(+key)) {
-      return;
     }
   }
 };

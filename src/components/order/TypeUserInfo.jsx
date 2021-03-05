@@ -14,7 +14,9 @@ const container = 'flex flex-col pt-12 pl-12 pr-12';
 
 const TypeUserInfo = ({ modalIsOpen, closeModal, deliveryInfo, setDeliveryInfo }) => {
   const [check, setCheck] = useState(true);
+  // 받으실 장소
   const [receiveDelivery, setreceiveDelivery] = useState('door');
+
   const DeliveryModalStyles = {
     content: {
       top: '50%',
@@ -86,7 +88,11 @@ const TypeUserInfo = ({ modalIsOpen, closeModal, deliveryInfo, setDeliveryInfo }
           <ReceiveDelivery
             title="받으실 장소"
             state={receiveDelivery}
-            onChange={e => setreceiveDelivery(e.target.id)}
+            onChange={e => {
+              setreceiveDelivery(e.target.id);
+              setDeliveryInfo({ ...deliveryInfo, deliveryPlace: e.target.title });
+            }}
+            deliveryInfo={deliveryInfo}
           />
           {receiveDelivery === 'door' || receiveDelivery === 'courier' ? (
             <EntrancePwd title="공동현관 출입방법" state={receiveDelivery} />

@@ -10,6 +10,7 @@ const modifyBtn =
 const DeliveryTable = ({ orderer_name, orderer_phone, orderer_address }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [deliveryInfo, setDeliveryInfo] = useState({});
+
   const openModal = useCallback(() => {
     setModalIsOpen(true);
   }, []);

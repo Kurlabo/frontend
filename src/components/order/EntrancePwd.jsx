@@ -22,12 +22,12 @@ const othersText =
 const othersText2 =
   '배송 받으실 시간은 별도로 지정하실 수 없으며, 밤 11시까지 주문 시 오전 7시까지 배송이 완료됩니다.';
 
-const EntrancePwd = ({ title, state }) => {
+const EntrancePwd = ({ title, receiveDelivery }) => {
   const [entrancePwd, setEntrancePwd] = useState('enterPwd');
 
   return (
     <div className="text-1.4">
-      {state === 'courier' && <CourierInfo title="택배함 정보" />}
+      {receiveDelivery === 'courier' && <CourierInfo title="택배함 정보" />}
 
       <fieldset id="entrance">
         <legend className="pb-6 pt-9 font-semibold">
