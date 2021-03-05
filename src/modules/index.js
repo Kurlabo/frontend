@@ -12,6 +12,7 @@ import loading from './loading';
 import instagram from './instagram';
 import mdButtons from './mdButtons';
 import order from './orderList';
+import orderInfo from './order';
 import myReviewRegister, { myReviewSaga } from './myReviewRegister';
 import wish from './wishList';
 import addGoodsToCart, { addGoodsToCartSaga } from './common/addGoodsToCart';
@@ -24,6 +25,7 @@ const rootReducer = history =>
     cart,
     wish,
     order,
+    orderInfo,
     goodsCart,
     user,
     notice,

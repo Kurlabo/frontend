@@ -6,8 +6,12 @@ import { useState } from 'react';
 export const borderBottom = 'border-b border-gray-800';
 const productWrapper = `flex justify-between w-p-1050 mx-auto text-2 ${borderBottom}`;
 
-const OrderProduct = () => {
+const OrderProduct = ({ products_list = [] }) => {
   const [btnSwitch, setBtnSwitch] = useState(false);
+  let firstProduct = [];
+  if (products_list !== undefined) {
+    firstProduct = products_list.find((product, index) => index === 0);
+  }
 
   return (
     <>
@@ -20,25 +24,26 @@ const OrderProduct = () => {
       <div className="w-p-1050 mx-auto text-p-16">
         {btnSwitch ? (
           <ul>
-            <OrderItemLi
-              quantity={1}
-              productName="[Kurly's] 동물복지 백색 유정란 10구"
-              price={4600}
-            />
-            <OrderItemLi
-              quantity={1}
-              productName="[Kurly's] 동물복지 백색 유정란 10구"
-              price={4600}
-            />
-            <OrderItemLi
-              quantity={1}
-              productName="[Kurly's] 동물복지 백색 유정란 10구"
-              price={4600}
-            />
+            {products_list.map((product, index) => (
+              <OrderItemLi
+                key={product.product_id + index * 113}
+                list_image_url={product.list_image_url}
+                product_cnt={product.product_cnt}
+                product_name={product.product_name}
+                product_price={+product.product_price}
+                product_discount_price={+product.product_discount_price}
+              />
+            ))}
           </ul>
         ) : (
           <p className="text-center font-medium pt-12">
-            방울토마토 500g외 <span className="text-kp-600">5개</span>상품을 주문합니다.
+            {firstProduct !== undefined && firstProduct.product_name}외
+            {firstProduct !== undefined && (
+              <>
+                <span className="text-kp-600 ml-2">{products_list.length - 1}개</span>상품을
+                주문합니다.
+              </>
+            )}
           </p>
         )}
       </div>
