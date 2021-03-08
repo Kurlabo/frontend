@@ -30,9 +30,11 @@ const Select = ({ bottom }) => {
   return (
     <div
       className={
-        bottom
-          ? 'text-r-1.4 border-t border-solid py-5 border-gray-300 w-r-73'
-          : 'text-r-1.4 border-b border-solid py-5 border-black w-r-73'
+        bottom === true && GoodsInfo.length === 0
+          ? 'text-r-1.4 py-5 w-r-73 border-t border-gray-300'
+          : GoodsInfo.length === 0
+          ? 'border-b border-black text-r-1.4 py-5 w-r-73'
+          : 'text-r-1.4 py-5 w-r-73'
       }
     >
       <input
