@@ -69,7 +69,11 @@ const CartGoods = ({ goods }) => {
                   if (itemCount.filter(item => item.product_id === product_id)[0].cnt === 1) return;
                   onClickItemCount(product_id, -1);
                 }}
-                className="inline-block w-12 h-12 border border-r-0 text-gray-300 focus:outline-none"
+                className={`inline-block w-12 h-12 border border-r-0 ${
+                  itemCount.filter(item => item.product_id === product_id)[0].cnt === 1
+                    ? 'text-gray-300'
+                    : ''
+                } focus:outline-none`}
               >
                 -
               </button>
