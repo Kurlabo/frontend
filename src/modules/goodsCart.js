@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import axios from '../../node_modules/axios';
+import { setActiveModalGoods, setActiveModalProdcut } from './cart';
 
 // 액션타입
 const ADD_GOODS_INFO_TO_CART_STATE = 'goodsCart/ADD_GOODS_INFO_TO_CART_STATE';
@@ -78,7 +79,8 @@ export const requestForModificationGoodsAmount = (product_id, variation) => asyn
 };
 
 // 상품데이터 삭제
-export const requestServerToDeleteProducInfo = product_id => async dispatch => {
+export const requestServerToDeleteProducInfo = (product_id, goods) => async dispatch => {
+  // prodcut_id는 배열로 들어와야한다.
   try {
     const res = await axios.post('http://3.35.221.9:8080/api/goods/goods_cart/delete', {
       product_id: [...product_id],
@@ -86,6 +88,11 @@ export const requestServerToDeleteProducInfo = product_id => async dispatch => {
     dispatch(deleteProdcutInfo(res.data.deleted_product_id));
   } catch (e) {
     console.log(e);
+  }
+  if (goods === true) {
+    dispatch(setActiveModalGoods());
+  } else {
+    dispatch(setActiveModalProdcut());
   }
 };
 

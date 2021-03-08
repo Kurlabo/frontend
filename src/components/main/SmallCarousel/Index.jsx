@@ -101,7 +101,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
             onClick={e => prevButton(e)}
             style={{ display: 'none' }}
             ref={prevButtonRef}
-            className="absolute z-50 w-r-6 h-r-6 bg-r-6 left- bg-sm-pre-button left-r--3 top-r-13 focus:outline-none"
+            className="absolute z-50 w-r-6 h-r-6 bg-r-6 left- bg-sm-pre-button left-r--1.5 top-r-13 focus:outline-none"
           />
           <div className="overflow-hidden">
             <ul ref={containerRef} className="w-r-735">
@@ -138,7 +138,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
           <button
             onClick={e => nextButton(e)}
             ref={nextButtonRef}
-            className="z-50 absolute w-r-6 h-r-6 bg-r-6 bg-sm-next-button right-r--3 top-r-13 focus:outline-none"
+            className="z-50 absolute w-r-6 h-r-6 bg-r-6 bg-sm-next-button right-r--1.5 top-r-13 focus:outline-none"
           />
           {mdSuggest && (
             <div className="w-r-52 mx-auto">

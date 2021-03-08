@@ -113,6 +113,7 @@ module.exports = {
       },
       inset: {
         'r--1': '-1rem',
+        'r--1.5': '-1.5rem',
         'r--3': '-3rem',
         'p-91': '9.1rem',
         'p-159': '15.9rem',
