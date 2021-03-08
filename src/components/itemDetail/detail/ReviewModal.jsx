@@ -45,7 +45,7 @@ const ReviewModal = ({ openModal, closeModal }) => {
       contentLabel="로그인 요청 창"
       ariaHideApp={false}
     >
-      <p className="">
+      <p className="text-1.4">
         상품후기는 상품을 구매하시고 배송완료된 회원 분만 한 달 내 작성 가능합니다.
       </p>
       <div
@@ -58,4 +58,4 @@ const ReviewModal = ({ openModal, closeModal }) => {
   );
 };
 
-export default React.memo(ReviewModal);
+export default ReviewModal;
