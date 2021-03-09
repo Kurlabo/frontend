@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 const btnStyle = 'w-12 text-gray-700 cursor-pointer absolute inset-y-1/2';
 let onAnimate = false;
+
 const NameBox = styled.p`
   overflow: hidden;
   width: 100%;
@@ -12,6 +13,7 @@ const NameBox = styled.p`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `;
+
 const RelatedProduct = ({ relatedProducts }) => {
   let curIndex = useRef(0);
   const containerRef = useRef();
@@ -25,7 +27,7 @@ const RelatedProduct = ({ relatedProducts }) => {
     containerRef.current.style.transform = 'translateX(-' + 950 + 'px)';
   }, [relatedProducts]);
 
-  const slideNext = useCallback(() => {
+  const slideNext = () => {
     if (onAnimate) return;
     onAnimate = true;
     if (curIndex.current <= 3) {
@@ -52,9 +54,8 @@ const RelatedProduct = ({ relatedProducts }) => {
     setTimeout(() => {
       onAnimate = false;
     }, 500);
-  }, []);
-
-  const slidePrev = useCallback(() => {
+  };
+  const slidePrev = () => {
     if (onAnimate) return;
     if (curIndex.current >= 0) {
       onAnimate = true;
@@ -73,7 +74,7 @@ const RelatedProduct = ({ relatedProducts }) => {
     setTimeout(() => {
       onAnimate = false;
     }, 500);
-  }, []);
+  };
 
   return (
     <div>
