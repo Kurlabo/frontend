@@ -1,8 +1,11 @@
 import React from 'react';
 
+const containerStyle =
+  'flex justify-between py-7 pl-5 text-p-16 font-medium border-b border-gray-300 text-gray-600';
+
 const OrderCancelGuide = ({ onClick, isClose }) => {
   return (
-    <div className="flex justify-between py-7 pl-5 text-p-16 font-medium border-b border-gray-300 text-gray-600">
+    <div className={containerStyle}>
       <h4 className="w-p-150">주문 취소 안내</h4>
       <div className="w-r-65">
         <p className="mb-2">

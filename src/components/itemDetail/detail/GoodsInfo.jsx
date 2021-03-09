@@ -22,7 +22,7 @@ const GoodsInfo = ({ itemDetail }) => {
     setState(e.target.firstChild.nodeValue);
   }, []);
 
-  const render = useCallback(() => {
+  const render = () => {
     switch (state) {
       case '상품설명':
         return (
@@ -44,7 +44,7 @@ const GoodsInfo = ({ itemDetail }) => {
       default:
         return;
     }
-  }, [name, short_description, detail_context, product_img_url, detail_img_url, reviews, state]);
+  };
 
   return (
     <div className="w-r-101 mt-20 mb-10">
