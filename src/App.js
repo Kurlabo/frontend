@@ -29,6 +29,7 @@ import ThemeProductListPage from './pages/ThemeProductListPage';
 import MyReviewRegisterPage from './pages/MyReviewRegisterPage';
 import KurlyPassPage from './pages/KurlyPassPage';
 import MyDestinationModify from './components/mykurly/MyDestinationModify';
+import GetSupportWritingPage from './pages/GetSupportWritingPage';
 function App() {
   return (
     <>
@@ -49,6 +50,7 @@ function App() {
         <Route path="/shop/goods/event" component={WeekEvent} />
         <Route path="/order" component={OrderPage} />
         <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />
+        <Route path="/shop/customer/board/get_support_writing" component={GetSupportWritingPage} />
         <Route path="/shop/customer/board/:id" component={NoticeDetail} />
         <Route path="/shop/customer/board" component={CustomerService} />
         <Route path="/shop/mypage/destination/list" component={MyDestinationLIstPage} />

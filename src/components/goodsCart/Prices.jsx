@@ -3,10 +3,14 @@ import { useSelector } from 'react-redux';
 
 const Prices = () => {
   const prices = useSelector(state => state.goodsCart.cart);
+  const selectedGoods = prices.filter(item => item.select);
+
+  const totalDiscountPrices = selectedGoods.reduce((acc, cur) => acc + cur.reduced_price, 0);
 
   const totalPrices = prices
     .filter(item => item.select)
     .reduce((acc, cur) => acc + cur.productTotalPrices, 0);
+
   return (
     <div className="w-r-28.4 px-8 py-9 border text-r-1.6 bg-kg-500">
       <p className="pt-3">
@@ -15,7 +19,9 @@ const Prices = () => {
       </p>
       <p className="pt-3">
         <span>상품할인금액</span>
-        <span className="float-right">0원</span>
+        <span className="float-right">
+          {totalDiscountPrices === 0 ? '0원' : `-${totalDiscountPrices.toLocaleString()}원`}
+        </span>
       </p>
       <p className="pt-3">
         <span>배송비</span>

@@ -3,7 +3,7 @@ import RelatedProduct from './detail/RelatedProduct';
 import PurchaseInfo from './detail/PurchaseInfo';
 import GoodsInfo from './detail/GoodsInfo';
 import GotopBtn from './detail/GotopBtn';
-import CartOption from './detail/CartOption';
+import BottomCartOption from './detail/BottomCartOption';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCartCount } from '../../modules/cartAddOption';
@@ -15,12 +15,12 @@ import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
 
 function getCookie(name) {
   let matches = document.cookie.match(
-    new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'),
+    new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'),
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
+const ItemDetail = ({ itemDetail, history, productId }) => {
   const dispatch = useDispatch();
   let onPopUp = useRef(false);
 
@@ -79,6 +79,9 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
 
   const closeWishListModal = useCallback(() => {
     setIsWishListModalOpen(false);
+  }, []);
+
+  const moveToSigninPage = useCallback(() => {
     history.push('/shop/account/signin');
   }, [history]);
 
@@ -118,7 +121,7 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
         <GotopBtn />
       </main>
       {viewCartOption && (
-        <CartOption
+        <BottomCartOption
           isLogin={isLogin}
           itemDetail={itemDetail}
           onClickAddCart={onClickAddCart}
@@ -126,7 +129,11 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
         />
       )}
       <CheckModal modalIsOpen={isOpen} closeModal={closeModal} msg={msg} />
-      <WishListLoginModal openModal={iswishListModalOpen} closeModal={closeWishListModal} />
+      <WishListLoginModal
+        openModal={iswishListModalOpen}
+        closeModal={closeWishListModal}
+        moveToSigninPage={moveToSigninPage}
+      />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Counter from '../common/Counter';
 import { setCartCount, setProductPrice } from '../../../modules/cartAddOption';
@@ -31,19 +31,19 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList, isLogin }) 
     dispatch(setProductPrice(isLogin ? itemDetail.discounted_price : itemDetail.original_price));
   }, [dispatch, isLogin, itemDetail.discounted_price, itemDetail.original_price]);
 
-  const increase = useCallback(() => {
+  const increase = () => {
     if (count > 99) return;
     dispatch(setCartCount(count + 1));
-  }, [count, dispatch]);
+  };
 
-  const decrease = useCallback(() => {
+  const decrease = () => {
     if (count < 1) return;
     dispatch(setCartCount(count - 1));
-  }, [count, dispatch]);
+  };
 
-  const alexCode = contactant.split('<br />').map(line => {
+  const alexCode = contactant.split('<br />').map((line, i) => {
     return (
-      <span>
+      <span key={i}>
         {line}
         <br />
       </span>
@@ -184,4 +184,4 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList, isLogin }) 
     </div>
   );
 };
-export default React.memo(PurchaseInfo);
+export default PurchaseInfo;

@@ -14,7 +14,7 @@ const RoundCheckBox = ({ id, value, onChange, onClick, modalClose, closeModal, f
         className="invisible absolute"
       />
       <label onClick={onClick} htmlFor={id} className="inline-block align-middle w-full">
-        {!(`${id}` === form.checkLabel) ? (
+        {form !== undefined && !(`${id}` === form.checkLabel) ? (
           <IoIosCheckmarkCircleOutline className="cursor-pointer inline-block align-middle w-12 h-12 leading-none text-kg-200" />
         ) : (
           <IoIosCheckmarkCircle className="cursor-pointer inline-block align-middle w-12 h-12 leading-none text-kp-600" />
@@ -23,7 +23,7 @@ const RoundCheckBox = ({ id, value, onChange, onClick, modalClose, closeModal, f
           <span className="inline-block align-middle text-r-1.4 text-kg-350">{value}</span>
         )}
       </label>
-      {form.checked ? (
+      {form !== undefined && form.checked ? (
         modalClose === 'modalClose' ? (
           ''
         ) : (

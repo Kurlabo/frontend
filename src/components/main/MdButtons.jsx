@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getMdSuggestionGoodsInfo } from '../../../../modules/mdButtons';
+import { getMdSuggestionGoodsInfo } from '../../modules/mdButtons';
 
 const MdButtons = ({ title, subtitle, suggestType, setMdCurIndex }) => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const MdButtons = ({ title, subtitle, suggestType, setMdCurIndex }) => {
       <ul className="pb-8 text-center">
         {suggestType.map((type, i) => (
           <li key={i} className="inline-block px-2 pb-8">
-            <input className="hidden" id={`${i}`} type="radio" name="md" />
+            <input defaultChecked={i === 0} className="hidden" id={`${i}`} type="radio" name="md" />
             <label
               onClick={() => {
                 dispatch(getMdSuggestionGoodsInfo(i));

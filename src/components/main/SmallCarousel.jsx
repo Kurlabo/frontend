@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import MdButtons from './MdButtons/Index';
+import MdButtons from './MdButtons';
 
 const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   const [mdCurIndex, setMdCurIndex] = useState('채소');
@@ -12,12 +12,12 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   const MdGoodsInfo = useSelector(state => state.mdButtons.GoodsInfo);
 
   let cur = useRef(0);
-  let onAnimate = false;
+  let onAnimate = useRef(false);
   const containerRef = useRef(null);
   const prevButtonRef = useRef(null);
   const nextButtonRef = useRef(null);
 
-  const imgArr = [];
+  const imgArr = useMemo(() => [], []);
 
   addCarouselInfoToArray('howAbout', '이 상품 어때요?');
   addCarouselInfoToArray('frugality', '알뜰 상품 >');
@@ -30,31 +30,6 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
     containerRef.current.style.transitionProperty = 'all';
     containerRef.current.style.transitionTimingFunction = 'ease-in-out';
   }, [dispatch]);
-
-  // const imgArr1 = [
-  //   [
-  //     'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
-  //     'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
-  //     'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
-  //     'https://img-cf.kurly.com/shop/data/goods/1578533870214l0.jpg',
-  //   ],
-
-  //   [
-  //     'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
-  //     'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
-  //     'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
-  //     'https://img-cf.kurly.com/shop/data/goods/1477568051626l0.jpg',
-  //   ],
-
-  //   [
-  //     'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
-  //     'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
-  //     'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
-  //     'https://img-cf.kurly.com/shop/data/goods/1508133192766l0.jpg',
-  //   ],
-
-  //   ['https://img-cf.kurly.com/shop/data/goods/1523522504728l0.jpg'],
-  // ];
 
   const suggestType = [
     '채소',
@@ -75,6 +50,53 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
     '베이비·키즈',
     '반려동물',
   ];
+
+  const prevButton = useCallback(e => {
+    if (onAnimate.current) return;
+    onAnimate.current = true;
+    if (cur.current === 1) {
+      containerRef.current.style.transform = `translateX(-${(cur.current - 1) * 1050}px)`;
+      e.target.disabled = true;
+      e.target.style.display = 'none';
+    } else {
+      nextButtonRef.current.disabled = false;
+      nextButtonRef.current.style.display = '';
+      containerRef.current.style.transform = `translateX(-${(cur.current - 1) * 1050}px)`;
+    }
+    --cur.current;
+
+    setTimeout(() => {
+      onAnimate.current = false;
+    }, 500);
+  }, []);
+
+  const nextButton = useCallback(
+    e => {
+      if (onAnimate.current) return;
+      onAnimate.current = true;
+      if (cur.current === imgArr.length - 2 && imgArr[imgArr.length - 1].length !== 4) {
+        containerRef.current.style.transform = `translateX(-${
+          cur.current * 1050 + 262 * imgArr[imgArr.length - 1].length
+        }px)`;
+        e.target.style.display = 'none';
+        e.target.disabled = true;
+      } else if (cur.current === imgArr.length - 2) {
+        containerRef.current.style.transform = `translateX(-${(cur.current + 1) * 1050}px)`;
+        e.target.style.display = 'none';
+        e.target.disabled = true;
+      } else {
+        containerRef.current.style.transform = `translateX(-${(cur.current + 1) * 1050}px)`;
+        prevButtonRef.current.disabled = false;
+        prevButtonRef.current.style.display = '';
+      }
+      ++cur.current;
+
+      setTimeout(() => {
+        onAnimate.current = false;
+      }, 500);
+    },
+    [imgArr],
+  );
 
   return (
     <div className={`${bgGray ? 'bg-kg-500' : ''}`}>
@@ -138,7 +160,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
           <button
             onClick={e => nextButton(e)}
             ref={nextButtonRef}
-            className="z-50 absolute w-r-6 h-r-6 bg-r-6 bg-sm-next-button right-r--3 top-r-13 focus:outline-none"
+            className="z-50 absolute w-r-6 h-r-6 bg-r-6 bg-sm-next-button right-r--1.5 top-r-13 focus:outline-none"
           />
           {mdSuggest && (
             <div className="w-r-52 mx-auto">
@@ -156,50 +178,6 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
       </div>
     </div>
   );
-
-  function prevButton(e) {
-    if (onAnimate) return;
-    onAnimate = true;
-    if (cur.current === 1) {
-      containerRef.current.style.transform = `translateX(-${(cur.current - 1) * 1050}px)`;
-      e.target.disabled = true;
-      e.target.style.display = 'none';
-    } else {
-      nextButtonRef.current.disabled = false;
-      nextButtonRef.current.style.display = '';
-      containerRef.current.style.transform = `translateX(-${(cur.current - 1) * 1050}px)`;
-    }
-    --cur.current;
-
-    setTimeout(() => {
-      onAnimate = false;
-    }, 500);
-  }
-
-  function nextButton(e) {
-    if (onAnimate) return;
-    onAnimate = true;
-    if (cur.current === imgArr.length - 2 && imgArr[imgArr.length - 1].length !== 4) {
-      containerRef.current.style.transform = `translateX(-${
-        cur.current * 1050 + 262 * imgArr[imgArr.length - 1].length
-      }px)`;
-      e.target.style.display = 'none';
-      e.target.disabled = true;
-    } else if (cur.current === imgArr.length - 2) {
-      containerRef.current.style.transform = `translateX(-${(cur.current + 1) * 1050}px)`;
-      e.target.style.display = 'none';
-      e.target.disabled = true;
-    } else {
-      containerRef.current.style.transform = `translateX(-${(cur.current + 1) * 1050}px)`;
-      prevButtonRef.current.disabled = false;
-      prevButtonRef.current.style.display = '';
-    }
-    ++cur.current;
-
-    setTimeout(() => {
-      onAnimate = false;
-    }, 500);
-  }
 
   function addCarouselInfoToArray(dataName, titleType, mdSuggestion) {
     if (mdSuggestion === 'mdSuggestion') {
