@@ -12,7 +12,14 @@ import Modal from 'react-modal';
 
 const container = 'flex flex-col pt-12 pl-12 pr-12';
 
-const TypeUserInfo = ({ modalIsOpen, closeModal, deliveryInfo, setDeliveryInfo }) => {
+const TypeUserInfo = ({
+  modalIsOpen,
+  closeModal,
+  deliveryInfo,
+  setDeliveryInfo,
+  setReceiverInfo,
+  receiverInfo,
+}) => {
   const [check, setCheck] = useState(true);
   // 받으실 장소
   const [receiveDelivery, setreceiveDelivery] = useState('door');
@@ -120,6 +127,8 @@ const TypeUserInfo = ({ modalIsOpen, closeModal, deliveryInfo, setDeliveryInfo }
             closeModal={closeModal}
             deliveryInfo={deliveryInfo}
             setDeliveryInfo={setDeliveryInfo}
+            setReceiverInfo={setReceiverInfo}
+            receiverInfo={receiverInfo}
           />
         </form>
       </div>

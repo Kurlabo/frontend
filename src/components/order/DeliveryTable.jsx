@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PayButton from './PayButton';
 import TypeUserInfo from './TypeUserInfo';
 
@@ -21,6 +21,13 @@ const DeliveryTable = ({ orderer_name, orderer_phone, orderer_address, agreeChec
     courierInfo: '',
     deliveryMsg: '배송 직후',
   });
+  const [receiverInfo, setReceiverInfo] = useState({
+    receiverName: '',
+    receiverPhone: '',
+  });
+  useEffect(() => {
+    setReceiverInfo({ receiverName: orderer_name, receiverPhone: orderer_phone });
+  }, [orderer_name, orderer_phone]);
 
   const openModal = useCallback(() => {
     setModalIsOpen(true);
@@ -46,7 +53,11 @@ const DeliveryTable = ({ orderer_name, orderer_phone, orderer_address, agreeChec
           <tr style={{ width: '19rem' }} className="align-text-top border-b border-gray-100">
             <th className="pt-r-1.9 text-1.4 font-medium">상세 정보</th>
             <td className={tdStyle}>
-              <p className="pb-6 ">{`${orderer_name}, ${orderer_phone}`}</p>
+              {orderer_name !== deliveryInfo.receiver || orderer_phone !== deliveryInfo.phone ? (
+                <p className="pb-6 ">{`${receiverInfo.receiverName}, ${receiverInfo.receiverPhone}`}</p>
+              ) : (
+                <p className="pb-6 ">{`${orderer_name}, ${orderer_phone}`}</p>
+              )}
               <button className={modifyBtn} onClick={openModal}>
                 입력
               </button>
@@ -58,6 +69,8 @@ const DeliveryTable = ({ orderer_name, orderer_phone, orderer_address, agreeChec
           closeModal={closeModal}
           deliveryInfo={deliveryInfo}
           setDeliveryInfo={setDeliveryInfo}
+          setReceiverInfo={setReceiverInfo}
+          receiverInfo={receiverInfo}
         />
       </table>
       <PayButton agreeCheck={agreeCheck} deliveryInfo={deliveryInfo} />

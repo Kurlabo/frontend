@@ -7,7 +7,14 @@ import { formRadioIcon, formRadioIcon2 } from '../../common_style/common';
 const cancelBtn = 'w-1/2 h-r-4.4 rounded-p-3 border border-gray-300 mr-4 focus:outline-0';
 const saveBtn = 'w-1/2 bg-kp-600 text-white h-r-4.4 rounded-p-3';
 
-const SendMsg = ({ title, closeModal, deliveryInfo, setDeliveryInfo }) => {
+const SendMsg = ({
+  title,
+  closeModal,
+  deliveryInfo,
+  setDeliveryInfo,
+  setReceiverInfo,
+  receiverInfo,
+}) => {
   const [messageTime, setMessageTime] = useState('afterDelivery');
 
   return (
@@ -63,7 +70,7 @@ const SendMsg = ({ title, closeModal, deliveryInfo, setDeliveryInfo }) => {
         <button className={cancelBtn} onClick={closeModal}>
           취소
         </button>
-        <button className={saveBtn} onClick={closeModal}>
+        <button className={saveBtn} onClick={setReceiver}>
           저장
         </button>
       </div>
@@ -73,6 +80,14 @@ const SendMsg = ({ title, closeModal, deliveryInfo, setDeliveryInfo }) => {
     setMessageTime(e.target.id);
     deliveryInfo.deliveryMsg !== undefined &&
       setDeliveryInfo({ ...deliveryInfo, deliveryMsg: e.target.title });
+  }
+
+  function setReceiver() {
+    closeModal();
+    setReceiverInfo({
+      receiverName: deliveryInfo.receiver,
+      receiverPhone: deliveryInfo.Phone,
+    });
   }
 };
 
