@@ -1,5 +1,5 @@
 import React from './react';
-import Carousel from './Index';
+import Carousel from './BigCarousel';
 
 export default {
   component: Carousel,

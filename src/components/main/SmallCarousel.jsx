@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import MdButtons from './MdButtons/Index';
+import MdButtons from './MdButtons';
 
 const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   const [mdCurIndex, setMdCurIndex] = useState('채소');
