@@ -20,7 +20,6 @@ import NoticeDetail from './components/customerService/NoticeDetail';
 import Sidebar from './components/common/Sidebar';
 import MyOrderViewPage from './pages/MyOrderViewPage';
 import OrderPage from './pages/OrderPage';
-import TypeUserInfo from './components/order/TypeUserInfo';
 import Header from './components/common/Header';
 import ItemDetailPage from './pages/ItemDetailPage';
 import ItemListPage from './pages/ItemListPage';

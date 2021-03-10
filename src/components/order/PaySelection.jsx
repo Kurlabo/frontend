@@ -44,6 +44,8 @@ const selectStyle = {
 
 const PaySelection = () => {
   const [paySelect, setpaySelect] = useState('normal');
+  const [wayToPay, setwayToPay] = useState('일반결제');
+
   return (
     <div className={wrapper}>
       <div className="w-r-74.6 ">
@@ -51,11 +53,12 @@ const PaySelection = () => {
         <table className="w-full">
           <tbody>
             <PaymentBrand
+              title="일반결제"
               brand="일반"
               id="normal"
               credit="신용카드"
               state={paySelect}
-              onChange={e => setpaySelect(e.target.id)}
+              onChange={changePayment}
             />
             <tr>
               <th></th>
@@ -79,45 +82,51 @@ const PaySelection = () => {
               </td>
             </tr>
             <PaymentBrand
+              title="CHAI 결제"
               brand="CHAI"
               imgUrl={chaiUrl}
               id="chai"
               state={paySelect}
-              onChange={e => setpaySelect(e.target.id)}
+              onChange={changePayment}
             />
             <PaymentBrand
+              title="TOSS 결제"
               brand="toss"
               imgUrl={tossUrl}
               id="toss"
               state={paySelect}
-              onChange={e => setpaySelect(e.target.id)}
+              onChange={changePayment}
             />
             <PaymentBrand
+              title="네이버페이"
               brand="네이버페이"
               imgUrl={naverUrl}
               id="naver"
               state={paySelect}
-              onChange={e => setpaySelect(e.target.id)}
+              onChange={changePayment}
             />
             <PaymentBrand
+              title="PAYCO 결제"
               brand="PAYCO"
               imgUrl={paycoUrl}
               id="payco"
               state={paySelect}
-              onChange={e => setpaySelect(e.target.id)}
+              onChange={changePayment}
             />
             <PaymentBrand
+              title="스마일페이 결제"
               brand="스마일페이"
               imgUrl={smileUrl}
               id="smilepay"
               state={paySelect}
-              onChange={e => setpaySelect(e.target.id)}
+              onChange={changePayment}
             />
             <PaymentBrand
+              title="휴대폰 결제"
               brand="휴대폰"
               id="phonepay"
               state={paySelect}
-              onChange={e => setpaySelect(e.target.id)}
+              onChange={changePayment}
             />
           </tbody>
         </table>
@@ -140,6 +149,11 @@ const PaySelection = () => {
       </div>
     </div>
   );
+  function changePayment(e) {
+    setpaySelect(e.target.id);
+    setwayToPay(e.target.title);
+    console.log(e.target.title);
+  }
 };
 
 export default PaySelection;

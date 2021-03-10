@@ -6,10 +6,14 @@ const GET_LOADING = 'order/GET_LOADING';
 const GET_ORDER_INFO_SUCCESS = 'order/GET_ORDER_INFO_SUCCESS';
 const GET_ORDER_INFO_FAIL = 'order/GET_ORDER_INFO_FAIL';
 
+const SET_DELIVERY_INFO_RECEIVER = 'order/SET_DELIVERY_INFO_RECEIVER';
+
 // 액션 생성자 함수
 export const getLoading = createAction(GET_LOADING);
 export const getOrderInfoSuccess = createAction(GET_ORDER_INFO_SUCCESS, res => res);
 export const getOrderInfoFail = createAction(GET_ORDER_INFO_FAIL, error => error);
+
+export const setDeliveryInfoReceiver = createAction(SET_DELIVERY_INFO_RECEIVER, () => {});
 
 export const getOrderInfo = () => async dispatch => {
   try {
@@ -33,6 +37,7 @@ const initialState = {
 
 const orderInfo = handleActions(
   {
+    // 상품정보 가져오기
     [GET_ORDER_INFO_SUCCESS]: (state, { payload }) => ({
       ...state,
       orderInfo: payload,

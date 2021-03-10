@@ -16,7 +16,6 @@ const TypeUserInfo = ({ modalIsOpen, closeModal, deliveryInfo, setDeliveryInfo }
   const [check, setCheck] = useState(true);
   // 받으실 장소
   const [receiveDelivery, setreceiveDelivery] = useState('door');
-
   const DeliveryModalStyles = {
     content: {
       top: '50%',
@@ -74,15 +73,15 @@ const TypeUserInfo = ({ modalIsOpen, closeModal, deliveryInfo, setDeliveryInfo }
           <ReceiverInput
             title="받으실 분"
             placeholder="이름을 입력해 주세요"
-            name="reciever"
-            deliveryInfo={deliveryInfo.reciever}
+            name="receiver"
+            deliveryInfo={deliveryInfo}
             setDeliveryInfo={setDeliveryInfo}
           />
           <ReceiverInput
             title="휴대폰"
             placeholder="숫자만 입력해주세요"
             name="phone"
-            deliveryInfo={deliveryInfo.phone}
+            deliveryInfo={deliveryInfo}
             setDeliveryInfo={setDeliveryInfo}
           />
           <ReceiveDelivery
@@ -90,16 +89,38 @@ const TypeUserInfo = ({ modalIsOpen, closeModal, deliveryInfo, setDeliveryInfo }
             state={receiveDelivery}
             onChange={e => {
               setreceiveDelivery(e.target.id);
-              setDeliveryInfo({ ...deliveryInfo, deliveryPlace: e.target.title });
+              setDeliveryInfo({
+                ...deliveryInfo,
+                deliveryPlace: e.target.title,
+                otherMsg: '',
+                courierInfo: '',
+                enterWay: '',
+                enterPwd: '',
+                securityMsg: '',
+              });
             }}
             deliveryInfo={deliveryInfo}
           />
           {receiveDelivery === 'door' || receiveDelivery === 'courier' ? (
-            <EntrancePwd title="공동현관 출입방법" state={receiveDelivery} />
+            <EntrancePwd
+              title="공동현관 출입방법"
+              state={receiveDelivery}
+              deliveryInfo={deliveryInfo}
+              setDeliveryInfo={setDeliveryInfo}
+            />
           ) : (
-            <ReceivePlace state={receiveDelivery} />
+            <ReceivePlace
+              state={receiveDelivery}
+              deliveryInfo={deliveryInfo}
+              setDeliveryInfo={setDeliveryInfo}
+            />
           )}
-          <SendMsg title="배송 완료 메시지 전송" closeModal={closeModal} />
+          <SendMsg
+            title="배송 완료 메시지 전송"
+            closeModal={closeModal}
+            deliveryInfo={deliveryInfo}
+            setDeliveryInfo={setDeliveryInfo}
+          />
         </form>
       </div>
     </Modal>

@@ -1,28 +1,73 @@
 import React from 'react';
 import { useState } from 'react';
 import { withRouter } from 'react-router';
+import axios from '../../../node_modules/axios/index';
 import AgreeModal from './AgreeModal';
 import { wrapper } from './Coupon';
 
 const payButton =
   'w-r-24.2 h-r-5.5 bg-kp-600 text-white text-1.6 flex justify-center rounded-p-3 mx-auto';
 
-const PayButton = ({ agreeCheck, history }) => {
+const PayButton = ({ agreeCheck, history, deliveryInfo }) => {
   const [isopen, setIsopen] = useState(false);
+  let reciever_visit_method = '';
+
+  switch (deliveryInfo.deliveryPlace) {
+    case '문 앞':
+      if (deliveryInfo.enterWay === '공동현관 비밀번호') {
+        reciever_visit_method = deliveryInfo.enterWay + deliveryInfo.enterPwd;
+      } else if (deliveryInfo.enterWay === '자유 출입 가능') {
+        reciever_visit_method = deliveryInfo.enterWay;
+      } else {
+        reciever_visit_method = deliveryInfo.otherMsg;
+      }
+      break;
+    case '경비실':
+      reciever_visit_method = '경비실' + deliveryInfo.securityMsg;
+      break;
+    case '택배함':
+      if (deliveryInfo.enterWay === '공동현관 비밀번호') {
+        reciever_visit_method =
+          deliveryInfo.courierInfo + deliveryInfo.enterWay + deliveryInfo.enterPwd;
+      } else if (deliveryInfo.enterWay === '자유 출입 가능') {
+        reciever_visit_method = deliveryInfo.courierInfo + deliveryInfo.enterWay;
+      } else {
+        reciever_visit_method =
+          deliveryInfo.courierInfo + deliveryInfo.enterWay + deliveryInfo.otherMsg;
+      }
+      break;
+
+    // 기타 장소
+    default:
+      reciever_visit_method = deliveryInfo.enterWay + deliveryInfo.otherMsg;
+      break;
+  }
+
+  const onClickPayButton = async () => {
+    if (agreeCheck) setIsopen(true);
+    else {
+      setIsopen(false);
+      const res = await axios.post('http://3.35.221.9:8080/api/order/checkout', {
+        reciever: deliveryInfo.receiver,
+        reciever_phone: deliveryInfo.phone,
+        reciever_post: deliveryInfo.deliveryPlace,
+        reciever_place: deliveryInfo.deliveryPlace,
+        reciever_visit_method: reciever_visit_method,
+        arrived_alarm: deliveryInfo.deliveryMsg,
+        checkout: '네이버페이',
+        total_price: 3390,
+        total_discount_price: 3900,
+      });
+
+      // history.push('/');
+      console.log(res.data);
+    }
+  };
 
   return (
-    <div className={wrapper}>
+    <div className={`${wrapper} absolute -bottom-r-180`}>
       <div className={payButton}>
-        <button
-          className="focus:outline-0 px-36 py-4"
-          onClick={() => {
-            if (agreeCheck) setIsopen(true);
-            else {
-              setIsopen(false);
-              history.push('/pay_complete');
-            }
-          }}
-        >
+        <button className="focus:outline-0 px-36 py-4" onClick={onClickPayButton}>
           결제하기
         </button>
       </div>

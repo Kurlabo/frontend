@@ -9,7 +9,6 @@ import Coupon from './Coupon';
 import DeliveryInfo from './DeliveryInfo';
 import MemberInfo from './MemberInfo';
 import OrderProduct from './OrderProduct';
-import PayButton from './PayButton';
 import PayHistory from './PayHistory';
 import PaySelection from './PaySelection';
 import PersonalAgree from './PersonalAgree';
@@ -42,6 +41,7 @@ const OrderContainer = () => {
           orderer_name={orderInfo.orderer_name}
           orderer_phone={orderInfo.orderer_phone}
           orderer_address={orderInfo.orderer_address}
+          agreeCheck={agreeCheck}
         />
         <div className="flex flex-wrap mx-auto w-p-1050">
           <Coupon />
@@ -54,7 +54,6 @@ const OrderContainer = () => {
           }}
           agreeCheck={agreeCheck}
         />
-        <PayButton agreeCheck={agreeCheck} />
         <GotopBtn />
       </div>
     </>

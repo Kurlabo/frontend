@@ -10,19 +10,18 @@ const ReceiverInput = ({ title, placeholder, deliveryInfo, setDeliveryInfo, name
         {title}
         <span className="text-formStar">*</span>
       </p>
-      <input
-        type="text"
-        placeholder={placeholder}
-        className={inputStyle}
-        onChange={onChange}
-        value={deliveryInfo}
-      />
+      {name === 'receiver' ? (
+        <input type="text" placeholder={placeholder} className={inputStyle} onChange={onChange} />
+      ) : (
+        <input type="text" placeholder={placeholder} className={inputStyle} onChange={onChange} />
+      )}
     </div>
   );
+
   function onChange(e) {
     switch (name) {
-      case 'reciever':
-        setDeliveryInfo({ ...deliveryInfo, reciever: e.target.value });
+      case 'receiver':
+        setDeliveryInfo({ ...deliveryInfo, receiver: e.target.value });
         break;
       case 'phone':
         setDeliveryInfo({ ...deliveryInfo, phone: e.target.value });

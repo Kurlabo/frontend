@@ -7,7 +7,7 @@ import { formRadioIcon, formRadioIcon2 } from '../../common_style/common';
 const cancelBtn = 'w-1/2 h-r-4.4 rounded-p-3 border border-gray-300 mr-4 focus:outline-0';
 const saveBtn = 'w-1/2 bg-kp-600 text-white h-r-4.4 rounded-p-3';
 
-const SendMsg = ({ title, closeModal }) => {
+const SendMsg = ({ title, closeModal, deliveryInfo, setDeliveryInfo }) => {
   const [messageTime, setMessageTime] = useState('afterDelivery');
 
   return (
@@ -21,6 +21,7 @@ const SendMsg = ({ title, closeModal }) => {
           {/* 배송 직후 클릭시 */}
           <div className="w-1/2">
             <input
+              title="배송 직후"
               type="radio"
               name="message"
               id="afterDelivery"
@@ -39,6 +40,7 @@ const SendMsg = ({ title, closeModal }) => {
           {/* 오전 7시 클릭시 */}
           <div className="w-1/2">
             <input
+              title="오전 7시"
               type="radio"
               name="message"
               id="sevenOclock"
@@ -61,12 +63,16 @@ const SendMsg = ({ title, closeModal }) => {
         <button className={cancelBtn} onClick={closeModal}>
           취소
         </button>
-        <button className={saveBtn}>저장</button>
+        <button className={saveBtn} onClick={closeModal}>
+          저장
+        </button>
       </div>
     </div>
   );
   function changeMsgTime(e) {
     setMessageTime(e.target.id);
+    deliveryInfo.deliveryMsg !== undefined &&
+      setDeliveryInfo({ ...deliveryInfo, deliveryMsg: e.target.title });
   }
 };
 

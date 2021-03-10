@@ -20,7 +20,6 @@ const PayHistory = ({ products_list }) => {
     );
     discount = products_list.reduce((acc, curr) => acc + curr.product_discount_price, 0);
   }
-  console.log(typeof sum, 'sum');
   return (
     <div className="w-r-27.5 sticky top-12 transform translate-y-r-7.2">
       <h2 className="text-2 font-medium pb-r-1.6">결제금액</h2>

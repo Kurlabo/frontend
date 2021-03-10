@@ -7,7 +7,6 @@ const OrderItemLi = ({
   product_price,
   product_discount_price,
 }) => {
-  console.log(typeof product_price);
   return (
     <li className="h-r-12.8 border-b border-gray-100 flex items-center">
       <img src={list_image_url} alt={product_name} className="w-24 h-r-7.9 inline-block mr-8" />
