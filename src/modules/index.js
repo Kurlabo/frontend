@@ -18,6 +18,7 @@ import wish from './wishList';
 import addGoodsToCart, { addGoodsToCartSaga } from './common/addGoodsToCart';
 import { connectRouter } from 'connected-react-router';
 import themeProductList from './themeProductList';
+import myWritableReviews, { myWritableReviewSaga } from './myWritableReviews';
 
 const rootReducer = history =>
   combineReducers({
@@ -38,11 +39,12 @@ const rootReducer = history =>
     themeProductList,
     instagram,
     myReviewRegister,
+    myWritableReviews,
     router: connectRouter(history),
   });
 
 export function* rootSaga() {
-  yield all([itemDetailSaga(), addGoodsToCartSaga(), myReviewSaga()]);
+  yield all([itemDetailSaga(), addGoodsToCartSaga(), myReviewSaga(), myWritableReviewSaga()]);
 }
 
 export default rootReducer;

@@ -65,3 +65,27 @@ export function createAddGoodsRequestSaga(type, request) {
     yield put(finishLoading(type));
   };
 }
+
+export function createCheckWritableReviewSaga(type, request) {
+  const SUCCESS = `${type}_SUCCESS`;
+  const FAILURE = `${type}_FAILURE`;
+
+  return function* (action) {
+    yield put(startLoading(type)); // 로딩 시작
+    try {
+      const response = yield call(request);
+      yield put({
+        type: SUCCESS,
+        payload: response.data.filter(item => item.product_id === action.payload),
+      });
+    } catch (e) {
+      yield put({
+        type: FAILURE,
+        payload: e,
+        error: true,
+      });
+      console.log('createRequestSaga error!!!!', e);
+    }
+    yield put(finishLoading(type));
+  };
+}
