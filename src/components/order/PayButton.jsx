@@ -12,7 +12,25 @@ const payButton =
 const PayButton = ({ agreeCheck, history, deliveryInfo }) => {
   const [isopen, setIsopen] = useState(false);
   const checkout = useSelector(state => state.orderInfo.checkoutMethod);
+  const products_list = useSelector(state => state.orderInfo.orderInfo.products_list);
+
   let reciever_visit_method = '';
+  let total_discount_price = 0;
+  let total_price = 0;
+
+  products_list !== undefined &&
+    (total_discount_price = products_list.reduce(
+      (acc, curr) => acc + curr.product_discount_price,
+      0,
+    ));
+  products_list !== undefined &&
+    (total_price = products_list.reduce(
+      (acc, curr) =>
+        curr.product_discount_price
+          ? 3000 + acc + (curr.product_price - curr.product_discount_price)
+          : 3000 + acc + curr.product_price,
+      0,
+    ));
 
   switch (deliveryInfo.deliveryPlace) {
     case '문 앞':
@@ -57,17 +75,18 @@ const PayButton = ({ agreeCheck, history, deliveryInfo }) => {
         reciever_visit_method: reciever_visit_method,
         arrived_alarm: deliveryInfo.deliveryMsg,
         checkout: checkout,
-        total_price: 3390,
-        total_discount_price: 3900,
+        total_price: total_price,
+        total_discount_price: total_discount_price,
       });
 
-      // history.push('/');
-      console.log(res.data);
+      if (res.data === 'CHECKOUT SUCCESS') {
+        history.push('/');
+      }
     }
   };
 
   return (
-    <div className={`${wrapper} absolute -bottom-r-180`}>
+    <div className={`${wrapper} absolute transform translate-y-r-130`}>
       <div className={payButton}>
         <button className="focus:outline-0 px-36 py-4" onClick={onClickPayButton}>
           결제하기
