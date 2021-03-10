@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CardOption from './CardOption';
 import { wrapper } from './Coupon';
 import PaymentBrand from './PaymentBrand';
+import { selectCheckoutMethod } from '../../modules/order';
 
 // 이미지 url
 const tossUrl = 'https://res.kurly.com/pc/service/order/1912/toss-logo-signature.svg';
@@ -45,6 +47,7 @@ const selectStyle = {
 const PaySelection = () => {
   const [paySelect, setpaySelect] = useState('normal');
   const [wayToPay, setwayToPay] = useState('일반결제');
+  const dispatch = useDispatch();
 
   return (
     <div className={wrapper}>
@@ -53,12 +56,12 @@ const PaySelection = () => {
         <table className="w-full">
           <tbody>
             <PaymentBrand
-              title="일반결제"
+              title="신용카드"
               brand="일반"
               id="normal"
               credit="신용카드"
               state={paySelect}
-              onChange={changePayment}
+              onChange={onChangePayment}
             />
             <tr>
               <th></th>
@@ -87,7 +90,7 @@ const PaySelection = () => {
               imgUrl={chaiUrl}
               id="chai"
               state={paySelect}
-              onChange={changePayment}
+              onChange={onChangePayment}
             />
             <PaymentBrand
               title="TOSS 결제"
@@ -95,7 +98,7 @@ const PaySelection = () => {
               imgUrl={tossUrl}
               id="toss"
               state={paySelect}
-              onChange={changePayment}
+              onChange={onChangePayment}
             />
             <PaymentBrand
               title="네이버페이"
@@ -103,7 +106,7 @@ const PaySelection = () => {
               imgUrl={naverUrl}
               id="naver"
               state={paySelect}
-              onChange={changePayment}
+              onChange={onChangePayment}
             />
             <PaymentBrand
               title="PAYCO 결제"
@@ -111,7 +114,7 @@ const PaySelection = () => {
               imgUrl={paycoUrl}
               id="payco"
               state={paySelect}
-              onChange={changePayment}
+              onChange={onChangePayment}
             />
             <PaymentBrand
               title="스마일페이 결제"
@@ -119,14 +122,14 @@ const PaySelection = () => {
               imgUrl={smileUrl}
               id="smilepay"
               state={paySelect}
-              onChange={changePayment}
+              onChange={onChangePayment}
             />
             <PaymentBrand
               title="휴대폰 결제"
               brand="휴대폰"
               id="phonepay"
               state={paySelect}
-              onChange={changePayment}
+              onChange={onChangePayment}
             />
           </tbody>
         </table>
@@ -149,8 +152,9 @@ const PaySelection = () => {
       </div>
     </div>
   );
-  function changePayment(e) {
+  function onChangePayment(e) {
     setpaySelect(e.target.id);
+    dispatch(selectCheckoutMethod(e.target.title));
     setwayToPay(e.target.title);
     console.log(e.target.title);
   }

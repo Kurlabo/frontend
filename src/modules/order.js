@@ -5,15 +5,13 @@ import axios from '../../node_modules/axios/index';
 const GET_LOADING = 'order/GET_LOADING';
 const GET_ORDER_INFO_SUCCESS = 'order/GET_ORDER_INFO_SUCCESS';
 const GET_ORDER_INFO_FAIL = 'order/GET_ORDER_INFO_FAIL';
-
-const SET_DELIVERY_INFO_RECEIVER = 'order/SET_DELIVERY_INFO_RECEIVER';
+const SELECT_CHECKOUT_METHOD = 'order/SELECT_CHECKOUT_METHOD';
 
 // 액션 생성자 함수
 export const getLoading = createAction(GET_LOADING);
 export const getOrderInfoSuccess = createAction(GET_ORDER_INFO_SUCCESS, res => res);
 export const getOrderInfoFail = createAction(GET_ORDER_INFO_FAIL, error => error);
-
-export const setDeliveryInfoReceiver = createAction(SET_DELIVERY_INFO_RECEIVER, () => {});
+export const selectCheckoutMethod = createAction(SELECT_CHECKOUT_METHOD, checkout => checkout);
 
 export const getOrderInfo = () => async dispatch => {
   try {
@@ -33,6 +31,7 @@ const initialState = {
   loading: true,
   error: '',
   orderInfo: [],
+  checkoutMethod: '',
 };
 
 const orderInfo = handleActions(
@@ -50,6 +49,10 @@ const orderInfo = handleActions(
     [GET_LOADING]: (state, action) => ({
       ...state,
       loading: true,
+    }),
+    [SELECT_CHECKOUT_METHOD]: (state, { payload }) => ({
+      ...state,
+      checkoutMethod: payload,
     }),
   },
   initialState,

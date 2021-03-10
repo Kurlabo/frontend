@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 import axios from '../../../node_modules/axios/index';
 import AgreeModal from './AgreeModal';
@@ -10,6 +11,7 @@ const payButton =
 
 const PayButton = ({ agreeCheck, history, deliveryInfo }) => {
   const [isopen, setIsopen] = useState(false);
+  const checkout = useSelector(state => state.orderInfo.checkoutMethod);
   let reciever_visit_method = '';
 
   switch (deliveryInfo.deliveryPlace) {
@@ -54,7 +56,7 @@ const PayButton = ({ agreeCheck, history, deliveryInfo }) => {
         reciever_place: deliveryInfo.deliveryPlace,
         reciever_visit_method: reciever_visit_method,
         arrived_alarm: deliveryInfo.deliveryMsg,
-        checkout: '네이버페이',
+        checkout: checkout,
         total_price: 3390,
         total_discount_price: 3900,
       });
