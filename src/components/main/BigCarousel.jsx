@@ -8,7 +8,7 @@ const BigCarousel = () => {
   const containerRef = useRef(null);
   const [isStop, setIStop] = useState('');
 
-  const imgArr = useSelector(state => state.instagram.slide_img_list);
+  const mainBannerImages = useSelector(state => state.instagram.slide_img_list);
 
   // 메인베너 다음 버튼 이동 이벤트 핸들러
   const prevButton = useCallback(() => {
@@ -19,16 +19,16 @@ const BigCarousel = () => {
     // onAnimate가 false값이어여서 실행된이후 true값으로 바꾸어 다음 이벤트가 실행되었을때 함수를 멈추게한다.
     onAnimate.current = true;
 
-    // imgArr이 state에서 존재하지 않는 경우에는 실행하지 않게한다.
+    // mainBannerImages이 state에서 존재하지 않는 경우에는 실행하지 않게한다.
     // cur 값이 만약 1인경우 캐러셀의 가장 첫번째이미지(캐러셀에 보이는 마지막 이미지)로 보이게 넘어간이후
     // 0.5초가 지나면 transition의 프로퍼티값을 없에고 가장 마지막 캐러셀 이미지 이동시킨다.
-    if (imgArr !== undefined && cur.current === 1) {
+    if (mainBannerImages !== undefined && cur.current === 1) {
       setTimeout(() => {
         containerRef.current.style.transitionDuration = '';
         containerRef.current.style.transitionProperty = '';
         containerRef.current.style.transitionTimingFunction = '';
-        containerRef.current.style.transform = `translateX(-${imgArr.length}00%)`;
-        cur.current = imgArr.length;
+        containerRef.current.style.transform = `translateX(-${mainBannerImages.length}00%)`;
+        cur.current = mainBannerImages.length;
       }, 500);
       containerRef.current.style.transitionDuration = '0.5s';
       containerRef.current.style.transitionProperty = 'all';
@@ -46,12 +46,12 @@ const BigCarousel = () => {
     setTimeout(() => {
       onAnimate.current = false;
     }, 500);
-  }, [imgArr]);
+  }, [mainBannerImages]);
 
   const nextButton = useCallback(() => {
     if (onAnimate.current) return;
     onAnimate.current = true;
-    if (imgArr !== undefined && cur.current === imgArr.length) {
+    if (mainBannerImages !== undefined && cur.current === mainBannerImages.length) {
       setTimeout(() => {
         containerRef.current.style.transitionDuration = '';
         containerRef.current.style.transitionProperty = '';
@@ -74,7 +74,7 @@ const BigCarousel = () => {
     setTimeout(() => {
       onAnimate.current = false;
     }, 500);
-  }, [imgArr]);
+  }, [mainBannerImages]);
 
   useEffect(() => {
     // setIStop으로 isStop의 스테이트가 변경되면 리렌더링이 되어 useEffect가 다시 실행되게 되고
@@ -84,7 +84,7 @@ const BigCarousel = () => {
     // 두번째 캐러셀이미지(원래 첫번째 이미지)가 보여지게 하는 코드이다.
 
     // 그러므로 isStop 스테이트가 변경되었을때는 밑의 코드가 실행안되게 해야한다.
-    // 그럴려면 isStop의 값은 'start' 또는 'stop'이므로 디폴트값은 ''이므로 ''일때만 실행시켜주고 값이있을때 실행안시켜주면된다.
+    // 그럴려면 isStop의 값은 'start' 또는 'stop'이므로 디폴트값은 ''이므로 ''일때만 실행시켜주고 값이있을때 실행시키지 않는다.
     if (isStop === '') {
       containerRef.current.style.transform = `translateX(-${cur.current}00%)`;
     }
@@ -127,13 +127,13 @@ const BigCarousel = () => {
         className="absolute z-50 w-p-52 h-p-52 bg-big-pre-button left-p-91 top-p-159 focus:outline-none"
       />
       <div ref={containerRef} className="relative h-p-370">
-        {imgArr !== undefined && (
+        {mainBannerImages !== undefined && (
           <ul className="absolute w-vw-700">
             <li
               className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${imgArr[imgArr.length - 1]})` }}
+              style={{ backgroundImage: `url(${mainBannerImages[mainBannerImages.length - 1]})` }}
             />
-            {imgArr.map((img, i) => (
+            {mainBannerImages.map((img, i) => (
               <li
                 key={i}
                 className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
@@ -142,7 +142,7 @@ const BigCarousel = () => {
             ))}
             <li
               className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${imgArr[0]})` }}
+              style={{ backgroundImage: `url(${mainBannerImages[0]})` }}
             />
           </ul>
         )}
