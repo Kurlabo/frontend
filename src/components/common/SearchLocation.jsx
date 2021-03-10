@@ -73,6 +73,7 @@ const SearchLocation = ({ history }) => {
   function onClose() {
     sessionStorage.setItem('res', resAddress.current.value);
     window.close();
+    window.opener.document.location.reload();
   }
 };
 
