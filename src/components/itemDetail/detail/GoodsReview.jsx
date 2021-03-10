@@ -1,34 +1,38 @@
 import React from 'react';
 import GoodsReviewTitle from './GoodsReviewTitle';
 import GoodsReviewList from './GoodsReviewList';
-import { useState } from 'react';
-import ReviewModal from './ReviewModal';
 import { withRouter } from 'react-router';
-import { useCallback } from 'react';
 import Pagination from '../../customerService/common/Pagination';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getWritableReviews } from '../../../modules/myWritableReviews';
 
 const isLogin = true;
 
 // style class
 const addReviewBtn =
-  'text-white bg-klp-600 w-52 my-1 pt-r-0.6 h-14 text-1.3 text-center hover:bg-white hover:text-kp-600 border border-kp-600 cursor-pointer';
+  'text-white bg-klp-600 w-52 my-1 pt-r-0.6 h-14 text-1.3 text-center hover:bg-white hover:text-kp-600 border border-kp-600 cursor-pointer select-none';
 
-const GoodsReview = ({ history, reviews, name }) => {
-  const [openModal, setOpenModal] = useState(false);
+const GoodsReview = ({ history, reviews, name, product_id }) => {
+  const { checkWritable } = useSelector(state => state.myWritableReviews);
+  const dispatch = useDispatch();
 
-  const onClick = useCallback(() => {
+  const onClick = () => {
     if (isLogin) {
-      history.push('/shop/mypage/mypage_review/register');
+      if (checkWritable.length > 0) {
+        history.push('/shop/mypage/mypage_review/register');
+      } else {
+        alert('상품후기는 상품을 구매하시고 배송완료된 회원 분만 한 달 내 작성 가능합니다.');
+      }
     } else {
-      // console.log('상품후기는 상품을 구매하시고배송완료된 회원 분만 한 달 내 작성 가능합니다.');
-      setOpenModal(true);
+      alert('상품후기는 상품을 구매하시고 배송완료된 회원 분만 한 달 내 작성 가능합니다.');
+      history.push('/shop/account/signin');
     }
-  }, [history]);
+  };
 
-  const closeModal = useCallback(() => {
-    setOpenModal(false);
-    history.push('/shop/account/signin');
-  }, [history]);
+  useEffect(() => {
+    dispatch(getWritableReviews(product_id));
+  }, [dispatch, product_id]);
 
   return (
     <div>
@@ -40,7 +44,6 @@ const GoodsReview = ({ history, reviews, name }) => {
         </div>
       </div>
       <Pagination num={1} />
-      <ReviewModal openModal={openModal} closeModal={closeModal} />
     </div>
   );
 };
