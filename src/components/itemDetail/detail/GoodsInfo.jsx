@@ -10,6 +10,7 @@ import { useCallback } from 'react';
 const GoodsInfo = ({ itemDetail }) => {
   const {
     name,
+    product_id,
     detail_context,
     short_description,
     product_img_url,
@@ -22,7 +23,7 @@ const GoodsInfo = ({ itemDetail }) => {
     setState(e.target.firstChild.nodeValue);
   }, []);
 
-  const render = useCallback(() => {
+  const render = () => {
     switch (state) {
       case '상품설명':
         return (
@@ -38,13 +39,13 @@ const GoodsInfo = ({ itemDetail }) => {
       case '상세정보':
         return <GoodsDetailInfo name={name} />;
       case '고객후기':
-        return <GoodsReview reviews={reviews} name={name} />;
+        return <GoodsReview reviews={reviews} name={name} product_id={product_id} />;
       case '상품문의':
         return <ProductQnA />;
       default:
         return;
     }
-  }, [name, short_description, detail_context, product_img_url, detail_img_url, reviews, state]);
+  };
 
   return (
     <div className="w-r-101 mt-20 mb-10">

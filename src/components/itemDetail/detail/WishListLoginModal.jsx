@@ -36,7 +36,7 @@ const modalStyles = {
   },
 };
 
-const WishListLoginModal = ({ openModal, closeModal }) => {
+const WishListLoginModal = ({ openModal, closeModal, moveToSigninPage }) => {
   return (
     <Modal
       isOpen={openModal}
@@ -45,15 +45,28 @@ const WishListLoginModal = ({ openModal, closeModal }) => {
       contentLabel="로그인 요청 창"
       ariaHideApp={false}
     >
-      <p className="">로그인하셔야 본 서비스를 이용하실 수 있습니다.</p>
-      <div
-        className="p-4 w-32 text-1.4 cursor-pointer rounded-lg self-end bg-blue-600 text-white text-center"
-        onClick={closeModal}
-      >
-        확인
+      <p className="">회원 전용 서비스입니다. 로그인/회원가입 페이지로 이동하시겠습니까?</p>
+      <div className="flex justify-end">
+        <div
+          className="p-3 w-28 text-1.4 cursor-pointer rounded-lg self-end text-center mr-2 text-blue-600 border border-gray-300"
+          onClick={closeModal}
+        >
+          취소
+        </div>
+        <div
+          className="p-3 w-28 text-1.4 cursor-pointer rounded-lg self-end text-center bg-blue-600 text-white"
+          onClick={onClick}
+        >
+          확인
+        </div>
       </div>
     </Modal>
   );
+
+  function onClick() {
+    closeModal();
+    moveToSigninPage();
+  }
 };
 
 export default React.memo(WishListLoginModal);

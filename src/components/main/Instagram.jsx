@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getInstagramInfo } from '../../../modules/instagram';
+import { getInstagramInfo } from '../../modules/instagram';
 
 const Instagram = () => {
   const dispatch = useDispatch();
@@ -11,8 +11,8 @@ const Instagram = () => {
 
   const imgArr = [];
 
-  let cur = 0;
-  let onAnimate = false;
+  let cur = useRef(0);
+  let onAnimate = useRef(false);
   const containerRef = useRef(null);
   const prevButtonRef = useRef(null);
   const nextButtonRef = useRef(null);
@@ -30,6 +30,56 @@ const Instagram = () => {
         }),
     );
   }
+
+  const nextButton = useCallback(
+    e => {
+      console.log('nextcur', cur.current);
+      if (onAnimate.current) return;
+      onAnimate.current = true;
+      if (cur.current === imgArr.length - 2 && imgArr[imgArr.length - 1].length !== 6) {
+        containerRef.current.style.transform = `translateX(-${
+          cur.current * 1050 + 175 * imgArr[imgArr.length - 1].length
+        }px)`;
+        e.target.style.display = 'none';
+        e.target.disabled = true;
+      } else if (cur.current === imgArr.length - 2) {
+        containerRef.current.style.transform = `translateX(-${(cur.current + 1) * 1050}px)`;
+        e.target.style.display = 'none';
+        e.target.disabled = true;
+      } else {
+        containerRef.current.style.transform = `translateX(-${(cur.current + 1) * 1050}px)`;
+        prevButtonRef.current.disabled = false;
+        prevButtonRef.current.style.display = '';
+      }
+
+      ++cur.current;
+
+      setTimeout(() => {
+        onAnimate.current = false;
+      }, 500);
+    },
+    [imgArr],
+  );
+
+  const prevButton = useCallback(e => {
+    console.log('prevcur', cur.current);
+    if (onAnimate.current) return;
+    onAnimate.current = true;
+    if (cur.current === 1) {
+      containerRef.current.style.transform = `translateX(-${(cur.current - 1) * 1050}px)`;
+      e.target.disabled = true;
+      e.target.style.display = 'none';
+    } else {
+      nextButtonRef.current.disabled = false;
+      nextButtonRef.current.style.display = '';
+      containerRef.current.style.transform = `translateX(-${(cur.current - 1) * 1050}px)`;
+    }
+    --cur.current;
+
+    setTimeout(() => {
+      onAnimate.current = false;
+    }, 500);
+  }, []);
 
   useEffect(() => {
     dispatch(getInstagramInfo());
@@ -59,7 +109,12 @@ const Instagram = () => {
                     {imgs.map(({ img, url }) => (
                       <div className="inline-block ">
                         <a rel="noreferrer" target="_blank" href={url}>
-                          <img className="h-r-17.5 w-r-17.5" alt="" src={img} />
+                          <img
+                            className="h-r-17.5 w-r-17.5"
+                            alt=""
+                            src={img}
+                            onError={e => (e.target.src = '/img/commingsoonresize.png')}
+                          />
                         </a>
                       </div>
                     ))}
@@ -82,51 +137,6 @@ const Instagram = () => {
       </div>
     </div>
   );
-
-  function prevButton(e) {
-    if (onAnimate) return;
-    onAnimate = true;
-    if (cur === 1) {
-      containerRef.current.style.transform = `translateX(-${(cur - 1) * 1050}px)`;
-      e.target.disabled = true;
-      e.target.style.display = 'none';
-    } else {
-      nextButtonRef.current.disabled = false;
-      nextButtonRef.current.style.display = '';
-      containerRef.current.style.transform = `translateX(-${(cur - 1) * 1050}px)`;
-    }
-    --cur;
-
-    setTimeout(() => {
-      onAnimate = false;
-    }, 500);
-  }
-
-  function nextButton(e) {
-    if (onAnimate) return;
-    onAnimate = true;
-    if (cur === imgArr.length - 2 && imgArr[imgArr.length - 1].length !== 6) {
-      containerRef.current.style.transform = `translateX(-${
-        cur * 1050 + 175 * imgArr[imgArr.length - 1].length
-      }px)`;
-      e.target.style.display = 'none';
-      e.target.disabled = true;
-    } else if (cur === imgArr.length - 2) {
-      containerRef.current.style.transform = `translateX(-${(cur + 1) * 1050}px)`;
-      e.target.style.display = 'none';
-      e.target.disabled = true;
-    } else {
-      containerRef.current.style.transform = `translateX(-${(cur + 1) * 1050}px)`;
-      prevButtonRef.current.disabled = false;
-      prevButtonRef.current.style.display = '';
-    }
-
-    ++cur;
-
-    setTimeout(() => {
-      onAnimate = false;
-    }, 500);
-  }
 };
 
 export default React.memo(Instagram);

@@ -22,12 +22,18 @@ const othersText =
 const othersText2 =
   '배송 받으실 시간은 별도로 지정하실 수 없으며, 밤 11시까지 주문 시 오전 7시까지 배송이 완료됩니다.';
 
-const EntrancePwd = ({ title, state }) => {
+const EntrancePwd = ({ title, state, deliveryInfo, setDeliveryInfo }) => {
   const [entrancePwd, setEntrancePwd] = useState('enterPwd');
 
   return (
     <div className="text-1.4">
-      {state === 'courier' && <CourierInfo title="택배함 정보" />}
+      {state === 'courier' && (
+        <CourierInfo
+          title="택배함 정보"
+          deliveryInfo={deliveryInfo}
+          setDeliveryInfo={setDeliveryInfo}
+        />
+      )}
 
       <fieldset id="entrance">
         <legend className="pb-6 pt-9 font-semibold">
@@ -36,7 +42,14 @@ const EntrancePwd = ({ title, state }) => {
         </legend>
 
         {/* 공동현관 비밀번호를 클릭했을 때 */}
-        <input type="radio" id="enterPwd" name="entrance" className="hidden" onChange={onChange} />
+        <input
+          type="radio"
+          id="enterPwd"
+          name="entrance"
+          className="hidden"
+          onChange={onChange}
+          title="공동현관 비밀번호"
+        />
         <label htmlFor="enterPwd" className="text-1.4 inline-block mb-6 cursor-pointer">
           {entrancePwd === 'enterPwd' ? (
             <RiRadioButtonFill className={formRadioIcon} />
@@ -47,7 +60,14 @@ const EntrancePwd = ({ title, state }) => {
         </label>
         {entrancePwd === 'enterPwd' && (
           <>
-            <input type="text" placeholder="예:#1234*" className={inputStyle} />
+            <input
+              type="text"
+              placeholder="예:#1234*"
+              className={inputStyle}
+              onChange={typePassword}
+              title="공동현관 비밀번호"
+              value={deliveryInfo.enterPwd}
+            />
             <p className="text-1.2 text-gray-400 mb-6">
               특수문자를 포함한 정확한 비밀번호를 입력해 주세요.
             </p>
@@ -62,6 +82,7 @@ const EntrancePwd = ({ title, state }) => {
             name="entrance"
             className="hidden"
             onChange={onChange}
+            title="자유 출입 가능"
           />
           <label htmlFor="enterFree" className="text-1.4 inline-block mb-6 cursor-pointer">
             {entrancePwd === 'enterFree' ? (
@@ -75,7 +96,14 @@ const EntrancePwd = ({ title, state }) => {
 
         {/* 기타 클릭했을 때 */}
         <div>
-          <input type="radio" id="others" name="entrance" className="hidden" onChange={onChange} />
+          <input
+            type="radio"
+            id="others"
+            name="entrance"
+            className="hidden"
+            onChange={onChange}
+            title="기타"
+          />
           <label htmlFor="others" className="text-1.4 inline-block mb-6 cursor-pointer">
             {entrancePwd === 'others' ? (
               <RiRadioButtonFill className={formRadioIcon} />
@@ -93,6 +121,8 @@ const EntrancePwd = ({ title, state }) => {
             rows="10"
             placeholder="예: 연락처로 전화, 경비실로 호출 (배송 시간은 별도로 지정할 수 없습니다)"
             className={textAreaStyle}
+            value={deliveryInfo.otherMsg || ''}
+            onChange={typePassword}
           ></textarea>
         )}
       </fieldset>
@@ -114,6 +144,36 @@ const EntrancePwd = ({ title, state }) => {
   );
   function onChange(e) {
     setEntrancePwd(e.target.id);
+    setDeliveryInfo({
+      ...deliveryInfo,
+      enterWay: e.target.title,
+      enterPwd: '',
+      otherMsg: '',
+    });
+  }
+
+  function typePassword(e) {
+    switch (entrancePwd) {
+      case 'enterPwd':
+        setDeliveryInfo({
+          ...deliveryInfo,
+          otherMsg: '',
+          enterWay: '',
+          enterPwd: e.target.value,
+        });
+        break;
+      case 'others':
+        setDeliveryInfo({
+          ...deliveryInfo,
+          enterPwd: '',
+          enterWay: '',
+          otherMsg: e.target.value,
+        });
+        console.log(deliveryInfo.otherMsg);
+        break;
+      default:
+        break;
+    }
   }
 };
 

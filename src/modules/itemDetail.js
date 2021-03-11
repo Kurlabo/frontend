@@ -72,11 +72,13 @@ const itemDetail = handleActions(
       ...state,
       error,
     }),
-    [POST_WISH_LIST_SUCCESS]: (state, { payload: msg }) => ({
+    [POST_WISH_LIST_SUCCESS]: (state, { payload: result }) => ({
       ...state,
       modalInfo: {
         isOpen: true,
-        msg: msg,
+        msg: result
+          ? '늘 사는 리스트에 추가 했습니다.'
+          : '이미 늘 사는 리스트에 존재하는 상품입니다.',
       },
     }),
     [POST_WISH_LIST_FAILURE]: (state, { payload: error }) => ({

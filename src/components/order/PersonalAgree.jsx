@@ -8,7 +8,7 @@ import { formRadioIcon2, formRadioIcon } from '../../common_style/common.js';
 
 const PersonalAgree = ({ onCheck, agreeCheck }) => {
   return (
-    <div className={wrapperWithText}>
+    <div className={`${wrapperWithText} pb-r-15.5`}>
       <h2 className="pb-r-1.6 border-b border-gray-800">개인정보 수집/제공</h2>
       <div className="font-medium pt-r-1.9">
         <input

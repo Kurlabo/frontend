@@ -22,7 +22,7 @@ const initialState = {
   reviewPostResult: '',
 };
 
-const itemDetail = handleActions(
+const myReviewRegister = handleActions(
   {
     [POST_REVIEW_SUCCESS]: (state, { payload: result }) => ({
       reviewPostResult: result,
@@ -34,4 +34,4 @@ const itemDetail = handleActions(
   initialState,
 );
 
-export default itemDetail;
+export default myReviewRegister;

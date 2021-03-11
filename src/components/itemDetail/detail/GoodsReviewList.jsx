@@ -23,4 +23,4 @@ const GoodsReviewList = ({ reviews, name }) => {
   );
 };
 
-export default GoodsReviewList;
+export default React.memo(GoodsReviewList);

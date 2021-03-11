@@ -18,7 +18,7 @@ const PageContainer = ({ firstParams }) => {
   const totalPages = useSelector(state => state.itemList.totalPages);
 
   return (
-    <div className="pagenation-container text-gray-900 text-xl  border border-gray-300 inline-block">
+    <div className="text-gray-900 text-xl  border border-gray-300 inline-block">
       <button className={pageFStyle}>
         <AiOutlineDoubleLeft />
       </button>
@@ -34,7 +34,7 @@ const PageContainer = ({ firstParams }) => {
                 <Link
                   to={`/shop/goods/item_list/category=${firstParams}?page=${i - 1}`}
                   style={{ verticalAlign: '-webkit-baseline-middle' }}
-                  className="pr-6 pl-6"
+                  className="pr-6 pl-6  transform translate-y-r-0.9 inline-block h-14 "
                 >
                   {i}
                 </Link>

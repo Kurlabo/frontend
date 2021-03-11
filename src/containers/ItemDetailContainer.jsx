@@ -9,9 +9,6 @@ import { getProductInfo } from '../modules/itemDetail';
 
 const ItemDetailContainer = ({ match }) => {
   const dispatch = useDispatch();
-
-  // const { productId } = match.params;
-  // productId는 아무래도 스토어에서 가져와야 될것
   const productId = match.params.productId;
 
   const { itemDetail, loading } = useSelector(({ itemDetail, loading }) => ({
@@ -25,12 +22,11 @@ const ItemDetailContainer = ({ match }) => {
     dispatch(setProductId({ productId }));
     window.scrollTo(0, 0);
     return () => {
-      // dispatch(unloadProductInfo());
       dispatch(initCartOption());
     };
   }, [dispatch, productId]);
 
-  console.log('데이터:', itemDetail);
+  // console.log('데이터:', itemDetail);
 
   return loading ? (
     <Loading />

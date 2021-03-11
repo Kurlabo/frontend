@@ -4,15 +4,15 @@ import MemberInfoTr from './MemberInfoTr';
 
 export const wrapperWithText = `${wrapper} text-2`;
 
-const MemberInfo = () => {
+const MemberInfo = ({ orderer_name, orderer_phone, orderer_email }) => {
   return (
     <div className={wrapperWithText}>
       <h2 className="border-b border-gray-800 pb-8 font-medium">주문자 정보</h2>
       <table width="100%">
         <tbody>
-          <MemberInfoTr tableHeader="보내는 분" desc="조재연" />
-          <MemberInfoTr tableHeader="휴대폰" desc="01098063260" />
-          <MemberInfoTr tableHeader="이메일" desc="cjy0029@naver.com" />
+          <MemberInfoTr tableHeader="보내는 분" desc={orderer_name} />
+          <MemberInfoTr tableHeader="휴대폰" desc={orderer_phone} />
+          <MemberInfoTr tableHeader="이메일" desc={orderer_email} />
           <tr className="text-1.2 text-gray-600">
             <th></th>
             <td className="pt-r-1.9 pb-r-0.9">
