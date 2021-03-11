@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { AiOutlinePauseCircle, AiOutlinePlayCircle } from 'react-icons/ai';
+import { AiFillPauseCircle, AiFillPlayCircle } from 'react-icons/ai';
 
 const BigCarousel = () => {
   let onAnimate = useRef(false);
@@ -116,20 +116,19 @@ const BigCarousel = () => {
       clearInterval(timerId);
     };
   }, [isStop]);
-
   return (
     <div className="relative">
-      <AiOutlinePauseCircle
+      <AiFillPauseCircle
         onClick={() => {
           setIStop('stop');
         }}
-        className="absolute cursor-pointer left-r-73 top-r-30.9 z-10 text-r-3.8 text-kp-600"
+        className="absolute cursor-pointer left-r-73 top-r-30.9 z-10 text-r-3 opacity-50 text-kp-600"
       />
-      <AiOutlinePlayCircle
+      <AiFillPlayCircle
         onClick={() => {
           setIStop('start');
         }}
-        className="absolute cursor-pointer left-r-67 top-r-30.9 z-10 text-r-3.8 text-kp-600"
+        className="absolute cursor-pointer left-r-69 top-r-30.9 z-10 text-r-3 opacity-50 text-kp-600"
       />
       <div
         onMouseOver={() => setIStop('stop')}
