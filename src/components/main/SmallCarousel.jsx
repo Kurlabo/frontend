@@ -135,7 +135,12 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
                       className="inline-block h-r-49.6 w-r-24.9 mr-r-1.3 align-top"
                     >
                       <Link to={`/shop/goods/goods_view/${info.product_id}`}>
-                        <img alt="" src={info.product_img} />
+                        <img
+                          alt=""
+                          src={info.product_img}
+                          className="h-r-32"
+                          onError={e => (e.target.src = '/img/commingsoonresize.png')}
+                        />
                         <p className="text-r-1.6 mt-5 mb-4">{info.product_name}</p>
                       </Link>
                       <span className="font-bold">
