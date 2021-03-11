@@ -6,6 +6,7 @@ import itemList from './itemlist';
 import user from './user';
 import notice from './notice';
 import recentItem from './aside';
+import login from './login';
 import cartAddOption from './cartAddOption';
 import itemDetail, { itemDetailSaga } from './itemDetail';
 import loading from './loading';
@@ -38,6 +39,7 @@ const rootReducer = history =>
     themeProductList,
     instagram,
     myReviewRegister,
+    login,
     router: connectRouter(history),
   });
 

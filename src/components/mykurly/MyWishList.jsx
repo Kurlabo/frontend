@@ -5,9 +5,14 @@ import MyKurlyPageNation from './MyKurlyPageNation';
 import CheckBox from '../login/CheckBox';
 import CartModal from '../itemList/CartModal';
 import { useSelector, useDispatch } from 'react-redux';
-import { getWishItems } from '../../modules/wishList';
+import {
+  getWishItems,
+  deleteWishItem,
+  setCheckedList,
+  cancelCheckedList,
+  resetCheckedList,
+} from '../../modules/wishList';
 import { getProductInfo } from '../../modules/itemDetail';
-
 import MyWishListItem from './MyWishListItem';
 import { withRouter } from 'react-router-dom';
 
@@ -25,10 +30,11 @@ const MyWishList = () => {
 
 const MyWishListBlock = withRouter(({ history }) => {
   const [modalIsOpen, setmodalIsOpen] = useState(false);
-  const [allCheck, setAllCheck] = useState(false);
   const wishList = useSelector(state => state.wish.data);
+  const checkedList = useSelector(state => state.wish.checkedList);
   const QueryString = history.location.search;
   const dispatch = useDispatch();
+
   useEffect(() => {
     QueryString ? dispatch(getWishItems(QueryString)) : dispatch(getWishItems());
   }, [QueryString]);
@@ -59,19 +65,26 @@ const MyWishListBlock = withRouter(({ history }) => {
               <li className="inline-block text-center align-middle">
                 <CheckBox
                   id="allCheck"
-                  checkAll={checkAll}
-                  allCheck={allCheck}
-                  setAllCheck={setAllCheck}
+                  onChange={onChangeCheck}
+                  checked={wishList.content.length === checkedList.length && checkedList.length > 0}
                 />
               </li>
               <li className="w-r-62 text-center inline-block align-middle">상품정보</li>
               <li className="w-48 text-center inline-block align-middle">선택</li>
             </ul>
           </li>
-          <MyWishListItem openModal={openCartModal} wishList={wishList} allCheck={allCheck} />
+          <MyWishListItem
+            removeWishItem={removeWishItem}
+            openModal={openCartModal}
+            wishList={wishList}
+            onChange={onChangeCheck}
+          />
         </ul>
         <div className="text-right">
-          <button className="mt-8 text-r-1.3 border border-kp-600 text-kp-600 py-4 px-10">
+          <button
+            onClick={deleteChecked}
+            className="mt-8 text-r-1.3 border border-kp-600 text-kp-600 py-4 px-10"
+          >
             늘 사는 것 비우기
           </button>
         </div>
@@ -111,12 +124,27 @@ const MyWishListBlock = withRouter(({ history }) => {
     dispatch(getProductInfo(product_id));
   }
 
+  function removeWishItem(e) {
+    dispatch(deleteWishItem(!QueryString ? '?page=0' : QueryString, [+e.target.id.split('_')[1]]));
+  }
   function closeCartModal() {
     setmodalIsOpen(false);
   }
-  function checkAll(e) {
-    setAllCheck(!allCheck);
+
+  function onChangeCheck(e) {
+    const id = +e.target.id.split('_')[1];
+    if (e.target.id === 'allCheck') {
+      e.target.checked
+        ? dispatch(setCheckedList(...wishList.content.map(({ product_id }) => product_id)))
+        : dispatch(resetCheckedList());
+    } else if (!e.target.checked) {
+      dispatch(cancelCheckedList(id));
+    } else {
+      dispatch(setCheckedList(id));
+    }
+  }
+  function deleteChecked() {
+    dispatch(deleteWishItem(!QueryString ? '?page=0' : QueryString));
   }
 });
-
 export default withRouter(MyWishList);
