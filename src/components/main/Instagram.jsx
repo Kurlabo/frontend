@@ -9,7 +9,7 @@ const Instagram = () => {
   const dispatch = useDispatch();
   const instagram = useSelector(state => state.instagram.instaSrcDto);
 
-  const imgArr = useMemo(() => [], []);
+  const imgArr = [];
 
   let cur = useRef(0);
   let onAnimate = useRef(false);
@@ -109,7 +109,12 @@ const Instagram = () => {
                     {imgs.map(({ img, url }) => (
                       <div className="inline-block ">
                         <a rel="noreferrer" target="_blank" href={url}>
-                          <img className="h-r-17.5 w-r-17.5" alt="" src={img} />
+                          <img
+                            className="h-r-17.5 w-r-17.5"
+                            alt=""
+                            src={img}
+                            onError={e => (e.target.src = '/img/commingsoonresize.png')}
+                          />
                         </a>
                       </div>
                     ))}

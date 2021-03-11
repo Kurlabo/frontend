@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +17,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   const prevButtonRef = useRef(null);
   const nextButtonRef = useRef(null);
 
-  const imgArr = useMemo(() => [], []);
+  const imgArr = [];
 
   addCarouselInfoToArray('howAbout', '이 상품 어때요?');
   addCarouselInfoToArray('frugality', '알뜰 상품 >');
@@ -135,7 +135,12 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
                       className="inline-block h-r-49.6 w-r-24.9 mr-r-1.3 align-top"
                     >
                       <Link to={`/shop/goods/goods_view/${info.product_id}`}>
-                        <img alt="" src={info.product_img} />
+                        <img
+                          alt=""
+                          src={info.product_img}
+                          className="h-r-32"
+                          onError={e => (e.target.src = '/img/commingsoonresize.png')}
+                        />
                         <p className="text-r-1.6 mt-5 mb-4">{info.product_name}</p>
                       </Link>
                       <span className="font-bold">
