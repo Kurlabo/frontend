@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +17,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   const prevButtonRef = useRef(null);
   const nextButtonRef = useRef(null);
 
-  const imgArr = useMemo(() => [], []);
+  const imgArr = [];
 
   addCarouselInfoToArray('howAbout', '이 상품 어때요?');
   addCarouselInfoToArray('frugality', '알뜰 상품 >');
