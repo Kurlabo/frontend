@@ -20,7 +20,7 @@ export const getPayCompleteInfo = orders_id => async dispatch => {
   }
 };
 
-const initialState = { error: '', paycompleteInfo: {} };
+const initialState = { paycompleteInfo: {}, error: '' };
 
 // reducer
 const paycomplete = handleActions(

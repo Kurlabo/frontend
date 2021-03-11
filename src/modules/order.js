@@ -31,7 +31,7 @@ const initialState = {
   loading: true,
   error: '',
   orderInfo: [],
-  checkoutMethod: '',
+  checkoutMethod: '신용카드 결제',
 };
 
 const orderInfo = handleActions(
