@@ -120,18 +120,20 @@ const BigCarousel = () => {
   }, [isStop, stopButton]);
   return (
     <div className="relative">
-      <AiFillPauseCircle
-        onClick={() => {
-          setStopButton('stop');
-        }}
-        className="absolute cursor-pointer left-r-73 top-r-30.9 z-10 text-r-3 opacity-50 text-kp-600"
-      />
-      <AiFillPlayCircle
-        onClick={() => {
-          setStopButton('start');
-        }}
-        className="absolute cursor-pointer left-r-69 top-r-30.9 z-10 text-r-3 opacity-50 text-kp-600"
-      />
+      <div className="absolute bottom-12 w-r-7.9 left-2/4 -translate-x-2/4 transform z-10 ">
+        <AiFillPlayCircle
+          onClick={() => {
+            setStopButton('start');
+          }}
+          className="inline-block cursor-pointer text-r-3 opacity-50 text-kp-600"
+        />
+        <AiFillPauseCircle
+          onClick={() => {
+            setStopButton('stop');
+          }}
+          className="inline-block cursor-pointer ml-6 text-r-3 opacity-50 text-kp-600"
+        />
+      </div>
       <div
         onMouseOver={() => setIStop('stop')}
         onMouseOut={() => setIStop('start')}
