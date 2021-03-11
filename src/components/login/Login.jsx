@@ -7,6 +7,7 @@ import Modalform from './Modalform';
 import Modal from './Modal';
 import Title from './Title';
 import { Link } from 'react-router-dom';
+import { setState } from '../../../node_modules/expect/build/index';
 
 export const LoginFormStyle = styled.div`
   width: 340px;
@@ -14,7 +15,9 @@ export const LoginFormStyle = styled.div`
   margin: 0 auto;
 `;
 
-export default function Login({ onSubmit, onClick, value, open }) {
+export default function Login({ onSubmit, onClick, value }) {
+  const [login, setLogin] = useState(false);
+  const loginState = false;
   const [inputs, setInputs] = useState({
     u_id: '',
     u_password: '',
@@ -69,23 +72,29 @@ export default function Login({ onSubmit, onClick, value, open }) {
             <span className="align-middle">비밀번호 찾기</span>
           </Link>
         </div>
-        <Button type="submit" form="signin" as={Link} to="/">
+        <Button onClick={loginCheck} type="submit" form="signin">
           로그인
         </Button>
       </form>
       <Button form="signout" as={Link} to="/shop/account/signup">
         회원가입
       </Button>
-      {open ? (
+      {login ? (
         <Modalform id="modal">
-          <Modal value={value} />
+          <Modal closeModal={closeModal} modal={login} value="아이디와 비밀번호를 확인해주세요" />
         </Modalform>
       ) : (
         ''
       )}
     </LoginFormStyle>
   );
+  function loginCheck() {
+    setLogin(true);
+  }
   function onClickCheckBox() {
     setchecked(!checked);
+  }
+  function closeModal() {
+    setLogin(false);
   }
 }

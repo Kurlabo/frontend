@@ -205,9 +205,7 @@ const MyInfoForm = () => {
 
   function secession() {}
 
-  function clickButton(params) {
-    console.log(1);
-  }
+  function clickButton(params) {}
 
   function onSnsAll(e) {
     setInfo(!info);

@@ -65,6 +65,7 @@ const SearchLocation = ({ history }) => {
   );
   function onClose() {
     window.close();
+    window.opener.document.location.reload();
   }
 };
 

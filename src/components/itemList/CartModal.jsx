@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import Modal from 'react-modal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
 import WishListLoginModal from '../itemDetail/detail/WishListLoginModal';
@@ -51,8 +51,8 @@ const CartModal = ({
   closeModal,
   productName,
   originalPrice,
-  discounted_price,
-  discount_percent,
+  discounted_price = 0,
+  discount_percent = 0,
   product_id,
 }) => {
   const [count, setCount] = useState(1);

@@ -37,9 +37,6 @@ const Cart = () => {
           </div>
         </div>
       )}
-      {!loading && frozen.length === 0 && ambient.length === 0 && cold.length === 0 && (
-        <div className="border-t pt-6 border-black" />
-      )}
       {!loading && frozen.length !== 0 && (
         <div>
           <CartGoodsType

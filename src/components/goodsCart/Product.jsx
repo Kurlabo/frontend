@@ -1,18 +1,40 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  requestForModificationGoodsAmount,
-  requestServerToDeleteProducInfo,
-  CountselectedCheckBox,
-} from '../../modules/goodsCart';
+import { requestForModificationGoodsAmount, CountselectedCheckBox } from '../../modules/goodsCart';
+import GoodsCartModal from './GoodsCartModal';
+import { setActiveModalProdcut } from '../../modules/cart';
 
 const CartGoods = ({ goods }) => {
   const dispatch = useDispatch();
+
   const itemCount = useSelector(state => state.goodsCart.cart);
+  const activeModalProduct = useSelector(state => state.cart.modalProduct);
+  const activeModalGoods = useSelector(state => state.cart.modalGoods);
+
+  const onClickButton = useCallback(
+    product_id => {
+      dispatch(setActiveModalProdcut(product_id));
+    },
+    [dispatch],
+  );
+
+  useEffect(() => {
+    if (activeModalProduct.isActive === true) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [activeModalProduct]);
   return (
-    <div>
+    <div
+      className={`${
+        activeModalProduct.isActive === true || activeModalGoods.isActive === true
+          ? 'overflow-hidden'
+          : ''
+      }`}
+    >
       {goods &&
         goods.map(({ product_id, list_image_url, name }) => (
           <div
@@ -37,7 +59,9 @@ const CartGoods = ({ goods }) => {
             />
             <Link to={`shop/goods/goods_view/${product_id}`} className="inline-block w-r-42.6">
               <img alt="" src={list_image_url} className="inline-block w-r-6 h-r-7.9 mr-r-1.6" />
-              <span className="inline-block">{name}</span>
+              <span className="w-r-30.9 inline-block whitespace-nowrap overflow-ellipsis overflow-hidden">
+                {name}
+              </span>
             </Link>
             <div>
               <button
@@ -45,7 +69,11 @@ const CartGoods = ({ goods }) => {
                   if (itemCount.filter(item => item.product_id === product_id)[0].cnt === 1) return;
                   onClickItemCount(product_id, -1);
                 }}
-                className="inline-block w-12 h-12 border border-r-0 text-gray-300 focus:outline-none"
+                className={`inline-block w-12 h-12 border border-r-0 ${
+                  itemCount.filter(item => item.product_id === product_id)[0].cnt === 1
+                    ? 'text-gray-300'
+                    : ''
+                } focus:outline-none`}
               >
                 -
               </button>
@@ -77,22 +105,28 @@ const CartGoods = ({ goods }) => {
             >
               <AiOutlineClose />
             </button>
+            {activeModalProduct.isActive === true && (
+              <>
+                <GoodsCartModal />
+                <div
+                  onClick={() => {
+                    dispatch(setActiveModalProdcut());
+                  }}
+                  className="fixed left-0 top-0 w-screen h-screen z-900 bg-gray-600 bg-opacity-30"
+                />
+              </>
+            )}
           </div>
         ))}
     </div>
   );
 
   function onClickCheckbox(product_id, check) {
-    console.log(check);
     dispatch(CountselectedCheckBox(product_id, check));
   }
 
   function onClickItemCount(product_id, variation) {
     dispatch(requestForModificationGoodsAmount(product_id, variation));
-  }
-
-  function onClickButton(product_id) {
-    dispatch(requestServerToDeleteProducInfo(product_id));
   }
 };
 

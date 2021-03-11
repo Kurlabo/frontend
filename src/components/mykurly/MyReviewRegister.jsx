@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router';
 import { postReview } from '../../modules/myReviewRegister';
 import MyKurlyCategory from './MyKurlyCategory';
 import MyKurlyHeader from './MyKurlyHeader';
+import ReviewCompleteModal from './ReviewCompleteModal';
 
 const submitBtnStyle = 'w-r-20 h-16 my-6 mx-auto text-r-1.3 text-center pt-4 select-none ';
 
@@ -18,7 +20,7 @@ const MyKurlyTemplate = ({ children }) => {
   );
 };
 
-const MyReviewRegister = () => {
+const MyReviewRegister = ({ history }) => {
   const title = useRef();
   const textArea = useRef();
   const dispatch = useDispatch();
@@ -33,6 +35,8 @@ const MyReviewRegister = () => {
     textArea: '',
   });
 
+  const [openModal, setOpenModal] = useState(false);
+
   useEffect(() => {
     if (inputState.title && inputState.textArea) {
       setisInputAll(true);
@@ -44,7 +48,6 @@ const MyReviewRegister = () => {
 
   const onClickSubmit = () => {
     if (!isInputAll) return;
-    console.log('리뷰 작성 post api 요청~!!!!!!');
     dispatch(
       postReview({
         review_id: null,
@@ -55,9 +58,16 @@ const MyReviewRegister = () => {
         regdate: '2021-02-26',
         help: null,
         cnt: null,
+        writer: '마마코코',
       }),
     );
+    setOpenModal(true);
   };
+
+  const closeModal = useCallback(() => {
+    setOpenModal(false);
+    history.push('/shop/mypage/mypage_review');
+  }, [history]);
 
   return (
     <MyKurlyTemplate>
@@ -113,6 +123,7 @@ const MyReviewRegister = () => {
           </div>
         </form>
       </div>
+      <ReviewCompleteModal openModal={openModal} closeModal={closeModal} />
     </MyKurlyTemplate>
   );
 
@@ -131,4 +142,4 @@ const MyReviewRegister = () => {
   }
 };
 
-export default MyReviewRegister;
+export default withRouter(MyReviewRegister);

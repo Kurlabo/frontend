@@ -15,7 +15,7 @@ const NoticeDetail = () => {
   useEffect(() => {
     fetchNoticeDetail(id);
     dispatch(getNotice());
-  }, [id]);
+  }, [id, dispatch]);
 
   return (
     <div className="container pb-48 text-r-1.2">
