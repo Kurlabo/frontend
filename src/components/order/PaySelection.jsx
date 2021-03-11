@@ -156,7 +156,6 @@ const PaySelection = () => {
     setpaySelect(e.target.id);
     dispatch(selectCheckoutMethod(e.target.title));
     setwayToPay(e.target.title);
-    console.log(e.target.title);
   }
 };
 

@@ -21,7 +21,6 @@ const OrderContainer = () => {
   const orderInfo = useSelector(state => state.orderInfo.orderInfo);
   const products_list = useSelector(state => state.orderInfo.orderInfo.products_list);
   const isLoading = useSelector(state => state.orderInfo.loading);
-
   useEffect(() => {
     dispatch(getOrderInfo());
   }, [dispatch]);
@@ -41,6 +40,7 @@ const OrderContainer = () => {
           orderer_name={orderInfo.orderer_name}
           orderer_phone={orderInfo.orderer_phone}
           orderer_address={orderInfo.orderer_address}
+          orders_id={orderInfo.orders_id}
           agreeCheck={agreeCheck}
         />
         <div className="flex flex-wrap mx-auto w-p-1050">

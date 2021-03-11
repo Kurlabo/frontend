@@ -8,7 +8,7 @@ const defaultDeliver =
 const modifyBtn =
   'w-24 h-12 text-1.2 font-medium rounded-p-3 border border-kp-600 text-kp-600 focus:outline-0';
 
-const DeliveryTable = ({ orderer_name, orderer_phone, orderer_address, agreeCheck }) => {
+const DeliveryTable = ({ orderer_name, orderer_phone, orderer_address, agreeCheck, orders_id }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [deliveryInfo, setDeliveryInfo] = useState({
     receiver: '',
@@ -73,7 +73,7 @@ const DeliveryTable = ({ orderer_name, orderer_phone, orderer_address, agreeChec
           receiverInfo={receiverInfo}
         />
       </table>
-      <PayButton agreeCheck={agreeCheck} deliveryInfo={deliveryInfo} />
+      <PayButton agreeCheck={agreeCheck} deliveryInfo={deliveryInfo} orders_id={orders_id} />
     </>
   );
 };
