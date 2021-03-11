@@ -1,23 +1,24 @@
 import React from 'react';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
 import axios from '../../../node_modules/axios/index';
+import { getPayCompleteInfo } from '../../modules/paycomplete';
 import AgreeModal from './AgreeModal';
 import { wrapper } from './Coupon';
 
 const payButton =
   'w-r-24.2 h-r-5.5 bg-kp-600 text-white text-1.6 flex justify-center rounded-p-3 mx-auto';
 
-const PayButton = ({ agreeCheck, history, deliveryInfo }) => {
+const PayButton = ({ agreeCheck, history, deliveryInfo, orders_id }) => {
   const [isopen, setIsopen] = useState(false);
   const checkout = useSelector(state => state.orderInfo.checkoutMethod);
   const products_list = useSelector(state => state.orderInfo.orderInfo.products_list);
+  const dispatch = useDispatch();
 
   let reciever_visit_method = '';
   let total_discount_price = 0;
   let total_price = 0;
-
   products_list !== undefined &&
     (total_discount_price = products_list.reduce(
       (acc, curr) => acc + curr.product_discount_price,
@@ -80,7 +81,9 @@ const PayButton = ({ agreeCheck, history, deliveryInfo }) => {
       });
 
       if (res.data === 'CHECKOUT SUCCESS') {
-        history.push('/');
+        history.push(`/order/paycomplete/${orders_id}`);
+        console.log(orders_id);
+        dispatch(getPayCompleteInfo(orders_id));
       }
     }
   };
