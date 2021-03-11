@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { AiOutlinePauseCircle, AiOutlinePlayCircle } from 'react-icons/ai';
 
 const BigCarousel = () => {
   let onAnimate = useRef(false);
@@ -117,40 +118,55 @@ const BigCarousel = () => {
   }, [isStop]);
 
   return (
-    <div
-      onMouseOver={() => setIStop('stop')}
-      onMouseOut={() => setIStop('start')}
-      className="relative overflow-hidden"
-    >
-      <button
-        onClick={prevButton}
-        className="absolute z-50 w-p-52 h-p-52 bg-big-pre-button left-p-91 top-p-159 focus:outline-none"
+    <div className="relative">
+      <AiOutlinePauseCircle
+        onClick={() => {
+          setIStop('stop');
+        }}
+        className="absolute cursor-pointer left-r-73 top-r-30.9 z-10 text-r-3.8 text-kp-600"
       />
-      <div ref={containerRef} className="relative h-p-370">
-        {mainBannerImages !== undefined && (
-          <ul className="absolute w-vw-700">
-            <li
-              className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${mainBannerImages[mainBannerImages.length - 1]})` }}
-            />
-            {mainBannerImages.map((img, i) => (
+      <AiOutlinePlayCircle
+        onClick={() => {
+          setIStop('start');
+        }}
+        className="absolute cursor-pointer left-r-67 top-r-30.9 z-10 text-r-3.8 text-kp-600"
+      />
+      <div
+        onMouseOver={() => setIStop('stop')}
+        onMouseOut={() => setIStop('start')}
+        className="relative overflow-hidden"
+      >
+        <button
+          onClick={prevButton}
+          className="absolute z-50 w-p-52 h-p-52 bg-big-pre-button left-p-91 top-p-159 focus:outline-none"
+        />
+
+        <div ref={containerRef} className="relative h-p-370">
+          {mainBannerImages !== undefined && (
+            <ul className="absolute w-vw-700">
               <li
-                key={i}
                 className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${img})` }}
+                style={{ backgroundImage: `url(${mainBannerImages[mainBannerImages.length - 1]})` }}
               />
-            ))}
-            <li
-              className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${mainBannerImages[0]})` }}
-            />
-          </ul>
-        )}
+              {mainBannerImages.map((img, i) => (
+                <li
+                  key={i}
+                  className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
+                  style={{ backgroundImage: `url(${img})` }}
+                />
+              ))}
+              <li
+                className="list-none w-screen float-left h-p-370 bg-center bg-no-repeat"
+                style={{ backgroundImage: `url(${mainBannerImages[0]})` }}
+              />
+            </ul>
+          )}
+        </div>
+        <button
+          onClick={nextButton}
+          className="z-50 absolute w-p-52 h-p-52 bg-big-next-button right-p-91 top-p-159 focus:outline-none"
+        />
       </div>
-      <button
-        onClick={nextButton}
-        className="z-50 absolute w-p-52 h-p-52 bg-big-next-button right-p-91 top-p-159 focus:outline-none"
-      />
     </div>
   );
 };
