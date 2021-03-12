@@ -180,7 +180,7 @@ const goodsCart = handleActions(
               ...item,
               cnt: payload.cnt,
               select: item.select,
-              productTotalPrices: item.cnt * item.discounted_price,
+              productTotalPrices: payload.cnt * item.discounted_price,
             }
           : item,
       ),
