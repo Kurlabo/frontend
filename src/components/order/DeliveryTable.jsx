@@ -14,6 +14,7 @@ const DeliveryTable = ({ orderer_name, orderer_phone, orderer_address, agreeChec
     receiver: '',
     phone: '',
     deliveryPlace: '문 앞',
+    address: `${orderer_address}`,
     enterWay: '',
     enterPwd: '',
     securityMsg: '',
@@ -21,6 +22,8 @@ const DeliveryTable = ({ orderer_name, orderer_phone, orderer_address, agreeChec
     courierInfo: '',
     deliveryMsg: '배송 직후',
   });
+  console.log(deliveryInfo);
+
   const [receiverInfo, setReceiverInfo] = useState({
     receiverName: '',
     receiverPhone: '',

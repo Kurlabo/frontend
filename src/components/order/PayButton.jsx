@@ -71,7 +71,7 @@ const PayButton = ({ agreeCheck, history, deliveryInfo, orders_id }) => {
       const res = await axios.post('http://3.35.221.9:8080/api/order/checkout', {
         reciever: deliveryInfo.receiver,
         reciever_phone: deliveryInfo.phone,
-        reciever_post: deliveryInfo.deliveryPlace,
+        reciever_post: deliveryInfo.address,
         reciever_place: deliveryInfo.deliveryPlace,
         reciever_visit_method: reciever_visit_method,
         arrived_alarm: deliveryInfo.deliveryMsg,
@@ -82,7 +82,6 @@ const PayButton = ({ agreeCheck, history, deliveryInfo, orders_id }) => {
 
       if (res.data === 'CHECKOUT SUCCESS') {
         history.push(`/order/paycomplete/${orders_id}`);
-        console.log(orders_id);
         dispatch(getPayCompleteInfo(orders_id));
       }
     }
