@@ -31,6 +31,7 @@ import KurlyPassPage from './pages/KurlyPassPage';
 import MyDestinationModify from './components/mykurly/MyDestinationModify';
 import GetSupportWritingPage from './pages/GetSupportWritingPage';
 import PayComplete from './components/order/PayComplete';
+import ThisWeekEvent from './components/event/ThisWeekEvent';
 function App() {
   return (
     <>
@@ -67,6 +68,7 @@ function App() {
         <Route path="/shop/mypage/kurlypass" component={KurlyPassPage} />
         <Route path="/shop/mypage/desination/modify_form?:dtn_id" component={MyDestinationModify} />
         <Route path="/shop/mypage/desination/modify_form" component={MyDestinationModify} />
+        <Route Path="/shop/event" component={ThisWeekEvent} />
         <Route path="/shop/member/" component={MyInfoPage} />
         <Route path="/kakao/destination" component={SearchLocation} />
         <Route component={NotFoundPage} />
