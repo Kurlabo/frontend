@@ -50,12 +50,7 @@ const SearchLocation = ({ history }) => {
             재검색
           </button>
         </div>
-        <input
-          type="text"
-          className={addInput}
-          placeholder="나머지 주소를 입력해주세요"
-          ref={resAddress}
-        />
+        <input type="text" className={addInput} placeholder="나머지 주소를 입력해주세요" />
       </div>
       <div className="w-full text-left mb-3">
         <RoundCheckBox
@@ -81,7 +76,6 @@ const SearchLocation = ({ history }) => {
     </div>
   );
   function onClose() {
-    sessionStorage.setItem('res', resAddress.current.value);
     window.close();
     window.opener.document.location.reload();
   }

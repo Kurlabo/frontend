@@ -14,6 +14,7 @@ const DeliveryTable = ({ orderer_name, orderer_phone, orderer_address, agreeChec
     receiver: '',
     phone: '',
     deliveryPlace: '문 앞',
+    address: `${orderer_address}`,
     enterWay: '',
     enterPwd: '',
     securityMsg: '',
@@ -21,6 +22,8 @@ const DeliveryTable = ({ orderer_name, orderer_phone, orderer_address, agreeChec
     courierInfo: '',
     deliveryMsg: '배송 직후',
   });
+  console.log(deliveryInfo);
+
   const [receiverInfo, setReceiverInfo] = useState({
     receiverName: '',
     receiverPhone: '',
@@ -53,11 +56,7 @@ const DeliveryTable = ({ orderer_name, orderer_phone, orderer_address, agreeChec
           <tr style={{ width: '19rem' }} className="align-text-top border-b border-gray-100">
             <th className="pt-r-1.9 text-1.4 font-medium">상세 정보</th>
             <td className={tdStyle}>
-              {orderer_name !== deliveryInfo.receiver || orderer_phone !== deliveryInfo.phone ? (
-                <p className="pb-6 ">{`${receiverInfo.receiverName}, ${receiverInfo.receiverPhone}`}</p>
-              ) : (
-                <p className="pb-6 ">{`${orderer_name}, ${orderer_phone}`}</p>
-              )}
+              <p className="pb-6 ">{`${receiverInfo.receiverName}, ${receiverInfo.receiverPhone}`}</p>
               <button className={modifyBtn} onClick={openModal}>
                 입력
               </button>
