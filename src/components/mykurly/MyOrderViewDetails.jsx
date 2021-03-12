@@ -13,23 +13,21 @@ const MyOrderViewDetails = ({ orderDetail, ordno }) => {
         <dl className="text-r-1.6 py-4 text-kg-350 leading-r-5 border-b border-kg-80">
           <dt className="inline-block w-4/5 text-kg-350">상품금액</dt>
           <dd className="inline-block w-1/5 text-right text-kg-400">
-            {orderDetail.checkout_total_price}원
+            {orderDetail.product_total_price_str}원
           </dd>
           <dt className="inline-block w-4/5 text-kg-350">배송비</dt>
           <dd className="inline-block w-1/5 text-right text-kg-400">
-            {orderDetail.checkout_total_price < 40000 ? 3000 : 0}원
+            {orderDetail.delivery_cost}원
           </dd>
           <dt className="inline-block w-4/5 text-kg-350">상품할인금액</dt>
-          <dd className="inline-block w-1/5 text-right text-kg-400">
-            -{orderDetail.total_discount_price}원
-          </dd>
+          <dd className="inline-block w-1/5 text-right text-kg-400">-{orderDetail.discount()}원</dd>
           {/* <dt className="inline-block w-4/5 text-kg-350">쿠폰할인</dt>
             <dd className="inline-block w-1/5 text-right text-kg-400">0 원</dd> */}
           {/* <dt className="inline-block w-4/5 text-kg-350">적립금사용</dt>
             <dd className="inline-block w-1/5 text-right text-kg-400">4,600원</dd> */}
           <dt className="inline-block w-4/5 text-kg-350">결제금액</dt>
           <dd className="inline-block w-1/5 text-right text-kg-400 font-medium">
-            {orderDetail.checkout_total_price}
+            {orderDetail.checkout()}
           </dd>
           {/* <dt className="inline-block w-4/5 text-kg-350">적립예정금액</dt>
             <dd className="inline-block w-1/5 text-right text-kg-400">100원</dd> */}

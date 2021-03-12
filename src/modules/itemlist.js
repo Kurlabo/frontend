@@ -22,7 +22,6 @@ export const getItemsThunk = (id, subid, page) => async dispatch => {
     const res = subid
       ? await axios.get(`http://3.35.221.9:8080/api/goods/goods_list?category=${subid}`)
       : await axios.get(`http://3.35.221.9:8080/api/goods/goods_list?category=${id}&page=${page}`);
-    console.log(1);
     setTimeout(() => {
       dispatch(getItemsSuccess(res.data, id, subid, res.data.totalPages));
     }, 1500);

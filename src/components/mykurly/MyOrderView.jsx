@@ -10,6 +10,8 @@ import MyOrderViewDetails from './MyOrderViewDetails';
 import MyOrderViewItem from './MyOrderViewItem';
 import Modalform from '../login/Modalform';
 import Modal from '../login/Modal';
+import { getProductInfo } from '../../modules/itemDetail';
+
 const MyOrderView = () => {
   return (
     <>
@@ -33,6 +35,16 @@ const MyOrderViewBlock = () => {
   useEffect(() => {
     dispatch(getOrderDetail(ordno));
   }, []);
+
+  const [cartItem, setCartItem] = useState({
+    product_id: '',
+    name: '',
+    original_price: 0,
+    discounted_price: 0,
+    discount_percent: 0,
+  });
+
+  const { product_id, name, original_price, discounted_price, discount_percent } = cartItem;
 
   return (
     <div className="float-left align-middle w-r-85 h-full mt-20 px-12 box-border ">
@@ -66,8 +78,15 @@ const MyOrderViewBlock = () => {
         </p>
       </div>
       <MyOrderViewDetails orderDetail={orderDetail} ordno={ordno} />
-      <CartModal modalIsOpen={modalIsOpen} closeModal={closeCartModal} />
-      {console.log(postSuccess)}
+      <CartModal
+        product_id={product_id}
+        modalIsOpen={modalIsOpen}
+        closeModal={closeCartModal}
+        productName={name}
+        originalPrice={original_price}
+        discounted_price={discounted_price}
+        discount_percent={discount_percent}
+      />
       {postSuccess ? (
         <Modalform id="modal">
           <Modal
@@ -82,9 +101,23 @@ const MyOrderViewBlock = () => {
       )}
     </div>
   );
-  function openCartModal() {
+  function openCartModal(e) {
+    const product_item = orderDetail.orderProducts.find(
+      product => product.product_id === +e.target.id.split('_')[1],
+    );
+    const { product_id, name, checkout_price, reduced_price, cnt } = product_item;
+    setCartItem({
+      ...cartItem,
+      product_id,
+      name,
+      original_price: checkout_price / cnt,
+      discounted_price: (checkout_price - reduced_price) / cnt,
+      discount_percent: checkout_price / reduced_price,
+    });
     setmodalIsOpen(true);
+    dispatch(getProductInfo(product_id));
   }
+
   function closeCartModal() {
     setmodalIsOpen(false);
   }

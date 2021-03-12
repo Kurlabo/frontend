@@ -41,7 +41,7 @@ const ItemCardContainer = ({ firstParams, location, history }) => {
   }, [dispatch, category, location.search, page]);
 
   return (
-    <div className="w-p-1050 mx-auto overflow-y-auto flex flex-col items-center">
+    <div className="w-p-1050 mx-auto flex flex-col items-center">
       <ul className="flex flex-wrap pb-24">
         {isLoading && <Loading />}
         {items.map((item, idx) => (

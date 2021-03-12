@@ -20,7 +20,6 @@ import NoticeDetail from './components/customerService/NoticeDetail';
 import Sidebar from './components/common/Sidebar';
 import MyOrderViewPage from './pages/MyOrderViewPage';
 import OrderPage from './pages/OrderPage';
-import TypeUserInfo from './components/order/TypeUserInfo';
 import Header from './components/common/Header';
 import ItemDetailPage from './pages/ItemDetailPage';
 import ItemListPage from './pages/ItemListPage';
@@ -31,6 +30,8 @@ import MyReviewRegisterPage from './pages/MyReviewRegisterPage';
 import KurlyPassPage from './pages/KurlyPassPage';
 import MyDestinationModify from './components/mykurly/MyDestinationModify';
 import GetSupportWritingPage from './pages/GetSupportWritingPage';
+import PayComplete from './components/order/PayComplete';
+import ThisWeekEvent from './components/event/ThisWeekEvent';
 function App() {
   return (
     <>
@@ -49,7 +50,7 @@ function App() {
         <Route path="/shop/goods/item_list/:category:page" component={ItemListPage} />
         <Route path="/shop/goods/theme_list/:theme" component={ThemeProductListPage} />
         <Route path="/shop/goods/event" component={WeekEvent} />
-        <Route path="/order/input_reception" exact component={TypeUserInfo} />
+        <Route path="/order/paycomplete/:ordno" component={PayComplete} />
         <Route path="/order" component={OrderPage} />
         <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />
         <Route path="/shop/customer/board/get_support_writing" component={GetSupportWritingPage} />
@@ -67,6 +68,7 @@ function App() {
         <Route path="/shop/mypage/kurlypass" component={KurlyPassPage} />
         <Route path="/shop/mypage/desination/modify_form?:dtn_id" component={MyDestinationModify} />
         <Route path="/shop/mypage/desination/modify_form" component={MyDestinationModify} />
+        <Route Path="/shop/event" component={ThisWeekEvent} />
         <Route path="/shop/member/" component={MyInfoPage} />
         <Route path="/kakao/destination" component={SearchLocation} />
         <Route component={NotFoundPage} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { inputStyle } from './ReceiverInput';
 
-const CourierInfo = ({ title }) => {
+const CourierInfo = ({ title, deliveryInfo, setDeliveryInfo }) => {
   return (
     <fieldset>
       <legend className="pb-6 pt-9 font-semibold">
@@ -15,6 +15,8 @@ const CourierInfo = ({ title }) => {
         name="entrance"
         className={inputStyle}
         placeholder="택배함 위치 / 택배함 번호 &middot; 비밀번호"
+        onChange={typeCourierInfo}
+        value={deliveryInfo.courierInfo || ''}
       />
       <div className="text-gray-500 text-1.2 mt-4">
         <p>&middot;지정되지 않은 택배함은 위치만 적어주세요.</p>
@@ -22,6 +24,14 @@ const CourierInfo = ({ title }) => {
       </div>
     </fieldset>
   );
+
+  function typeCourierInfo(e) {
+    deliveryInfo.courierInfo !== undefined &&
+      setDeliveryInfo({
+        ...deliveryInfo,
+        courierInfo: e.target.value,
+      });
+  }
 };
 
 export default CourierInfo;

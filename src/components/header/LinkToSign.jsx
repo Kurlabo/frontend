@@ -3,18 +3,25 @@ import { Link, NavLink } from 'react-router-dom';
 import { GoTriangleDown } from 'react-icons/go';
 import HeaderDropDown from './HeaderDropDown';
 import MyKurlyDropDown from './MyKurlyDropDown';
+import { useSelector, useDispatch } from 'react-redux';
+import { useCookies } from 'react-cookie';
+import { getLoginMember } from '../../modules/login';
 
 const signWrapper = 'relative w-p-1050 flex justify-between items-center mx-auto mt-2 text-r-1.2';
 
 const LinkToSign = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const authToken = cookies.auth;
+  const { grade, name, cartCnt } = useSelector(state => state.login.member);
   const [dropMenu, setDrop] = useState({
     loginService: false,
     customerService: false,
   });
-  const [loginSuccess, setLogin] = useState('');
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    setLogin('');
+    if (authToken) {
+      dispatch(getLoginMember(authToken));
+    }
   }, []);
   const { loginService, customerService } = dropMenu;
   return (
@@ -29,7 +36,7 @@ const LinkToSign = () => {
       <nav>
         <ul>
           <li className="inline-block text-kp-600">
-            {!loginSuccess ? (
+            {!authToken ? (
               <>
                 <NavLink to="/shop/account/signup" className="px-3">
                   회원가입
@@ -38,7 +45,7 @@ const LinkToSign = () => {
               </>
             ) : (
               <span className="border border-kp-600 text-sm rounded-xl px-4 leading-none -mt-1">
-                등급
+                {grade}
               </span>
             )}
           </li>
@@ -48,13 +55,13 @@ const LinkToSign = () => {
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
           >
-            {!loginSuccess ? (
+            {!authToken ? (
               <NavLink to="/shop/account/signin" className="px-3 inline-block">
                 로그인
               </NavLink>
             ) : (
               <div className="px-2 inline-block">
-                <span className="inline-block pr-2">정세영님</span>
+                <span className="inline-block pr-2">{name}님</span>
                 <img
                   className="w-4 inline-block"
                   src="https://res.kurly.com/pc/service/common/1904/ico_new_20x20.png"
@@ -66,7 +73,7 @@ const LinkToSign = () => {
                 <GoTriangleDown className=" ml-2 inline-block cursor-pointer" />
               </div>
             )}
-            {loginSuccess && loginService && <MyKurlyDropDown />}
+            {authToken && loginService && <MyKurlyDropDown />}
             <span className="text-gray-300">ㅣ</span>
           </li>
           <li
