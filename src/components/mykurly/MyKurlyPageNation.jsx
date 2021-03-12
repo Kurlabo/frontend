@@ -40,14 +40,13 @@ const MyKurlyPageNation = ({ pageNumber, totalProduct, history, elementNumber })
 };
 
 const PageNumber = withRouter(({ pageNumber, totalProduct, history, elementNumber }) => {
-  let pn = pageNumber;
-  let last = totalProduct % elementNumber === 0 ? 1 : 0;
+  // let last = totalProduct % elementNumber === 0 ? 0 : 1;
   return (
     <>
       {(() => {
         const array = [];
 
-        for (let i = 1; i < pn + last; i++) {
+        for (let i = 1; i <= pageNumber; i++) {
           array.push(
             <li
               key={`pageNum_${i - 1}`}

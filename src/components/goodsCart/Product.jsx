@@ -21,20 +21,14 @@ const CartGoods = ({ goods }) => {
   );
 
   useEffect(() => {
-    if (activeModalProduct.isActive === true) {
+    if (activeModalProduct.isActive === true || activeModalGoods.isActive === true) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
-  }, [activeModalProduct]);
+  }, [activeModalGoods.isActive, activeModalProduct]);
   return (
-    <div
-      className={`${
-        activeModalProduct.isActive === true || activeModalGoods.isActive === true
-          ? 'overflow-hidden'
-          : ''
-      }`}
-    >
+    <div>
       {goods &&
         goods.map(({ product_id, list_image_url, name }) => (
           <div
@@ -112,7 +106,7 @@ const CartGoods = ({ goods }) => {
                   onClick={() => {
                     dispatch(setActiveModalProdcut());
                   }}
-                  className="fixed left-0 top-0 w-screen h-screen z-900 bg-gray-600 bg-opacity-30"
+                  className="fixed left-0 top-0 w-screen h-screen z-900 bg-gray-600 bg-opacity-10"
                 />
               </>
             )}
