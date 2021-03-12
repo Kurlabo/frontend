@@ -13,17 +13,17 @@ const PayComplete = () => {
 
   // 결제 정보 불러오기
   useEffect(() => {
-    document.getElementsByTagName('body')[0].style.overflowY = 'hidden';
+    document.body.style.overflowY = 'hidden';
     setTimeout(() => {
       setIsLoading(false);
-      document.getElementsByTagName('body')[0].style.overflowY = 'auto';
+      document.body.style.overflowY = 'auto';
     }, 4000);
-  });
+  }, []);
 
   return (
     <div>
       {isLoading ? (
-        <PayingLoading />
+        <PayingLoading noScroll={noScroll} yesScroll={yesScroll} isLoading={isLoading} />
       ) : (
         <div className="bg-gray-100 transform -translate-y-r-2.8 py-r-6.5">
           <div className="flex flex-col items-center mx-auto bg-white w-r-42.6">
@@ -69,6 +69,13 @@ const PayComplete = () => {
       )}
     </div>
   );
+  function noScroll() {
+    document.body.style.overflowY = 'hidden';
+  }
+
+  function yesScroll() {
+    document.body.style.overflowY = 'scroll';
+  }
 };
 
 export default PayComplete;

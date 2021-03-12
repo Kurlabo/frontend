@@ -4,6 +4,9 @@ import MyKurlyCategory from './MyKurlyCategory';
 import { Link } from 'react-router-dom';
 import WrittenReview from './WrittenReview';
 import WriteReview from './WriteReview';
+import CartModal from '../itemList/CartModal';
+import { getProductInfo } from '../../modules/itemDetail';
+import { useDispatch } from 'react-redux';
 const MyReview = ({ history }) => {
   return (
     <>
@@ -17,7 +20,18 @@ const MyReview = ({ history }) => {
 };
 
 const MyReviewBlock = () => {
+  const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [tabView, setTabView] = useState('viewBeforeList');
+  const dispatch = useDispatch();
+  const [cartItem, setCartItem] = useState({
+    product_id: '',
+    name: '',
+    original_price: 0,
+    discounted_price: 0,
+    discount_percent: 0,
+  });
+
+  const { product_id, name, original_price, discounted_price, discount_percent } = cartItem;
 
   return (
     <div className="float-left align-middle w-r-85 h-full mt-20 mb-6 px-12 pb-32 box-border">
@@ -63,11 +77,39 @@ const MyReviewBlock = () => {
             </div>
           </Link>
         </div>
-        {tabView === 'viewBeforeList' ? <WriteReview /> : <WrittenReview />}
+        {tabView === 'viewBeforeList' ? <WriteReview onClick={openCartModal} /> : <WrittenReview />}
       </div>
+      <CartModal
+        product_id={product_id}
+        modalIsOpen={modalIsOpen}
+        closeModal={closeCartModal}
+        productName={name}
+        originalPrice={original_price}
+        discounted_price={discounted_price}
+        discount_percent={discount_percent}
+      />
     </div>
   );
 
+  function openCartModal(e) {
+    // const product_item = orderDetail.orderProducts.find(
+    //   product => product.product_id === +e.target.id.split('_')[1],
+    // );
+    // const { product_id, name, checkout_price, reduced_price, cnt } = product_item;
+    // setCartItem({
+    //   ...cartItem,
+    //   product_id,
+    //   name,
+    //   original_price: checkout_price / cnt,
+    //   discounted_price: (checkout_price - reduced_price) / cnt,
+    //   discount_percent: checkout_price / reduced_price,
+    // });
+    setmodalIsOpen(true);
+    // dispatch(getProductInfo(product_id));
+  }
+  function closeCartModal() {
+    setmodalIsOpen(false);
+  }
   function onClick(e) {
     setTabView(e.currentTarget.href.split('#')[1]);
   }

@@ -2,7 +2,6 @@ import React from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { IoChevronUpOutline, IoChevronDownOutline } from 'react-icons/io5';
 
 const Aside = () => {
   const pathname = window.location.pathname;
@@ -77,11 +76,11 @@ const Aside = () => {
   );
 
   function scrollSlider() {
-    if (window.scrollY > 410) {
-      asideRef.current.style.top = `${window.scrollY + window.innerHeight / 2}px`;
-    } else {
-      asideRef.current.style.top = '710px';
-    }
+    // if (window.scrollY > 410) {
+    //   asideRef.current.style.top = `${window.scrollY + window.innerHeight / 2}px`;
+    // } else {
+    //   asideRef.current.style.top = '710px';
+    // }
   }
 };
 
