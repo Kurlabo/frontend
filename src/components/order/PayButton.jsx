@@ -28,8 +28,8 @@ const PayButton = ({ agreeCheck, history, deliveryInfo, orders_id }) => {
     (total_price = products_list.reduce(
       (acc, curr) =>
         curr.product_discount_price
-          ? 3000 + acc + (curr.product_price - curr.product_discount_price)
-          : 3000 + acc + curr.product_price,
+          ? acc + (curr.product_price - curr.product_discount_price)
+          : acc + curr.product_price,
       0,
     ));
 
