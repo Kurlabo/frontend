@@ -65,7 +65,7 @@ const SignupModal = ({ modalIsOpen, closeModal, value }) => {
       break;
   }
   return (
-    <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={modalStyles}>
+    <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={modalStyles} ariaHideApp={false}>
       <div className="px-8 pt-8">
         <div className="pb-8 border-b-1 border-gray-400">
           <h1 className="inline-block font-bold text-r-1.4 text-kp-600 ">알림메세지</h1>
