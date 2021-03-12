@@ -12,6 +12,7 @@ import WishListLoginModal from './detail/WishListLoginModal';
 import { withRouter } from 'react-router';
 import { postWishList, setModuleMsg, setModuleMsgEmpty } from '../../modules/itemDetail';
 import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
+import { setRecent } from '../../modules/recentItem';
 
 function getCookie(name) {
   let matches = document.cookie.match(
@@ -23,7 +24,6 @@ function getCookie(name) {
 const ItemDetail = ({ itemDetail, history, productId }) => {
   const dispatch = useDispatch();
   let onPopUp = useRef(false);
-  console.log(itemDetail);
   const isLogin = true;
 
   const { count } = useSelector(state => state.cartAddOption);
@@ -34,7 +34,25 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
   // 쿠키에 넣을 key와 value
   const name = 'recentlyViewed';
   const existingValue = getCookie(name);
-  console.log(existingValue);
+
+  const saveView = ({ product_id, name, original_image_url }) => ({
+    product_id,
+    name,
+    original_image_url,
+  });
+  // const recentViewed = JSON.parse(localStorage.getItem('recentlyViewed'));
+  // console.log(recentViewed.find(recentView => recentView.product_id === itemDetail.product_id));
+  // console.log(
+  //   recentViewed.find(recentView => recentView.product_id === itemDetail.product_id + 44),
+  // );
+
+  // localStorage.setItem(
+  //   'recentlyViewed',
+  //   recentViewed.find(recentView => recentView.product_id === itemDetail.product_id)
+  //     ? JSON.stringify(recentViewed)
+  //     : JSON.stringify([...recentViewed, saveView(itemDetail)]),
+  // );
+
   const cartOptionRender = useCallback(() => {
     if (window.pageYOffset > 1100) {
       setviewCartOption(true);
@@ -87,7 +105,7 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
 
   useEffect(() => {
     dispatch(setCartCount(1));
-
+    dispatch(setRecent(saveView(itemDetail)));
     window.addEventListener('scroll', cartOptionRender);
 
     return () => {

@@ -1,17 +1,20 @@
 import React from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { IoChevronUpOutline, IoChevronDownOutline } from 'react-icons/io5';
 
 const Aside = () => {
   const pathname = window.location.pathname;
-  const recentList = document.cookie.match('RecentlyViewed');
   const asideRef = useRef();
   const asideLink =
     'block h-12 border-solid border border-gray-400 border-t-0 text-center leading-3';
+  const viewList = useSelector(state => state.recentItem);
   useEffect(() => {
     window.onscroll = scrollSlider;
   }, []);
+
   if (pathname === '/kakao/destination' || pathname === '/order/input_reception') return null;
   else if (pathname === '/shop/mypage/desination/modify_form') return null;
   else if (pathname === '/shop/mypage/desination/modify_form/') return null;
@@ -49,19 +52,19 @@ const Aside = () => {
           </Link>
         </li>
       </ul>
-      {/* {recentList.length !== 0 && (
+      {viewList.length !== 0 && (
         <div className="border-gray-400 border-t-1 text-r-1.2">
           <button className="block w-full h-7 text-center">
             <IoChevronUpOutline className="inline-block text-gray-300" />
           </button>
           <h6 className="text-center leading-3'">최근 본 상품</h6>
           <ul>
-            {recentList.map(item => {
+            {viewList.map(item => {
               return (
-                <li key={item.url}>
-                  <Link to={item.url}>
-                    <img src={item.url} alt="" />
-                    {item.title}
+                <li key={item.product_id}>
+                  <Link to={item.product_id}>
+                    <img src={item.original_image_url} alt={`${item.name} 상품 바로가기`} />
+                    {item.name}
                   </Link>
                 </li>
               );
@@ -71,16 +74,16 @@ const Aside = () => {
             <IoChevronDownOutline className="inline-block text-gray-300" />
           </button>
         </div>
-      )} */}
+      )}
     </aside>
   );
 
   function scrollSlider() {
-    // if (window.scrollY > 410) {
-    //   asideRef.current.style.top = `${window.scrollY + window.innerHeight / 2}px`;
-    // } else {
-    //   asideRef.current.style.top = '710px';
-    // }
+    if (window.scrollY > 410) {
+      asideRef.current.style.top = `${window.scrollY + window.innerHeight / 2}px`;
+    } else {
+      asideRef.current.style.top = '710px';
+    }
   }
 };
 
