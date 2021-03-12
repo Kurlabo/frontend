@@ -23,7 +23,7 @@ function getCookie(name) {
 const ItemDetail = ({ itemDetail, history, productId }) => {
   const dispatch = useDispatch();
   let onPopUp = useRef(false);
-
+  console.log(itemDetail);
   const isLogin = true;
 
   const { count } = useSelector(state => state.cartAddOption);
@@ -34,7 +34,7 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
   // 쿠키에 넣을 key와 value
   const name = 'recentlyViewed';
   const existingValue = getCookie(name);
-
+  console.log(existingValue);
   const cartOptionRender = useCallback(() => {
     if (window.pageYOffset > 1100) {
       setviewCartOption(true);

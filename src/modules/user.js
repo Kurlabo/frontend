@@ -27,7 +27,7 @@ const user = handleActions(
 
 export const signUpStart = user => async (dispatch, getState) => {
   try {
-    await axios.post('/user', user);
+    await axios.post('http://3.35.221.9:8080/api/member/signup', user);
     const loginUser = { uId: user.uid, uName: user.name, isLogin: true };
     dispatch(signUpSuccess(loginUser));
     dispatch(push('/'));
