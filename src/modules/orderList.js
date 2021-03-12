@@ -53,7 +53,7 @@ export const postInsertCart = orderItem => async (dispatch, getState) => {
 const initialize = {
   loading: false,
   data: { content: [] },
-  detail: { orderProducts: [] },
+  detail: { orderProducts: [], discount() {}, checkout() {} },
   posts: false,
   error: null,
 };
@@ -86,7 +86,18 @@ const order = handleActions(
           (initial, { reduced_price }) => initial + reduced_price,
           0,
         ),
-        checkout_total_price: action.payload.checkout_total_price.toLocaleString(),
+        discount() {
+          return this.total_discount_price.toLocaleString();
+        },
+        delivery_cost: action.payload.checkout_total_price < 40000 ? 3000 : 0,
+        product_total_price_str: action.payload.checkout_total_price.toLocaleString(),
+        checkout() {
+          return (
+            this.checkout_total_price -
+            this.total_discount_price +
+            this.delivery_cost
+          ).toLocaleString();
+        },
       },
     }),
     [GET_FAIL]: (state, action) => ({

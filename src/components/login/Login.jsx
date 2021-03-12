@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Input from './Input';
 import Button from './Button';
@@ -6,8 +6,10 @@ import CheckBox from './CheckBox';
 import Modalform from './Modalform';
 import Modal from './Modal';
 import Title from './Title';
-import { Link } from 'react-router-dom';
-import { setState } from '../../../node_modules/expect/build/index';
+import { Link, withRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAuthentication } from '../../modules/login';
+import { useCookies } from 'react-cookie';
 
 export const LoginFormStyle = styled.div`
   width: 340px;
@@ -15,30 +17,32 @@ export const LoginFormStyle = styled.div`
   margin: 0 auto;
 `;
 
-export default function Login({ onSubmit, onClick, value }) {
+const Login = ({ onSubmit, history }) => {
   const [login, setLogin] = useState(false);
-  const loginState = false;
-  const [inputs, setInputs] = useState({
+  const authToken = useSelector(state => state.login.data.token);
+  const [user, setUser] = useState({
     u_id: '',
     u_password: '',
   });
-  const [checked, setchecked] = useState(true);
+  const [checked, setchecked] = useState(false);
 
-  const idInput = useRef();
-  const pwdInput = useRef();
-
-  const { u_id, u_password } = inputs;
-
+  const { u_id, u_password } = user;
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
   function onChange(e) {
     const { value, name } = e.target;
-    setInputs({
-      ...inputs,
+    setUser({
+      ...user,
       [name]: value,
     });
   }
-  // useEffect(
-  //   loginstatus && setOpen(true)
-  // )
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (authToken) {
+      setCookie('auth', authToken);
+      history.push('/');
+      console.log('토큰가져오기', authToken);
+    }
+  }, [authToken]);
   return (
     <LoginFormStyle>
       <Title>로그인</Title>
@@ -46,7 +50,6 @@ export default function Login({ onSubmit, onClick, value }) {
         <Input
           name="u_id"
           onChange={onChange}
-          ref={idInput}
           autoFocus
           required
           type="text"
@@ -56,14 +59,13 @@ export default function Login({ onSubmit, onClick, value }) {
         <Input
           name="u_password"
           onChange={onChange}
-          ref={pwdInput}
           type="password"
           placeholder="비밀번호를 입력하세요"
           value={u_password}
           required
         />
         <div className="mt-r-0.9 text-kg-300 text-r-1.3 leading-3">
-          <CheckBox value="보안접속" onClick={onClickCheckBox} checked={checked} />
+          <CheckBox value="보안접속" onChange={onClickCheckBox} checked={checked} />
           <Link to="/shop/account/find_id">
             <span className="align-middle ml-r-11">아이디 찾기</span>
           </Link>
@@ -89,7 +91,7 @@ export default function Login({ onSubmit, onClick, value }) {
     </LoginFormStyle>
   );
   function loginCheck() {
-    setLogin(true);
+    dispatch(loginAuthentication(user));
   }
   function onClickCheckBox() {
     setchecked(!checked);
@@ -97,4 +99,6 @@ export default function Login({ onSubmit, onClick, value }) {
   function closeModal() {
     setLogin(false);
   }
-}
+};
+
+export default withRouter(Login);

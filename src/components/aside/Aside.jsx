@@ -79,11 +79,11 @@ const Aside = () => {
   );
 
   function scrollSlider() {
-    if (window.scrollY > 410) {
-      asideRef.current.style.top = `${window.scrollY + window.innerHeight / 2}px`;
-    } else {
-      asideRef.current.style.top = '710px';
-    }
+    // if (window.scrollY > 410) {
+    //   asideRef.current.style.top = `${window.scrollY + window.innerHeight / 2}px`;
+    // } else {
+    //   asideRef.current.style.top = '710px';
+    // }
   }
 };
 
