@@ -8,6 +8,7 @@ const BigCarousel = () => {
   let cur = useRef(1);
   const containerRef = useRef(null);
   const [isStop, setIStop] = useState('');
+  const [stopButton, setStopButton] = useState('');
 
   const mainBannerImages = useSelector(state => state.instagram.slide_img_list);
 
@@ -90,6 +91,7 @@ const BigCarousel = () => {
       containerRef.current.style.transform = `translateX(-${cur.current}00%)`;
     }
     if (isStop === 'stop') return;
+    if (stopButton === 'stop') return;
     const timerId = setInterval(() => {
       if (cur.current === 1) {
         setTimeout(() => {
@@ -110,26 +112,28 @@ const BigCarousel = () => {
         containerRef.current.style.transform = `translateX(-${cur.current - 1}00%)`;
         --cur.current;
       }
-    }, 3000);
+    }, 1000);
     return () => {
       console.log('clearInterval');
       clearInterval(timerId);
     };
-  }, [isStop]);
+  }, [isStop, stopButton]);
   return (
     <div className="relative">
-      <AiFillPauseCircle
-        onClick={() => {
-          setIStop('stop');
-        }}
-        className="absolute cursor-pointer left-r-73 top-r-30.9 z-10 text-r-3 opacity-50 text-kp-600"
-      />
-      <AiFillPlayCircle
-        onClick={() => {
-          setIStop('start');
-        }}
-        className="absolute cursor-pointer left-r-69 top-r-30.9 z-10 text-r-3 opacity-50 text-kp-600"
-      />
+      <div className="absolute bottom-12 w-r-7.9 left-2/4 -translate-x-2/4 transform z-10 ">
+        <AiFillPlayCircle
+          onClick={() => {
+            setStopButton('start');
+          }}
+          className="inline-block cursor-pointer text-r-3 opacity-50 text-kp-600"
+        />
+        <AiFillPauseCircle
+          onClick={() => {
+            setStopButton('stop');
+          }}
+          className="inline-block cursor-pointer ml-6 text-r-3 opacity-50 text-kp-600"
+        />
+      </div>
       <div
         onMouseOver={() => setIStop('stop')}
         onMouseOut={() => setIStop('start')}
