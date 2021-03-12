@@ -49,13 +49,13 @@ const HeaderNav = () => {
         </button>
         <ul className="flex flex-1 justify-evenly w-r-58 ">
           <li className={linkHover}>
-            <Link to={'/shop/goods/theme_list/category=200'}>신상품</Link>
+            <Link to={'/shop/goods/theme_list/category=200?page=1'}>신상품</Link>
           </li>
           <li className={linkHover}>
-            <Link to={'/shop/goods/theme_list/category=300'}>베스트</Link>
+            <Link to={'/shop/goods/theme_list/category=300?page=1'}>베스트</Link>
           </li>
           <li className={linkHover}>
-            <Link to={'/shop/goods/theme_list/category=400'}>알뜰쇼핑</Link>
+            <Link to={'/shop/goods/theme_list/category=400?page=1'}>알뜰쇼핑</Link>
           </li>
           <li className={linkHover}>
             <Link to="/shop/event">금주혜택</Link>

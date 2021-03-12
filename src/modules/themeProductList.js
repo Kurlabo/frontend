@@ -14,10 +14,12 @@ export const getThemeItemsSuccess = createAction(GET_THEMEITEMS_SUCEESS, (res, t
 export const getThemeItemsFail = createAction(GET_THEMEITEMS_FAIL, error => error);
 export const getThemeLoading = createAction(GET_THEME_LOADING);
 
-export const getThemeItemsThunk = params => async dispatch => {
+export const getThemeItemsThunk = (params, pageNo) => async dispatch => {
   dispatch(getThemeLoading());
   try {
-    const res = await axios.get(`http://3.35.221.9:8080/api/goods/goods_list?category=${params}`);
+    const res = await axios.get(
+      `http://3.35.221.9:8080/api/goods/goods_list?category=${params}&page=${pageNo}`,
+    );
     setTimeout(() => {
       dispatch(getThemeItemsSuccess(res.data.content, res.data.totalPages));
     }, 1500);

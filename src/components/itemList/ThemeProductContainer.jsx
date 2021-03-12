@@ -3,18 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../common/Loading';
 import { getThemeItemsThunk } from '../../modules/themeProductList';
 import ThemeProductCard from './ThemeProductCard';
-import { useParams } from 'react-router';
+import { useParams, withRouter } from 'react-router';
 
-const ThemeProductContainer = () => {
+const ThemeProductContainer = ({ location }) => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.themeProductList.productList.res);
   const isLoading = useSelector(state => state.themeProductList.loading);
   const { theme } = useParams();
 
+  // page 넘버
+
   useEffect(() => {
+    const pageNo = location.search.split('=')[1];
     const params = theme.split('=')[1];
-    dispatch(getThemeItemsThunk(params));
-  }, [dispatch, theme]);
+    dispatch(getThemeItemsThunk(params, pageNo));
+  }, [dispatch, theme, location.search]);
 
   return (
     <div className="w-p-1050 mx-auto overflow-y-auto">
@@ -40,4 +43,4 @@ const ThemeProductContainer = () => {
   );
 };
 
-export default ThemeProductContainer;
+export default withRouter(ThemeProductContainer);

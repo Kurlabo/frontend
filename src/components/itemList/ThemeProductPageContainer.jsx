@@ -5,8 +5,7 @@ import {
   AiOutlineLeft,
   AiOutlineRight,
 } from 'react-icons/ai';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 const pageAStyle =
   'h-14 pr-5 pl-5 focus:outline-0 hover:bg-gray-100 hover:text-kp-600 border-l border-gray-300 align-text-top inline-block';
 const pageFStyle =
@@ -14,8 +13,9 @@ const pageFStyle =
 const pageNoStyle =
   'h-14 focus:outline-0 hover:bg-gray-100 hover:text-kp-600  border-l border-gray-300 align-text-top inline-block ';
 
-const ThemeProductPageContainer = () => {
-  const totalPages = useSelector(state => state.itemList.totalPages);
+const ThemeProductPageContainer = ({ totalPage }) => {
+  const params = useParams('theme');
+  const categoryNo = params.theme.split('=')[1];
 
   return (
     <div className="text-gray-900 text-xl  border border-gray-300 inline-block">
@@ -28,11 +28,11 @@ const ThemeProductPageContainer = () => {
       <ul className="inline-block">
         {(() => {
           const array = [];
-          for (let i = 1; i <= 7; i++) {
+          for (let i = 1; i <= 10; i++) {
             array.push(
               <li key={i} className={pageNoStyle}>
                 <Link
-                  to={`/shop/goods/item_list/category=300?page=${i - 1}`}
+                  to={`/shop/goods/theme_list/category=${categoryNo}?page=${i}`}
                   style={{ verticalAlign: '-webkit-baseline-middle' }}
                   className="pr-6 pl-6  transform translate-y-r-0.9 inline-block h-14 "
                 >
