@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { requestForModificationGoodsAmount, CountselectedCheckBox } from '../../modules/goodsCart';
 import GoodsCartModal from './GoodsCartModal';
 import { setActiveModalProdcut } from '../../modules/cart';
+import { useCookies } from 'react-cookie';
 
 const CartGoods = ({ goods }) => {
+  const [cookies] = useCookies(['auth']);
+
   const dispatch = useDispatch();
 
   const itemCount = useSelector(state => state.goodsCart.cart);
@@ -61,7 +64,7 @@ const CartGoods = ({ goods }) => {
               <button
                 onClick={() => {
                   if (itemCount.filter(item => item.product_id === product_id)[0].cnt === 1) return;
-                  onClickItemCount(product_id, -1);
+                  onClickItemCount(product_id, -1, cookies.auth);
                 }}
                 className={`inline-block w-12 h-12 border border-r-0 ${
                   itemCount.filter(item => item.product_id === product_id)[0].cnt === 1
@@ -76,7 +79,7 @@ const CartGoods = ({ goods }) => {
               </button>
               <button
                 onClick={() => {
-                  onClickItemCount(product_id, 1);
+                  onClickItemCount(product_id, 1, cookies.auth);
                 }}
                 className="inline-block w-12 h-12 border border-l-0 focus:outline-none"
               >
@@ -119,8 +122,8 @@ const CartGoods = ({ goods }) => {
     dispatch(CountselectedCheckBox(product_id, check));
   }
 
-  function onClickItemCount(product_id, variation) {
-    dispatch(requestForModificationGoodsAmount(product_id, variation));
+  function onClickItemCount(product_id, variation, cookies) {
+    dispatch(requestForModificationGoodsAmount(product_id, variation, cookies));
   }
 };
 
