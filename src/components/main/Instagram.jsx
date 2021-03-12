@@ -104,10 +104,10 @@ const Instagram = () => {
           <div className="overflow-hidden">
             <ul ref={containerRef} className="w-r-735">
               {imgArr &&
-                imgArr.map(imgs => (
-                  <li className="w-r-105 float-left">
-                    {imgs.map(({ img, url }) => (
-                      <div className="inline-block ">
+                imgArr.map((imgs, i) => (
+                  <li key={i} className="w-r-105 float-left">
+                    {imgs.map(({ img, url }, j) => (
+                      <div key={j} className="inline-block ">
                         <a rel="noreferrer" target="_blank" href={url}>
                           <img
                             className="h-r-17.5 w-r-17.5"
