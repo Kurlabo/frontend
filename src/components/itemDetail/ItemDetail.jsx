@@ -23,25 +23,16 @@ function getCookie(name) {
 const ItemDetail = ({ itemDetail, history, productId }) => {
   const dispatch = useDispatch();
   let onPopUp = useRef(false);
-  console.log(itemDetail);
   const isLogin = true;
 
   const { count } = useSelector(state => state.cartAddOption);
   const { isOpen, msg } = useSelector(state => state.itemDetail.modalInfo);
-  const [viewCartOption, setviewCartOption] = useState(false);
+
   const [iswishListModalOpen, setIsWishListModalOpen] = useState(false);
 
   // 쿠키에 넣을 key와 value
   const name = 'recentlyViewed';
   const existingValue = getCookie(name);
-  console.log(existingValue);
-  const cartOptionRender = useCallback(() => {
-    if (window.pageYOffset > 1100) {
-      setviewCartOption(true);
-    } else {
-      setviewCartOption(false);
-    }
-  }, []);
 
   const onClickAddCart = useCallback(() => {
     if (onPopUp.current) return;
@@ -88,11 +79,7 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
   useEffect(() => {
     dispatch(setCartCount(1));
 
-    window.addEventListener('scroll', cartOptionRender);
-
     return () => {
-      window.removeEventListener('scroll', cartOptionRender);
-
       let value = existingValue ? [...JSON.parse(existingValue)] : [];
       value = value.filter(item => +item.product_id !== +productId);
       value.unshift({ product_id: productId, thumbnailUrl: itemDetail.list_image_url });
@@ -105,7 +92,7 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
         encodeURIComponent(JSON.stringify(value)) +
         '; max-age=3600';
     };
-  }, [cartOptionRender, dispatch, existingValue, itemDetail.list_image_url, productId]);
+  }, [dispatch, existingValue, itemDetail.list_image_url, productId]);
 
   return (
     <div>
@@ -120,14 +107,12 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
         <GoodsInfo itemDetail={itemDetail} />
         <GotopBtn />
       </main>
-      {viewCartOption && (
-        <BottomCartOption
-          isLogin={isLogin}
-          itemDetail={itemDetail}
-          onClickAddCart={onClickAddCart}
-          onClickWishList={onClickWishList}
-        />
-      )}
+      <BottomCartOption
+        isLogin={isLogin}
+        itemDetail={itemDetail}
+        onClickAddCart={onClickAddCart}
+        onClickWishList={onClickWishList}
+      />
       <CheckModal modalIsOpen={isOpen} closeModal={closeModal} msg={msg} />
       <WishListLoginModal
         openModal={iswishListModalOpen}
