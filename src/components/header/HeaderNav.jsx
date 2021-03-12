@@ -58,7 +58,7 @@ const HeaderNav = () => {
             <Link to={'/shop/goods/theme_list/category=400?page=1'}>알뜰쇼핑</Link>
           </li>
           <li className={linkHover}>
-            <Link to="/shop/event">금주혜택</Link>
+            <Link to="/shop/goods/event">금주혜택</Link>
           </li>
         </ul>
         <HeaderSearch />

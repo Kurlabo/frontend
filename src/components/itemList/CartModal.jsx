@@ -80,7 +80,6 @@ const CartModal = ({
       return;
     }
     onPopUp.current = true;
-    console.log('모래반지빵야빵야:', productName);
     // 장바구니에 post
     closeModal();
     dispatch(postGoodsToCart({ product_id: product_id, cnt: count }));

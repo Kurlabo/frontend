@@ -75,7 +75,7 @@ const PassInput = ({
         <td className="py-4" colSpan="2">
           <input
             type="password"
-            name="repassword"
+            name="CheckPassword"
             className={regInput}
             onChange={checkPass}
             onFocus={onFocusRePass}
@@ -109,11 +109,11 @@ const PassInput = ({
         var pwRegExp1 = /^[~`!@#$%^&*()_+=[\]\{}|;':",.\/<>?a-zA-Z0-9-]+$/;
         var pwRegExp2 = /(\w)\1\1/;
 
-        value.length >= 9 ? setValidPass1(true) : setValidPass1(false);
+        value.length >= 10 ? setValidPass1(true) : setValidPass1(false);
         pwRegExp1.test(value) ? setValidPass2(true) : setValidPass2(false);
         pwRegExp2.test(value) ? setValidPass3(false) : setValidPass3(true);
         break;
-      case 'repassword':
+      case 'CheckPassword':
         console.log();
         passRef.current.value && passRef.current.value === value
           ? setValidRePass(true)

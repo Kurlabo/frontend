@@ -42,11 +42,11 @@ const DeliveryLocation = () => {
         sessionStorage.setItem('address', addr);
         sessionStorage.setItem('buildingName', buildingName);
 
-        window.open(
-          '/kakao/destination',
-          '_blank',
-          `height=${height},width=${width}, top=${top}, left=${left}`,
-        );
+        // window.open(
+        //   '/kakao/destination',
+        //   '_blank',
+        //   `height=${height},width=${width}, top=${top}, left=${left}`,
+        // );
       },
     }).open({
       left: Math.ceil((window.screen.width - width) / 2),
