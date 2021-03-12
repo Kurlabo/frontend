@@ -6,8 +6,15 @@ import Prices from './Prices';
 import Select from './Select';
 import Submit from './Submit';
 import Title from './Title';
+import { useCookies } from 'react-cookie';
+import { useHistory } from 'react-router-dom';
 
 const GoodsCart = () => {
+  const history = useHistory();
+  const [cookies] = useCookies(['auth']);
+  if (cookies.auth === undefined) {
+    history.push('/shop/account/signin');
+  }
   return (
     <div className="container">
       <Title />
