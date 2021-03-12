@@ -9,6 +9,7 @@ const ReceiveDeliveryChild = ({ id, title, state, onChange }) => {
     <div className="text-1.4">
       <input
         type="radio"
+        title={title}
         id={id}
         value={id}
         name="location"

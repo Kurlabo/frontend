@@ -10,6 +10,7 @@ import { useCallback } from 'react';
 const GoodsInfo = ({ itemDetail }) => {
   const {
     name,
+    product_id,
     detail_context,
     short_description,
     product_img_url,
@@ -38,7 +39,7 @@ const GoodsInfo = ({ itemDetail }) => {
       case '상세정보':
         return <GoodsDetailInfo name={name} />;
       case '고객후기':
-        return <GoodsReview reviews={reviews} name={name} />;
+        return <GoodsReview reviews={reviews} name={name} product_id={product_id} />;
       case '상품문의':
         return <ProductQnA />;
       default:

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getMdSuggestionGoodsInfo } from '../../../../modules/mdButtons';
+import { getMdSuggestionGoodsInfo } from '../../modules/mdButtons';
 
 const MdButtons = ({ title, subtitle, suggestType, setMdCurIndex }) => {
   const dispatch = useDispatch();
