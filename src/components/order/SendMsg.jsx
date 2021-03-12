@@ -7,14 +7,7 @@ import { formRadioIcon, formRadioIcon2 } from '../../common_style/common';
 const cancelBtn = 'w-1/2 h-r-4.4 rounded-p-3 border border-gray-300 mr-4 focus:outline-0';
 const saveBtn = 'w-1/2 bg-kp-600 text-white h-r-4.4 rounded-p-3';
 
-const SendMsg = ({
-  title,
-  closeModal,
-  deliveryInfo,
-  setDeliveryInfo,
-  setReceiverInfo,
-  receiverInfo,
-}) => {
+const SendMsg = ({ title, closeModal, deliveryInfo, setDeliveryInfo, setReceiverInfo }) => {
   const [messageTime, setMessageTime] = useState('afterDelivery');
 
   return (
@@ -86,7 +79,7 @@ const SendMsg = ({
     closeModal();
     setReceiverInfo({
       receiverName: deliveryInfo.receiver,
-      receiverPhone: deliveryInfo.Phone,
+      receiverPhone: deliveryInfo.phone,
     });
   }
 };

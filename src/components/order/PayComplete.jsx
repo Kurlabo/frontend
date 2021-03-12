@@ -53,7 +53,7 @@ const PayComplete = () => {
                   홈으로 이동
                 </Link>
                 <Link
-                  to="/shop/mypage/mypage_orderlist"
+                  to={`/shop/mypage/mypage_orderview/ordno=${orderInfo.orders_id}`}
                   className=" block border border-gray-200 text-gray-900 rounded-p-3 py-r-0.9 text-center"
                 >
                   주문내역 상세보기

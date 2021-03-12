@@ -7,17 +7,23 @@ const GET_THEMEITEMS_SUCEESS = 'themeProductList/GET_THEMEITEMS_SUCEESS';
 const GET_THEMEITEMS_FAIL = 'themeProductList/GET_THEMEITEMS_FAIL';
 
 // action creator
-export const getThemeItemsSuccess = createAction(GET_THEMEITEMS_SUCEESS, res => res);
+export const getThemeItemsSuccess = createAction(GET_THEMEITEMS_SUCEESS, (res, totalPages) => ({
+  res,
+  totalPages,
+}));
 export const getThemeItemsFail = createAction(GET_THEMEITEMS_FAIL, error => error);
 export const getThemeLoading = createAction(GET_THEME_LOADING);
 
-export const getThemeItemsThunk = params => async dispatch => {
+export const getThemeItemsThunk = (params, pageNo) => async dispatch => {
   dispatch(getThemeLoading());
   try {
-    const res = await axios.get(`http://3.35.221.9:8080/api/goods/goods_list?category=${params}`);
+    const res = await axios.get(
+      `http://3.35.221.9:8080/api/goods/goods_list?category=${params}&page=${pageNo}`,
+    );
     setTimeout(() => {
-      dispatch(getThemeItemsSuccess(res.data.content));
+      dispatch(getThemeItemsSuccess(res.data.content, res.data.totalPages));
     }, 1500);
+    console.log(res.data);
   } catch (e) {
     dispatch(getThemeItemsFail(e));
   }
@@ -38,6 +44,7 @@ const initialState = {
     },
   ],
   loading: false,
+  totalPages: '',
   error: '',
 };
 
@@ -47,6 +54,7 @@ const themeProductList = handleActions(
     [GET_THEMEITEMS_SUCEESS]: (state, { payload }) => ({
       ...state,
       productList: payload,
+      totalPages: payload.totalPages,
       loading: false,
     }),
     [GET_THEMEITEMS_FAIL]: (state, action) => ({
