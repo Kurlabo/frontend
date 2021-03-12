@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { loginWrapper } from './LoginDropDown';
 
@@ -32,8 +32,8 @@ const DeliveryLocation = () => {
   function openSearch() {
     new daum.Postcode({
       oncomplete: function (data) {
-        let left = Math.ceil((window.screen.width - width) / 2);
-        let top = Math.ceil((window.screen.height - height) / 2);
+        // let left = Math.ceil((window.screen.width - width) / 2);
+        // let top = Math.ceil((window.screen.height - height) / 2);
 
         const addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
         const buildingName = data.buildingName ? data.buildingName : '';
