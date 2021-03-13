@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import { FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
 
 const width = 500;

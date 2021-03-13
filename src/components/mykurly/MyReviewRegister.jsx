@@ -8,6 +8,21 @@ import ReviewCompleteModal from './ReviewCompleteModal';
 
 const submitBtnStyle = 'w-r-20 h-16 my-6 mx-auto text-r-1.3 text-center pt-4 select-none ';
 
+// name에 맞는 쿠키 가져오는 함수
+function getCookie(name) {
+  let matches = document.cookie.match(
+    new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'),
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+// api header
+const config = {
+  headers: {
+    Authorization: 'Bearer ' + getCookie('auth'),
+  },
+};
+
 const MyKurlyTemplate = ({ children }) => {
   return (
     <>
@@ -50,15 +65,18 @@ const MyReviewRegister = ({ history }) => {
     if (!isInputAll) return;
     dispatch(
       postReview({
-        review_id: null,
-        member_id: 1,
-        product_id: itemDetail.product_id,
-        title: inputState.title,
-        content: inputState.textArea,
-        regdate: '2021-02-26',
-        help: null,
-        cnt: null,
-        writer: '마마코코',
+        reviewInfo: {
+          review_id: null,
+          member_id: 1,
+          product_id: itemDetail.product_id,
+          title: inputState.title,
+          content: inputState.textArea,
+          regdate: '2021-02-26',
+          help: null,
+          cnt: null,
+          writer: '마마코코',
+        },
+        config,
       }),
     );
     setOpenModal(true);

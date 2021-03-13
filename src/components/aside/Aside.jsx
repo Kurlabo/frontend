@@ -2,13 +2,10 @@ import React from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { IoChevronUpOutline, IoChevronDownOutline } from 'react-icons/io5';
-import { useSelector } from 'react-redux';
 
 const Aside = () => {
   const pathname = window.location.pathname;
-
-  const recentList = useSelector(state => state.recentItem);
+  const recentList = document.cookie.match('RecentlyViewed');
   const asideRef = useRef();
   const asideLink =
     'block h-12 border-solid border border-gray-400 border-t-0 text-center leading-3';
@@ -52,7 +49,7 @@ const Aside = () => {
           </Link>
         </li>
       </ul>
-      {recentList.length !== 0 && (
+      {/* {recentList.length !== 0 && (
         <div className="border-gray-400 border-t-1 text-r-1.2">
           <button className="block w-full h-7 text-center">
             <IoChevronUpOutline className="inline-block text-gray-300" />
@@ -74,7 +71,7 @@ const Aside = () => {
             <IoChevronDownOutline className="inline-block text-gray-300" />
           </button>
         </div>
-      )}
+      )} */}
     </aside>
   );
 

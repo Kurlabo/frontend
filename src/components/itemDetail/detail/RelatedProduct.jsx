@@ -112,9 +112,10 @@ const RelatedProduct = ({ relatedProducts }) => {
                   <Link to={`/shop/goods/goods_view/${product.product_id}`}>
                     <div className="h-p-230">
                       <img
-                        className="w-full"
+                        className="h-full w-full"
                         src={product.original_image_url}
                         alt="연관 상품 이미지"
+                        onError={handleImgError}
                       />
                     </div>
                     <div className="p-4">
@@ -132,5 +133,9 @@ const RelatedProduct = ({ relatedProducts }) => {
       </div>
     </div>
   );
+
+  function handleImgError(e) {
+    e.target.src = '/img/commingsoonresize.png';
+  }
 };
 export default React.memo(RelatedProduct);
