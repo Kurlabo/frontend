@@ -52,10 +52,14 @@ export const changeOnlySelectAllState = createAction(CHANGE_ONLY_SELECT_ALL_STAT
 
 // 떵크
 // 상품 수량 변경
-export const getGoodsInfo = () => async dispatch => {
+export const getGoodsInfo = cookies => async dispatch => {
   dispatch(startLoading());
   try {
-    const res = await axios.get('http://3.35.221.9:8080/api/goods/goods_cart');
+    const res = await axios.get('http://3.35.221.9:8080/api/goods/goods_cart', {
+      headers: {
+        Authorization: 'Bearer ' + cookies.auth,
+      },
+    });
     // cart state에 들어갈 추가정보인 select,productTotalPrices를 넣어준다.
     dispatch(addGoodsInfoToCartState(res.data.cartDataDto));
   } catch (e) {
@@ -65,13 +69,25 @@ export const getGoodsInfo = () => async dispatch => {
 };
 
 // 상품데이터 받아오기
-export const requestForModificationGoodsAmount = (product_id, variation) => async dispatch => {
+export const requestForModificationGoodsAmount = (
+  product_id,
+  variation,
+  cookies,
+) => async dispatch => {
   try {
-    const res = await axios.patch(`http://3.35.221.9:8080/api/goods/goods_cart/${product_id}`, {
-      member_id: 1,
-      product_id,
-      variation,
-    });
+    const res = await axios.patch(
+      `http://3.35.221.9:8080/api/goods/goods_cart/${product_id}`,
+      {
+        member_id: 1,
+        product_id,
+        variation,
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + cookies.auth,
+        },
+      },
+    );
     dispatch(modifyProductCntInfo(res.data));
   } catch (e) {
     console.log(e);
@@ -79,12 +95,20 @@ export const requestForModificationGoodsAmount = (product_id, variation) => asyn
 };
 
 // 상품데이터 삭제
-export const requestServerToDeleteProducInfo = (product_id, goods) => async dispatch => {
+export const requestServerToDeleteProducInfo = (product_id, goods, cookies) => async dispatch => {
   // prodcut_id는 배열로 들어와야한다.
   try {
-    const res = await axios.post('http://3.35.221.9:8080/api/goods/goods_cart/delete', {
-      product_id: [...product_id],
-    });
+    const res = await axios.post(
+      'http://3.35.221.9:8080/api/goods/goods_cart/delete',
+      {
+        product_id: [...product_id],
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + cookies.auth,
+        },
+      },
+    );
     dispatch(deleteProdcutInfo(res.data.deleted_product_id));
   } catch (e) {
     console.log(e);
@@ -180,7 +204,7 @@ const goodsCart = handleActions(
               ...item,
               cnt: payload.cnt,
               select: item.select,
-              productTotalPrices: item.cnt * item.discounted_price,
+              productTotalPrices: payload.cnt * item.discounted_price,
             }
           : item,
       ),

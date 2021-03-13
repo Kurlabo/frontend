@@ -19,19 +19,14 @@ const PayButton = ({ agreeCheck, history, deliveryInfo, orders_id }) => {
   let reciever_visit_method = '';
   let total_discount_price = 0;
   let total_price = 0;
+
   products_list !== undefined &&
     (total_discount_price = products_list.reduce(
       (acc, curr) => acc + curr.product_discount_price,
       0,
     ));
   products_list !== undefined &&
-    (total_price = products_list.reduce(
-      (acc, curr) =>
-        curr.product_discount_price
-          ? 3000 + acc + (curr.product_price - curr.product_discount_price)
-          : 3000 + acc + curr.product_price,
-      0,
-    ));
+    (total_price = products_list.reduce((acc, curr) => acc + curr.product_price, 0));
 
   switch (deliveryInfo.deliveryPlace) {
     case '문 앞':
@@ -71,7 +66,7 @@ const PayButton = ({ agreeCheck, history, deliveryInfo, orders_id }) => {
       const res = await axios.post('http://3.35.221.9:8080/api/order/checkout', {
         reciever: deliveryInfo.receiver,
         reciever_phone: deliveryInfo.phone,
-        reciever_post: deliveryInfo.deliveryPlace,
+        reciever_post: deliveryInfo.address,
         reciever_place: deliveryInfo.deliveryPlace,
         reciever_visit_method: reciever_visit_method,
         arrived_alarm: deliveryInfo.deliveryMsg,
@@ -82,7 +77,6 @@ const PayButton = ({ agreeCheck, history, deliveryInfo, orders_id }) => {
 
       if (res.data === 'CHECKOUT SUCCESS') {
         history.push(`/order/paycomplete/${orders_id}`);
-        console.log(orders_id);
         dispatch(getPayCompleteInfo(orders_id));
       }
     }

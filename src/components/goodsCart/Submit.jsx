@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import axios from '../../../node_modules/axios/index';
+import { useCookies } from 'react-cookie';
 
 const Submit = () => {
   const cart = useSelector(state => state.goodsCart.cart);
 
   const selectedProduct = cart.filter(item => item.select);
+  const [cookies] = useCookies(['auth']);
 
   let addr = sessionStorage.getItem('address');
 
@@ -35,16 +37,24 @@ const Submit = () => {
   );
 
   const onClickLink = useCallback(async () => {
-    const res = await axios.post('http://3.35.221.9:8080/api/goods/goods_cart/orderSheet', {
-      checkout_Products,
-      total_price,
-      total_discounted_price,
-    });
+    const res = await axios.post(
+      'http://3.35.221.9:8080/api/goods/goods_cart/orderSheet',
+      {
+        checkout_Products,
+        total_price,
+        total_discounted_price,
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + cookies.auth,
+        },
+      },
+    );
 
     if (res.data === 'success') {
       history.push('/order');
     }
-  }, [checkout_Products, history, total_discounted_price, total_price]);
+  }, [checkout_Products, cookies.auth, history, total_discounted_price, total_price]);
 
   return (
     <>

@@ -52,7 +52,12 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList, isLogin }) 
 
   return (
     <div className="flex justify-between py-p-18">
-      <img className="block w-p-430 h-p-552" src={original_image_url} alt="상품 대표 이미지" />
+      <img
+        className="block w-p-430 h-p-552"
+        src={original_image_url}
+        alt="상품 대표 이미지"
+        onError={handleImgError}
+      />
       <div className="w-p-560">
         <p className="pt-4 pb-12">
           <strong className="text-p-24 font-medium">{name}</strong>
@@ -183,5 +188,9 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList, isLogin }) 
       </div>
     </div>
   );
+
+  function handleImgError(e) {
+    e.target.src = '/img/commingsoonresize.png';
+  }
 };
 export default PurchaseInfo;

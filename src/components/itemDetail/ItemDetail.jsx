@@ -14,6 +14,7 @@ import { postWishList, setModuleMsg, setModuleMsgEmpty } from '../../modules/ite
 import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
 import { setRecent } from '../../modules/recentItem';
 
+// name에 맞는 쿠키 가져오는 함수
 function getCookie(name) {
   let matches = document.cookie.match(
     new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'),
@@ -21,14 +22,21 @@ function getCookie(name) {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
+// api header
+const config = {
+  headers: {
+    Authorization: 'Bearer ' + getCookie('auth'),
+  },
+};
+
 const ItemDetail = ({ itemDetail, history, productId }) => {
   const dispatch = useDispatch();
   let onPopUp = useRef(false);
-  const isLogin = true;
+  const isLogin = getCookie('auth') !== undefined;
 
   const { count } = useSelector(state => state.cartAddOption);
   const { isOpen, msg } = useSelector(state => state.itemDetail.modalInfo);
-  const [viewCartOption, setviewCartOption] = useState(false);
+
   const [iswishListModalOpen, setIsWishListModalOpen] = useState(false);
 
   // 쿠키에 넣을 key와 value
@@ -40,26 +48,6 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
     name,
     original_image_url,
   });
-  // const recentViewed = JSON.parse(localStorage.getItem('recentlyViewed'));
-  // console.log(recentViewed.find(recentView => recentView.product_id === itemDetail.product_id));
-  // console.log(
-  //   recentViewed.find(recentView => recentView.product_id === itemDetail.product_id + 44),
-  // );
-
-  // localStorage.setItem(
-  //   'recentlyViewed',
-  //   recentViewed.find(recentView => recentView.product_id === itemDetail.product_id)
-  //     ? JSON.stringify(recentViewed)
-  //     : JSON.stringify([...recentViewed, saveView(itemDetail)]),
-  // );
-
-  const cartOptionRender = useCallback(() => {
-    if (window.pageYOffset > 1100) {
-      setviewCartOption(true);
-    } else {
-      setviewCartOption(false);
-    }
-  }, []);
 
   const onClickAddCart = useCallback(() => {
     if (onPopUp.current) return;
@@ -73,7 +61,12 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
     }
     onPopUp.current = true;
     // 장바구니에 post
-    dispatch(postGoodsToCart({ product_id: productId, cnt: count }));
+    dispatch(
+      postGoodsToCart({
+        addProductInfo: { insertCartList: [{ product_id: productId, cnt: count }] },
+        config,
+      }),
+    );
     setTimeout(() => {
       onPopUp.current = false;
     }, 3000);
@@ -91,7 +84,12 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
       dispatch(setModuleMsg('하나 이상의 패키지 구성품을 선택하셔야됩니다!'));
       return;
     } else {
-      dispatch(postWishList({ product_id: productId }));
+      dispatch(
+        postWishList({
+          product_id: { product_id: productId },
+          config,
+        }),
+      );
     }
   }, [count, isLogin, dispatch, productId]);
 
@@ -106,11 +104,8 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
   useEffect(() => {
     dispatch(setCartCount(1));
     dispatch(setRecent(saveView(itemDetail)));
-    window.addEventListener('scroll', cartOptionRender);
 
     return () => {
-      window.removeEventListener('scroll', cartOptionRender);
-
       let value = existingValue ? [...JSON.parse(existingValue)] : [];
       value = value.filter(item => +item.product_id !== +productId);
       value.unshift({ product_id: productId, thumbnailUrl: itemDetail.list_image_url });
@@ -123,7 +118,7 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
         encodeURIComponent(JSON.stringify(value)) +
         '; max-age=3600';
     };
-  }, [cartOptionRender, dispatch, existingValue, itemDetail.list_image_url, productId]);
+  }, [dispatch, existingValue, itemDetail.list_image_url, productId]);
 
   return (
     <div>
@@ -138,14 +133,12 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
         <GoodsInfo itemDetail={itemDetail} />
         <GotopBtn />
       </main>
-      {viewCartOption && (
-        <BottomCartOption
-          isLogin={isLogin}
-          itemDetail={itemDetail}
-          onClickAddCart={onClickAddCart}
-          onClickWishList={onClickWishList}
-        />
-      )}
+      <BottomCartOption
+        isLogin={isLogin}
+        itemDetail={itemDetail}
+        onClickAddCart={onClickAddCart}
+        onClickWishList={onClickWishList}
+      />
       <CheckModal modalIsOpen={isOpen} closeModal={closeModal} msg={msg} />
       <WishListLoginModal
         openModal={iswishListModalOpen}

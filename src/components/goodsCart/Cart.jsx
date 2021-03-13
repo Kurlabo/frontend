@@ -5,6 +5,7 @@ import CartGoodsType from './CartGoodsType';
 import NoGoods from './NoGoods';
 import { isDropDownAmbient, isDropDownCold, isDropDownFrozen } from '../../modules/cart';
 import { getGoodsInfo } from '../../modules/goodsCart';
+import { useCookies } from 'react-cookie';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Cart = () => {
   // 업데이트 할때마다 변수가 다시 호출되는 문제 해결하는 리팩토링
   const goods = useSelector(state => state.goodsCart.cart);
   const loading = useSelector(state => state.goodsCart.loading);
+  const [cookies] = useCookies(['auth']);
 
   const isDropdownFrozen = useSelector(state => state.cart.frozen);
   const isDropdownAmbient = useSelector(state => state.cart.ambient);
@@ -24,8 +26,8 @@ const Cart = () => {
   const cold = goods.filter(good => good.packing_type_text === '냉장/종이포장');
 
   useEffect(() => {
-    dispatch(getGoodsInfo());
-  }, [dispatch]);
+    dispatch(getGoodsInfo(cookies));
+  }, [cookies, dispatch]);
 
   return (
     <div>
