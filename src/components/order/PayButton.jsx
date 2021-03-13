@@ -19,19 +19,14 @@ const PayButton = ({ agreeCheck, history, deliveryInfo, orders_id }) => {
   let reciever_visit_method = '';
   let total_discount_price = 0;
   let total_price = 0;
+
   products_list !== undefined &&
     (total_discount_price = products_list.reduce(
       (acc, curr) => acc + curr.product_discount_price,
       0,
     ));
   products_list !== undefined &&
-    (total_price = products_list.reduce(
-      (acc, curr) =>
-        curr.product_discount_price
-          ? acc + (curr.product_price - curr.product_discount_price)
-          : acc + curr.product_price,
-      0,
-    ));
+    (total_price = products_list.reduce((acc, curr) => acc + curr.product_price, 0));
 
   switch (deliveryInfo.deliveryPlace) {
     case '문 앞':
