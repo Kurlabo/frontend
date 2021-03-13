@@ -189,6 +189,7 @@ module.exports = {
         modalBg: '#f5f5f5',
       },
       spacing: {
+        'p-2': '2px',
         'p-18': '1.8rem',
         'p-28': '2.8rem',
         'p-33': '3.3rem',
