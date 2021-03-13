@@ -95,11 +95,13 @@ const BigCarousel = () => {
     const timerId = setInterval(() => {
       if (cur.current === 1) {
         setTimeout(() => {
-          containerRef.current.style.transitionDuration = '';
-          containerRef.current.style.transitionProperty = '';
-          containerRef.current.style.transitionTimingFunction = '';
-          containerRef.current.style.transform = `translateX(-500%)`;
-          cur.current = 5;
+          if (containerRef.current !== null) {
+            containerRef.current.style.transitionDuration = '';
+            containerRef.current.style.transitionProperty = '';
+            containerRef.current.style.transitionTimingFunction = '';
+            containerRef.current.style.transform = `translateX(-500%)`;
+            cur.current = 5;
+          }
         }, 500);
         containerRef.current.style.transitionDuration = '0.5s';
         containerRef.current.style.transitionProperty = 'all';
@@ -112,7 +114,7 @@ const BigCarousel = () => {
         containerRef.current.style.transform = `translateX(-${cur.current - 1}00%)`;
         --cur.current;
       }
-    }, 1000);
+    }, 3000);
     return () => {
       console.log('clearInterval');
       clearInterval(timerId);

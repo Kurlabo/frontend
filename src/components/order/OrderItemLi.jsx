@@ -12,12 +12,7 @@ const OrderItemLi = ({
       <img src={list_image_url} alt={product_name} className="w-24 h-r-7.9 inline-block mr-8" />
       <p className="w-r-73.9 text-gray-900 text-1.6 font-medium pr-8">{product_name}</p>
       <p className="w-40 text-1.4 font-light">{product_cnt}개</p>
-      <p className="w-r-12 text-right">
-        {product_discount_price
-          ? (product_price - product_discount_price).toLocaleString()
-          : product_price.toLocaleString()}
-        원
-      </p>
+      <p className="w-r-12 text-right">{product_price.toLocaleString()}원</p>
     </li>
   );
 };

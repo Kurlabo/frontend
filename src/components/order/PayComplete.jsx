@@ -9,7 +9,7 @@ const PayComplete = () => {
   const orderInfo = useSelector(state => state.paycomplete.paycompleteInfo);
   const [isLoading, setIsLoading] = useState(true);
 
-  // window.scrollTo({ top: 0 });
+  window.scrollTo({ top: 0 });
 
   // 결제 정보 불러오기
   useEffect(() => {
@@ -41,7 +41,7 @@ const PayComplete = () => {
               <div className="text-r-1.6 text-gray-600 pt-r-1.4 pl-r-1.6 font-medium ">
                 <h2>결제금액</h2>
                 <p className="text-gray-800 font-semibold pb-r-1.1 text-r-1.8">
-                  {(+orderInfo.total_price).toLocaleString()}원
+                  {(+orderInfo.total_price + 3000).toLocaleString()}원
                 </p>
                 <p className="text-gray-500 text-r-1.2">* 적립금은 배송당일에 적립됩니다.</p>
               </div>
@@ -53,7 +53,7 @@ const PayComplete = () => {
                   홈으로 이동
                 </Link>
                 <Link
-                  to="/shop/mypage/mypage_orderlist"
+                  to={`/shop/mypage/mypage_orderview/ordno=${orderInfo.orders_id}`}
                   className=" block border border-gray-200 text-gray-900 rounded-p-3 py-r-0.9 text-center"
                 >
                   주문내역 상세보기
