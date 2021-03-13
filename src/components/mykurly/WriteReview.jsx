@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const WriteReview = () => {
+const WriteReview = ({ onClick }) => {
   return (
     <section id="#viewBeforeList" className="">
       <h3 className="a11y-hidden">작성가능한후기보기</h3>
       <ul className="">
-        <WriteReviewItem />
+        <WriteReviewItem onClick={onClick} />
       </ul>
     </section>
   );
 };
 
-const WriteReviewItem = () => {
+const WriteReviewItem = ({ onClick }) => {
   const [written, setWritten] = useState(true);
   return (
     <>
@@ -39,7 +39,11 @@ const WriteReviewItem = () => {
                   <span className="font-medium inline-block mb-3 py-3 px-4 border border-kg-250 text-kg-200">
                     후기작성 완료
                   </span>
-                  <button className="font-medium hover:bg-kp-600 hover:text-white py-3 px-4 border border-kp-600 text-kp-600">
+                  <button
+                    id={`button_product_id`}
+                    onClick={onClick}
+                    className="font-medium hover:bg-kp-600 hover:text-white py-3 px-4 border border-kp-600 text-kp-600"
+                  >
                     장바구니 담기
                   </button>
                 </div>

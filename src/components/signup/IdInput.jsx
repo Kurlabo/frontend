@@ -69,17 +69,21 @@ const IdInput = ({ state, setState, readOnly }) => {
   }
   async function overlapId() {
     try {
-      const res = await axios.get(`http://localhost:5000/user/${idInput.current.value}`);
-      if (res.status === 200) {
+      const res = await axios.post('http://3.35.221.9:8080/api/member/signup/checkuid', {
+        checkUid: idInput.current.value,
+      });
+      console.log(res);
+      if (res.data === 'EXISTED UID') {
         setState[1](false);
         setCheckOverLapId(true);
         setModalValue('중복된 아이디 입니다.');
+      } else {
+        setState[1](true);
+        setCheckOverLapId(true);
+        setModalValue('사용가능한 아이디 입니다.');
       }
     } catch (e) {
       console.log(e);
-      setState[1](true);
-      setCheckOverLapId(true);
-      setModalValue('사용가능한 아이디 입니다.');
     }
   }
   function keyPress(e) {
