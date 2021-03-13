@@ -1,7 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FiChevronRight } from 'react-icons/fi';
-
+import { dispatch } from '../../../node_modules/rxjs/internal/observable/pairs';
+import { getReviewList } from '../../modules/review';
+import { useCookies } from 'react-cookie';
 const category = [
   { id: 1, name: '주문내역', path: '/shop/mypage/mypage_orderlist' },
   { id: 2, name: '배송지관리', path: '/shop/mypage/destination/list' },
@@ -15,6 +17,8 @@ const category = [
 const myKurly_menu =
   'w-80 border border-kg-80 border-b-0 last:border text-r-1.4 text-kg-350 hover:text-kp-600 hover:bg-kg-50 leading-none';
 const MyKurlyCategory = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const authToken = cookies.auth;
   return (
     <div className="float-left">
       <h1 className="a11y-hidden">마이컬리 메인</h1>
@@ -28,9 +32,18 @@ const MyKurlyCategory = () => {
                 activeClassName="bg-kg-50 text-kp-600 font-medium"
                 className="text-right inline-block pl-10 pr-6 py-6 w-full "
               >
-                <span className="inline-block text-left w-48 mr-8 leading-none align-middle">
-                  {list.name}
-                </span>
+                {list.id === 4 ? (
+                  <span
+                    onClick={getReview}
+                    className="inline-block text-left w-48 mr-8 leading-none align-middle"
+                  >
+                    {list.name}
+                  </span>
+                ) : (
+                  <span className="inline-block text-left w-48 mr-8 leading-none align-middle">
+                    {list.name}
+                  </span>
+                )}
                 <FiChevronRight className="inline-block text-r-1.8 leading-none align-middle" />
               </NavLink>
             </li>
@@ -46,6 +59,9 @@ const MyKurlyCategory = () => {
       </section>
     </div>
   );
+  function getReview() {
+    dispatch(getReviewList('viewBeforeList', authToken));
+  }
 };
 
 export default MyKurlyCategory;

@@ -21,6 +21,7 @@ const LinkToSign = () => {
   useEffect(() => {
     if (authToken) {
       dispatch(getLoginMember(authToken));
+      console.log('고객정보받아오기');
     }
   }, []);
   const { loginService, customerService } = dropMenu;

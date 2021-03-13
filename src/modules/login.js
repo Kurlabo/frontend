@@ -10,22 +10,26 @@ const setLogInAndOut = createAction(SET_LOGIN_AND_SET_LOGOUT);
 export const logInSuccess = createAction(LOGIN_SUCCESS, token => token);
 export const logOutSuccess = createAction(LOGOUT_SUCCESS, message => message);
 export const loginAndOutFail = createAction(LOGIN_AND_OUT_FAIL, error => error);
-export const getMemberInfo = createAction(GET_MEMBER_INFO, info => info);
+export const getMemberInfo = createAction(GET_MEMBER_INFO, (info, { u_id, u_password }) => ({
+  ...info,
+  u_id,
+  u_password,
+}));
 
 export const loginAuthentication = user => async dispatch => {
   dispatch(setLogInAndOut());
   const res = await loginAPI.loginAuthentication(user);
   try {
     dispatch(logInSuccess(res.data.token));
-    dispatch(getLoginMember(res.data.token));
+    dispatch(getLoginMember(res.data.token, user));
   } catch (error) {
     dispatch(loginAndOutFail(error));
   }
 };
-export const getLoginMember = authToken => async (dispatch, getState) => {
+export const getLoginMember = (authToken, user) => async (dispatch, getState) => {
   try {
     const info = await loginAPI.getLoginMember(authToken);
-    dispatch(getMemberInfo(info.data));
+    dispatch(getMemberInfo(info.data, user));
   } catch (error) {
     dispatch(loginAndOutFail(error));
   }
@@ -45,7 +49,7 @@ const initialize = {
   loading: false,
   data: { token: '' },
   error: null,
-  member: { grade: '', name: '', cartCnt: null },
+  member: { grade: '', name: '', cartCnt: null, u_id: '', u_password: '' },
   message: '',
 };
 
@@ -59,7 +63,7 @@ const login = handleActions(
       console.log('페이로드2', payload);
       return {
         ...state,
-        data: { ...state.data, token: payload },
+        data: { token: payload },
       };
     },
     [LOGOUT_SUCCESS]: (state, { payload }) => {
@@ -70,7 +74,7 @@ const login = handleActions(
       });
       return {
         ...state,
-        data: {},
+        data: null,
         message: payload,
       };
     },
@@ -82,7 +86,7 @@ const login = handleActions(
       console.log('페이로드1', payload);
       return {
         ...state,
-        member: { ...state.member, ...payload },
+        member: payload,
       };
     },
   },

@@ -20,12 +20,7 @@ const MyKurlyDropDown = ({ onMouseOut }) => {
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
   const authToken = useSelector(state => state.login.data.token);
   const dispatch = useDispatch();
-  useEffect(() => {
-    console.log('쿠키토큰', authToken);
-    if (!authToken) {
-      removeCookie('auth');
-    }
-  }, []);
+  useEffect(() => {}, []);
   return (
     <ul className={listStyle}>
       {linkTo.map((linkInfo, index) => {
@@ -46,7 +41,7 @@ const MyKurlyDropDown = ({ onMouseOut }) => {
     </ul>
   );
   function setLogout() {
-    dispatch(logoutAuthentication(authToken));
+    // dispatch(logoutAuthentication(authToken));
     removeCookie('auth');
   }
 };

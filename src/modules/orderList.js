@@ -78,28 +78,26 @@ const order = handleActions(
       ...state,
       loading: true,
     }),
-    [GET_DETAIL_SUCCESS]: (state, action) => ({
-      ...state,
-      detail: {
-        ...action.payload,
-        total_discount_price: action.payload.orderProducts.reduce(
-          (initial, { reduced_price }) => initial + reduced_price,
-          0,
-        ),
-        discount() {
-          return this.total_discount_price.toLocaleString();
+    [GET_DETAIL_SUCCESS]: (state, action) => {
+      return {
+        ...state,
+        detail: {
+          ...action.payload,
+          total_discount_price: action.payload.orderProducts.reduce(
+            (initial, { reduced_price }) => initial + +reduced_price,
+            0,
+          ),
+          discount() {
+            return this.total_discount_price.toLocaleString();
+          },
+          delivery_cost: action.payload.checkout_total_price < 40000 ? 3000 : 0,
+          checkout_total_price_str: action.payload.checkout_total_price.toLocaleString(),
+          checkout() {
+            return (this.checkout_total_price + this.total_discount_price).toLocaleString();
+          },
         },
-        delivery_cost: action.payload.checkout_total_price < 40000 ? 3000 : 0,
-        product_total_price_str: action.payload.checkout_total_price.toLocaleString(),
-        checkout() {
-          return (
-            this.checkout_total_price -
-            this.total_discount_price +
-            this.delivery_cost
-          ).toLocaleString();
-        },
-      },
-    }),
+      };
+    },
     [GET_FAIL]: (state, action) => ({
       ...state,
       error: action.payload,

@@ -4,19 +4,25 @@ import MyKurlyCategory from './MyKurlyCategory';
 import MyInfoModify from './MyInfoModify';
 import Modal from '../login/Modal';
 import Modalform from '../login/Modalform';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const MyInfo = () => {
-  const confirm = {
-    state: false,
+  const [confirm, setConfirm] = useState({
+    authState: false,
     modal: false,
-  };
+  });
   // const dispatch = useDispatch();
   return (
     <>
       <MyKurlyHeader />
       <main className="container h-full box-content clear-fix">
         <MyKurlyCategory />
-        {!confirm.state ? <MyInfoBlock /> : <MyInfoModify />}
+        {!confirm.authState ? (
+          <MyInfoBlock confirm={confirm} setConfirm={setConfirm} />
+        ) : (
+          <MyInfoModify />
+        )}
         {confirm.modal ? (
           <Modalform id="modal">
             <Modal
@@ -37,7 +43,9 @@ const MyInfo = () => {
   }
 };
 
-const MyInfoBlock = () => {
+const MyInfoBlock = ({ confirm, setConfirm }) => {
+  const [password, setPassword] = useState('');
+  const { u_id, u_password } = useSelector(state => state.login.member);
   return (
     <div className="float-left align-middle w-r-85 h-full mt-20 mb-6 px-12 pb-32 box-border">
       <h1 className="a11y-hidden">개인 정보 수정하기 </h1>
@@ -56,6 +64,7 @@ const MyInfoBlock = () => {
               <input
                 className="inline-block text-r-1.4 p-4 px-6 w-p-340 focus:bg-klp-700 border border-kg-80 rounded"
                 type="text"
+                value={`${u_id}`}
               />
             </label>
             <label className="block my-4 mt-8">
@@ -65,6 +74,8 @@ const MyInfoBlock = () => {
               <input
                 className="inline-block text-r-1.4 py-4 px-6 w-p-340 focus:bg-klp-700 border border-kg-80 rounded"
                 type="password"
+                value={`${password}`}
+                onChange={onChange}
               />
             </label>
           </div>
@@ -75,9 +86,23 @@ const MyInfoBlock = () => {
       </div>
     </div>
   );
-
+  function onChange(e) {
+    setPassword(e.target.value);
+  }
   function onSubmit(e) {
     e.preventDefault();
+    console.log(password === u_password);
+    if (password === u_password) {
+      setConfirm({
+        ...confirm,
+        authState: true,
+      });
+    } else {
+      setConfirm({
+        ...confirm,
+        modal: true,
+      });
+    }
   }
 };
 

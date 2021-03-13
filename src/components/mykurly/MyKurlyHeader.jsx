@@ -1,12 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { BsChevronRight } from 'react-icons/bs';
 import mykurlybanner from '../../img/mykurlybanner.jpg';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+
 const li_sm = 'float-left align-middle w-r-19.7 h-r-17.8 bg-white p-12';
 const detail_wrapper = 'mt-r-3.5 text-kp-600 leading-none';
 const detail_text = 'text-r-2 inline-block align-middle font-medium -mt-1';
 const arr_icon = 'inline-block text-r-1.6 leading-8 text-kg-200 ml-2 align-middle';
-const MyKurlyHeader = () => {
+
+const MyKurlyHeader = ({ history }) => {
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const authToken = cookies.auth;
+  const { grade, name, cartCnt } = useSelector(state => state.login.member);
+  useEffect(() => {
+    if (!authToken) {
+      history.push('/');
+    }
+  });
   return (
     <section className="bg-kg-100 py-20">
       <h1 className="a11y-hidden">회원정보</h1>
@@ -16,10 +29,10 @@ const MyKurlyHeader = () => {
             <section className="p-12 h-full">
               <h1 className="a11y-hidden">회원등급 및 회원이름</h1>
               <span className="align-top mr-8 inline-block border border-kp-600 px-8 py-10 text-r-1.6 rounded-md text-kp-600 leading-none	">
-                일반
+                {grade}
               </span>
               <div className="inline-block">
-                <h2 className="inline-block tracking-wide	 text-r-2 font-medium pr-2">정세영</h2>
+                <h2 className="inline-block tracking-wide	 text-r-2 font-medium pr-2">{name}</h2>
                 <span className="text-r-1.6">님</span>
                 <p className="text-r-1.2 my-6">적립 0.5%</p>
                 <button className="py-3 px-7 mr-4 text-r-1.4 bg-kg-100 rounded-full leading-none">
@@ -82,4 +95,4 @@ const MyKurlyHeader = () => {
   );
 };
 
-export default MyKurlyHeader;
+export default withRouter(MyKurlyHeader);

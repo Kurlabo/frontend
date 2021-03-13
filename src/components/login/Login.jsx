@@ -20,6 +20,8 @@ export const LoginFormStyle = styled.div`
 const Login = ({ onSubmit, history }) => {
   const [login, setLogin] = useState(false);
   const authToken = useSelector(state => state.login.data.token);
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const authCookie = cookies.auth;
   const [user, setUser] = useState({
     u_id: '',
     u_password: '',
@@ -27,7 +29,6 @@ const Login = ({ onSubmit, history }) => {
   const [checked, setchecked] = useState(false);
 
   const { u_id, u_password } = user;
-  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
   function onChange(e) {
     const { value, name } = e.target;
     setUser({

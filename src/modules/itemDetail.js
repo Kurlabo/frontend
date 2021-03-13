@@ -58,7 +58,7 @@ const itemDetail = handleActions(
           itemDetail.related_product.push(itemDetail.related_product[i]);
         }
       }
-
+      console.log('페이로드', itemDetail);
       // 부족한 개수만큼 객체 정보를 넣어준다.
       return {
         ...state,

@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MyKurlyHeader from './MyKurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
 import { Link } from 'react-router-dom';
 import WrittenReview from './WrittenReview';
 import WriteReview from './WriteReview';
 import CartModal from '../itemList/CartModal';
-import { getProductInfo } from '../../modules/itemDetail';
-import { useDispatch } from 'react-redux';
+import itemDetail, { getProductInfo } from '../../modules/itemDetail';
+import { useDispatch, useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie';
+import { getReviewList } from '../../modules/review';
 const MyReview = ({ history }) => {
   return (
     <>
@@ -32,6 +34,20 @@ const MyReviewBlock = () => {
   });
 
   const { product_id, name, original_price, discounted_price, discount_percent } = cartItem;
+  const [cookies, setCookie, removeCookie] = useCookies(['auh']);
+  const authToken = cookies.auth;
+  // const  = useSelector(state => state.review.data);
+  const { itemDetail } = useSelector(({ itemDetail }) => ({
+    itemDetail: itemDetail.info,
+  }));
+  useEffect(() => {
+    dispatch(getReviewList('viewBeforeList', authToken));
+    dispatch(getReviewList('viewAfterList', authToken));
+  });
+
+  const { viewBeforeList: canWriteReview, viewAfterList: writtenReview } = useSelector(
+    state => state.review.data,
+  );
 
   return (
     <div className="float-left align-middle w-r-85 h-full mt-20 mb-6 px-12 pb-32 box-border">
@@ -60,7 +76,15 @@ const MyReviewBlock = () => {
                 tabView === 'viewBeforeList' ? 'border-b-2 border-kp-600' : ''
               } text-center inline-block w-full py-4 text-r-1.4  bg-white`}
             >
-              작성가능 후기(<span>1</span>)
+              작성가능 후기(
+              <span>
+                {
+                  canWriteReview.filter(
+                    ({ delivery_condition }) => delivery_condition === '배송완료',
+                  ).length
+                }
+              </span>
+              )
             </div>
           </Link>
           <Link
@@ -73,7 +97,7 @@ const MyReviewBlock = () => {
                 !(tabView === 'viewBeforeList') ? 'border-b-2 border-kp-600' : ''
               } text-center inline-block w-full py-4 text-r-1.4  bg-white`}
             >
-              작성완료 후기 (<span>1</span>)
+              작성완료 후기 (<span>{writtenReview.length}</span>)
             </div>
           </Link>
         </div>
@@ -92,17 +116,18 @@ const MyReviewBlock = () => {
   );
 
   function openCartModal(e) {
-    // const product_item = orderDetail.orderProducts.find(
-    //   product => product.product_id === +e.target.id.split('_')[1],
-    // );
-    // const { product_id, name, checkout_price, reduced_price, cnt } = product_item;
+    const productId = +e.target.id.split('_')[1];
+    dispatch(getProductInfo(productId));
+    // items.find(item => item.product_id === +e.target.id.split('_')[1]),
+    // const product_item = items.find(item => item.product_id === +e.target.id.split('_')[1]);
+    // const { product_id, name, original_price, discounted_price, discount_percent } = itemDetail;
     // setCartItem({
     //   ...cartItem,
     //   product_id,
     //   name,
-    //   original_price: checkout_price / cnt,
-    //   discounted_price: (checkout_price - reduced_price) / cnt,
-    //   discount_percent: checkout_price / reduced_price,
+    //   original_price,
+    //   discounted_price,
+    //   discount_percent,
     // });
     setmodalIsOpen(true);
     // dispatch(getProductInfo(product_id));
@@ -112,6 +137,7 @@ const MyReviewBlock = () => {
   }
   function onClick(e) {
     setTabView(e.currentTarget.href.split('#')[1]);
+    dispatch(getReviewList(e.currentTarget.href.split('#')[1], authToken));
   }
 };
 
