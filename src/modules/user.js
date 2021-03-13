@@ -25,7 +25,7 @@ const user = handleActions(
   initialize,
 );
 
-export const signUpStart = user => async (dispatch, getState) => {
+export const signUpStart = user => async dispatch => {
   try {
     await axios.post('http://3.35.221.9:8080/api/member/signup', user);
     const loginUser = { uId: user.uid, uName: user.name, isLogin: true };

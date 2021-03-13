@@ -106,6 +106,7 @@ const Aside = () => {
   );
 
   function scrollSlider() {
+    if (!asideRef.current) return false;
     if (window.scrollY > 410) {
       asideRef.current.style.top = `${window.scrollY + window.innerHeight / 2}px`;
     } else {
