@@ -5,7 +5,7 @@ import goodsCart from './goodsCart';
 import itemList from './itemlist';
 import user from './user';
 import notice from './notice';
-import recentItem from './aside';
+import recentItem from './recentItem';
 import login from './login';
 import paycomplete from './paycomplete';
 import cartAddOption from './cartAddOption';

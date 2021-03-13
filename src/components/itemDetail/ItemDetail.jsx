@@ -12,6 +12,7 @@ import WishListLoginModal from './detail/WishListLoginModal';
 import { withRouter } from 'react-router';
 import { postWishList, setModuleMsg, setModuleMsgEmpty } from '../../modules/itemDetail';
 import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
+import { setRecent } from '../../modules/recentItem';
 
 // name에 맞는 쿠키 가져오는 함수
 function getCookie(name) {
@@ -41,6 +42,12 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
   // 쿠키에 넣을 key와 value
   const name = 'recentlyViewed';
   const existingValue = getCookie(name);
+
+  const saveView = ({ product_id, name, original_image_url }) => ({
+    product_id,
+    name,
+    original_image_url,
+  });
 
   const onClickAddCart = useCallback(() => {
     if (onPopUp.current) return;
@@ -96,6 +103,7 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
 
   useEffect(() => {
     dispatch(setCartCount(1));
+    dispatch(setRecent(saveView(itemDetail)));
 
     return () => {
       let value = existingValue ? [...JSON.parse(existingValue)] : [];
