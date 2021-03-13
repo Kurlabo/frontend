@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AddCartModal from './AddCartModal';
 import Categories from './Categories';
 import HeaderSearch from './HeaderSearch';
@@ -18,7 +18,7 @@ const headerRel = 'w-full bg-white z-100 transform duration-75 border-gray-50 bo
 const HeaderNav = () => {
   const [fix, setFix] = useState(false);
   const [category, setCategory] = useState(false);
-  const { theme } = useParams();
+  // const { theme } = useParams();
 
   useEffect(() => {
     window.addEventListener('scroll', changePos);

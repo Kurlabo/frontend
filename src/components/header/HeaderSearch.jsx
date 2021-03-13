@@ -26,6 +26,7 @@ const HeaderSearch = () => {
 
   useEffect(() => {
     setLocation(sessionStorage.getItem('address'));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionStorage.getItem('address')]);
 
   return (

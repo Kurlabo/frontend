@@ -46,6 +46,7 @@ const selectStyle = {
 
 const PaySelection = () => {
   const [paySelect, setpaySelect] = useState('normal');
+  // eslint-disable-next-line no-unused-vars
   const [wayToPay, setwayToPay] = useState('일반결제');
   const dispatch = useDispatch();
 

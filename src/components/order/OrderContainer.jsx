@@ -12,6 +12,8 @@ import OrderProduct from './OrderProduct';
 import PayHistory from './PayHistory';
 import PaySelection from './PaySelection';
 import PersonalAgree from './PersonalAgree';
+import { useCookies } from 'react-cookie';
+import { useHistory } from 'react-router-dom';
 
 const headingStyle = 'w-p-1050 text-5xl font-semibold pb-r-4.4 pt-r-5.5 mx-auto text-center';
 
@@ -24,6 +26,12 @@ const OrderContainer = () => {
   useEffect(() => {
     dispatch(getOrderInfo());
   }, [dispatch]);
+
+  const history = useHistory();
+  const [cookies] = useCookies(['auth']);
+  if (cookies.auth === undefined) {
+    history.push('/shop/account/signin');
+  }
 
   return (
     <>
