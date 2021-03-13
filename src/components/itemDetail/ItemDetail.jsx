@@ -13,6 +13,7 @@ import { withRouter } from 'react-router';
 import { postWishList, setModuleMsg, setModuleMsgEmpty } from '../../modules/itemDetail';
 import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
 
+// name에 맞는 쿠키 가져오는 함수
 function getCookie(name) {
   let matches = document.cookie.match(
     new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'),
@@ -20,10 +21,17 @@ function getCookie(name) {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
+// api header
+const config = {
+  headers: {
+    Authorization: 'Bearer ' + getCookie('auth'),
+  },
+};
+
 const ItemDetail = ({ itemDetail, history, productId }) => {
   const dispatch = useDispatch();
   let onPopUp = useRef(false);
-  const isLogin = true;
+  const isLogin = getCookie('auth') !== undefined;
 
   const { count } = useSelector(state => state.cartAddOption);
   const { isOpen, msg } = useSelector(state => state.itemDetail.modalInfo);
@@ -46,7 +54,12 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
     }
     onPopUp.current = true;
     // 장바구니에 post
-    dispatch(postGoodsToCart({ product_id: productId, cnt: count }));
+    dispatch(
+      postGoodsToCart({
+        addProductInfo: { insertCartList: [{ product_id: productId, cnt: count }] },
+        config,
+      }),
+    );
     setTimeout(() => {
       onPopUp.current = false;
     }, 3000);
@@ -64,7 +77,12 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
       dispatch(setModuleMsg('하나 이상의 패키지 구성품을 선택하셔야됩니다!'));
       return;
     } else {
-      dispatch(postWishList({ product_id: productId }));
+      dispatch(
+        postWishList({
+          product_id: { product_id: productId },
+          config,
+        }),
+      );
     }
   }, [count, isLogin, dispatch, productId]);
 

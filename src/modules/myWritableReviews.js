@@ -11,7 +11,7 @@ const [
 ] = createRequestActionType('myReview/GET_WRITABLE_REVIEWS');
 
 // 액션 생성 함수
-export const getWritableReviews = createAction(CHECK_WRITABLE_REVIEWS, productId => productId);
+export const getWritableReviews = createAction(CHECK_WRITABLE_REVIEWS, config => config);
 
 // 사가
 const checkWritableReviewsSaga = createCheckWritableReviewSaga(

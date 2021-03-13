@@ -13,9 +13,7 @@ const [
 const INITIALIZE_RESULT = 'common/INITIALIZE_RESULT';
 
 // 액션 생성 함수
-export const postGoodsToCart = createAction(ADD_GOODS_TO_CART, goodsInfo => ({
-  insertCartList: [goodsInfo],
-}));
+export const postGoodsToCart = createAction(ADD_GOODS_TO_CART, goodsInfo => goodsInfo);
 export const initializeResult = createAction(INITIALIZE_RESULT);
 
 // 사가
