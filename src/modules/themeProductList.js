@@ -23,7 +23,6 @@ export const getThemeItemsThunk = (params, pageNo) => async dispatch => {
     setTimeout(() => {
       dispatch(getThemeItemsSuccess(res.data.content, res.data.totalPages));
     }, 1500);
-    console.log(res.data);
   } catch (e) {
     dispatch(getThemeItemsFail(e));
   }
