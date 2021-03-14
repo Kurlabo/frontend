@@ -2,22 +2,23 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveModalGoods, setActiveModalProdcut } from '../../modules/cart';
 import { requestServerToDeleteProducInfo } from '../../modules/goodsCart';
+import { useCookies } from 'react-cookie';
 
 const GoodsCartModal = ({ goods }) => {
   const dispatch = useDispatch();
   const productId = useSelector(state => state.cart.modalProduct.productId);
   const goodsId = useSelector(state => state.cart.modalGoods.GoodsId);
-  const modalGoods = useSelector(state => state.cart.modalGoods.isActive);
+  const [cookies] = useCookies(['auth']);
 
   const onClickButtonConfirm = useCallback(
     id => {
       if (goods === true) {
-        dispatch(requestServerToDeleteProducInfo(id, true));
+        dispatch(requestServerToDeleteProducInfo(id, true, cookies.auth));
       } else {
-        dispatch(requestServerToDeleteProducInfo([id]));
+        dispatch(requestServerToDeleteProducInfo([id], false, cookies.auth));
       }
     },
-    [dispatch, goods, modalGoods],
+    [cookies.auth, dispatch, goods],
   );
 
   const onClickButtonCancel = useCallback(() => {

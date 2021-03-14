@@ -7,7 +7,20 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWritableReviews } from '../../../modules/myWritableReviews';
 
-const isLogin = true;
+// name에 맞는 쿠키 가져오는 함수
+function getCookie(name) {
+  let matches = document.cookie.match(
+    new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'),
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+// api header
+const config = {
+  headers: {
+    Authorization: 'Bearer ' + getCookie('auth'),
+  },
+};
 
 // style class
 const addReviewBtn =
@@ -18,7 +31,7 @@ const GoodsReview = ({ history, reviews, name, product_id }) => {
   const dispatch = useDispatch();
 
   const onClick = () => {
-    if (isLogin) {
+    if (getCookie('auth') !== undefined) {
       if (checkWritable.length > 0) {
         history.push('/shop/mypage/mypage_review/register');
       } else {
@@ -31,7 +44,7 @@ const GoodsReview = ({ history, reviews, name, product_id }) => {
   };
 
   useEffect(() => {
-    dispatch(getWritableReviews(product_id));
+    dispatch(getWritableReviews({ product_id, config }));
   }, [dispatch, product_id]);
 
   return (

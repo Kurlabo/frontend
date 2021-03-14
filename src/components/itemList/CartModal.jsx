@@ -46,6 +46,21 @@ const cartModalStyles = {
   },
 };
 
+// name에 맞는 쿠키 가져오는 함수
+function getCookie(name) {
+  let matches = document.cookie.match(
+    new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'),
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+// api header
+const config = {
+  headers: {
+    Authorization: 'Bearer ' + getCookie('auth'),
+  },
+};
+
 const CartModal = ({
   modalIsOpen,
   closeModal,
@@ -60,7 +75,7 @@ const CartModal = ({
   const [iswishListModalOpen, setIsWishListModalOpen] = useState(false);
 
   // 로그인 유무 받아와야됨
-  const isLogin = true;
+  const isLogin = getCookie('auth') !== undefined;
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -74,7 +89,6 @@ const CartModal = ({
       return;
     }
     if (!isLogin) {
-      console.log('로그인 창으로 이동!!!');
       setIsWishListModalOpen(true);
       closeModal();
       return;
@@ -82,12 +96,17 @@ const CartModal = ({
     onPopUp.current = true;
     // 장바구니에 post
     closeModal();
-    dispatch(postGoodsToCart({ product_id: product_id, cnt: count }));
+    dispatch(
+      postGoodsToCart({
+        addProductInfo: { insertCartList: [{ product_id: product_id, cnt: count }] },
+        config,
+      }),
+    );
     setCount(1);
     setTimeout(() => {
       onPopUp.current = false;
     }, 3000);
-  }, [count, dispatch, isLogin, product_id, onPopUp, closeModal, productName]);
+  }, [count, dispatch, isLogin, product_id, onPopUp, closeModal]);
 
   const closeWishListModal = useCallback(() => {
     setIsWishListModalOpen(false);

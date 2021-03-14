@@ -73,10 +73,10 @@ export function createCheckWritableReviewSaga(type, request) {
   return function* (action) {
     yield put(startLoading(type)); // 로딩 시작
     try {
-      const response = yield call(request);
+      const response = yield call(request, action.payload);
       yield put({
         type: SUCCESS,
-        payload: response.data.filter(item => item.product_id === action.payload),
+        payload: response.data.filter(item => item.product_id === action.payload.product_id),
       });
     } catch (e) {
       yield put({
