@@ -6,10 +6,7 @@
 
 2021년 2월 01일부터 2월 26일까지(업데이트 기간 제외) 진행한 Kurlabo 프로젝트입니다.
 
-
-
 <div width><h2>1. 📖 Tech Stack</h2><p><img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/>&nbsp;<br/><img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/NPM-CB3837?style=flat-square&logo=NPM&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/Storybook-FF4785?style=flat-square&logo=Storybook&logoColor=white"/>&nbsp;<br/><img src="https://img.shields.io/badge/Tailwind CSS-38B2AC?style=flat-square&logo=Tailwind CSS&logoColor=white"/><img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"/><img src="https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=Postman&logoColor=white"/>
-
 
 - 라이브러리
 
@@ -32,28 +29,21 @@
       </div>
   </details>
 
-
-
 ## 2. Getting Start!
 
 `$ git clone "https://github.com/Kurlabo/frontend.git`
 `$ npm install`
 `$ npm run start`
 
-
-
-
 ## 3. Contributioning
 
 Please read [CONTRIBUTING.md](https://github.com/Kurlabo/frontend/blob/develop/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us. /
-
-
 
 ## 4. Contributors
 
 - **김어진**
 
-- **박상언** *-PM-*
+- **박상언** _-PM-_
 
   <details>
     <summary>작업 내용</summary>
@@ -67,6 +57,15 @@ Please read [CONTRIBUTING.md](https://github.com/Kurlabo/frontend/blob/develop/C
   </details>
 
 - **백나라**
+  <details>
+    <summary>작업 내용</summary>
+    <div>
+        <br/>
+        - 상품 상세 페이지 UI 구현<br/><br/>
+        - 고객센터 페이지 UI 구현<br/><br/>
+        - API 연동하여 상품 정보 렌더, 연관 상품 캐러셀 렌더, 늘 사는 것에 상품 추가, 장바구니에 상품 추가, 상품 리뷰 작성 구현<br/><br/>
+       </div>
+  </details>
 
 - **정세영**
 
@@ -96,10 +95,8 @@ Please read [CONTRIBUTING.md](https://github.com/Kurlabo/frontend/blob/develop/C
        </div>
   </details>
 
-
-
 ## 5. Develop motivation
 
 ### 5-1 Reason for Kurly Clone
 
-Market Kurly 사이트의 기존 기능과 더불어 개선점을 찾고 kurlabo 프로젝트에 적용하는 것이 가장 큰 목표였습니다. 웹 앱의 기본인 CRUD 기능은 물론 다채로운 기능을 가진 쇼핑몰을 Clone하여   interactive한 UI를 만들고자 하였습니다. 그리고 원활한 서버통신을 통해 백엔드와의 협업과 커뮤니케이션 능력을 배양하고자 시작하였습니다.
+Market Kurly 사이트의 기존 기능과 더불어 개선점을 찾고 kurlabo 프로젝트에 적용하는 것이 가장 큰 목표였습니다. 웹 앱의 기본인 CRUD 기능은 물론 다채로운 기능을 가진 쇼핑몰을 Clone하여 interactive한 UI를 만들고자 하였습니다. 그리고 원활한 서버통신을 통해 백엔드와의 협업과 커뮤니케이션 능력을 배양하고자 시작하였습니다.
