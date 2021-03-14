@@ -22,7 +22,7 @@ const LinkToSign = () => {
     if (authToken) {
       dispatch(getLoginMember(authToken));
     }
-  }, []);
+  }, [authToken, dispatch]);
   const { loginService, customerService } = dropMenu;
   return (
     <div className={signWrapper}>
