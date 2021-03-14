@@ -53,13 +53,6 @@ function getCookie(name) {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-// api header
-const config = {
-  headers: {
-    Authorization: 'Bearer ' + getCookie('auth'),
-  },
-};
-
 const CartModal = ({
   modalIsOpen,
   closeModal,
@@ -81,6 +74,12 @@ const CartModal = ({
 
   // 장바구니 담기 버튼
   const onClickAddCart = useCallback(() => {
+    // api header
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + getCookie('auth'),
+      },
+    };
     if (onPopUp.current) return;
     if (count === 0) {
       setCheckQuantity(true);
