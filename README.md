@@ -66,6 +66,7 @@ Please read [CONTRIBUTING.md](https://github.com/Kurlabo/frontend/blob/develop/C
   </details>
 
 - **백나라**
+  
   <details>
     <summary>작업 내용</summary>
     <div>
@@ -74,8 +75,8 @@ Please read [CONTRIBUTING.md](https://github.com/Kurlabo/frontend/blob/develop/C
         - 고객센터 페이지 UI 구현<br/><br/>
         - API 연동하여 상품 정보 렌더, 연관 상품 캐러셀 렌더, 늘 사는 것에 상품 추가, 장바구니에 상품 추가, 상품 리뷰 작성 구현<br/><br/>
        </div>
-  </details>
-
+</details>
+  
 - **정세영**
 
   <details>
@@ -107,8 +108,57 @@ Please read [CONTRIBUTING.md](https://github.com/Kurlabo/frontend/blob/develop/C
        </div>
   </details>
 
+
+
 ## 5. Develop motivation
+
+
 
 ### 5-1 Reason for Kurly Clone
 
 Market Kurly 사이트의 기존 기능과 더불어 개선점을 찾고 kurlabo 프로젝트에 적용하는 것이 가장 큰 목표였습니다. 웹 앱의 기본인 CRUD 기능은 물론 다채로운 기능을 가진 쇼핑몰을 Clone하여 interactive한 UI를 만들고자 하였습니다. 그리고 원활한 서버통신을 통해 백엔드와의 협업과 커뮤니케이션 능력을 배양하고자 시작하였습니다.
+
+
+
+## 6. 서비스 기능
+
+### 메인 Header
+
+- 화면 최상단 고객센터 메뉴 마우스 오버시 드롭다운 메뉴.
+
+- 전체 카테고리 마우스 오버시에 모든 카테고리 메뉴 보여주는 드롭다운 메뉴 렌더링.
+- 전체 카테고리 드롭다운 메뉴에서 대분류 메뉴에서만 스크롤 렌더링.
+- DAUM API를 이용하여 주소검색 기능.
+- 주소 변경 기능.
+- Session Storage를 이용하여 주소 set, get하여 배송가능한 주소 렌더링.
+- cookie를 이용하여 토큰 값 유지하면서 회원정보 GET.
+
+
+
+### 상품리스트(전체 카테고리, 알뜰상품, 베스트, 신상품)
+
+- 대분류, 소분류에 따라서 다른 이미지 렌더링.
+- 요청 가능한 페이지 갯수에 따른 페이지네이션.
+- Redux 사용하여 상품, 로딩, 에러에 대한 state 관리.
+- Redux-Thunk를 이용하여 비동기 처리.
+- history.location을 사용하여 페이지 번호에 따라 다른 routing 처리.
+- 각 상품 클릭시 해당 상품에 대한 설명 렌더링.
+- Original 마켓컬리 페이지에서 장바구니 모달창의 외부를 클릭시 모달창이 닫히지 않는 접근성 issue 해결.
+- 장바구니 담기 버튼 클릭시 해당 상품에 대한 정보 POST.
+
+
+
+### 주문서
+
+- Redux-Thunk를 이용하여 비동기 처리.
+- useState를 사용하여 주문상품, 회원정보, 결제 정보에 대한 상태관리.
+- 주문 상품 화살표 메뉴 클릭시 텍스트 Swap 형태로  해당 상품에 대한 가격, 수량, 이미지 렌더링하고 재클릭시 '해당 상품 외 (개) 렌더링'.
+- Original 마켓컬리 사이트는 배송지에 대한 수정을 할 때, 새로운 브라우저(윈도우)창을 띄웠지만 접근성 Issue가 있기 때문에 본 Kurlabo 프로젝트에서는 모달창으로 대체.
+- 배송지 변경 모달창에서 받으실 장소, 출입 방법에 따라 각기 다른 Input 및 메세지 렌더링.
+- 결제 정보 창 Sticky를 이용하여 해당 사이즈에 맞게 스크롤에 따라서 이동.
+- 결제 동의 하지 않았을 시에 결제 불가 모달창 팝업.
+- 결제하기 클릭시 가지고 있던 state를 모두 POST.
+- 결제버튼 클릭시 결제 준비중 로딩창 렌더링.
+
+
+
