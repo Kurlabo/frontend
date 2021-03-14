@@ -26,7 +26,7 @@ const Cart = () => {
   const cold = goods.filter(good => good.packing_type_text === '냉장/종이포장');
 
   useEffect(() => {
-    dispatch(getGoodsInfo(cookies));
+    dispatch(getGoodsInfo(cookies.auth));
   }, [cookies, dispatch]);
 
   return (
