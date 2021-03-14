@@ -67,8 +67,8 @@ function App() {
         <Route path="/shop/mypage/desination/modify_form?:dtn_id" component={MyDestinationModify} />
         <Route path="/shop/mypage/desination/modify_form" component={MyDestinationModify} />
         <Route path="/shop/member/" component={MyInfoPage} />
-        <Route Path="/shop/goods/event" component={ThisWeekEvent} />
         <Route path="/kakao/destination" component={SearchLocation} />
+        <Route Path="/shop/goods/event" component={ThisWeekEvent} />
         <Route component={NotFoundPage} />
       </Switch>
       {window.location.pathname !== '/kakao/destination' ? <Sidebar /> : null}
