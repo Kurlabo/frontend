@@ -48,7 +48,6 @@ function App() {
         <Route path="/shop/goods/goods_view/:productId" component={ItemDetailPage} />
         <Route path="/shop/goods/item_list/:category:page" component={ItemListPage} />
         <Route path="/shop/goods/theme_list/:theme" component={ThemeProductListPage} />
-        <Route Path="/shop/goods/event" component={ThisWeekEvent} />
         <Route path="/order/paycomplete/:ordno" component={PayComplete} />
         <Route path="/order" component={OrderPage} />
         <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />
@@ -68,6 +67,7 @@ function App() {
         <Route path="/shop/mypage/desination/modify_form?:dtn_id" component={MyDestinationModify} />
         <Route path="/shop/mypage/desination/modify_form" component={MyDestinationModify} />
         <Route path="/shop/member/" component={MyInfoPage} />
+        <Route Path="/shop/goods/event" component={ThisWeekEvent} />
         <Route path="/kakao/destination" component={SearchLocation} />
         <Route component={NotFoundPage} />
       </Switch>

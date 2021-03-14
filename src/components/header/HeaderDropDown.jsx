@@ -11,13 +11,13 @@ const HeaderDropDown = () => {
         <Link to="/shop/customer/board">공지사항</Link>
       </li>
       <li className="mb-2">
-        <Link to="/">자주하는 질문</Link>
+        <Link to="/shop/customer/board">자주하는 질문</Link>
       </li>
       <li className="mb-2">
-        <Link to="/">1:1 문의</Link>
+        <Link to="/shop/customer/board">1:1 문의</Link>
       </li>
       <li className="mb-2">
-        <Link to="/">상품 제안</Link>
+        <Link to="/shop/customer/board/get_support_writing">1:1 글쓰기</Link>
       </li>
       <li className="mb-2">
         <Link to="/shop/mypage/mypage_orderlist">마이컬리</Link>
