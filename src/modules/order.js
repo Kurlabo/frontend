@@ -13,10 +13,14 @@ export const getOrderInfoSuccess = createAction(GET_ORDER_INFO_SUCCESS, res => r
 export const getOrderInfoFail = createAction(GET_ORDER_INFO_FAIL, error => error);
 export const selectCheckoutMethod = createAction(SELECT_CHECKOUT_METHOD, checkout => checkout);
 
-export const getOrderInfo = () => async dispatch => {
+export const getOrderInfo = cookies => async dispatch => {
   try {
     dispatch(getLoading());
-    const res = await axios.get('http://3.35.221.9:8080/api/order/orderSheet');
+    const res = await axios.get('http://3.35.221.9:8080/api/order/orderSheet', {
+      headers: {
+        Authorization: `Bearer ${cookies}`,
+      },
+    });
     const orderInfo = res.data;
     setTimeout(() => {
       dispatch(getOrderInfoSuccess(orderInfo));
