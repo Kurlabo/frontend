@@ -6,6 +6,7 @@ import axios from '../../../node_modules/axios/index';
 import { getPayCompleteInfo } from '../../modules/paycomplete';
 import AgreeModal from './AgreeModal';
 import { wrapper } from './Coupon';
+import { useCookies } from 'react-cookie';
 
 const payButton =
   'w-r-24.2 h-r-5.5 bg-kp-600 text-white text-1.6 flex justify-center rounded-p-3 mx-auto';
@@ -15,6 +16,7 @@ const PayButton = ({ agreeCheck, history, deliveryInfo, orders_id }) => {
   const checkout = useSelector(state => state.orderInfo.checkoutMethod);
   const products_list = useSelector(state => state.orderInfo.orderInfo.products_list);
   const dispatch = useDispatch();
+  const [cookies] = useCookies(['auth']);
 
   let reciever_visit_method = '';
   let total_discount_price = 0;
@@ -59,22 +61,29 @@ const PayButton = ({ agreeCheck, history, deliveryInfo, orders_id }) => {
       break;
   }
 
-  const onClickPayButton = async () => {
+  const onClickPayButton = async cookies => {
     if (agreeCheck) setIsopen(true);
     else {
       setIsopen(false);
-      const res = await axios.post('http://3.35.221.9:8080/api/order/checkout', {
-        reciever: deliveryInfo.receiver,
-        reciever_phone: deliveryInfo.phone,
-        reciever_post: deliveryInfo.address,
-        reciever_place: deliveryInfo.deliveryPlace,
-        reciever_visit_method: reciever_visit_method,
-        arrived_alarm: deliveryInfo.deliveryMsg,
-        checkout: checkout,
-        total_price: total_price,
-        total_discount_price: total_discount_price,
-      });
-
+      const res = await axios.post(
+        'http://3.35.221.9:8080/api/order/checkout',
+        {
+          reciever: deliveryInfo.receiver,
+          reciever_phone: deliveryInfo.phone,
+          reciever_post: deliveryInfo.address,
+          reciever_place: deliveryInfo.deliveryPlace,
+          reciever_visit_method: reciever_visit_method,
+          arrived_alarm: deliveryInfo.deliveryMsg,
+          checkout: checkout,
+          total_price: total_price,
+          total_discount_price: total_discount_price,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${cookies}`,
+          },
+        },
+      );
       if (res.data === 'CHECKOUT SUCCESS') {
         history.push(`/order/paycomplete/${orders_id}`);
         dispatch(getPayCompleteInfo(orders_id));
@@ -85,7 +94,12 @@ const PayButton = ({ agreeCheck, history, deliveryInfo, orders_id }) => {
   return (
     <div className={`${wrapper} absolute transform translate-y-r-130`}>
       <div className={payButton}>
-        <button className="focus:outline-0 px-36 py-4" onClick={onClickPayButton}>
+        <button
+          className="focus:outline-0 px-36 py-4"
+          onClick={() => {
+            onClickPayButton(cookies.auth);
+          }}
+        >
           결제하기
         </button>
       </div>
