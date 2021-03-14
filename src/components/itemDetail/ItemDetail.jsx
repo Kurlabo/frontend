@@ -124,7 +124,7 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
         encodeURIComponent(JSON.stringify(value)) +
         '; max-age=3600';
     };
-  }, [dispatch, existingValue, itemDetail.list_image_url, productId, itemDetail]);
+  }, [dispatch, existingValue, itemDetail, itemDetail.list_image_url, productId]);
 
   return (
     <div>

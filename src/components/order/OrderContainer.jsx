@@ -23,12 +23,13 @@ const OrderContainer = () => {
   const orderInfo = useSelector(state => state.orderInfo.orderInfo);
   const products_list = useSelector(state => state.orderInfo.orderInfo.products_list);
   const isLoading = useSelector(state => state.orderInfo.loading);
-  useEffect(() => {
-    dispatch(getOrderInfo());
-  }, [dispatch]);
-
   const history = useHistory();
   const [cookies] = useCookies(['auth']);
+
+  useEffect(() => {
+    dispatch(getOrderInfo(cookies.auth));
+  }, [cookies.auth, dispatch]);
+
   if (cookies.auth === undefined) {
     history.push('/shop/account/signin');
   }

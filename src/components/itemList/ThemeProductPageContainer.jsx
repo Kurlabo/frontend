@@ -16,8 +16,6 @@ const ThemeProductPageContainer = ({ totalPage, location }) => {
   const categoryNo = params.theme.split('=')[1];
   const currentPage = location.search.split('=')[1];
   let pageNationPage = Math.floor((currentPage - 1) / 5);
-  console.log(pageNationPage);
-
   return (
     <div className="text-gray-900 text-xl   border border-gray-300 inline-block">
       <Link

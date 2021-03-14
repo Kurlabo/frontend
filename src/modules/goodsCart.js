@@ -57,7 +57,7 @@ export const getGoodsInfo = cookies => async dispatch => {
   try {
     const res = await axios.get('http://3.35.221.9:8080/api/goods/goods_cart', {
       headers: {
-        Authorization: 'Bearer ' + cookies.auth,
+        Authorization: 'Bearer ' + cookies,
       },
     });
     // cart state에 들어갈 추가정보인 select,productTotalPrices를 넣어준다.
@@ -84,7 +84,7 @@ export const requestForModificationGoodsAmount = (
       },
       {
         headers: {
-          Authorization: 'Bearer ' + cookies.auth,
+          Authorization: 'Bearer ' + cookies,
         },
       },
     );
@@ -105,7 +105,7 @@ export const requestServerToDeleteProducInfo = (product_id, goods, cookies) => a
       },
       {
         headers: {
-          Authorization: 'Bearer ' + cookies.auth,
+          Authorization: 'Bearer ' + cookies,
         },
       },
     );

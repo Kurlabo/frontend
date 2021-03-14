@@ -43,6 +43,15 @@ Please read [CONTRIBUTING.md](https://github.com/Kurlabo/frontend/blob/develop/C
 
 - **김어진**
 
+  <details>
+      <summary>작업 내용</summary>
+      <div>
+          <br/>
+          - 메인페이지, 장바구니 페이지 UI, API 작업<br/><br/>
+          - 기획, coding convention 작성,<br/><br/>
+         </div>
+  </details>
+
 - **박상언** _-PM-_
 
   <details>
@@ -86,11 +95,14 @@ Please read [CONTRIBUTING.md](https://github.com/Kurlabo/frontend/blob/develop/C
     <div>
         <br/>
         - 메인 페이지 헤더 UI 구현.<br/><br/>
+        - 배송지 검색 DAUM API 사용하여 구현.<br/><br/>
         - 카테고리 별 상품리스트 페이지 UI 구현 및 라우팅 처리.<br/><br/>
         - 신상품, 베스트, 알뜰쇼핑 페이지 UI 구현 및 라우팅 처리.<br/><br/>
+        - 카테고리, 신상품, 베스트, 알뜰쇼핑 페이지네이션 구현.<br/><br/>
         - 주문하기 페이지, 장바구니 모달창 UI 구현.<br/><br/>
+        - 주문서 페이지 API 요청 기능 구현.
+        - 금주혜택 페이지 구현.
         - API 연동하여 상품 렌더링 기능 구현.<br/><br/>
-        - daum API 연동하여 배송지 검색기능 구현.<br/><br/>
         - documentation 작성.
        </div>
   </details>
