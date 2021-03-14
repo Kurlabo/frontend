@@ -15,13 +15,6 @@ function getCookie(name) {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-// api header
-const config = {
-  headers: {
-    Authorization: 'Bearer ' + getCookie('auth'),
-  },
-};
-
 // style class
 const addReviewBtn =
   'text-white bg-klp-600 w-52 my-1 pt-r-0.6 h-14 text-1.3 text-center hover:bg-white hover:text-kp-600 border border-kp-600 cursor-pointer select-none';
@@ -44,6 +37,12 @@ const GoodsReview = ({ history, reviews, name, product_id }) => {
   };
 
   useEffect(() => {
+    // api header
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + getCookie('auth'),
+      },
+    };
     dispatch(getWritableReviews({ product_id, config }));
   }, [dispatch, product_id]);
 

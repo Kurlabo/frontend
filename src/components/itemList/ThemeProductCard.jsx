@@ -64,6 +64,7 @@ const ThemeProductCard = ({
         originalPrice={+originalPrice}
         discounted_price={+discounted_price}
         discount_percent={+discount_percent}
+        product_id={product_id}
       />
     </>
   );

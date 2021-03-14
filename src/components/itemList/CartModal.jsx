@@ -3,7 +3,6 @@ import Modal from 'react-modal';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
-import WishListLoginModal from '../itemDetail/detail/WishListLoginModal';
 import CheckQuantityModal from './CheckQuantityModal';
 
 const quanWrapper =
@@ -11,9 +10,9 @@ const quanWrapper =
 const accum =
   'inline-block text-center text-white bg-yellow-400 border-yellow-500 border border-solid w-p-38 h-8 rounded-2xl text-lg mr-2  align-text-bottom';
 const btnStyle =
-  'border-gray-400 border borders-solid text-3xl rounded-p-3 w-full text-gray-900 pt-8 pb-8 mr-4 rounded-md box-border focus:outline-0';
+  'border-gray-400 border borders-solid text-r-1.6 rounded-p-3 w-full text-gray-900 py-6 mr-4 rounded-md box-border focus:outline-0';
 const btnStyleP =
-  'border-gray-400 border borders-solid text-3xl rounded-p-3 w-full bg-kp-600 text-white pt-8 pb-8 rounded-md box-border focus:outline-0';
+  'border-gray-400 border borders-solid text-r-1.6 rounded-p-3 w-full bg-kp-600 text-white py-6 rounded-md box-border focus:outline-0';
 const sumWrapper = 'text-p-16 flex justify-between text-gray-800';
 const priceWrapper = 'flex justify-between pt-3 pb-28 ';
 
@@ -65,7 +64,6 @@ const CartModal = ({
 }) => {
   const [count, setCount] = useState(1);
   const [checkQuantity, setCheckQuantity] = useState(false);
-  const [iswishListModalOpen, setIsWishListModalOpen] = useState(false);
 
   // 로그인 유무 받아와야됨
   const isLogin = getCookie('auth') !== undefined;
@@ -88,8 +86,12 @@ const CartModal = ({
       return;
     }
     if (!isLogin) {
-      setIsWishListModalOpen(true);
-      closeModal();
+      let result = window.confirm(
+        '회원 전용 서비스입니다. 로그인/회원가입 페이지로 이동하시겠습니까?',
+      );
+      if (result) {
+        history.push('/shop/account/signin');
+      }
       return;
     }
     onPopUp.current = true;
@@ -105,12 +107,7 @@ const CartModal = ({
     setTimeout(() => {
       onPopUp.current = false;
     }, 3000);
-  }, [count, dispatch, isLogin, product_id, onPopUp, closeModal]);
-
-  const closeWishListModal = useCallback(() => {
-    setIsWishListModalOpen(false);
-    history.push('/shop/account/signin');
-  }, [history]);
+  }, [count, dispatch, isLogin, product_id, history, onPopUp, closeModal]);
 
   return (
     <>
@@ -121,7 +118,7 @@ const CartModal = ({
         contentLabel="회원가입"
         ariaHideApp={false}
       >
-        <h1 className="text-2xl ">{productName}</h1>
+        <h1 className="text-2xl">{productName}</h1>
         <div className={priceWrapper}>
           <div>
             <div className="inline-block text-2xl font-bold pt-2">
@@ -164,7 +161,6 @@ const CartModal = ({
           </button>
         </form>
       </Modal>
-      <WishListLoginModal openModal={iswishListModalOpen} closeModal={closeWishListModal} />
       {checkQuantity && <CheckQuantityModal checkQuantity={checkQuantity} close={close} />}
     </>
   );

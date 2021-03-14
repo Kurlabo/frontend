@@ -66,6 +66,15 @@ Please read [CONTRIBUTING.md](https://github.com/Kurlabo/frontend/blob/develop/C
   </details>
 
 - **백나라**
+  <details>
+    <summary>작업 내용</summary>
+    <div>
+        <br/>
+        - 상품 상세 페이지 UI 구현<br/><br/>
+        - 고객센터 페이지 UI 구현<br/><br/>
+        - API 연동하여 상품 정보 렌더, 연관 상품 캐러셀 렌더, 늘 사는 것에 상품 추가, 장바구니에 상품 추가, 상품 리뷰 작성 구현<br/><br/>
+       </div>
+  </details>
 
 - **정세영**
 
