@@ -43,6 +43,15 @@ Please read [CONTRIBUTING.md](https://github.com/Kurlabo/frontend/blob/develop/C
 
 - **김어진**
 
+  <details>
+      <summary>작업 내용</summary>
+      <div>
+          <br/>
+          - 메인페이지, 장바구니 페이지 UI, API 작업<br/><br/>
+          - 기획, coding convention 작성,<br/><br/>
+         </div>
+  </details>
+
 - **박상언** _-PM-_
 
   <details>
