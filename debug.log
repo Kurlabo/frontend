@@ -1,1 +1,0 @@
-[0220/095852.086:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\solan\AppData\Local\Google\Chrome\User Data\Crashpad\reports\b18da1f3-4f8e-4da5-8886-aac8d69e4738.dmp: 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다. (0x20)
