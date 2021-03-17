@@ -15,6 +15,7 @@ import {
 import { getProductInfo } from '../../modules/itemDetail';
 import MyWishListItem from './MyWishListItem';
 import { withRouter } from 'react-router-dom';
+import { useCookies, withCookies } from 'react-cookie';
 
 const MyWishList = () => {
   return (
@@ -36,7 +37,9 @@ const MyWishListBlock = withRouter(({ history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    QueryString ? dispatch(getWishItems(QueryString)) : dispatch(getWishItems());
+    QueryString
+      ? dispatch(getWishItems(QueryString, cookieAuth))
+      : dispatch(getWishItems('?page=0', cookieAuth));
   }, [QueryString]);
 
   const [cartItem, setCartItem] = useState({
@@ -48,7 +51,8 @@ const MyWishListBlock = withRouter(({ history }) => {
   });
 
   const { product_id, name, original_price, discounted_price, discount_percent } = cartItem;
-
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const cookieAuth = cookies.auth;
   return (
     <div className="float-left align-middle w-r-85 h-full mt-20 mb-6 px-12 pb-32 box-border">
       <h1 className="a11y-hidden">배송지 확인</h1>
@@ -125,7 +129,13 @@ const MyWishListBlock = withRouter(({ history }) => {
   }
 
   function removeWishItem(e) {
-    dispatch(deleteWishItem(!QueryString ? '?page=0' : QueryString, [+e.target.id.split('_')[1]]));
+    dispatch(
+      deleteWishItem(
+        !QueryString ? '?page=0' : QueryString,
+        [+e.target.id.split('_')[1]],
+        cookieAuth,
+      ),
+    );
   }
   function closeCartModal() {
     setmodalIsOpen(false);
@@ -144,7 +154,7 @@ const MyWishListBlock = withRouter(({ history }) => {
     }
   }
   function deleteChecked() {
-    dispatch(deleteWishItem(!QueryString ? '?page=0' : QueryString));
+    dispatch(deleteWishItem(!QueryString ? '?page=0' : QueryString, '', cookieAuth));
   }
 });
-export default withRouter(MyWishList);
+export default withRouter(withCookies(MyWishList));

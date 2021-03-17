@@ -49,7 +49,7 @@ function App() {
         <Route path="/shop/goods/goods_view/:productId" component={ItemDetailPage} />
         <Route path="/shop/goods/item_list/:category:page" component={ItemListPage} />
         <Route path="/shop/goods/theme_list/:theme" component={ThemeProductListPage} />
-        <Route path="/shop/goods/event" component={WeekEvent} />
+        {/* <Route path="/shop/goods/event" component={WeekEvent} /> */}
         <Route path="/order/paycomplete/:ordno" component={PayComplete} />
         <Route path="/order" component={OrderPage} />
         <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />
@@ -68,9 +68,9 @@ function App() {
         <Route path="/shop/mypage/kurlypass" component={KurlyPassPage} />
         <Route path="/shop/mypage/desination/modify_form?:dtn_id" component={MyDestinationModify} />
         <Route path="/shop/mypage/desination/modify_form" component={MyDestinationModify} />
-        <Route Path="/shop/event" component={ThisWeekEvent} />
         <Route path="/shop/member/" component={MyInfoPage} />
         <Route path="/kakao/destination" component={SearchLocation} />
+        <Route Path="/shop/goods/event" component={ThisWeekEvent} />
         <Route component={NotFoundPage} />
       </Switch>
       {window.location.pathname !== '/kakao/destination' ? <Sidebar /> : null}
