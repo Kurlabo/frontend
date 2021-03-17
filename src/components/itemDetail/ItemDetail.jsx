@@ -12,6 +12,7 @@ import WishListLoginModal from './detail/WishListLoginModal';
 import { withRouter } from 'react-router';
 import { postWishList, setModuleMsg, setModuleMsgEmpty } from '../../modules/itemDetail';
 import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
+import { setRecent } from '../../modules/recentItem';
 
 // name에 맞는 쿠키 가져오는 함수
 function getCookie(name) {
@@ -20,13 +21,6 @@ function getCookie(name) {
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
-
-// api header
-const config = {
-  headers: {
-    Authorization: 'Bearer ' + getCookie('auth'),
-  },
-};
 
 const ItemDetail = ({ itemDetail, history, productId }) => {
   const dispatch = useDispatch();
@@ -42,7 +36,20 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
   const name = 'recentlyViewed';
   const existingValue = getCookie(name);
 
+  const saveView = ({ product_id, name, original_image_url }) => ({
+    product_id,
+    name,
+    original_image_url,
+  });
+
   const onClickAddCart = useCallback(() => {
+    // api header
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + getCookie('auth'),
+      },
+    };
+
     if (onPopUp.current) return;
     if (count < 1) {
       dispatch(setModuleMsg('수량은 반드시 1 이상이어야 합니다.'));
@@ -70,6 +77,12 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
   }, [dispatch]);
 
   const onClickWishList = useCallback(() => {
+    // api header
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + getCookie('auth'),
+      },
+    };
     if (!isLogin) {
       setIsWishListModalOpen(true);
       return;
@@ -96,6 +109,7 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
 
   useEffect(() => {
     dispatch(setCartCount(1));
+    dispatch(setRecent(saveView(itemDetail)));
 
     return () => {
       let value = existingValue ? [...JSON.parse(existingValue)] : [];
@@ -110,7 +124,7 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
         encodeURIComponent(JSON.stringify(value)) +
         '; max-age=3600';
     };
-  }, [dispatch, existingValue, itemDetail.list_image_url, productId]);
+  }, [dispatch, existingValue, itemDetail, itemDetail.list_image_url, productId]);
 
   return (
     <div>
@@ -140,4 +154,4 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
     </div>
   );
 };
-export default withRouter(ItemDetail);
+export default React.memo(withRouter(ItemDetail));

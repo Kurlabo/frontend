@@ -116,7 +116,6 @@ const BigCarousel = () => {
       }
     }, 3000);
     return () => {
-      console.log('clearInterval');
       clearInterval(timerId);
     };
   }, [isStop, stopButton]);

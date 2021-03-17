@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import axios from '../../../node_modules/axios/index';
 import CheckBox from './CheckBox';
@@ -27,11 +28,13 @@ const Signup = ({ signUpStart }) => {
   const [validPass3, setValidPass3] = useState(false);
   const [validRePass, setValidRePass] = useState(false);
 
-  const [gender, setGender] = useState('none');
+  const [gender, setGender] = useState('선택안함');
 
   const [emailValue, setEmailValue] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
   const [checkOverLapEmail, setCheckOverLapEmail] = useState(false);
+
+  const [addr, setAddr] = useState(false);
 
   const [allagree, setAllAgree] = useState(false);
   const [agree1, setAgree1] = useState(false);
@@ -116,13 +119,33 @@ const Signup = ({ signUpStart }) => {
                 주소<span className="text-formStar">*</span>
               </th>
               <td className="py-4">
-                <SignupButton big={true}>
-                  <FiSearch className="inline-block" />
-                  주소검색
-                </SignupButton>
+                {!addr ? (
+                  <SignupButton big={true} onClick={openSearch}>
+                    <FiSearch className="inline-block" />
+                    주소검색
+                  </SignupButton>
+                ) : (
+                  <>
+                    <input
+                      name="address"
+                      className={`${regInput} mb-r-1.1`}
+                      value={addr}
+                      readOnly
+                    />{' '}
+                    <br />
+                    <input name="addressDetail" className={regInput} />
+                  </>
+                )}
                 <p className={subText}>배송지에 따라 상품 정보가 달라질 수 있습니다.</p>
               </td>
-              <td></td>
+              <td className="align-top pt-4">
+                {addr && (
+                  <SignupButton onClick={openSearch} className="-mt-p-2">
+                    <FiSearch className="inline-block" />
+                    재검색
+                  </SignupButton>
+                )}
+              </td>
             </tr>
             <tr>
               <th className={regTitle}>
@@ -285,6 +308,7 @@ const Signup = ({ signUpStart }) => {
       validPass2,
       validPass3,
       validRePass,
+      addr,
       agree1,
       agree2,
       age,
@@ -297,18 +321,20 @@ const Signup = ({ signUpStart }) => {
       name: '',
       gender: '',
       date_of_birth: '',
-      address: '서울시 은평구 은평동 은평아파트 111동 1111호',
+      address: `${addr}`,
     };
     const formData = new FormData(formRef.current);
     for (let [key, value] of formData) {
-      if (!value) {
+      if (!value && key !== 'addressDetail') {
         setSignup(true);
         setModalValue(key);
         return false;
       }
       if (key === 'birthY' || key === 'birthM' || key === 'birthD')
         newUser['date_of_birth'] += key === 'birthY' ? value : `-${value}`;
-      else newUser[key] = value;
+      else if (key === 'addressDetail') {
+        newUser.address = `${newUser.address} ${value}`;
+      } else newUser[key] = value;
     }
     for (let i = 0; i < valid.length; i++) {
       if (!valid[i]) {
@@ -324,17 +350,21 @@ const Signup = ({ signUpStart }) => {
         } else if (i === 5) {
           setSignup(true);
           setModalValue('동일한 비밀번호 입력해 주세요');
-        } else if (i > 5 && i < 8) {
+        } else if (i === 6) {
+          setSignup(true);
+          setModalValue('주소를 입력해 주세요');
+        } else if (i > 6 && i < 9) {
           setSignup(true);
           setModalValue('필수사항을 체크해 주세요');
-        } else if (i === 8) {
+        } else if (i === 9) {
           setSignup(true);
           setModalValue('14세 이상 항목을 체크해 주세요');
         }
+        return false;
       }
     }
     signUpStart(newUser);
-    // console.log(newUser);
+    console.log(newUser);
   }
   function checkPhone(e) {
     const { value } = e.target;
@@ -359,6 +389,19 @@ const Signup = ({ signUpStart }) => {
   }
   function closeModal() {
     setSignup(false);
+  }
+  function openSearch() {
+    const width = 500;
+    const height = 400;
+    new daum.Postcode({
+      oncomplete: function (data) {
+        const addr = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
+        setAddr(addr);
+      },
+    }).open({
+      left: Math.ceil((window.screen.width - width) / 2),
+      top: Math.ceil((window.screen.height - height) / 2),
+    });
   }
 };
 export default Signup;

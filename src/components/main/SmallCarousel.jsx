@@ -17,6 +17,7 @@ const SmallCarousel = ({ title, subtitle, bgGray, mdSuggest }) => {
   const prevButtonRef = useRef(null);
   const nextButtonRef = useRef(null);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const imgArr = [];
 
   addCarouselInfoToArray('howAbout', '이 상품 어때요?');

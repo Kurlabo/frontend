@@ -193,4 +193,4 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList, isLogin }) 
     e.target.src = '/img/commingsoonresize.png';
   }
 };
-export default PurchaseInfo;
+export default React.memo(PurchaseInfo);

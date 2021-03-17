@@ -35,4 +35,4 @@ const ItemDetailContainer = ({ match }) => {
   );
 };
 
-export default withRouter(ItemDetailContainer);
+export default React.memo(withRouter(ItemDetailContainer));

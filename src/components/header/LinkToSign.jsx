@@ -19,7 +19,7 @@ const LinkToSign = () => {
     customerService: false,
   });
   const { loginService, customerService } = dropMenu;
-  const listShow = useSelector(state => state.login.listShow);
+
   const dispatch = useDispatch();
   useEffect(() => {
     // setDrop({
@@ -30,7 +30,8 @@ const LinkToSign = () => {
       dispatch(getLoginMember(cookieToken));
     } else {
     }
-  }, [cookieToken]);
+  }, [cookieToken, authToken, dispatch]);
+
   return (
     <div className={signWrapper}>
       <Link to="/">
@@ -91,9 +92,9 @@ const LinkToSign = () => {
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
           >
-            <NavLink to="" className="px-3 inline-block">
+            <Link to="" className="px-3 inline-block">
               고객센터
-            </NavLink>
+            </Link>
             <GoTriangleDown className="inline-block cursor-pointer" />
             {customerService && <HeaderDropDown />}
           </li>
