@@ -25,30 +25,19 @@ const MyReviewBlock = () => {
   const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [tabView, setTabView] = useState('viewBeforeList');
   const dispatch = useDispatch();
-  const [cartItem, setCartItem] = useState({
-    product_id: '',
-    name: '',
-    original_price: 0,
-    discounted_price: 0,
-    discount_percent: 0,
-  });
 
-  const { product_id, name, original_price, discounted_price, discount_percent } = cartItem;
-  const [cookies, setCookie, removeCookie] = useCookies(['auh']);
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
   const authToken = cookies.auth;
   // const  = useSelector(state => state.review.data);
-  const { itemDetail } = useSelector(({ itemDetail }) => ({
-    itemDetail: itemDetail.info,
-  }));
-  useEffect(() => {
-    dispatch(getReviewList('viewBeforeList', authToken));
-    dispatch(getReviewList('viewAfterList', authToken));
-  });
+  const itemDetail = useSelector(state => state.itemDetail.info);
 
   const { viewBeforeList: canWriteReview, viewAfterList: writtenReview } = useSelector(
     state => state.review.data,
   );
-
+  useEffect(() => {
+    dispatch(getReviewList('viewBeforeList', authToken));
+    dispatch(getReviewList('viewAfterList', authToken));
+  }, [canWriteReview, writtenReview]);
   return (
     <div className="float-left align-middle w-r-85 h-full mt-20 mb-6 px-12 pb-32 box-border">
       <h1 className="a11y-hidden">작성 가능한 후기 보기 및 내가 쓴 후기 보기 </h1>
@@ -103,32 +92,21 @@ const MyReviewBlock = () => {
         </div>
         {tabView === 'viewBeforeList' ? <WriteReview onClick={openCartModal} /> : <WrittenReview />}
       </div>
-      <CartModal
-        product_id={product_id}
+      {/* <CartModal
+        product_id={itemDetail.product_id}
         modalIsOpen={modalIsOpen}
         closeModal={closeCartModal}
-        productName={name}
-        originalPrice={original_price}
-        discounted_price={discounted_price}
-        discount_percent={discount_percent}
-      />
+        productName={itemDetail.name}
+        originalPrice={itemDetail.original_price}
+        discounted_price={itemDetail.discounted_price}
+        discount_percent={itemDetail.discount_percent}
+      /> */}
     </div>
   );
 
   function openCartModal(e) {
     const productId = +e.target.id.split('_')[1];
     dispatch(getProductInfo(productId));
-    // items.find(item => item.product_id === +e.target.id.split('_')[1]),
-    // const product_item = items.find(item => item.product_id === +e.target.id.split('_')[1]);
-    // const { product_id, name, original_price, discounted_price, discount_percent } = itemDetail;
-    // setCartItem({
-    //   ...cartItem,
-    //   product_id,
-    //   name,
-    //   original_price,
-    //   discounted_price,
-    //   discount_percent,
-    // });
     setmodalIsOpen(true);
     // dispatch(getProductInfo(product_id));
   }

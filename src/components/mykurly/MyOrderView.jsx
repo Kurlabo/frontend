@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MyKurlyHeader from './MyKurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
 import { HiOutlineChevronRight } from 'react-icons/hi';
-import { useParams } from 'react-router';
+import { useParams, withRouter } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOrderDetail, postInsertCart } from '../../modules/orderList';
 import CartModal from '../itemList/CartModal';
@@ -11,7 +11,7 @@ import MyOrderViewItem from './MyOrderViewItem';
 import Modalform from '../login/Modalform';
 import Modal from '../login/Modal';
 import { getProductInfo } from '../../modules/itemDetail';
-
+import { useCookies, withCookies } from 'react-cookie';
 const MyOrderView = () => {
   return (
     <>
@@ -24,7 +24,7 @@ const MyOrderView = () => {
   );
 };
 
-const MyOrderViewBlock = () => {
+const MyOrderViewBlock = withRouter(({ history }) => {
   const [modalIsOpen, setmodalIsOpen] = useState(false);
   const { orderNumber } = useParams();
   const ordno = orderNumber.split('=')[1];
@@ -32,8 +32,13 @@ const MyOrderViewBlock = () => {
   const postSuccess = useSelector(state => state.order.posts);
   const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const cookieAuth = cookies.auth;
   useEffect(() => {
-    dispatch(getOrderDetail(ordno));
+    if (!cookieAuth) {
+      history.push('/');
+    }
+    dispatch(getOrderDetail(ordno, cookieAuth));
   }, []);
 
   const [cartItem, setCartItem] = useState({
@@ -115,7 +120,7 @@ const MyOrderViewBlock = () => {
       discount_percent: checkout_price / reduced_price,
     });
     setmodalIsOpen(true);
-    dispatch(getProductInfo(product_id));
+    // dispatch(getProductInfo(product_id));
   }
 
   function closeCartModal() {
@@ -123,12 +128,12 @@ const MyOrderViewBlock = () => {
   }
   function insertCartItems() {
     const allItem = orderDetail.orderProducts.map(({ product_id, cnt }) => ({ product_id, cnt }));
-    dispatch(postInsertCart(allItem));
+    dispatch(postInsertCart(allItem, cookieAuth));
     setModal(true);
   }
   function closeModal() {
     setModal(false);
   }
-};
+});
 
-export default MyOrderView;
+export default withCookies(MyOrderView);

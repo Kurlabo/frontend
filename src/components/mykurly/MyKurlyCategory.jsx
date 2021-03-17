@@ -25,29 +25,31 @@ const MyKurlyCategory = () => {
       <section className="">
         <h2 className="text-5xl leading-none mt-20 mb-14">마이컬리</h2>
         <ul className="w-full ">
-          {category.map(list => (
-            <li className={`${myKurly_menu}`} key={list.id}>
-              <NavLink
-                to={list.path}
-                activeClassName="bg-kg-50 text-kp-600 font-medium"
-                className="text-right inline-block pl-10 pr-6 py-6 w-full "
-              >
-                {list.id === 4 ? (
-                  <span
-                    onClick={getReview}
-                    className="inline-block text-left w-48 mr-8 leading-none align-middle"
-                  >
-                    {list.name}
-                  </span>
-                ) : (
-                  <span className="inline-block text-left w-48 mr-8 leading-none align-middle">
-                    {list.name}
-                  </span>
-                )}
-                <FiChevronRight className="inline-block text-r-1.8 leading-none align-middle" />
-              </NavLink>
-            </li>
-          ))}
+          <>
+            {category.map(list => (
+              <li className={`${myKurly_menu}`} key={list.id}>
+                <NavLink
+                  to={list.path}
+                  activeClassName="bg-kg-50 text-kp-600 font-medium"
+                  className="text-right inline-block pl-10 pr-6 py-6 w-full "
+                >
+                  {list.id === 4 ? (
+                    <span
+                      onClick={getReview}
+                      className="inline-block text-left w-48 mr-8 leading-none align-middle"
+                    >
+                      {list.name}
+                    </span>
+                  ) : (
+                    <span className="inline-block text-left w-48 mr-8 leading-none align-middle">
+                      {list.name}
+                    </span>
+                  )}
+                  <FiChevronRight className="inline-block text-r-1.8 leading-none align-middle" />
+                </NavLink>
+              </li>
+            ))}
+          </>
         </ul>
         <div className="cursor-pointer w-80 py-4 pl-10 rounded-r-full bg-kg-100 my-8">
           <p className="inline-block align-middle">

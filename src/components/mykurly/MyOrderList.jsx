@@ -7,26 +7,32 @@ import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOrderItems } from '../../modules/orderList';
 import MyOrderListItem from './MyOrderListItem';
+import { useCookies, withCookies } from 'react-cookie';
+
 const MyOrderList = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const cookieAuth = cookies.auth;
   return (
     <>
       <MyKurlyHeader />
       <main className="container h-full box-content clear-fix">
         <MyKurlyCategory />
-        <MyOrderListBlock />
+        <MyOrderListBlock cookieAuth={cookieAuth} />
       </main>
     </>
   );
 };
 
-const MyOrderListBlock = withRouter(({ history }) => {
+const MyOrderListBlock = withRouter(({ history, cookieAuth }) => {
   const [open, setOpen] = useState(false);
   const orderList = useSelector(state => state.order.data);
   const dispatch = useDispatch();
   const QueryString = history.location.search;
 
   useEffect(() => {
-    QueryString ? dispatch(getOrderItems(QueryString)) : dispatch(getOrderItems());
+    QueryString
+      ? dispatch(getOrderItems(QueryString, cookieAuth))
+      : dispatch(getOrderItems('?page=0', cookieAuth));
   }, [QueryString]);
 
   return (
@@ -91,4 +97,4 @@ const MyOrderListBlock = withRouter(({ history }) => {
   }
 });
 
-export default MyOrderList;
+export default withCookies(MyOrderList);

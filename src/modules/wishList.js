@@ -21,20 +21,20 @@ export const setCheckedList = createAction(SET_CHECKED_LIST, (...id) => id);
 export const cancelCheckedList = createAction(CANCEL_CHECKED_ITEM, id => id);
 export const resetCheckedList = createAction(RESET_CHECKED_LIST);
 
-export const getWishItems = requestPage => async dispatch => {
+export const getWishItems = (requestPage, authToken) => async dispatch => {
   dispatch(getWishList()); // 요청이 시작됨
   try {
-    const wishlist = await wishAPI.getWishItems(requestPage); // API 호출
+    const wishlist = await wishAPI.getWishItems(requestPage, authToken); // API 호출
     dispatch(resSuccess(wishlist.data)); // 성공
   } catch (error) {
     dispatch(resFail(error)); // 실패
   }
 };
-export const deleteWishItem = (requestPage, id) => async (dispatch, getState) => {
+export const deleteWishItem = (requestPage, id, authToken) => async (dispatch, getState) => {
   dispatch(deleteWish());
   try {
     const checkedArray = getState().wish.checkedList;
-    const wishlist = await wishAPI.deleteWishItem(requestPage, id || checkedArray); //API 호출
+    const wishlist = await wishAPI.deleteWishItem(requestPage, id || checkedArray, authToken); //API 호출
     dispatch(resSuccess(wishlist.data)); //성공
   } catch (error) {
     dispatch(resFail(error)); //실패

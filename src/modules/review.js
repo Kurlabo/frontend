@@ -6,12 +6,9 @@ const GET_REVIEW_SUCCESS = 'review/GET_SUCCESS';
 const GET_REVIEW_FAIL = 'review/GET_FAIL';
 
 export const getReviewItem = createAction(GET_REVIEW_LIST);
-export const getReivewSuccess = createAction(GET_REVIEW_SUCCESS, (tabId, review) => {
-  console.log(tabId);
-  return {
-    [tabId]: review,
-  };
-});
+export const getReivewSuccess = createAction(GET_REVIEW_SUCCESS, (tabId, review) => ({
+  [tabId]: review,
+}));
 export const getReviewFail = createAction(GET_REVIEW_FAIL, error => error);
 
 export const getReviewList = (tabId, token) => async (dispatch, getState) => {
@@ -23,7 +20,11 @@ export const getReviewList = (tabId, token) => async (dispatch, getState) => {
             Authorization: `Bearer ${token}`,
           },
         })
-      : await axios.get('http://3.35.221.9:8080/api/mypage/written-reviews');
+      : await axios.get('http://3.35.221.9:8080/api/mypage/written-reviews', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
   try {
     dispatch(getReivewSuccess(tabId, res.data));
   } catch (error) {
@@ -42,7 +43,6 @@ const review = handleActions(
       loading: true,
     }),
     [GET_REVIEW_SUCCESS]: (state, { payload }) => {
-      console.log('페이로드2', payload);
       return {
         ...state,
         data: { ...state.data, ...payload },
