@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
-import { logoutAuthentication } from '../../modules/login';
+import { useCookies, withCookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
+import { getReviewList } from '../../modules/review';
+import { logoutAuthentication } from '../../modules/login';
 const listStyle =
   'absolute right-28 top-8 border-gray-200 border py-2 px-r-0.9 bg-white text-1.2 text-gray-700 z-900';
 
@@ -18,7 +19,7 @@ const MyKurlyDropDown = ({ onMouseOut }) => {
     { text: '로그아웃', url: '/shop/account/signin' },
   ];
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
-  const authToken = useSelector(state => state.login.data.token);
+  const loginInfo = useSelector(state => state.login.member);
   const dispatch = useDispatch();
   useEffect(() => {}, []);
   return (
@@ -26,6 +27,12 @@ const MyKurlyDropDown = ({ onMouseOut }) => {
       {linkTo.map((linkInfo, index) => {
         return index === 7 ? (
           <li onClick={setLogout} className="mb-2" key={`li_${index}`}>
+            <Link to={linkInfo.url} className="w-full inline-block h-full hover:text-kp-600">
+              {linkInfo.text}{' '}
+            </Link>
+          </li>
+        ) : index === 3 ? (
+          <li onClick={getReview} className="mb-2" key={`li_${index}`}>
             <Link to={linkInfo.url} className="w-full inline-block h-full hover:text-kp-600">
               {linkInfo.text}{' '}
             </Link>
@@ -41,9 +48,12 @@ const MyKurlyDropDown = ({ onMouseOut }) => {
     </ul>
   );
   function setLogout() {
-    // dispatch(logoutAuthentication(authToken));
     removeCookie('auth');
+    dispatch(logoutAuthentication(loginInfo.token));
+  }
+  function getReview() {
+    dispatch(getReviewList('viewBeforeList', loginInfo.token));
   }
 };
 
-export default MyKurlyDropDown;
+export default withCookies(MyKurlyDropDown);
