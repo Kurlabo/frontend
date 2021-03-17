@@ -8,7 +8,7 @@ import Modal from './Modal';
 import Title from './Title';
 import { Link, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginAuthentication } from '../../modules/login';
+import { loginAuthentication, setLogInAndOut } from '../../modules/login';
 import { useCookies } from 'react-cookie';
 
 export const LoginFormStyle = styled.div`
@@ -17,15 +17,17 @@ export const LoginFormStyle = styled.div`
   margin: 0 auto;
 `;
 
-const Login = ({ onSubmit, history }) => {
+const Login = ({ history }) => {
   const [login, setLogin] = useState(false);
-  const authToken = useSelector(state => state.login.data.token);
+  const loginInfo = useSelector(state => state.login.member);
+  const modalOpen = useSelector(state => state.login.modalOpen);
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
-  const authCookie = cookies.auth;
+  const cookieAuth = cookies.auth;
   const [user, setUser] = useState({
     u_id: '',
     u_password: '',
   });
+  const [modal, setModal] = useState(false);
   const [checked, setchecked] = useState(false);
 
   const { u_id, u_password } = user;
@@ -37,17 +39,11 @@ const Login = ({ onSubmit, history }) => {
     });
   }
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (authToken) {
-      setCookie('auth', authToken);
-      history.push('/');
-      console.log('토큰가져오기', authToken);
-    }
-  }, [authToken]);
+  useEffect(() => {}, []);
   return (
     <LoginFormStyle>
       <Title>로그인</Title>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmitCheckLogin}>
         <Input
           name="u_id"
           onChange={onChange}
@@ -82,23 +78,26 @@ const Login = ({ onSubmit, history }) => {
       <Button form="signout" as={Link} to="/shop/account/signup">
         회원가입
       </Button>
-      {login ? (
+      {modalOpen && (
         <Modalform id="modal">
-          <Modal closeModal={closeModal} modal={login} value="아이디와 비밀번호를 확인해주세요" />
+          <Modal closeModal={closeModal} modal={modal} value="아이디와 비밀번호를 확인해주세요" />
         </Modalform>
-      ) : (
-        ''
       )}
     </LoginFormStyle>
   );
+  function onSubmitCheckLogin(e) {
+    e.preventDefault();
+  }
   function loginCheck() {
     dispatch(loginAuthentication(user));
+    setModal(true);
   }
   function onClickCheckBox() {
     setchecked(!checked);
   }
   function closeModal() {
-    setLogin(false);
+    dispatch(setLogInAndOut());
+    setModal(false);
   }
 };
 
