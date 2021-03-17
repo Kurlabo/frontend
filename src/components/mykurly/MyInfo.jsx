@@ -39,7 +39,10 @@ const MyInfo = () => {
   );
 
   function closeModal() {
-    // dispatch({});
+    setConfirm({
+      ...confirm,
+      modal: false,
+    });
   }
 };
 
