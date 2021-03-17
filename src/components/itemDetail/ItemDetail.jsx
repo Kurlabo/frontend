@@ -154,4 +154,4 @@ const ItemDetail = ({ itemDetail, history, productId }) => {
     </div>
   );
 };
-export default withRouter(ItemDetail);
+export default React.memo(withRouter(ItemDetail));
