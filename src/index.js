@@ -13,6 +13,7 @@ import ErrorPage from './pages/ErrorPage';
 import ReduxThunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
+import { CookiesProvider } from 'react-cookie';
 
 const history = createBrowserHistory();
 const sagaMiddleWare = createSagaMiddleware();
@@ -21,17 +22,18 @@ const store = createStore(
   rootReducer(history),
   composeWithDevTools(applyMiddleware(routerMiddleware(history), ReduxThunk, sagaMiddleWare)),
 );
-
 sagaMiddleWare.run(rootSaga);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <ErrorBoundary FallbackComponent={ErrorPage}>
-      <ConnectedRouter history={history}>
-        <App />
-      </ConnectedRouter>
-    </ErrorBoundary>
-  </Provider>,
+  <CookiesProvider>
+    <Provider store={store}>
+      <ErrorBoundary FallbackComponent={ErrorPage}>
+        <ConnectedRouter history={history}>
+          <App />
+        </ConnectedRouter>
+      </ErrorBoundary>
+    </Provider>
+  </CookiesProvider>,
   document.getElementById('root'),
 );
 

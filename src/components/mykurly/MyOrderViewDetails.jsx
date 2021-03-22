@@ -12,9 +12,7 @@ const MyOrderViewDetails = ({ orderDetail, ordno }) => {
         <h3 className={`${detailTitle}`}>결제 정보</h3>
         <dl className="text-r-1.6 py-4 text-kg-350 leading-r-5 border-b border-kg-80">
           <dt className="inline-block w-4/5 text-kg-350">상품금액</dt>
-          <dd className="inline-block w-1/5 text-right text-kg-400">
-            {orderDetail.product_total_price_str}원
-          </dd>
+          <dd className="inline-block w-1/5 text-right text-kg-400">{orderDetail.checkout()}원</dd>
           <dt className="inline-block w-4/5 text-kg-350">배송비</dt>
           <dd className="inline-block w-1/5 text-right text-kg-400">
             {orderDetail.delivery_cost}원
@@ -27,7 +25,7 @@ const MyOrderViewDetails = ({ orderDetail, ordno }) => {
             <dd className="inline-block w-1/5 text-right text-kg-400">4,600원</dd> */}
           <dt className="inline-block w-4/5 text-kg-350">결제금액</dt>
           <dd className="inline-block w-1/5 text-right text-kg-400 font-medium">
-            {orderDetail.checkout()}
+            {orderDetail.checkout_total_price_str}원
           </dd>
           {/* <dt className="inline-block w-4/5 text-kg-350">적립예정금액</dt>
             <dd className="inline-block w-1/5 text-right text-kg-400">100원</dd> */}

@@ -4,29 +4,34 @@ import { GoTriangleDown } from 'react-icons/go';
 import HeaderDropDown from './HeaderDropDown';
 import MyKurlyDropDown from './MyKurlyDropDown';
 import { useSelector, useDispatch } from 'react-redux';
-import { useCookies } from 'react-cookie';
+import { useCookies, withCookies } from 'react-cookie';
 import { getLoginMember } from '../../modules/login';
 
 const signWrapper = 'relative w-p-1050 flex justify-between items-center mx-auto mt-2 text-r-1.2';
 
 const LinkToSign = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
-  const authToken = cookies.auth;
-  const { grade, name, cartCnt } = useSelector(state => state.login.member);
+  const loginInfo = useSelector(state => state.login.member);
+  const authToken = useSelector(state => state.login.data.token);
+  const error = useSelector(state => state.login.error);
+  const cookieAuth = cookies.auth;
   const [dropMenu, setDrop] = useState({
     loginService: false,
     customerService: false,
   });
-  const state = useSelector(state => state);
+  const { loginService, customerService } = dropMenu;
 
   const dispatch = useDispatch();
   useEffect(() => {
-    if (authToken) {
-      dispatch(getLoginMember(authToken));
+    // setDrop({
+    //   loginService: false,
+    //   customerService: false,
+    // });
+    if (cookieAuth) {
+      dispatch(getLoginMember(cookieAuth));
     }
-  }, [authToken, dispatch]);
+  }, [cookieAuth, error, authToken, dispatch]);
 
-  const { loginService, customerService } = dropMenu;
   return (
     <div className={signWrapper}>
       <Link to="/">
@@ -39,7 +44,7 @@ const LinkToSign = () => {
       <nav>
         <ul>
           <li className="inline-block text-kp-600">
-            {!authToken ? (
+            {!loginInfo.name ? (
               <>
                 <NavLink to="/shop/account/signup" className="px-3">
                   회원가입
@@ -48,7 +53,7 @@ const LinkToSign = () => {
               </>
             ) : (
               <span className="border border-kp-600 text-sm rounded-xl px-4 leading-none -mt-1">
-                {grade}
+                {loginInfo.grade}
               </span>
             )}
           </li>
@@ -58,25 +63,27 @@ const LinkToSign = () => {
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
           >
-            {!authToken ? (
+            {!loginInfo.name ? (
               <NavLink to="/shop/account/signin" className="px-3 inline-block">
                 로그인
               </NavLink>
             ) : (
-              <div className="px-2 inline-block">
-                <span className="inline-block pr-2">{name}님</span>
-                <img
-                  className="w-4 inline-block"
-                  src="https://res.kurly.com/pc/service/common/1904/ico_new_20x20.png"
-                  alt=""
-                />
-                {/* <span className="inline-block align-middle text-center text-r-0.2 p-0.5 box-content bg-red-400 text-white  rounded-full leading-none">
+              <>
+                <div className="px-2 inline-block">
+                  <span className="inline-block pr-2">{loginInfo.name}님</span>
+                  <img
+                    className="w-4 inline-block"
+                    src="https://res.kurly.com/pc/service/common/1904/ico_new_20x20.png"
+                    alt=""
+                  />
+                  {/* <span className="inline-block align-middle text-center text-r-0.2 p-0.5 box-content bg-red-400 text-white  rounded-full leading-none">
                   N
                 </span> */}
-                <GoTriangleDown className=" ml-2 inline-block cursor-pointer" />
-              </div>
+                  <GoTriangleDown className=" ml-2 inline-block cursor-pointer" />
+                </div>
+                {loginService && <MyKurlyDropDown />}
+              </>
             )}
-            {authToken && loginService && <MyKurlyDropDown />}
             <span className="text-gray-300">ㅣ</span>
           </li>
           <li
@@ -112,4 +119,4 @@ const LinkToSign = () => {
   }
 };
 
-export default LinkToSign;
+export default withCookies(LinkToSign);
