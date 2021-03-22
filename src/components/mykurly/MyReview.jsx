@@ -5,39 +5,41 @@ import { Link } from 'react-router-dom';
 import WrittenReview from './WrittenReview';
 import WriteReview from './WriteReview';
 import CartModal from '../itemList/CartModal';
-import itemDetail, { getProductInfo } from '../../modules/itemDetail';
+import { getProductInfo } from '../../modules/itemDetail';
 import { useDispatch, useSelector } from 'react-redux';
-import { useCookies } from 'react-cookie';
+import { withRouter } from 'react-router-dom';
+import { useCookies, withCookies } from 'react-cookie';
 import { getReviewList } from '../../modules/review';
 const MyReview = ({ history }) => {
+  const dispatch = useDispatch();
+
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const cookieAuth = cookies.auth;
+  useEffect(() => {
+    dispatch(getReviewList('viewBeforeList', cookieAuth));
+    dispatch(getReviewList('viewAfterList', cookieAuth));
+  }, []);
   return (
     <>
       <MyKurlyHeader />
       <main className="container h-full box-content clear-fix">
         <MyKurlyCategory />
-        <MyReviewBlock />
+        <MyReviewBlock dispatch={dispatch} cookieAuth={cookieAuth} />
       </main>
     </>
   );
 };
 
-const MyReviewBlock = () => {
+const MyReviewBlock = ({ dispatch, cookieAuth }) => {
   const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [tabView, setTabView] = useState('viewBeforeList');
-  const dispatch = useDispatch();
 
-  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
-  const authToken = cookies.auth;
   // const  = useSelector(state => state.review.data);
   const itemDetail = useSelector(state => state.itemDetail.info);
 
   const { viewBeforeList: canWriteReview, viewAfterList: writtenReview } = useSelector(
     state => state.review.data,
   );
-  useEffect(() => {
-    dispatch(getReviewList('viewBeforeList', authToken));
-    dispatch(getReviewList('viewAfterList', authToken));
-  }, [canWriteReview, writtenReview]);
   return (
     <div className="float-left align-middle w-r-85 h-full mt-20 mb-6 px-12 pb-32 box-border">
       <h1 className="a11y-hidden">작성 가능한 후기 보기 및 내가 쓴 후기 보기 </h1>
@@ -93,7 +95,7 @@ const MyReviewBlock = () => {
         {tabView === 'viewBeforeList' ? <WriteReview onClick={openCartModal} /> : <WrittenReview />}
       </div>
       {/* <CartModal
-        product_id={itemDetail.product_id}
+        // product_id={itemDetail.product_id}
         modalIsOpen={modalIsOpen}
         closeModal={closeCartModal}
         productName={itemDetail.name}
@@ -108,15 +110,14 @@ const MyReviewBlock = () => {
     const productId = +e.target.id.split('_')[1];
     dispatch(getProductInfo(productId));
     setmodalIsOpen(true);
-    // dispatch(getProductInfo(product_id));
   }
   function closeCartModal() {
     setmodalIsOpen(false);
   }
   function onClick(e) {
     setTabView(e.currentTarget.href.split('#')[1]);
-    dispatch(getReviewList(e.currentTarget.href.split('#')[1], authToken));
+    dispatch(getReviewList(e.currentTarget.href.split('#')[1], cookieAuth));
   }
 };
 
-export default MyReview;
+export default withRouter(withCookies(MyReview));

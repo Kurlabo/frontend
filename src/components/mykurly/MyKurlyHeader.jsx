@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { BsChevronRight } from 'react-icons/bs';
 import mykurlybanner from '../../img/mykurlybanner.jpg';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { useCookies } from 'react-cookie';
+import { useCookies, withCookies } from 'react-cookie';
 
 const li_sm = 'float-left align-middle w-r-19.7 h-r-17.8 bg-white p-12';
 const detail_wrapper = 'mt-r-3.5 text-kp-600 leading-none';
@@ -12,14 +11,19 @@ const detail_text = 'text-r-2 inline-block align-middle font-medium -mt-1';
 const arr_icon = 'inline-block text-r-1.6 leading-8 text-kg-200 ml-2 align-middle';
 
 const MyKurlyHeader = ({ history }) => {
-  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
-  const authToken = cookies.auth;
-  const { grade, name, cartCnt } = useSelector(state => state.login.member);
-  useEffect(() => {
-    if (!authToken) {
-      history.push('/');
-    }
-  });
+  const { grade, name } = useSelector(state => state.login.member);
+  // const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  // const cookieAuth = cookies.auth;
+  // const member = useSelector(state => state.login.member);
+  // // useEffect(() => {
+  //   if (!cookieAuth) {
+  //     history.push('/shop/account/signin');
+  //   } else if (cookieAuth && !member.name) {
+  //     removeCookie('auth');
+  //     alert('비정상적인 접속으로 메인화면으로 이동합니다.');
+  //     history.push('/');
+  //   }
+  // }, []);
   return (
     <section className="bg-kg-100 py-20">
       <h1 className="a11y-hidden">회원정보</h1>
@@ -95,4 +99,4 @@ const MyKurlyHeader = ({ history }) => {
   );
 };
 
-export default withRouter(MyKurlyHeader);
+export default withRouter(withCookies(MyKurlyHeader));

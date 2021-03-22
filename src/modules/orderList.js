@@ -19,11 +19,9 @@ export const postCart = createAction(POST_CART);
 export const postSuccess = createAction(POST_SUCCESS, orderlist => orderlist);
 export const postFail = createAction(POST_FAIL, error => error);
 export const getOrderItems = (requestPage, authToken) => async dispatch => {
-  console.log('오더리스트', authToken);
   dispatch(getOrderList());
   try {
     const orderList = await orderAPI.getOrderItems(requestPage, authToken); // API 호출
-    console.log(orderList.data);
     dispatch(getListSuccess(orderList.data)); // 성공
   } catch (error) {
     dispatch(getListFail(error)); // 실패

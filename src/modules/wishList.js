@@ -30,11 +30,11 @@ export const getWishItems = (requestPage, authToken) => async dispatch => {
     dispatch(resFail(error)); // 실패
   }
 };
-export const deleteWishItem = (requestPage, id, authToken) => async (dispatch, getState) => {
+export const deleteWishItem = (requestPage, authToken, id) => async (dispatch, getState) => {
   dispatch(deleteWish());
   try {
-    const checkedArray = getState().wish.checkedList;
-    const wishlist = await wishAPI.deleteWishItem(requestPage, id || checkedArray, authToken); //API 호출
+    // const checkedArray = getState().wish.checkedList;
+    const wishlist = await wishAPI.deleteWishItem(requestPage, authToken, id); //API 호출
     dispatch(resSuccess(wishlist.data)); //성공
   } catch (error) {
     dispatch(resFail(error)); //실패

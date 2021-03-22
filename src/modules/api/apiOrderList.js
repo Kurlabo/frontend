@@ -17,13 +17,10 @@ export const getOrderDetail = (orderNumber, token) => {
   });
 };
 export const postInsertCart = (orderItem, token) => {
-  axios.post(
-    'http://3.35.221.9:8080/api/goods/goods_cart',
-    { insertCartList: orderItem },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  axios.post('http://3.35.221.9:8080/api/goods/goods_cart', {
+    data: { insertCartList: orderItem },
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
-  );
+  });
 };

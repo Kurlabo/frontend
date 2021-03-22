@@ -17,7 +17,16 @@ import MyWishListItem from './MyWishListItem';
 import { withRouter } from 'react-router-dom';
 import { useCookies, withCookies } from 'react-cookie';
 
-const MyWishList = () => {
+const MyWishList = ({ history, match }) => {
+  const dispatch = useDispatch();
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const cookieAuth = cookies.auth;
+  // useEffect(() => {
+  //   if (!cookieAuth) {
+  //     alert('로그인 후 이용해주세요');
+  //     history.push('/shop/account/signin');
+  //   }
+  // }, [dispatch]);
   return (
     <>
       <MyKurlyHeader />
@@ -37,9 +46,7 @@ const MyWishListBlock = withRouter(({ history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    QueryString
-      ? dispatch(getWishItems(QueryString, cookieAuth))
-      : dispatch(getWishItems('?page=0', cookieAuth));
+    dispatch(getWishItems(QueryString, cookieAuth));
   }, [QueryString]);
 
   const [cartItem, setCartItem] = useState({
@@ -129,13 +136,7 @@ const MyWishListBlock = withRouter(({ history }) => {
   }
 
   function removeWishItem(e) {
-    dispatch(
-      deleteWishItem(
-        !QueryString ? '?page=0' : QueryString,
-        [+e.target.id.split('_')[1]],
-        cookieAuth,
-      ),
-    );
+    dispatch(deleteWishItem(QueryString, cookieAuth, [+e.target.id.split('_')[1]]));
   }
   function closeCartModal() {
     setmodalIsOpen(false);
@@ -154,7 +155,7 @@ const MyWishListBlock = withRouter(({ history }) => {
     }
   }
   function deleteChecked() {
-    dispatch(deleteWishItem(!QueryString ? '?page=0' : QueryString, '', cookieAuth));
+    dispatch(deleteWishItem(QueryString, cookieAuth, checkedList));
   }
 });
 export default withRouter(withCookies(MyWishList));

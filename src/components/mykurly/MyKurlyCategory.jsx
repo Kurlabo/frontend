@@ -1,9 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { FiChevronRight } from 'react-icons/fi';
-import { dispatch } from '../../../node_modules/rxjs/internal/observable/pairs';
 import { getReviewList } from '../../modules/review';
-import { useCookies } from 'react-cookie';
+import { useCookies, withCookies } from 'react-cookie';
+import { useDispatch } from 'react-redux';
 const category = [
   { id: 1, name: '주문내역', path: '/shop/mypage/mypage_orderlist' },
   { id: 2, name: '배송지관리', path: '/shop/mypage/destination/list' },
@@ -18,7 +18,8 @@ const myKurly_menu =
   'w-80 border border-kg-80 border-b-0 last:border text-r-1.4 text-kg-350 hover:text-kp-600 hover:bg-kg-50 leading-none';
 const MyKurlyCategory = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
-  const authToken = cookies.auth;
+  const cookieAuth = cookies.auth;
+  const dispatch = useDispatch();
   return (
     <div className="float-left">
       <h1 className="a11y-hidden">마이컬리 메인</h1>
@@ -62,8 +63,8 @@ const MyKurlyCategory = () => {
     </div>
   );
   function getReview() {
-    dispatch(getReviewList('viewBeforeList', authToken));
+    dispatch(getReviewList('viewBeforeList', cookieAuth));
   }
 };
 
-export default MyKurlyCategory;
+export default withRouter(withCookies(MyKurlyCategory));

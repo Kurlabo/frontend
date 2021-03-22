@@ -19,12 +19,7 @@ export const findInfo = createAction(FIND_INFO);
 export const findInfoSuccess = createAction(FIND_INFO_SUCCESS, info => info);
 export const findInfoFail = createAction(FIND_INFO_FAIL, info => info);
 export const resetData = createAction(RESET_DATA);
-export const getMemberInfo = createAction(GET_MEMBER_INFO, (info, { u_id, u_password }, token) => ({
-  ...info,
-  u_id,
-  u_password,
-  token,
-}));
+export const getMemberInfo = createAction(GET_MEMBER_INFO, info => info);
 const setCookie = function (name, value, exp) {
   var date = new Date();
   date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
@@ -36,16 +31,17 @@ export const loginAuthentication = user => async dispatch => {
     const res = await loginAPI.loginAuthentication(user);
     await setCookie('auth', res.data.token, 1);
     dispatch(logInSuccess(res.data));
-    dispatch(getLoginMember(res.data.token, user));
+    dispatch(getLoginMember(res.data.token));
     dispatch(push('/'));
   } catch (error) {
     dispatch(loginAndOutFail(error));
   }
 };
-export const getLoginMember = (authToken, user) => async (dispatch, getState) => {
+export const getLoginMember = authToken => async (dispatch, getState) => {
   try {
     const info = await loginAPI.getLoginMember(authToken);
-    dispatch(getMemberInfo(info.data, user || { u_id: '', u_password: '' }, authToken));
+    dispatch(getMemberInfo(info.data));
+    console.log(info.data);
   } catch (error) {
     dispatch(loginAndOutFail(error));
   }
@@ -81,7 +77,7 @@ const initialize = {
   loading: false,
   data: { token: '' },
   error: null,
-  member: { grade: '', name: '', cartCnt: null, u_id: '', u_password: '', token: '' },
+  member: { grade: '', name: '', cartCnt: null, uid: '', token: '' },
   message: '',
   modalOpen: false,
   findInfo: { message: 'FAIL', uid: '', email: '', member_id: '' },

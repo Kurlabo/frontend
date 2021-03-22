@@ -8,7 +8,7 @@ const regTitle = 'font-medium text-kg-400 text-left align-top pt-7 ';
 const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
 const subText = 'text-r-1.2 text-gray-600';
 
-const IdInput = ({ state, setState, readOnly }) => {
+const IdInput = ({ state, setState, readOnly, u_id }) => {
   const idInput = useRef();
   const idSub = useRef();
   const [checkOverLapId, setCheckOverLapId] = useState();
@@ -25,8 +25,9 @@ const IdInput = ({ state, setState, readOnly }) => {
           name="uid"
           className={regInput}
           ref={idInput}
-          onChange={readOnly ? '' : checkId}
-          onFocus={readOnly ? '' : onFocusId}
+          value={readOnly && u_id}
+          onChange={readOnly ? () => {} : checkId}
+          onFocus={readOnly ? () => {} : onFocusId}
           placeholder={readOnly ? '' : '6자 이상의 영문 혹은 영문과 숫자를 조합'}
           autoComplete="uid"
           readOnly={readOnly}

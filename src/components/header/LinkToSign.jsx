@@ -5,7 +5,7 @@ import HeaderDropDown from './HeaderDropDown';
 import MyKurlyDropDown from './MyKurlyDropDown';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCookies, withCookies } from 'react-cookie';
-import { getLoginMember, resetData } from '../../modules/login';
+import { getLoginMember } from '../../modules/login';
 
 const signWrapper = 'relative w-p-1050 flex justify-between items-center mx-auto mt-2 text-r-1.2';
 
@@ -13,7 +13,8 @@ const LinkToSign = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
   const loginInfo = useSelector(state => state.login.member);
   const authToken = useSelector(state => state.login.data.token);
-  const cookieToken = cookies.auth;
+  const error = useSelector(state => state.login.error);
+  const cookieAuth = cookies.auth;
   const [dropMenu, setDrop] = useState({
     loginService: false,
     customerService: false,
@@ -26,11 +27,10 @@ const LinkToSign = () => {
     //   loginService: false,
     //   customerService: false,
     // });
-    if (cookieToken) {
-      dispatch(getLoginMember(cookieToken));
-    } else {
+    if (cookieAuth) {
+      dispatch(getLoginMember(cookieAuth));
     }
-  }, [cookieToken, authToken, dispatch]);
+  }, [cookieAuth, error, authToken, dispatch]);
 
   return (
     <div className={signWrapper}>

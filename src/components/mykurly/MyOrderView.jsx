@@ -33,9 +33,15 @@ const MyOrderViewBlock = withRouter(({ history }) => {
   const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const member = useSelector(state => state.login.member);
   const cookieAuth = cookies.auth;
   useEffect(() => {
     if (!cookieAuth) {
+      alert('로그인 후 이용해주세요');
+      history.push('/shop/account/signin');
+    } else if (cookieAuth && !member.name) {
+      alert('비정상적인 접속으로 메인화면으로 이동합니다.');
+      removeCookie('auth');
       history.push('/');
     }
     dispatch(getOrderDetail(ordno, cookieAuth));
