@@ -32,12 +32,3 @@ export const modifyMainDestination = (modifyId, authToken) => {
     },
   });
 };
-
-export const removeMainDestination = (modifyId, authToken) => {
-  return axios.put('http://3.35.221.9:8080/api/mypage/destination/list', {
-    data: { id: modifyId, is_main: 0 },
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-    },
-  });
-};

@@ -45,49 +45,22 @@ export const modifyMainDestination = (modifyMainId, removeMainId, authToken) => 
   dispatch,
   getState,
 ) => {
-  const data = getState().destination.data;
-  const modifiedItem = data.map(({ id }, _, arr) =>
-    id === modifyMainId ? { ...arr, is_main: 1 } : { ...arr, is_main: 0 },
-  );
-
   try {
     await apiDestination.modifyMainDestination(modifyMainId, authToken);
-    await apiDestination.removeMainDestination(removeMainId, authToken);
-    dispatch(modifyMainSuccess(modifiedItem));
   } catch (error) {
     dispatch(requestOfDestinationFail(error));
   }
 };
 export const deleteDestinationItem = (id, authToken) => async (dispatch, getState) => {
   dispatch(requestDestinationList());
-  const member = getState().destination.member;
   try {
-    const res = await apiDestination.deleteDestination(id, member, authToken);
+    const res = await apiDestination.deleteDestination(id, authToken);
     dispatch(requestOfDestinationSuccess(res.data));
   } catch (error) {
     dispatch(requestOfDestinationFail(error));
   }
 };
 
-// const initialize = {"id": 46,
-// "deliver_address": "서울시 강동구 암사동 룰루랄라아파트 103동 103호",
-// "is_main": 0,
-// "reciever": "이창준",
-// "reciever_phone": "030-0111-3244",
-// "member": {
-//     "id": 1,
-//     "uid": "limnoah0301",
-//     "password": "$2a$10$gJvie1O1Ft9oJNz0BDOR0.SPKID.fhGkrz49YyJyaTwY8IM23glD6",
-//     "name": "임정우",
-//     "email": "limnoah0301@gmail.com",
-//     "phone": "01066075331",
-//     "gender": "남자",
-//     "date_of_birth": "1991-03-01",
-//     "grade": "일반",
-//     "total_cost": 0,
-//     "role": "MEMBER",
-//     "deleted": false
-// }
 const initialize = {
   loading: false,
   modalOpen: false,
