@@ -281,7 +281,8 @@ const Signup = ({ signUpStart }) => {
       <SignupModal modalIsOpen={signup} closeModal={closeModal} value={modalValue} />
     </div>
   );
-  async function overlapkEmail() {
+  async function overlapkEmail(e) {
+    console.log(e.target.value);
     try {
       console.log(emailValue);
       const res = await axios.post('http://3.35.221.9:8080/api/member/signup/checkemail', {
@@ -324,6 +325,7 @@ const Signup = ({ signUpStart }) => {
       validPass2,
       validPass3,
       validRePass,
+      validEmail,
       addr,
       agree1,
       agree2,
@@ -370,11 +372,14 @@ const Signup = ({ signUpStart }) => {
           setModalValue('동일한 비밀번호 입력해 주세요');
         } else if (i === 6) {
           setSignup(true);
+          setModalValue('이메일 중복검사를 해주세요');
+        } else if (i === 7) {
+          setSignup(true);
           setModalValue('주소를 입력해 주세요');
-        } else if (i > 6 && i < 9) {
+        } else if (i > 7 && i < 10) {
           setSignup(true);
           setModalValue('필수사항을 체크해 주세요');
-        } else if (i === 9) {
+        } else if (i === 10) {
           setSignup(true);
           setModalValue('14세 이상 항목을 체크해 주세요');
         }
