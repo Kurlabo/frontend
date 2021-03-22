@@ -30,7 +30,7 @@ const Signup = ({ signUpStart }) => {
 
   const [gender, setGender] = useState('선택안함');
 
-  const [emailValue, setEmailValue] = useState(false);
+  const [emailValue, setEmailValue] = useState('');
   const [validEmail, setValidEmail] = useState(false);
   const [checkOverLapEmail, setCheckOverLapEmail] = useState(false);
 
@@ -281,10 +281,14 @@ const Signup = ({ signUpStart }) => {
       <SignupModal modalIsOpen={signup} closeModal={closeModal} value={modalValue} />
     </div>
   );
-  async function overlapkEmail(e) {
-    console.log(e.target.value);
+  async function overlapkEmail() {
+    console.log(emailValue);
     try {
-      console.log(emailValue);
+      if (emailValue === '') {
+        setCheckOverLapEmail(true);
+        setModalValue('이메일을 입력해주세요.');
+        return false;
+      }
       const res = await axios.post('http://3.35.221.9:8080/api/member/signup/checkemail', {
         checkEmail: emailValue,
       });

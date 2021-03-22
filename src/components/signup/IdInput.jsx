@@ -69,10 +69,14 @@ const IdInput = ({ state, setState, readOnly }) => {
   }
   async function overlapId() {
     try {
+      if (idInput.current.value === '') {
+        setCheckOverLapId(true);
+        setModalValue('아이디를 입력해주세요.');
+        return false;
+      }
       const res = await axios.post('http://3.35.221.9:8080/api/member/signup/checkuid', {
         checkUid: idInput.current.value,
       });
-      console.log(res.data);
       if (res.data === 'EXISTED UID') {
         setState[1](false);
         setCheckOverLapId(true);
