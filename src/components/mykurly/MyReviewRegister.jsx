@@ -16,13 +16,6 @@ function getCookie(name) {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-// api header
-const config = {
-  headers: {
-    Authorization: 'Bearer ' + getCookie('auth'),
-  },
-};
-
 const MyKurlyTemplate = ({ children }) => {
   return (
     <>
@@ -62,6 +55,12 @@ const MyReviewRegister = ({ history }) => {
   }, [inputState]);
 
   const onClickSubmit = () => {
+    // api header
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + getCookie('auth'),
+      },
+    };
     if (!isInputAll) return;
     dispatch(
       postReview({

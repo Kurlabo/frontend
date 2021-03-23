@@ -20,7 +20,9 @@ const Aside = () => {
     if (viewList.length) {
       recentDiv.current.style.height = `${viewList.length * 77}px`;
       recentUl.current.style.top = '0px';
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       moveValue = recentUl.current.style.top;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       moveValueNum = +moveValue.slice(1).slice(0, moveValue.indexOf('px') - 1);
     }
   }, [viewList]);

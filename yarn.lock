@@ -9299,6 +9299,11 @@
   "resolved" "https://registry.npmjs.org/js-base64/-/js-base64-2.6.4.tgz"
   "version" "2.6.4"
 
+"js-cookie@^2.1.4":
+  "integrity" "sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ=="
+  "resolved" "https://registry.npmjs.org/js-cookie/-/js-cookie-2.2.1.tgz"
+  "version" "2.2.1"
+
 "js-string-escape@^1.0.1":
   "integrity" "sha1-4mJbrbwNZ8dTPp7cEGjFh65BN+8="
   "resolved" "https://registry.npmjs.org/js-string-escape/-/js-string-escape-1.0.1.tgz"
@@ -12800,6 +12805,14 @@
     "loose-envify" "^1.4.0"
     "reduce-reducers" "^0.4.3"
     "to-camel-case" "^1.0.0"
+
+"redux-cookies-middleware@^0.2.1":
+  "integrity" "sha512-0tWO8Qz0xLoWeti04oAUQvliDNaLpJSEwHkRPBOQT89EVjE17dTRpaXKGkKbHkab37+3n6Nm9IWID7DoTubWLA=="
+  "resolved" "https://registry.npmjs.org/redux-cookies-middleware/-/redux-cookies-middleware-0.2.1.tgz"
+  "version" "0.2.1"
+  dependencies:
+    "js-cookie" "^2.1.4"
+    "lodash" "^4.17.15"
 
 "redux-devtools-extension@^2.13.8":
   "integrity" "sha512-8qlpooP2QqPtZHQZRhx3x3OP5skEV1py/zUdMY28WNAocbafxdG2tRD1MWE7sp8obGMNYuLWanhhQ7EQvT1FBg=="

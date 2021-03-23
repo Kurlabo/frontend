@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ const Instagram = () => {
   const dispatch = useDispatch();
   const instagram = useSelector(state => state.instagram.instaSrcDto);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const imgArr = [];
 
   let cur = useRef(0);

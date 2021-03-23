@@ -35,7 +35,10 @@ import ThisWeekEvent from './components/event/ThisWeekEvent';
 function App() {
   return (
     <>
-      {window.location.pathname !== '/kakao/destination' ? <Header /> : null}
+      {window.location.pathname !== '/kakao/destination' &&
+      !window.location.pathname.includes('/shop/mypage/desination/modify_form/') ? (
+        <Header />
+      ) : null}
       <Switch>
         <Route path="/" exact component={MainPage} />
         <Route path="/goods_cart" component={GoodsCartPage} />
@@ -57,7 +60,7 @@ function App() {
         <Route path="/shop/customer/board/:id" component={NoticeDetail} />
         <Route path="/shop/customer/board" component={CustomerService} />
         <Route path="/shop/mypage/destination/list" component={MyDestinationLIstPage} />
-        <Route path="/shop/mypage/mypage_wishlist:page" component={MyWishListPage} />
+        <Route path="/shop/mypage/mypage_wishlist/:page" component={MyWishListPage} />
         <Route path="/shop/mypage/mypage_wishlist" component={MyWishListPage} />
         <Route path="/shop/mypage/mypage_review/register" component={MyReviewRegisterPage} />
         <Route path="/shop/mypage/mypage_review" component={MyReviewPage} />
@@ -66,15 +69,21 @@ function App() {
         <Route path="/shop/mypage/mypage_coupon" component={MyCouponPage} />
         <Route path="/shop/member/myinfo" component={MyInfoPage} />
         <Route path="/shop/mypage/kurlypass" component={KurlyPassPage} />
-        <Route path="/shop/mypage/desination/modify_form?:dtn_id" component={MyDestinationModify} />
-        <Route path="/shop/mypage/desination/modify_form" component={MyDestinationModify} />
-        <Route Path="/shop/event" component={ThisWeekEvent} />
+        <Route path="/shop/mypage/desination/modify_form/:dtn_id" component={MyDestinationModify} />
+        <Route path="/shop/mypage/desination/modify_form/" component={MyDestinationModify} />
         <Route path="/shop/member/" component={MyInfoPage} />
         <Route path="/kakao/destination" component={SearchLocation} />
+        <Route Path="/shop/goods/event" component={ThisWeekEvent} />
         <Route component={NotFoundPage} />
       </Switch>
-      {window.location.pathname !== '/kakao/destination' ? <Sidebar /> : null}
-      {window.location.pathname !== '/kakao/destination' ? <Footer /> : null}
+      {window.location.pathname !== '/kakao/destination' &&
+      !window.location.pathname.includes('/shop/mypage/desination/modify_form/') ? (
+        <Sidebar />
+      ) : null}
+      {window.location.pathname !== '/kakao/destination' &&
+      !window.location.pathname.includes('/shop/mypage/desination/modify_form/') ? (
+        <Footer />
+      ) : null}
     </>
   );
 }

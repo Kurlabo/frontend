@@ -60,16 +60,16 @@ const Submit = () => {
     <>
       <div
         className={`w-r-28.4 ${
-          cart.length !== 0 && selectedProduct.length !== 0 && addr !== '' ? 'hidden' : ''
+          cart.length !== 0 && selectedProduct.length !== 0 && addr !== null ? 'hidden' : ''
         } inline-block h-24 bg-gray-200 mt-8 text-white leading-r-6.3 rounded-r-0.4 text-r-1.6 font-semibold text-center`}
       >
         {cart.length === 0 && <span to="#">상품을 담아주세요</span>}
         {cart.length !== 0 && selectedProduct.length === 0 && (
           <span to="#">상품을 선택해주세요</span>
         )}
-        {addr === '' && selectedProduct.length !== 0 && <span to="#">배송지를 입력해주세요</span>}
+        {addr === null && selectedProduct.length !== 0 && <span to="#">배송지를 입력해주세요</span>}
       </div>
-      {cart.length !== 0 && selectedProduct.length !== 0 && addr !== '' && (
+      {cart.length !== 0 && selectedProduct.length !== 0 && addr !== null && (
         <Link
           className="w-r-28.4 inline-block h-24 bg-kp-600 mt-8 text-white leading-r-6.3 rounded-r-0.4 text-r-1.6 font-semibold text-center"
           onClick={onClickLink}

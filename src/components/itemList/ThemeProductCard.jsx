@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getProductInfo } from '../../modules/itemDetail';
 import CartModal from './CartModal';
 
 const imgStyle = 'w-p-308 h-p-396 transform hover:scale-105 duration-700';
@@ -15,6 +17,7 @@ const ThemeProductCard = ({
   discounted_price,
 }) => {
   const [modalIsOpen, setmodalIsOpen] = useState(false);
+  const dispatch = useDispatch();
   return (
     <>
       <div className="pt-10 pl-14 relative cursor-pointer mb-52">
@@ -64,11 +67,13 @@ const ThemeProductCard = ({
         originalPrice={+originalPrice}
         discounted_price={+discounted_price}
         discount_percent={+discount_percent}
+        product_id={product_id}
       />
     </>
   );
 
   function openModal() {
+    dispatch(getProductInfo(product_id));
     setmodalIsOpen(true);
   }
   function closeModal() {
