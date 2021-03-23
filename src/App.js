@@ -14,6 +14,7 @@ import Modal from './components/login/Modal';
 import NotFoundPage from './pages/NotFoundPage';
 import SearchLocation from './components/common/SearchLocation';
 import Footer from './components/common/Footer';
+import WeekEvent from './components/weekEvent/WeekEvent';
 import CustomerService from './components/customerService/CustomerService';
 import NoticeDetail from './components/customerService/NoticeDetail';
 import Sidebar from './components/common/Sidebar';
@@ -30,7 +31,7 @@ import KurlyPassPage from './pages/KurlyPassPage';
 import MyDestinationModify from './components/mykurly/MyDestinationModify';
 import GetSupportWritingPage from './pages/GetSupportWritingPage';
 import PayComplete from './components/order/PayComplete';
-import ThisWeekEvent from './components/weekEvent/ThisWeekEvent';
+import ThisWeekEvent from './components/event/ThisWeekEvent';
 function App() {
   return (
     <>
@@ -51,6 +52,7 @@ function App() {
         <Route path="/shop/goods/goods_view/:productId" component={ItemDetailPage} />
         <Route path="/shop/goods/item_list/:category:page" component={ItemListPage} />
         <Route path="/shop/goods/theme_list/:theme" component={ThemeProductListPage} />
+        <Route path="/shop/goods/event" component={WeekEvent} />
         <Route path="/order/paycomplete/:ordno" component={PayComplete} />
         <Route path="/order" component={OrderPage} />
         <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />

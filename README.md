@@ -6,7 +6,10 @@
 
 2021년 2월 01일부터 2월 26일까지(업데이트 기간 제외) 진행한 Kurlabo 프로젝트입니다.
 
+
+
 <div width><h2>1. 📖 Tech Stack</h2><p><img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/>&nbsp;<br/><img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/NPM-CB3837?style=flat-square&logo=NPM&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/Storybook-FF4785?style=flat-square&logo=Storybook&logoColor=white"/>&nbsp;<br/><img src="https://img.shields.io/badge/Tailwind CSS-38B2AC?style=flat-square&logo=Tailwind CSS&logoColor=white"/><img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"/><img src="https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=Postman&logoColor=white"/>
+
 
 - 라이브러리
 
@@ -29,15 +32,22 @@
       </div>
   </details>
 
+
+
 ## 2. Getting Start!
 
 `$ git clone "https://github.com/Kurlabo/frontend.git`
 `$ npm install`
 `$ npm run start`
 
+
+
+
 ## 3. Contributioning
 
 Please read [CONTRIBUTING.md](https://github.com/Kurlabo/frontend/blob/develop/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us. /
+
+
 
 ## 4. Contributors
 
@@ -95,17 +105,16 @@ Please read [CONTRIBUTING.md](https://github.com/Kurlabo/frontend/blob/develop/C
     <div>
         <br/>
         - 메인 페이지 헤더 UI 구현.<br/><br/>
-        - 배송지 검색 DAUM API 사용하여 구현.<br/><br/>
         - 카테고리 별 상품리스트 페이지 UI 구현 및 라우팅 처리.<br/><br/>
         - 신상품, 베스트, 알뜰쇼핑 페이지 UI 구현 및 라우팅 처리.<br/><br/>
-        - 카테고리, 신상품, 베스트, 알뜰쇼핑 페이지네이션 구현.<br/><br/>
         - 주문하기 페이지, 장바구니 모달창 UI 구현.<br/><br/>
-        - 주문서 페이지 API 요청 기능 구현.
-        - 금주혜택 페이지 구현.
         - API 연동하여 상품 렌더링 기능 구현.<br/><br/>
+        - daum API 연동하여 배송지 검색기능 구현.<br/><br/>
         - documentation 작성.
        </div>
   </details>
+
+
 
 ## 5. Develop motivation
 

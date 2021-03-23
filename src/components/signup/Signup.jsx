@@ -23,9 +23,11 @@ const Signup = ({ signUpStart }) => {
   const [validId1, setValidId1] = useState(false);
   const [validId2, setValidId2] = useState(false);
 
+  const [originPassword, setOriginPassword] = useState('');
   const [validPass1, setValidPass1] = useState(false);
   const [validPass2, setValidPass2] = useState(false);
   const [validPass3, setValidPass3] = useState(false);
+  const [validPass4, setValidPass4] = useState(false);
   const [validRePass, setValidRePass] = useState(false);
 
   const [gender, setGender] = useState('선택안함');
@@ -87,8 +89,15 @@ const Signup = ({ signUpStart }) => {
               <IdInput state={[validId1, validId2]} setState={[setValidId1, setValidId2]} />
             </tr>
             <PassInput
-              state={[validPass1, validPass2, validPass3, validRePass]}
-              setState={[setValidPass1, setValidPass2, setValidPass3, setValidRePass]}
+              state={[validPass1, validPass2, validPass3, validPass4, validRePass]}
+              setState={[
+                setValidPass1,
+                setValidPass2,
+                setValidPass3,
+                setValidPass4,
+                setValidRePass,
+              ]}
+              setOriginPassword={setOriginPassword}
             />
             <tr>
               <FormInput name="name" placeholder="이름을 입력해주세요">
