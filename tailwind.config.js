@@ -1,23 +1,40 @@
+const plugin = require('tailwindcss/plugin');
+
+const focusedSiblingPlugin = plugin(function ({ addVariant, e }) {
+  addVariant('focused-sibling', ({ container }) => {
+    container.walkRules(rule => {
+      rule.selector = `:checked + .focused-sibling\\:${rule.selector.slice(1)}`;
+    });
+  });
+});
+
 module.exports = {
-  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+  purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      boxShadow: {
+        sm: '0 1px 3px 0 rgba(0, 0, 0, 0.05)',
+      },
       fontFamily: {
         body: ['Noto Sans KR'],
       },
       borderRadius: {
+        'r-2': '2rem',
         'p-3': '0.3rem',
         '50-p': '50%',
+        'r-3': '3rem',
+        'r-3.3': '3.3rem',
         'r-0.4': '0.4rem',
         'r-0.9': '0.9rem',
         'r-1.1': '1.1rem',
-        'r-2': '2rem',
       },
       lineHeight: {
         3: '3rem',
         4: '4rem',
         5: '5rem',
+        'r-1.2': '1.2rem',
+        'r-1.5': '1.5rem',
         'r-3': '3rem',
         'r-3.5': '3.5rem',
         'r-5': '5rem',
@@ -80,6 +97,8 @@ module.exports = {
         'checked-button':
           "url('https://res.kurly.com/mobile/service/common/2006/ico_checkbox_checked.svg')",
         'conversation-btn': 'url(https://res.kurly.com/pc/ico/2011/ico_point_up_18x12.svg)',
+        'kurlypass-on': 'url(https://res.kurly.com/pc/service/pass/1806/btn_pass_on.png)',
+        'kurlypass-off': 'url(https://res.kurly.com/pc/service/pass/1806/btn_pass_off.png)',
         cartTriangle: 'url(https://res.kurly.com/pc/ico/1903/ico_layer_point_x2.png)',
       }),
       width: {
@@ -94,6 +113,7 @@ module.exports = {
       },
       inset: {
         'r--1': '-1rem',
+        'r--1.5': '-1.5rem',
         'r--3': '-3rem',
         'p-91': '9.1rem',
         'p-159': '15.9rem',
@@ -140,6 +160,7 @@ module.exports = {
         discount: {
           100: '#FA622F',
         },
+        kurlypass: '#cac8c4',
         kdp: {
           100: '#31123D',
           200: '#401351',
@@ -168,6 +189,7 @@ module.exports = {
         modalBg: '#f5f5f5',
       },
       spacing: {
+        'p-2': '2px',
         'p-18': '1.8rem',
         'p-28': '2.8rem',
         'p-33': '3.3rem',
@@ -227,6 +249,7 @@ module.exports = {
         'r-4.5': '4.5rem',
         'r-4.6': '4.6rem',
         'r-4.8': '4.8rem',
+        'r-5.1': '5.1rem',
         'r-5.2': '5.2rem',
         'r-5.5': '5.5rem',
         'r-5.6': '5.6rem',
@@ -287,6 +310,7 @@ module.exports = {
         'r-65': '65rem',
         'r-65.2': '65.2rem',
         'r-67': '67rem',
+        'r-69': '69rem',
         'r-82': '82rem',
         'r-71': '71rem',
         'r-73': '73rem',
@@ -298,14 +322,18 @@ module.exports = {
         'r-90': '90rem',
         'r-101': '101rem',
         'r-105': '105rem',
+        'r-130': '130rem',
         'r-150': '150rem',
+        'r-180': '180rem',
+        'r-267': '267rem',
         'r-735': '735rem',
-        'vw-700': '700vw',
-        510: '510px',
+        'vh-50': '50vh',
         'vw-99': '99vw',
-        700: '700vw',
+        'vw-700': '700vw',
         13: '52px',
         370: '370px',
+        510: '510px',
+        700: '700vw',
       },
       translate: {
         'r-7.2': '7.2rem',
@@ -331,16 +359,17 @@ module.exports = {
       },
     },
   },
+  // 포커스시 형제요소중 fucsed-sibling이 있는 클래스 요소클릭
+  plugins: [focusedSiblingPlugin],
   variants: {
     extend: {
       borderWidth: ['last'],
       fontWeight: ['hover', 'focus', 'focused-sibling'],
       backgroundColor: ['focused-sibling', 'active', 'odd'],
-      backgroundImage: ['focused-sibling'],
+      backgroundImage: ['focused-sibling', 'hover'],
       textColor: ['focused-sibling'],
       overflow: ['hover'],
       display: ['focused-sibling'],
     },
   },
-  plugins: [],
 };

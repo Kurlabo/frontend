@@ -1,25 +1,50 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, withRouter } from 'react-router-dom';
 import MyKurlyHeader from './MyKurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
 import MyKurlyPageNation from './MyKurlyPageNation';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
-import { VscChevronRight } from 'react-icons/vsc';
+import { useSelector, useDispatch } from 'react-redux';
+import { getOrderItems } from '../../modules/orderList';
+import MyOrderListItem from './MyOrderListItem';
+import { useCookies, withCookies } from 'react-cookie';
 
-const MyOrderList = () => {
+const MyOrderList = ({ history }) => {
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const cookieAuth = cookies.auth;
+  const QueryString = history.location.search;
+  const member = useSelector(state => state.login.member);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    QueryString
+      ? dispatch(getOrderItems(QueryString, cookieAuth))
+      : dispatch(getOrderItems('?page=0', cookieAuth));
+    if (!cookieAuth) {
+      alert('로그인 후 이용해주세요');
+      history.push('/shop/account/signin');
+    } else if (cookieAuth && !member.name) {
+      alert('비정상적인 접속으로 메인화면으로 이동합니다.');
+      removeCookie('auth');
+      history.push('/');
+    }
+  }, [QueryString]);
+
   return (
     <>
       <MyKurlyHeader />
       <main className="container h-full box-content clear-fix">
         <MyKurlyCategory />
-        <MyOrderListBlock />
+        <MyOrderListBlock cookieAuth={cookieAuth} />
       </main>
     </>
   );
 };
 
-const MyOrderListBlock = () => {
+const MyOrderListBlock = withRouter(({ history, cookieAuth }) => {
   const [open, setOpen] = useState(false);
+  const orderList = useSelector(state => state.order.data);
+
   return (
     <div className="float-left align-middle w-r-85 h-full mt-20 mb-14 px-12 pb-32">
       <h1 className="a11y-hidden">주문 내역 확인 </h1>
@@ -65,11 +90,14 @@ const MyOrderListBlock = () => {
       </div>
       <div>
         <ul>
-          <MyOrderListItem />
-          <MyOrderListItem />
-          <MyOrderListItem />
+          <MyOrderListItem orderList={orderList} />
         </ul>
-        <MyKurlyPageNation pageNumber="4" />
+        <MyKurlyPageNation
+          pageNumber={orderList.totalPages}
+          totalProduct={orderList.totalElements}
+          elementNumber={orderList.numberOfElements}
+          history={history}
+        />
       </div>
     </div>
   );
@@ -77,46 +105,6 @@ const MyOrderListBlock = () => {
   function onClick() {
     setOpen(!open);
   }
-};
-const MyOrderListItem = () => {
-  const qa_button =
-    'text-kp-600 text-r-1.2 absolute top-1/2 right-3 transform -translate-y-2/4 border border-kp-600 px-20 py-4';
-  return (
-    <>
-      <li className="">
-        <p className="text-r-1.6 text-kg-350 font-medium mt-8 mb-6">
-          2020.12.22 <span>(1시 05분)</span>
-        </p>
-        <div className="pt-10 px-8 border border-kg-80">
-          <h3 className="cursor-pointer clear-fix text-r-1.6 pb-6 font-medium">
-            <Link to="/shop/mypage/mypage_orderview/ordno=123">
-              [리치몬드 과자점] 쉬폰 4종 외 4건
-              <VscChevronRight className="float-right inline-block text-r-2" />
-            </Link>
-          </h3>
-          <div className="relative clear-fix border-t border-kg-80 ">
-            <div className="w-24 py-6 float-left align-middle">
-              <img src="https://img-cf.kurly.com/shop/data/goods/1607575010169s0.jpg" alt="" />
-            </div>
-            <dl className="float-left pl-6 pt-7 w-r-65 align-middle ">
-              <dt className="inline-block w-24 text-r-1.2 leading-none">주문번호</dt>
-              <dd className="inline-block w-r-52 text-r-1.4 font-medium pb-5 leading-none">
-                1608566281235
-              </dd>
-              <dt className="inline-block w-24 text-r-1.2 leading-none">결제금액</dt>
-              <dd className="inline-block w-r-52 text-r-1.4 font-medium pb-5 leading-none">
-                20,082원
-              </dd>
-              <dt className="inline-block w-24 text-r-1.2 leading-none">주문상태</dt>
-              <dd className="inline-block w-r-52 text-r-1.4 font-medium pb-5 leading-none">
-                배송완료
-              </dd>
-            </dl>
-            <button className={`${qa_button}`}>1:1 문의</button>
-          </div>
-        </div>
-      </li>
-    </>
-  );
-};
-export default MyOrderList;
+});
+
+export default withRouter(withCookies(MyOrderList));

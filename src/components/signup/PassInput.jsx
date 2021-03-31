@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 
-const regTitle = 'font-bold text-left align-top pt-7 ';
-const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6';
+const regTitle = 'font-medium text-left align-top pt-7 ';
+const regInput = 'border-solid border border-inputGray w-r-32 h-16 px-6 text-kg-400';
 const subText = 'text-r-1.2 text-gray-600';
 
 const PassInput = ({
@@ -75,7 +75,7 @@ const PassInput = ({
         <td className="py-4" colSpan="2">
           <input
             type="password"
-            name="repassword"
+            name="CheckPassword"
             className={regInput}
             onChange={checkPass}
             onFocus={onFocusRePass}
@@ -109,11 +109,11 @@ const PassInput = ({
         var pwRegExp1 = /^[~`!@#$%^&*()_+=[\]\{}|;':",.\/<>?a-zA-Z0-9-]+$/;
         var pwRegExp2 = /(\w)\1\1/;
 
-        value.length >= 9 ? setValidPass1(true) : setValidPass1(false);
+        value.length >= 10 ? setValidPass1(true) : setValidPass1(false);
         pwRegExp1.test(value) ? setValidPass2(true) : setValidPass2(false);
         pwRegExp2.test(value) ? setValidPass3(false) : setValidPass3(true);
         break;
-      case 'repassword':
+      case 'CheckPassword':
         console.log();
         passRef.current.value && passRef.current.value === value
           ? setValidRePass(true)

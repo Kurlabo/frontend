@@ -4,10 +4,17 @@ import Cart from './Cart';
 import Notice from './Notice';
 import Prices from './Prices';
 import Select from './Select';
-import Summit from './Summit';
+import Submit from './Submit';
 import Title from './Title';
+import { useCookies } from 'react-cookie';
+import { useHistory } from 'react-router-dom';
 
 const GoodsCart = () => {
+  const history = useHistory();
+  const [cookies] = useCookies(['auth']);
+  if (cookies.auth === undefined) {
+    history.push('/shop/account/signin');
+  }
   return (
     <div className="container">
       <Title />
@@ -20,7 +27,7 @@ const GoodsCart = () => {
         <div className="inline-block mt-r-4.5">
           <Adress />
           <Prices />
-          <Summit />
+          <Submit />
           <Notice />
         </div>
       </div>

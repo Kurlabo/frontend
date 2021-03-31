@@ -51,19 +51,34 @@ const initialState = {
 
 const itemDetail = handleActions(
   {
-    [GET_PRODUCT_INFO_SUCCESS]: (state, { payload: itemDetail }) => ({
-      ...state,
-      info: itemDetail,
-    }),
+    [GET_PRODUCT_INFO_SUCCESS]: (state, { payload: itemDetail }) => {
+      let count = 20 - itemDetail.related_product.length;
+      if (itemDetail.related_product.length < 20) {
+        for (let i = 0; i < count; i++) {
+          itemDetail.related_product.push(itemDetail.related_product[i]);
+        }
+      }
+      // 부족한 개수만큼 객체 정보를 넣어준다.
+      console.log('페이로드', itemDetail);
+      return {
+        ...state,
+        info: {
+          ...itemDetail,
+          related_product: itemDetail.related_product,
+        },
+      };
+    },
     [GET_PRODUCT_INFO_FAILURE]: (state, { payload: error }) => ({
       ...state,
       error,
     }),
-    [POST_WISH_LIST_SUCCESS]: (state, { payload: msg }) => ({
+    [POST_WISH_LIST_SUCCESS]: (state, { payload: result }) => ({
       ...state,
       modalInfo: {
         isOpen: true,
-        msg: msg,
+        msg: result
+          ? '늘 사는 리스트에 추가 했습니다.'
+          : '이미 늘 사는 리스트에 존재하는 상품입니다.',
       },
     }),
     [POST_WISH_LIST_FAILURE]: (state, { payload: error }) => ({

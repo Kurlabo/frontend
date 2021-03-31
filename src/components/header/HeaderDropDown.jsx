@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const listStyle =
-  'absolute right-0 top-9 border-gray-200 border py-2 px-r-0.9 bg-white text-1.2 text-gray-700 z-900';
+  'absolute right-0 top-8 border-gray-200 border py-3 px-r-0.9 bg-white text-1.2 text-gray-700 z-900';
 
 const HeaderDropDown = ({ onMouseOut }) => {
   return (
     <ul className={listStyle}>
       <li className="mb-2">
-        <Link to="/">공지사항</Link>
+        <Link to="/shop/customer/board">공지사항</Link>
       </li>
       <li className="mb-2">
         <Link to="/">자주하는 질문</Link>
@@ -20,7 +20,7 @@ const HeaderDropDown = ({ onMouseOut }) => {
         <Link to="/">상품 제안</Link>
       </li>
       <li className="mb-2">
-        <Link to="/">에코포장 피드백</Link>
+        <Link to="/shop/mypage/mypage_orderlist">마이컬리</Link>
       </li>
     </ul>
   );

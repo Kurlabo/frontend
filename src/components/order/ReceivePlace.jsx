@@ -17,7 +17,7 @@ const otherText3 =
 const otherText4 =
   '배송 받으실 시간은 별도로 지정하실 수 없으며, 밤 11시까지 주문 시 오전 7시까지 배송이 완료됩니다.';
 
-const ReceivePlace = ({ state }) => {
+const ReceivePlace = ({ state, setDeliveryInfo, deliveryInfo }) => {
   return (
     <div>
       <h3 className="pb-6 pt-9 text-1.4 font-semibold">
@@ -25,7 +25,7 @@ const ReceivePlace = ({ state }) => {
       </h3>
       <textarea
         name="others"
-        id="others"
+        id={state}
         cols="20"
         rows="10"
         placeholder={
@@ -34,6 +34,7 @@ const ReceivePlace = ({ state }) => {
             : '예 : 계단 밑, 주택단지 앞 경비초소를 지나 A동 출입구 (배송 시간은 별도로 지정할 수 없습니다)'
         }
         className={textAreaStyle}
+        onChange={onChangeSecurityMsg}
       ></textarea>
       <div className="text-1.2 text-kp-600 w-full bg-klp-30 bg-opacity-5 py-6 px-6">
         <p className="font-medium">
@@ -48,6 +49,17 @@ const ReceivePlace = ({ state }) => {
       </div>
     </div>
   );
+  function onChangeSecurityMsg(e) {
+    setDeliveryInfo({
+      ...deliveryInfo,
+      courierInfo: '',
+      otherMsg: '',
+      enterWay: '',
+      enterPwd: '',
+      securityMsg: e.target.value,
+    });
+    console.log(deliveryInfo.securityMsg);
+  }
 };
 
 export default ReceivePlace;

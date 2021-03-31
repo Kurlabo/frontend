@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AddCartModal from './AddCartModal';
 import Categories from './Categories';
 import HeaderSearch from './HeaderSearch';
@@ -18,6 +18,7 @@ const headerRel = 'w-full bg-white z-100 transform duration-75 border-gray-50 bo
 const HeaderNav = () => {
   const [fix, setFix] = useState(false);
   const [category, setCategory] = useState(false);
+  // const { theme } = useParams();
 
   useEffect(() => {
     window.addEventListener('scroll', changePos);
@@ -48,16 +49,16 @@ const HeaderNav = () => {
         </button>
         <ul className="flex flex-1 justify-evenly w-r-58 ">
           <li className={linkHover}>
-            <NavLink to="/shop/goods/item_list">신상품</NavLink>
+            <Link to={'/shop/goods/theme_list/category=200?page=1'}>신상품</Link>
           </li>
           <li className={linkHover}>
-            <NavLink to="/shop/goods/item_list">베스트</NavLink>
+            <Link to={'/shop/goods/theme_list/category=300?page=1'}>베스트</Link>
           </li>
           <li className={linkHover}>
-            <NavLink to="/shop/goods/item_list">알뜰쇼핑</NavLink>
+            <Link to={'/shop/goods/theme_list/category=400?page=1'}>알뜰쇼핑</Link>
           </li>
           <li className={linkHover}>
-            <NavLink to="/shop/goods/item_list">금주혜택</NavLink>
+            <Link to="/shop/goods/event">금주혜택</Link>
           </li>
         </ul>
         <HeaderSearch />

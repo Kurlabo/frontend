@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 @layer base {
   html {
@@ -22,7 +23,12 @@
 
 * {
   box-sizing: border-box;
+  outline: none;
 }
+*:active {
+  outline: none;
+}
+
 @layer components {
   .a11y-hidden {
     position: absolute;
@@ -53,13 +59,11 @@
   }
   .multiline-ellipsis {
     display: inline-block;
-    width: 60rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; /* 여러 줄 자르기 추가 스타일 */
     white-space: normal;
     line-height: 1.2;
-    height: 2.4em;
     text-align: left;
     word-wrap: break-word;
     display: -webkit-box;

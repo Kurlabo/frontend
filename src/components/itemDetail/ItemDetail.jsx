@@ -3,7 +3,7 @@ import RelatedProduct from './detail/RelatedProduct';
 import PurchaseInfo from './detail/PurchaseInfo';
 import GoodsInfo from './detail/GoodsInfo';
 import GotopBtn from './detail/GotopBtn';
-import CartOption from './detail/CartOption';
+import BottomCartOption from './detail/BottomCartOption';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCartCount } from '../../modules/cartAddOption';
@@ -12,38 +12,61 @@ import WishListLoginModal from './detail/WishListLoginModal';
 import { withRouter } from 'react-router';
 import { postWishList, setModuleMsg, setModuleMsgEmpty } from '../../modules/itemDetail';
 import { postGoodsToCart } from '../../modules/common/addGoodsToCart';
+import { setRecent } from '../../modules/recentItem';
 
-const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
+// name에 맞는 쿠키 가져오는 함수
+function getCookie(name) {
+  let matches = document.cookie.match(
+    new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'),
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+const ItemDetail = ({ itemDetail, history, productId }) => {
   const dispatch = useDispatch();
   let onPopUp = useRef(false);
+  const isLogin = getCookie('auth') !== undefined;
 
-  const isLogin = true;
   const { count } = useSelector(state => state.cartAddOption);
   const { isOpen, msg } = useSelector(state => state.itemDetail.modalInfo);
-  const [viewCartOption, setviewCartOption] = useState(false);
+
   const [iswishListModalOpen, setIsWishListModalOpen] = useState(false);
 
-  const cartOptionRender = useCallback(() => {
-    if (window.pageYOffset > 1100) {
-      setviewCartOption(true);
-    } else {
-      setviewCartOption(false);
-    }
-  }, []);
+  // 쿠키에 넣을 key와 value
+  const name = 'recentlyViewed';
+  const existingValue = getCookie(name);
+
+  const saveView = ({ product_id, name, original_image_url }) => ({
+    product_id,
+    name,
+    original_image_url,
+  });
 
   const onClickAddCart = useCallback(() => {
+    // api header
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + getCookie('auth'),
+      },
+    };
+
     if (onPopUp.current) return;
     if (count < 1) {
       dispatch(setModuleMsg('수량은 반드시 1 이상이어야 합니다.'));
       return;
     }
     if (!isLogin) {
-      console.log('로그인 창으로 이동!!!');
+      setIsWishListModalOpen(true);
       return;
     }
     onPopUp.current = true;
     // 장바구니에 post
-    dispatch(postGoodsToCart({ product_id: productId, cnt: count }));
+    dispatch(
+      postGoodsToCart({
+        addProductInfo: { insertCartList: [{ product_id: productId, cnt: count }] },
+        config,
+      }),
+    );
     setTimeout(() => {
       onPopUp.current = false;
     }, 3000);
@@ -54,6 +77,12 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
   }, [dispatch]);
 
   const onClickWishList = useCallback(() => {
+    // api header
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + getCookie('auth'),
+      },
+    };
     if (!isLogin) {
       setIsWishListModalOpen(true);
       return;
@@ -61,29 +90,47 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
       dispatch(setModuleMsg('하나 이상의 패키지 구성품을 선택하셔야됩니다!'));
       return;
     } else {
-      dispatch(postWishList({ product_id: productId }));
+      dispatch(
+        postWishList({
+          product_id: { product_id: productId },
+          config,
+        }),
+      );
     }
   }, [count, isLogin, dispatch, productId]);
 
   const closeWishListModal = useCallback(() => {
     setIsWishListModalOpen(false);
+  }, []);
+
+  const moveToSigninPage = useCallback(() => {
     history.push('/shop/account/signin');
   }, [history]);
 
   useEffect(() => {
     dispatch(setCartCount(1));
-
-    window.addEventListener('scroll', cartOptionRender);
+    dispatch(setRecent(saveView(itemDetail)));
 
     return () => {
-      window.removeEventListener('scroll', cartOptionRender);
+      let value = existingValue ? [...JSON.parse(existingValue)] : [];
+      value = value.filter(item => +item.product_id !== +productId);
+      value.unshift({ product_id: productId, thumbnailUrl: itemDetail.list_image_url });
+      if (value.length > 10) {
+        value.pop();
+      }
+      document.cookie =
+        encodeURIComponent(name) +
+        '=' +
+        encodeURIComponent(JSON.stringify(value)) +
+        '; max-age=3600';
     };
-  }, [cartOptionRender, dispatch]);
+  }, [dispatch, existingValue, itemDetail, itemDetail.list_image_url, productId]);
 
   return (
     <div>
       <main className="w-p-1050 pt-8 mx-auto my-0 text-gray-800">
         <PurchaseInfo
+          isLogin={isLogin}
           itemDetail={itemDetail}
           onClickAddCart={onClickAddCart}
           onClickWishList={onClickWishList}
@@ -92,16 +139,19 @@ const ItemDetail = ({ itemDetail, loading, error, history, productId }) => {
         <GoodsInfo itemDetail={itemDetail} />
         <GotopBtn />
       </main>
-      {viewCartOption && (
-        <CartOption
-          itemDetail={itemDetail}
-          onClickAddCart={onClickAddCart}
-          onClickWishList={onClickWishList}
-        />
-      )}
+      <BottomCartOption
+        isLogin={isLogin}
+        itemDetail={itemDetail}
+        onClickAddCart={onClickAddCart}
+        onClickWishList={onClickWishList}
+      />
       <CheckModal modalIsOpen={isOpen} closeModal={closeModal} msg={msg} />
-      <WishListLoginModal openModal={iswishListModalOpen} closeModal={closeWishListModal} />
+      <WishListLoginModal
+        openModal={iswishListModalOpen}
+        closeModal={closeWishListModal}
+        moveToSigninPage={moveToSigninPage}
+      />
     </div>
   );
 };
-export default withRouter(ItemDetail);
+export default React.memo(withRouter(ItemDetail));

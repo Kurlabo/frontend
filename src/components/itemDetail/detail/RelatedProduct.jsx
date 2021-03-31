@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 const btnStyle = 'w-12 text-gray-700 cursor-pointer absolute inset-y-1/2';
 let onAnimate = false;
+
 const NameBox = styled.p`
   overflow: hidden;
   width: 100%;
@@ -12,8 +13,9 @@ const NameBox = styled.p`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `;
+
 const RelatedProduct = ({ relatedProducts }) => {
-  let curIndex = 0;
+  let curIndex = useRef(0);
   const containerRef = useRef();
   const carouselArr = [
     ...relatedProducts.slice(15),
@@ -25,21 +27,21 @@ const RelatedProduct = ({ relatedProducts }) => {
     containerRef.current.style.transform = 'translateX(-' + 950 + 'px)';
   }, [relatedProducts]);
 
-  const slideNext = useCallback(() => {
+  const slideNext = () => {
     if (onAnimate) return;
     onAnimate = true;
-    if (curIndex <= 3) {
+    if (curIndex.current <= 3) {
       containerRef.current.style.transition = 'all 0.5s ease-in-out';
-      containerRef.current.style.transform = 'translateX(-' + 950 * (curIndex + 2) + 'px)';
-      ++curIndex;
+      containerRef.current.style.transform = 'translateX(-' + 950 * (curIndex.current + 2) + 'px)';
+      ++curIndex.current;
     }
-    if (curIndex === 3) {
+    if (curIndex.current === 3) {
       setTimeout(() => {
         containerRef.current.style.transition = 'all 0s';
         containerRef.current.style.transform = 'translateX(-' + 0 + 'px)';
       }, 500);
-      curIndex = -1;
-    } else if (curIndex === 4) {
+      curIndex.current = -1;
+    } else if (curIndex.current === 4) {
       setTimeout(() => {
         containerRef.current.style.transition = 'all 0s';
         containerRef.current.style.transform = 'translateX(-' + 950 + 'px)';
@@ -47,33 +49,32 @@ const RelatedProduct = ({ relatedProducts }) => {
       containerRef.current.style.transition = 'all 0.5s ease-in-out';
       containerRef.current.style.transform = 'translateX(-' + 950 * 5 + 'px)';
       console.log(950 * 4);
-      curIndex = 0;
+      curIndex.current = 0;
     }
     setTimeout(() => {
       onAnimate = false;
     }, 500);
-  }, []);
-
-  const slidePrev = useCallback(() => {
+  };
+  const slidePrev = () => {
     if (onAnimate) return;
-    if (curIndex >= 0) {
+    if (curIndex.current >= 0) {
       onAnimate = true;
       containerRef.current.style.transition = 'all 0.5s ease-in-out';
-      containerRef.current.style.transform = 'translateX(-' + 950 * curIndex + 'px)';
-      --curIndex;
+      containerRef.current.style.transform = 'translateX(-' + 950 * curIndex.current + 'px)';
+      --curIndex.current;
     }
-    if (curIndex === -1) {
+    if (curIndex.current === -1) {
       setTimeout(() => {
         onAnimate = true;
         containerRef.current.style.transition = 'all 0s';
         containerRef.current.style.transform = 'translateX(-' + 950 * 4 + 'px)';
       }, 500);
-      curIndex = 3;
+      curIndex.current = 3;
     }
     setTimeout(() => {
       onAnimate = false;
     }, 500);
-  }, []);
+  };
 
   return (
     <div>
@@ -104,23 +105,27 @@ const RelatedProduct = ({ relatedProducts }) => {
           <ul className="absolute w-per-500" ref={containerRef}>
             {carouselArr.map((product, i) => {
               return (
-                <Link to={`/shop/goods/goods_view/${product.product_id}`}>
-                  <li
-                    className="cursor-pointer float-left w-p-180 h-p-320 mr-4 border border-gray-300"
-                    id={product.product_id}
-                    key={product.product_id * i}
-                  >
+                <li
+                  className="cursor-pointer float-left w-p-180 h-p-320 mr-4 border border-gray-300"
+                  key={i}
+                >
+                  <Link to={`/shop/goods/goods_view/${product.product_id}`}>
                     <div className="h-p-230">
-                      <img className="w-full" src={product.name} alt="연관 상품 이미지" />
+                      <img
+                        className="h-full w-full"
+                        src={product.original_image_url}
+                        alt="연관 상품 이미지"
+                        onError={handleImgError}
+                      />
                     </div>
                     <div className="p-4">
                       <NameBox className="text-p-14 text-gray-800 h-14 leading-7">
-                        {product['list_image_url']}
+                        {product.name}
                       </NameBox>
                       <p className="text-p-14">{(+product['original_price']).toLocaleString()}원</p>
                     </div>
-                  </li>
-                </Link>
+                  </Link>
+                </li>
               );
             })}
           </ul>
@@ -128,5 +133,9 @@ const RelatedProduct = ({ relatedProducts }) => {
       </div>
     </div>
   );
+
+  function handleImgError(e) {
+    e.target.src = '/img/commingsoonresize.png';
+  }
 };
 export default React.memo(RelatedProduct);

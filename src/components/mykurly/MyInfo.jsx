@@ -1,28 +1,53 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MyKurlyHeader from './MyKurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
 import MyInfoModify from './MyInfoModify';
 import Modal from '../login/Modal';
 import Modalform from '../login/Modalform';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { withCookies, useCookies } from 'react-cookie';
+import { getMemberMyInfo } from '../../modules/myInfo';
+import { withRouter } from 'react-router-dom';
 
-const MyInfo = () => {
-  const confirm = {
-    state: true,
-    modal: false,
-  };
-  // const dispatch = useDispatch();
+const MyInfo = ({ history }) => {
+  const [info, SetInfo] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [modalValue, setModalValue] = useState('');
+  const myInfo = useSelector(state => state.myInfo);
+  const member = useSelector(state => state.login.member);
+  const { modalOpen, message } = myInfo;
+  const dispatch = useDispatch();
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const cookieAuth = cookies.auth;
+  const [password, setPassword] = useState('');
+  // const cookieId = cookies.id;
+
+  useEffect(() => {
+    if (!cookieAuth) {
+      alert('로그인 후 이용해주세요');
+      history.push('/shop/account/signin');
+    } else if (cookieAuth && !member.name) {
+      alert('비정상적인 접속으로 메인화면으로 이동합니다.');
+      history.push('/');
+    }
+  }, []);
   return (
     <>
       <MyKurlyHeader />
       <main className="container h-full box-content clear-fix">
         <MyKurlyCategory />
-        {!confirm.state ? <MyInfoBlock /> : <MyInfoModify />}
-        {confirm.modal ? (
+        {message !== 'SUCCESS' ? (
+          <MyInfoBlock uid={member.uid} onChange={onChange} onSubmit={onSubmitCheckUserInfo} />
+        ) : (
+          <MyInfoModify />
+        )}
+        {modalOpen ? (
           <Modalform id="modal">
             <Modal
-              modal={confirm.modal}
+              modal={modal}
               closeModal={closeModal}
-              value="비밀번호를 정확하게 입력해주세요"
+              value={modalValue || '비밀번호를 정확하게 입력해주세요'}
             />
           </Modalform>
         ) : (
@@ -31,13 +56,20 @@ const MyInfo = () => {
       </main>
     </>
   );
-
+  function onChange(e) {
+    setPassword(e.target.value);
+  }
+  function onSubmitCheckUserInfo(e) {
+    e.preventDefault();
+    dispatch(getMemberMyInfo(cookieAuth, password));
+    setModal(true);
+  }
   function closeModal() {
-    // dispatch({});
+    setModal(false);
   }
 };
 
-const MyInfoBlock = () => {
+const MyInfoBlock = ({ uid, onChange, onSubmit, password }) => {
   return (
     <div className="float-left align-middle w-r-85 h-full mt-20 mb-6 px-12 pb-32 box-border">
       <h1 className="a11y-hidden">개인 정보 수정하기 </h1>
@@ -50,12 +82,16 @@ const MyInfoBlock = () => {
       </div>
       <div className="text-center text-r-1.4">
         <form onSubmit={onSubmit}>
-          <div className="-ml-32 border-b border-kg-80 py-6 mb-16">
+          <div className="border-b border-kg-80 py-6 mb-16">
             <label className="block my-4">
-              <span className="text-left inline-block w-48 font-medium">로그인</span>
+              <span className="text-left inline-block w-48 font-medium">아이디</span>
               <input
+                name="id"
+                onChange={onChange}
                 className="inline-block text-r-1.4 p-4 px-6 w-p-340 focus:bg-klp-700 border border-kg-80 rounded"
                 type="text"
+                value={uid}
+                readOnly
               />
             </label>
             <label className="block my-4 mt-8">
@@ -63,8 +99,11 @@ const MyInfoBlock = () => {
                 비밀번호<span className="text-red-500 font-normal">*</span>
               </span>
               <input
+                name="password"
                 className="inline-block text-r-1.4 py-4 px-6 w-p-340 focus:bg-klp-700 border border-kg-80 rounded"
                 type="password"
+                value={password}
+                onChange={onChange}
               />
             </label>
           </div>
@@ -75,10 +114,6 @@ const MyInfoBlock = () => {
       </div>
     </div>
   );
-
-  function onSubmit(e) {
-    e.preventDefault();
-  }
 };
 
-export default MyInfo;
+export default withRouter(withCookies(MyInfo));

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Counter from '../common/Counter';
 import { setCartCount, setProductPrice } from '../../../modules/cartAddOption';
@@ -7,7 +7,7 @@ import { setCartCount, setProductPrice } from '../../../modules/cartAddOption';
 const dlStyle = 'py-p-18 border-b border-gray-100 flex';
 const dtStyle = 'w-p-150 text-gray-700';
 const btnStyle = 'h-p-56 font-medium border rounded-p-3 text-p-16 text-center pt-6';
-const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList }) => {
+const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList, isLogin }) => {
   const {
     original_image_url,
     name,
@@ -24,9 +24,6 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList }) => {
     discounted_price,
   } = itemDetail;
 
-  // 스토어에서 로그인 유무 상태데이터 가져와야함!!!!!!!!
-  const isLogin = false;
-
   const dispatch = useDispatch();
   const { count, productPrice } = useSelector(state => state.cartAddOption);
 
@@ -34,19 +31,19 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList }) => {
     dispatch(setProductPrice(isLogin ? itemDetail.discounted_price : itemDetail.original_price));
   }, [dispatch, isLogin, itemDetail.discounted_price, itemDetail.original_price]);
 
-  const increase = useCallback(() => {
+  const increase = () => {
     if (count > 99) return;
     dispatch(setCartCount(count + 1));
-  }, [count, dispatch]);
+  };
 
-  const decrease = useCallback(() => {
+  const decrease = () => {
     if (count < 1) return;
     dispatch(setCartCount(count - 1));
-  }, [count, dispatch]);
+  };
 
-  const alexCode = contactant.split('<br />').map(line => {
+  const alexCode = contactant.split('<br />').map((line, i) => {
     return (
-      <span>
+      <span key={i}>
         {line}
         <br />
       </span>
@@ -55,7 +52,12 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList }) => {
 
   return (
     <div className="flex justify-between py-p-18">
-      <img className="block w-p-430 h-p-552" src={original_image_url} alt="상품 대표 이미지" />
+      <img
+        className="block w-p-430 h-p-552"
+        src={original_image_url}
+        alt="상품 대표 이미지"
+        onError={handleImgError}
+      />
       <div className="w-p-560">
         <p className="pt-4 pb-12">
           <strong className="text-p-24 font-medium">{name}</strong>
@@ -137,12 +139,14 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList }) => {
               <dd className="w-p-410">{expiration_date}</dd>
             </dl>
           )}
-          {guides && guides.length > 0 && (
+          {guides && guides.length > 0 && guides[0].length > 0 && (
             <dl className={dlStyle}>
               <dt className={dtStyle}>안내사항</dt>
               <div>
-                {guides.map(guide => (
-                  <dd className="w-p-410">- {guide}</dd>
+                {guides.map((guide, i) => (
+                  <dd key={i} className="w-p-410">
+                    - {guide}
+                  </dd>
                 ))}
               </div>
             </dl>
@@ -184,5 +188,9 @@ const PurchaseInfo = ({ itemDetail, onClickAddCart, onClickWishList }) => {
       </div>
     </div>
   );
+
+  function handleImgError(e) {
+    e.target.src = '/img/commingsoonresize.png';
+  }
 };
 export default React.memo(PurchaseInfo);

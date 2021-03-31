@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MyKurlyPageNation from './MyKurlyPageNation';
 import MyKurlyHeader from './MyKurlyHeader';
 import MyKurlyCategory from './MyKurlyCategory';
+import { useCookies, withCookies } from 'react-cookie';
+import { withRouter } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const MyEmoney = () => {
+const MyEmoney = ({ history }) => {
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const cookieAuth = cookies.auth;
+  const member = useSelector(state => state.login.member);
+
+  useEffect(() => {
+    if (!cookieAuth) {
+      alert('로그인 후 이용해주세요');
+      history.push('/shop/account/signin');
+    } else if (cookieAuth && !member.name) {
+      alert('비정상적인 접속으로 메인화면으로 이동합니다.');
+      removeCookie('auth');
+      history.push('/');
+    }
+  }, []);
   return (
     <>
       <MyKurlyHeader />
@@ -15,7 +32,7 @@ const MyEmoney = () => {
   );
 };
 
-const MyEmoneyBlock = () => {
+const MyEmoneyBlock = ({ history }) => {
   return (
     <div className="float-left align-middle w-r-85 h-full mt-20 px-12 pb-32 ">
       <h1 className="a11y-hidden">적립금 확인</h1>
@@ -52,8 +69,6 @@ const MyEmoneyBlock = () => {
           </li>
           <MyEmoneyItem />
         </ul>
-
-        <MyKurlyPageNation pageNumber="1" />
       </div>
     </div>
   );
@@ -88,4 +103,4 @@ const MyEmoneyItem = () => {
   );
 };
 
-export default MyEmoney;
+export default withRouter(withCookies(MyEmoney));

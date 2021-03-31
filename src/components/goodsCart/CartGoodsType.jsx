@@ -11,13 +11,12 @@ const CartGoodsType = ({
   isDropdownCold,
 }) => {
   return (
-    <div className="py-6 flex items-center justify-between">
+    <div className="py-6 flex items-center justify-between border-t-1 border-black">
       <div>
         <img
           alt=""
           className="w-12 h-12 inline-block mr-2.5"
           src={
-            // https://res.kurly.com/pc/service/cart/2007/ico_frozen.svg
             frozen
               ? 'https://res.kurly.com/pc/service/cart/2007/ico_cold.svg'
               : cold

@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { withRouter } from 'react-router';
 import GetSupportContent from './GetSupportContent';
 import GetSupportModal from './GetSupportModal';
-import GetSupportWriting from './GetSupportWriting';
 
 const pQData = [
   {
@@ -30,7 +29,6 @@ const pQData = [
 ];
 
 const GetSupport = ({ history }) => {
-  const [isWritingPage, setPage] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -38,11 +36,7 @@ const GetSupport = ({ history }) => {
       <h2 className="pt-2 pb-r-3.4 text-r-24 inline-block text-gray-800 font-medium mt-3 mb-1">
         1:1문의
       </h2>
-      {isWritingPage ? (
-        <GetSupportWriting setPage={setPage} />
-      ) : (
-        <GetSupportContent pQData={pQData} setPage={setPage} />
-      )}
+      <GetSupportContent pQData={pQData} />
       <GetSupportModal openModal={openModal} closeModal={closeModal} />
     </div>
   );

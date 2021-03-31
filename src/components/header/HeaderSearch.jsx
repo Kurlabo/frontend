@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { GrLocation } from 'react-icons/gr';
 import { FiShoppingCart } from 'react-icons/fi';
 import { BiSearch } from 'react-icons/bi';
@@ -6,6 +6,7 @@ import { a11yHidden } from './HeaderNav';
 import LoginDropDown from './LoginDropDown';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { Link } from 'react-router-dom';
+import DeliveryLocation from './DeliveryLocation';
 
 const inputStyle =
   'inline-block focus:outline-0 focus:bg-gray-50 w-r-24.2 h-r-3.6 rounded-3xl shadow-2xl pl-8 pr-24 bg-gray-100 text-1.2';
@@ -18,8 +19,15 @@ const dropDownStyle =
 const HeaderSearch = () => {
   const [dropDown, setDropDown] = useState(false);
   const [search, setSearch] = useState({ search: '', toggle: false });
+  const [location, setLocation] = useState(sessionStorage.getItem('address'));
+
   // input Ref
   const searchRef = useRef();
+
+  useEffect(() => {
+    setLocation(sessionStorage.getItem('address'));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionStorage.getItem('address')]);
 
   return (
     <div className="flex ">
@@ -47,20 +55,28 @@ const HeaderSearch = () => {
           onMouseLeave={onMouseLeave}
         >
           <GrLocation className="cursor-pointer" />
-          {dropDown && (
-            <>
-              <LoginDropDown />
-              <div className={dropDownStyle}></div>
-            </>
-          )}
+          {location
+            ? dropDown && (
+                <>
+                  <DeliveryLocation />
+                  <div className={dropDownStyle}></div>
+                </>
+              )
+            : dropDown && (
+                <>
+                  <LoginDropDown />
+                  <div className={dropDownStyle}></div>
+                </>
+              )}
         </div>
 
-        <Link to="/" className="inline-block text-5xl cursor-pointer">
+        <Link to="/goods_cart" className="inline-block text-5xl cursor-pointer">
           <FiShoppingCart className="hover:text-kp-600" />
         </Link>
       </div>
     </div>
   );
+
   // 배송지, 로그인 정보 창
   function onMouseEnter() {
     setDropDown(true);

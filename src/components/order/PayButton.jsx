@@ -1,26 +1,103 @@
 import React from 'react';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router';
+import axios from '../../../node_modules/axios/index';
+import { getPayCompleteInfo } from '../../modules/paycomplete';
 import AgreeModal from './AgreeModal';
 import { wrapper } from './Coupon';
+import { useCookies } from 'react-cookie';
 
 const payButton =
   'w-r-24.2 h-r-5.5 bg-kp-600 text-white text-1.6 flex justify-center rounded-p-3 mx-auto';
 
-const PayButton = ({ agreeCheck, history }) => {
+const PayButton = ({ agreeCheck, history, deliveryInfo, orders_id }) => {
   const [isopen, setIsopen] = useState(false);
+  const checkout = useSelector(state => state.orderInfo.checkoutMethod);
+  const products_list = useSelector(state => state.orderInfo.orderInfo.products_list);
+  const dispatch = useDispatch();
+  const [cookies] = useCookies(['auth']);
+
+  let reciever_visit_method = '';
+  let total_discount_price = 0;
+  let total_price = 0;
+
+  products_list !== undefined &&
+    (total_discount_price = products_list.reduce(
+      (acc, curr) => acc + curr.product_discount_price,
+      0,
+    ));
+  products_list !== undefined &&
+    (total_price = products_list.reduce((acc, curr) => acc + curr.product_price, 0));
+
+  switch (deliveryInfo.deliveryPlace) {
+    case '문 앞':
+      if (deliveryInfo.enterWay === '공동현관 비밀번호') {
+        reciever_visit_method = deliveryInfo.enterWay + deliveryInfo.enterPwd;
+      } else if (deliveryInfo.enterWay === '자유 출입 가능') {
+        reciever_visit_method = deliveryInfo.enterWay;
+      } else {
+        reciever_visit_method = deliveryInfo.otherMsg;
+      }
+      break;
+    case '경비실':
+      reciever_visit_method = '경비실' + deliveryInfo.securityMsg;
+      break;
+    case '택배함':
+      if (deliveryInfo.enterWay === '공동현관 비밀번호') {
+        reciever_visit_method =
+          deliveryInfo.courierInfo + deliveryInfo.enterWay + deliveryInfo.enterPwd;
+      } else if (deliveryInfo.enterWay === '자유 출입 가능') {
+        reciever_visit_method = deliveryInfo.courierInfo + deliveryInfo.enterWay;
+      } else {
+        reciever_visit_method =
+          deliveryInfo.courierInfo + deliveryInfo.enterWay + deliveryInfo.otherMsg;
+      }
+      break;
+
+    // 기타 장소
+    default:
+      reciever_visit_method = deliveryInfo.enterWay + deliveryInfo.otherMsg;
+      break;
+  }
+
+  const onClickPayButton = async cookies => {
+    if (agreeCheck) setIsopen(true);
+    else {
+      setIsopen(false);
+      const res = await axios.post(
+        'http://3.35.221.9:8080/api/order/checkout',
+        {
+          reciever: deliveryInfo.receiver,
+          reciever_phone: deliveryInfo.phone,
+          reciever_post: deliveryInfo.address,
+          reciever_place: deliveryInfo.deliveryPlace,
+          reciever_visit_method: reciever_visit_method,
+          arrived_alarm: deliveryInfo.deliveryMsg,
+          checkout: checkout,
+          total_price: total_price,
+          total_discount_price: total_discount_price,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${cookies}`,
+          },
+        },
+      );
+      if (res.data === 'CHECKOUT SUCCESS') {
+        history.push(`/order/paycomplete/${orders_id}`);
+        dispatch(getPayCompleteInfo(orders_id));
+      }
+    }
+  };
 
   return (
-    <div className={wrapper}>
+    <div className={`${wrapper} absolute transform translate-y-r-130`}>
       <div className={payButton}>
         <button
           className="focus:outline-0 px-36 py-4"
           onClick={() => {
-            if (agreeCheck) setIsopen(true);
-            else {
-              setIsopen(false);
-              history.push('/pay_complete');
-            }
+            onClickPayButton(cookies.auth);
           }}
         >
           결제하기

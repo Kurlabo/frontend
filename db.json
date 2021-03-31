@@ -1,3 +1,13 @@
 {
-  "user": []
+  "user": [
+    {
+      "date_of_birth": "199286",
+      "id": "bnb135",
+      "password": "1111111rma",
+      "repassword": "1111111rma",
+      "name": "박상언",
+      "email": "wwwbbb1@naver.com",
+      "phone": "01051771500"
+    }
+  ]
 }

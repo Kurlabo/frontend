@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
-export default function CheckBox({ value }) {
-  const [checked, setchecked] = useState(false);
-  const onClick = () => {
-    setchecked(!checked);
-  };
+export default function CheckBox({ value, id, onChange, checked }) {
   return (
     <>
-      <input id="checkbox" type="checkbox" className="invisible absolute" />
-      <label htmlFor="checkbox" onClick={onClick} className="inline-block ">
+      <input
+        id={id}
+        onChange={onChange}
+        type="checkbox"
+        className="hidden absolute"
+        checked={checked}
+      />
+      <label htmlFor={id} className="inline-block">
         {checked ? (
           <MdCheckBox className="inline-block align-middle w-9 h-9 leading-none text-klp-600" />
         ) : (

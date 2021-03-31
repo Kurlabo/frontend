@@ -39,7 +39,7 @@ const CategoriesLi = ({
       ) : (
         <img className="w-r-2.4 h-r-2.4 mr-4" src={`/img/category/${inactiveImg}`} alt={text} />
       )}
-      <Link to={`/shop/goods/item_list/category=${id}`}>{text}</Link>
+      <Link to={`/shop/goods/item_list/category=${id}?page=0`}>{text}</Link>
     </li>
   );
 };

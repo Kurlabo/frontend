@@ -20,9 +20,10 @@ const AddCartModal = () => {
     isNew: addGoodsToCart.result,
     isOpen: addGoodsToCart.modalopen,
   }));
+
   return (
     <div className={AddCartModalStyle + (isOpen ? '' : ' transform scale-0 opacity-0')}>
-      <div className=" bg-cartTriangle bg-no-repeat absolute bg-contain w-r-1.9 h-36 bg-center -top-r-5.2 right-r-1.4 " />
+      <div className=" bg-cartTriangle bg-no-repeat absolute bg-contain w-r-1.9 h-36 bg-center -top-r-5.1 right-r-1.4 " />
       <div className="flex justify-between">
         <img className="w-r-4.6 h-r-6" src={itemDetail && itemDetail.list_image_url} alt="img" />
         <div className="text-r-1.4 font-medium w-r-24 flex flex-col justify-around">
