@@ -96,9 +96,10 @@ const MyDestinationListItem = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
   const dispatch = useDispatch();
   const cookieAuth = cookies.auth;
+  console.log(destination);
   return (
     <>
-      {destinationList.map(
+      {[].map(
         ({ id, is_main, reciever, reciever_phone, deliver_address, member, htmlFor }, index) => (
           <li key={`destination_${index}`} className="h-40 border-b border-kg-80 box-border">
             <ul className="text-r-1.4 ">
