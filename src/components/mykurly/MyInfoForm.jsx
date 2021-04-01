@@ -8,7 +8,7 @@ import FormInput from '../signup/FormInput';
 import IdInput from '../signup/IdInput';
 import InputDate from '../signup/InputDate';
 import InputGender from '../signup/InputGender';
-import PassInput from '../signup/PassInput';
+import PassInput from './MyCurlyPassInput';
 import SignupButton from '../signup/SignupButton';
 import SignupModal from '../signup/SignupModal';
 import { useCookies, withCookies } from 'react-cookie';
