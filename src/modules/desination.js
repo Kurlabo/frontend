@@ -25,6 +25,7 @@ export const getMyDestination = (authToken, id) => async dispatch => {
   dispatch(requestDestinationList());
   try {
     const res = await apiDestination.getDestinationList(authToken);
+    console.log('배송지', res.data);
     !id
       ? dispatch(requestOfDestinationSuccess(res.data, res.data[0].member))
       : dispatch(requestOfDestinationItem(res.data, id));
@@ -79,7 +80,7 @@ const destination = handleActions(
     [REQUEST_OF_DESTINATION_SUCCESS]: (state, { payload }) => ({
       ...state,
       loading: false,
-      data: payload.data,
+      data: payload,
       member: payload.member,
     }),
     [REQUEST_OF_DESTINATION_FAIL]: (state, { payload }) => ({

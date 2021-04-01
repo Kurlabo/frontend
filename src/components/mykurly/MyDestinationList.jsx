@@ -90,7 +90,6 @@ const MyDestinationListItem = () => {
   const { modalOpen, data: destinationList } = destination;
 
   const [modal, setModal] = useState(false);
-  const [htmlfor, setHtmlFor] = useState('');
   const [checked, setChecked] = useState(false);
 
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
@@ -107,9 +106,9 @@ const MyDestinationListItem = () => {
                   id={id}
                   className="w-16"
                   value={`destination_${index}`}
-                  onClick={onClickCheckBox}
+                  // onClick={onClickCheckBox}
                   onChange={onChangeInput}
-                  htmlfor={htmlfor}
+                  state={checked}
                   is_main={is_main}
                 />
                 {modalOpen && (
@@ -124,7 +123,7 @@ const MyDestinationListItem = () => {
               </li>
               <li className="w-p-370 px-8 inline-block align-middle">
                 <p className="text-r-1.6">
-                  {member.id === is_main ? (
+                  {is_main === 1 ? (
                     <span className="block text-r-1.2 w-r-7.9 bg-gray-100 rounded-full px-3 py-2 leading-none">
                       기본배송지
                     </span>
@@ -173,10 +172,9 @@ const MyDestinationListItem = () => {
   function onClickCheckBox(e) {
     dispatch(modifyDestination(e.currentTarget.htmlFor, cookieAuth));
     setModal(!modal);
-    setHtmlFor(e.currentTarget.htmlFor);
   }
   function onChangeInput(e) {
-    setChecked(e.target.checked);
+    setChecked(e.target.id);
   }
   function closeModal() {
     setModal(false);
