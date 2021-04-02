@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IoIosCheckmarkCircle, IoIosCheckmarkCircleOutline } from 'react-icons/io';
 
-const RoundCheckBox = ({ is_main, id, value, onChange, onClick, htmlfor }) => {
+const RoundCheckBox = ({ is_main, id, state, value, onChange }) => {
   return (
     <>
       <input
@@ -13,8 +13,8 @@ const RoundCheckBox = ({ is_main, id, value, onChange, onClick, htmlfor }) => {
         value={value}
         className="invisible absolute"
       />
-      <label onClick={onClick} htmlFor={id} className="inline-block align-middle w-full">
-        {htmlfor !== id ? (
+      <label htmlFor={id} className="inline-block align-middle w-full">
+        {state === id ? (
           <IoIosCheckmarkCircleOutline className="cursor-pointer inline-block align-middle w-12 h-12 leading-none text-kg-200" />
         ) : (
           <IoIosCheckmarkCircle className="cursor-pointer inline-block align-middle w-12 h-12 leading-none text-kp-600" />
