@@ -25,6 +25,7 @@ export const getMyDestination = (authToken, id) => async dispatch => {
   dispatch(requestDestinationList());
   try {
     const res = await apiDestination.getDestinationList(authToken);
+    console.log(res.data);
     !id
       ? dispatch(requestOfDestinationSuccess(res.data, res.data[0].member))
       : dispatch(requestOfDestinationItem(res.data, id));
@@ -76,7 +77,7 @@ const destination = handleActions(
       loading: true,
       error: false,
     }),
-    [REQUEST_OF_DESTINATION_SUCCESS]: (state, { payload }) => ({
+    [REQUEST_OF_DESTINATION_SUCCESS]: (state, payload) => ({
       ...state,
       loading: false,
       data: payload.data,

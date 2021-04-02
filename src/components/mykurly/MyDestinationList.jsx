@@ -88,7 +88,7 @@ const MyDestinationBlock = () => {
 const MyDestinationListItem = () => {
   const destination = useSelector(state => state.destination);
   const { modalOpen, data: destinationList } = destination;
-
+  console.log(destination);
   const [modal, setModal] = useState(false);
   const [htmlfor, setHtmlFor] = useState('');
   const [checked, setChecked] = useState(false);
