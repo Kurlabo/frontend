@@ -88,10 +88,10 @@ const MyDestinationBlock = () => {
 const MyDestinationListItem = () => {
   const destination = useSelector(state => state.destination);
   const { modalOpen, data: destinationList } = destination;
-
+  const main = destinationList.length ? destinationList.find(v => v.is_main === 1).id : false;
   const [modal, setModal] = useState(false);
-  const [checked, setChecked] = useState(false);
-
+  const [htmlfor, setHtmlFor] = useState('');
+  const [checked, setChecked] = useState(main);
   const [cookies, setCookie, removeCookie] = useCookies(['auth']);
   const dispatch = useDispatch();
   const cookieAuth = cookies.auth;
@@ -104,12 +104,13 @@ const MyDestinationListItem = () => {
               <li className="text-center inline-block leading-r-10">
                 <RoundCheckBox
                   id={id}
-                  className="w-16"
+                  className="w-1"
                   value={`destination_${index}`}
-                  // onClick={onClickCheckBox}
+                  onClick={onClickCheckBox}
                   onChange={onChangeInput}
-                  state={checked}
+                  htmlfor={htmlfor}
                   is_main={is_main}
+                  state={checked}
                 />
                 {modalOpen && (
                   <Modalform id="modal">
@@ -123,7 +124,7 @@ const MyDestinationListItem = () => {
               </li>
               <li className="w-p-370 px-8 inline-block align-middle">
                 <p className="text-r-1.6">
-                  {is_main === 1 ? (
+                  {member.id === is_main ? (
                     <span className="block text-r-1.2 w-r-7.9 bg-gray-100 rounded-full px-3 py-2 leading-none">
                       기본배송지
                     </span>
@@ -172,6 +173,7 @@ const MyDestinationListItem = () => {
   function onClickCheckBox(e) {
     dispatch(modifyDestination(e.currentTarget.htmlFor, cookieAuth));
     setModal(!modal);
+    setHtmlFor(e.currentTarget.htmlFor);
   }
   function onChangeInput(e) {
     setChecked(e.target.id);
