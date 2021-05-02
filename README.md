@@ -139,13 +139,22 @@ Market Kurly 사이트의 기존 기능과 더불어 개선점을 찾고 kurlabo
 ### 2. 메인 페이지
 
 - 메인배너에대한 정보를 보여주는 infinity carousel 구현
+
 - infinity carousel 자동 넘기기, mouseover, mouseout 일때 자동넘기기 정지, 재생 구현
+
 - infinity carousel 자동 넘기기 재생, 정지 버튼 구현
+
 - 추천하는 상품에대한 정보를 보여주는 carousel 구현
+
 - carousel 에서 가장 우측페이지로 이동시 우측 버튼 hidden, 가장 좌측페이지 인경우 좌측버튼 hidden
+
 - 추천하는 상품의 이미지 클릭시 각 상품별 세부정보 페이지로 URL이동 구현
+
 - MD의 추천 상품 버튼클릭시 각 상품 카테고리 버튼별로 carousel 정보 변경 구현
+
 - 인스타그램 고객 후기 이미지 및 인스타그램 URL이동 구현
+
+- [메인페이지 구현 유튜브](https://www.youtube.com/watch?v=qNzzZWR1LR8&list=PLw4AQO2Dk2sSHVtuFktOa74IJas9GbkFn&index=6)
 
 <br>
 
@@ -159,6 +168,7 @@ Market Kurly 사이트의 기존 기능과 더불어 개선점을 찾고 kurlabo
 - 각 상품 클릭시 해당 상품에 대한 설명 렌더링.
 - Original 마켓컬리 페이지에서 장바구니 모달창의 외부를 클릭시 모달창이 닫히지 않는 접근성 issue 해결.
 - 장바구니 담기 버튼 클릭시 해당 상품에 대한 정보 POST.
+- [상품리스트 구현 유튜브](https://www.youtube.com/watch?v=NuTKsd7XR34&list=PLw4AQO2Dk2sSHVtuFktOa74IJas9GbkFn&index=4)
 
 <br>
 
@@ -178,6 +188,8 @@ Market Kurly 사이트의 기존 기능과 더불어 개선점을 찾고 kurlabo
 - 주소검색 daum API 를 통한 주소 검색후 주소 정보 표시
 - 상품 선택하지않고 주소검색하지않은경우 주문하기 버튼 비활성화 / 상품 선택시, 주소검색시 주문하기 버튼 활성화
 
+- [장바구니페이지 구현 유튜브](https://www.youtube.com/watch?v=J7viPBt7YYk&list=PLw4AQO2Dk2sSHVtuFktOa74IJas9GbkFn&index=7)
+
 <br>
 
 ### 5. 주문서
@@ -191,3 +203,4 @@ Market Kurly 사이트의 기존 기능과 더불어 개선점을 찾고 kurlabo
 - 결제 동의 하지 않았을 시에 결제 불가 모달창 팝업.
 - 결제하기 클릭시 가지고 있던 state를 모두 POST.
 - 결제버튼 클릭시 결제 준비중 로딩창 렌더링.
+- [주문서 구현 유튜브](https://www.youtube.com/watch?v=NuTKsd7XR34&list=PLw4AQO2Dk2sSHVtuFktOa74IJas9GbkFn&index=4)
