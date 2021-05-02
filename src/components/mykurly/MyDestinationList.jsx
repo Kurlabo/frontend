@@ -1,10 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MyKurlyHeader from './MyKurlyHeader';
+import Modalform from '../login/Modalform';
+import Modal from '../login/Modal';
 import MyKurlyCategory from './MyKurlyCategory';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BiPencil } from 'react-icons/bi';
 import RoundCheckBox from './RoundCheckBox';
-const MyDestinationList = () => {
+import { useDispatch, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { useCookies, withCookies } from 'react-cookie';
+import { getMyDestination, modifyDestination } from '../../modules/desination';
+
+const MyDestinationList = ({ history }) => {
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const cookieAuth = cookies.auth;
+  const member = useSelector(state => state.login.member);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMyDestination(cookieAuth));
+    if (!cookieAuth) {
+      alert('로그인 후 이용해주세요');
+      history.push('/shop/account/signin');
+    }
+  }, []);
   return (
     <>
       <MyKurlyHeader />
@@ -68,95 +86,101 @@ const MyDestinationBlock = () => {
 };
 
 const MyDestinationListItem = () => {
-  const [form, setform] = useState({
-    checked: false,
-    checkLabel: '',
-    modal: false,
-  });
-
-  const checkForms = [
-    { id: 'dtn1', value: 'radio1' },
-    { id: 'dtn2', value: 'radio2' },
-    { id: 'dtn3', value: 'radio3' },
-    { id: 'dtn4', value: 'radio4' },
-    { id: 'dtn5', value: 'radio5' },
-  ];
+  const destination = useSelector(state => state.destination);
+  const { modalOpen, data: destinationList } = destination;
+  const main = destinationList.length ? destinationList.find(v => v.is_main === 1).id : false;
+  const [modal, setModal] = useState(false);
+  const [htmlfor, setHtmlFor] = useState('');
+  const [checked, setChecked] = useState(main);
+  const [cookies, setCookie, removeCookie] = useCookies(['auth']);
+  const dispatch = useDispatch();
+  const cookieAuth = cookies.auth;
   return (
     <>
-      {checkForms.map((checkform, index) => (
-        <li key={`destination_${index}`} className="h-40 border-b border-kg-80 box-border">
-          <ul className="text-r-1.4 ">
-            <li className="text-center inline-block leading-r-10">
-              <RoundCheckBox
-                id={checkform.id}
-                className="w-16"
-                value={`radio${index}`}
-                onClick={onClickCheckBox}
-                onChange={onChangeInput}
-                form={form}
-                closeModal={closeModal}
-              />
-            </li>
-            <li className="w-p-370 px-8 inline-block align-middle">
-              <p className="text-r-1.6">
-                {`${index}` === form.checkLabel ? (
-                  <span className="block text-r-1.2 w-r-7.9 bg-gray-100 rounded-full px-3 py-2 leading-none">
-                    기본배송지
-                  </span>
-                ) : (
-                  ''
+      {destinationList.map(
+        ({ id, is_main, reciever, reciever_phone, deliver_address, member, htmlFor }, index) => (
+          <li key={`destination_${index}`} className="h-40 border-b border-kg-80 box-border">
+            <ul className="text-r-1.4 ">
+              <li className="text-center inline-block leading-r-10">
+                <RoundCheckBox
+                  id={id}
+                  className="w-1"
+                  value={`destination_${index}`}
+                  onClick={onClickCheckBox}
+                  onChange={onChangeInput}
+                  htmlfor={htmlfor}
+                  is_main={is_main}
+                  state={checked}
+                />
+                {modalOpen && (
+                  <Modalform id="modal">
+                    <Modal
+                      modal={modal}
+                      closeModal={closeModal}
+                      value="배송지로 선택이 완료되었습니다"
+                    />
+                  </Modalform>
                 )}
-                서울시 도봉로 136길 111
-              </p>
-            </li>
-            <li className="w-32 text-center inline-block align-middle leading-r-10">정세영</li>
-            <li className="w-52 text-center inline-block align-middle leading-r-10">
-              010-8331-4362
-            </li>
-            <li className="w-48 text-kp-600 text-center inline-block align-middle leading-r-10">
-              샛별배송
-            </li>
-            <li className="w-16 text-center inline-block align-middle leading-r-10">
-              <BiPencil className="w-16 text-r-2.8 text-kg-80 cursor-pointer" onClick={onClick} />
-            </li>
-          </ul>
-        </li>
-      ))}
+              </li>
+              <li className="w-p-370 px-8 inline-block align-middle">
+                <p className="text-r-1.6">
+                  {member.id === is_main ? (
+                    <span className="block text-r-1.2 w-r-7.9 bg-gray-100 rounded-full px-3 py-2 leading-none">
+                      기본배송지
+                    </span>
+                  ) : (
+                    ''
+                  )}
+                  {deliver_address}
+                </p>
+              </li>
+              <li className="w-32 text-center inline-block align-middle leading-r-10">
+                {reciever}
+              </li>
+              <li className="w-52 text-center inline-block align-middle leading-r-10">
+                {reciever_phone}
+              </li>
+              <li className="w-48 text-kp-600 text-center inline-block align-middle leading-r-10">
+                샛별배송
+              </li>
+              <li className="w-16 text-center inline-block align-middle leading-r-10">
+                <BiPencil
+                  id={`destination_${id}`}
+                  className="w-16 text-r-2.8 text-kg-80 cursor-pointer"
+                  onClick={onClick}
+                />
+              </li>
+            </ul>
+          </li>
+        ),
+      )}
     </>
   );
-  function onClick() {
+  function onClick(e) {
+    const itemId = e.currentTarget.id.split('_')[1];
     const width = 500;
     const height = 450;
     var left = Math.ceil((window.screen.width - width) / 2);
     var top = Math.ceil((window.screen.height - height) / 2);
 
     window.open(
-      //배송지 id를 같이 보내줄예정
-      '/shop/mypage/desination/modify_form/',
+      `/shop/mypage/desination/modify_form/${itemId}`,
       '_blank',
       `height=${height},width=${width}, top=${top}, left=${left}`,
     );
   }
 
   function onClickCheckBox(e) {
-    setform({
-      ...form,
-      checkLabel: e.currentTarget.htmlFor,
-      modal: !form.modal,
-    });
+    dispatch(modifyDestination(e.currentTarget.htmlFor, cookieAuth));
+    setModal(!modal);
+    setHtmlFor(e.currentTarget.htmlFor);
   }
   function onChangeInput(e) {
-    setform({
-      ...form,
-      checked: e.target.checked,
-    });
+    setChecked(e.target.id);
   }
   function closeModal() {
-    setform({
-      ...form,
-      modal: false,
-    });
+    setModal(false);
   }
 };
 
-export default MyDestinationList;
+export default withRouter(withCookies(MyDestinationList));

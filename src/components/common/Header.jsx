@@ -10,7 +10,7 @@ const logoUrl = 'https://res.kurly.com/images/marketkurly/logo/logo_x2.png';
 const Header = () => {
   const pathname = window.location.pathname;
   if (pathname === '/kakao/destination' || pathname === '/order/input_reception') return null;
-  else if (pathname === '/shop/mypage/desination/modify_form/') return null;
+  else if (pathname === '/shop/mypage/desination/modify_form/:itemId') return null;
   else if (pathname === '/shop/mypage/desination/modify_form') return null;
   return (
     <header className="w-full m-auto mb-6">

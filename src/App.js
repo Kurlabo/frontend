@@ -14,6 +14,7 @@ import Modal from './components/login/Modal';
 import NotFoundPage from './pages/NotFoundPage';
 import SearchLocation from './components/common/SearchLocation';
 import Footer from './components/common/Footer';
+import WeekEvent from './components/weekEvent/WeekEvent';
 import CustomerService from './components/customerService/CustomerService';
 import NoticeDetail from './components/customerService/NoticeDetail';
 import Sidebar from './components/common/Sidebar';
@@ -30,11 +31,14 @@ import KurlyPassPage from './pages/KurlyPassPage';
 import MyDestinationModify from './components/mykurly/MyDestinationModify';
 import GetSupportWritingPage from './pages/GetSupportWritingPage';
 import PayComplete from './components/order/PayComplete';
-import ThisWeekEvent from './components/weekEvent/ThisWeekEvent';
+import ThisWeekEvent from './components/event/ThisWeekEvent';
 function App() {
   return (
     <>
-      {window.location.pathname !== '/kakao/destination' ? <Header /> : null}
+      {window.location.pathname !== '/kakao/destination' &&
+      !window.location.pathname.includes('/shop/mypage/desination/modify_form/') ? (
+        <Header />
+      ) : null}
       <Switch>
         <Route path="/" exact component={MainPage} />
         <Route path="/goods_cart" component={GoodsCartPage} />
@@ -48,6 +52,7 @@ function App() {
         <Route path="/shop/goods/goods_view/:productId" component={ItemDetailPage} />
         <Route path="/shop/goods/item_list/:category:page" component={ItemListPage} />
         <Route path="/shop/goods/theme_list/:theme" component={ThemeProductListPage} />
+        <Route path="/shop/goods/event" component={WeekEvent} />
         <Route path="/order/paycomplete/:ordno" component={PayComplete} />
         <Route path="/order" component={OrderPage} />
         <Route path="/shop/mypage/mypage_orderlist" component={MyOrderListPage} />
@@ -55,7 +60,7 @@ function App() {
         <Route path="/shop/customer/board/:id" component={NoticeDetail} />
         <Route path="/shop/customer/board" component={CustomerService} />
         <Route path="/shop/mypage/destination/list" component={MyDestinationLIstPage} />
-        <Route path="/shop/mypage/mypage_wishlist:page" component={MyWishListPage} />
+        <Route path="/shop/mypage/mypage_wishlist/:page" component={MyWishListPage} />
         <Route path="/shop/mypage/mypage_wishlist" component={MyWishListPage} />
         <Route path="/shop/mypage/mypage_review/register" component={MyReviewRegisterPage} />
         <Route path="/shop/mypage/mypage_review" component={MyReviewPage} />
@@ -64,15 +69,21 @@ function App() {
         <Route path="/shop/mypage/mypage_coupon" component={MyCouponPage} />
         <Route path="/shop/member/myinfo" component={MyInfoPage} />
         <Route path="/shop/mypage/kurlypass" component={KurlyPassPage} />
-        <Route path="/shop/mypage/desination/modify_form?:dtn_id" component={MyDestinationModify} />
-        <Route path="/shop/mypage/desination/modify_form" component={MyDestinationModify} />
+        <Route path="/shop/mypage/desination/modify_form/:dtn_id" component={MyDestinationModify} />
+        <Route path="/shop/mypage/desination/modify_form/" component={MyDestinationModify} />
         <Route path="/shop/member/" component={MyInfoPage} />
         <Route path="/kakao/destination" component={SearchLocation} />
         <Route Path="/shop/goods/event" component={ThisWeekEvent} />
         <Route component={NotFoundPage} />
       </Switch>
-      {window.location.pathname !== '/kakao/destination' ? <Sidebar /> : null}
-      {window.location.pathname !== '/kakao/destination' ? <Footer /> : null}
+      {window.location.pathname !== '/kakao/destination' &&
+      !window.location.pathname.includes('/shop/mypage/desination/modify_form/') ? (
+        <Sidebar />
+      ) : null}
+      {window.location.pathname !== '/kakao/destination' &&
+      !window.location.pathname.includes('/shop/mypage/desination/modify_form/') ? (
+        <Footer />
+      ) : null}
     </>
   );
 }

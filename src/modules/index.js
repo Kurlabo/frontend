@@ -14,10 +14,13 @@ import loading from './loading';
 import instagram from './instagram';
 import customerService from './customerService';
 import mdButtons from './mdButtons';
+import destination from './desination';
 import order from './orderList';
 import orderInfo from './order';
+import myInfo from './myInfo';
 import myReviewRegister, { myReviewSaga } from './myReviewRegister';
 import wish from './wishList';
+import review from './review';
 import addGoodsToCart, { addGoodsToCartSaga } from './common/addGoodsToCart';
 import { connectRouter } from 'connected-react-router';
 import themeProductList from './themeProductList';
@@ -31,6 +34,7 @@ const rootReducer = history =>
     order,
     orderInfo,
     goodsCart,
+    review,
     user,
     notice,
     recentItem,
@@ -44,7 +48,9 @@ const rootReducer = history =>
     instagram,
     myReviewRegister,
     login,
+    myInfo,
     paycomplete,
+    destination,
     myWritableReviews,
     router: connectRouter(history),
   });

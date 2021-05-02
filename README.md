@@ -6,7 +6,10 @@
 
 2021년 2월 01일부터 2월 26일까지(업데이트 기간 제외) 진행한 Kurlabo 프로젝트입니다.
 
+
+
 <div width><h2>1. 📖 Tech Stack</h2><p><img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/>&nbsp;<br/><img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/NPM-CB3837?style=flat-square&logo=NPM&logoColor=white"/>&nbsp;<img src="https://img.shields.io/badge/Storybook-FF4785?style=flat-square&logo=Storybook&logoColor=white"/>&nbsp;<br/><img src="https://img.shields.io/badge/Tailwind CSS-38B2AC?style=flat-square&logo=Tailwind CSS&logoColor=white"/><img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"/><img src="https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=Postman&logoColor=white"/>
+
 
 - 라이브러리
 
@@ -29,15 +32,22 @@
       </div>
   </details>
 
+
+
 ## 2. Getting Start!
 
 `$ git clone "https://github.com/Kurlabo/frontend.git`
 `$ npm install`
 `$ npm run start`
 
+
+
+
 ## 3. Contributioning
 
 Please read [CONTRIBUTING.md](https://github.com/Kurlabo/frontend/blob/develop/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us. /
+
+
 
 ## 4. Contributors
 
@@ -95,17 +105,16 @@ Please read [CONTRIBUTING.md](https://github.com/Kurlabo/frontend/blob/develop/C
     <div>
         <br/>
         - 메인 페이지 헤더 UI 구현.<br/><br/>
-        - 배송지 검색 DAUM API 사용하여 구현.<br/><br/>
         - 카테고리 별 상품리스트 페이지 UI 구현 및 라우팅 처리.<br/><br/>
         - 신상품, 베스트, 알뜰쇼핑 페이지 UI 구현 및 라우팅 처리.<br/><br/>
-        - 카테고리, 신상품, 베스트, 알뜰쇼핑 페이지네이션 구현.<br/><br/>
         - 주문하기 페이지, 장바구니 모달창 UI 구현.<br/><br/>
-        - 주문서 페이지 API 요청 기능 구현.
-        - 금주혜택 페이지 구현.
         - API 연동하여 상품 렌더링 기능 구현.<br/><br/>
+        - daum API 연동하여 배송지 검색기능 구현.<br/><br/>
         - documentation 작성.
        </div>
   </details>
+
+
 
 ## 5. Develop motivation
 
@@ -203,4 +212,32 @@ Market Kurly 사이트의 기존 기능과 더불어 개선점을 찾고 kurlabo
 - 결제 동의 하지 않았을 시에 결제 불가 모달창 팝업.
 - 결제하기 클릭시 가지고 있던 state를 모두 POST.
 - 결제버튼 클릭시 결제 준비중 로딩창 렌더링.
+<<<<<<< HEAD
 - [주문서 구현 유튜브](https://www.youtube.com/watch?v=NuTKsd7XR34&list=PLw4AQO2Dk2sSHVtuFktOa74IJas9GbkFn&index=4)
+=======
+
+<br>
+
+### 6. 상품 상세 페이지
+
+- 상품 ID에 따라 해당 상품에 대한 상세 정보 렌더링
+- 해당 카테고리의 상품들로 구성된 연관 상품의 infinity carousel 구현
+- 상품 정보 navigation의 선택된 탭에 따라 상품 info영역 렌더링
+- 고객 후기 탭 선택시 해당 상품에 대한 상품 후기 렌더링
+- 스크롤 위치에 따라 하단 장바구니 옵션창 여닫힘
+- 개수 증가, 감소시 총 상품금액 정보 변경
+- 장바구니 옵션(count, price) state로 관리하여 설정한 옵션 상/하단 연동
+- 장바구니에 담기 기능 및 담기 결과 알림창 렌더
+- count 수 1미만일 경우 알림 팝업창 구현
+- 늘 사는 것 추가하기 기능 및 결과 팝업창 구현
+- 후기 작성 가능여부 확인 후 후기 작성 페이지로 이동 또는 작성불가 알림
+
+<br>
+
+### 7. 고객센터 페이지
+
+- navigation의 선택된 탭에 따라 해당 부류의 내용 렌더링
+- 공지사항의 글 클릭시 해당 글의 페이지로 이동 및 렌더링
+- 자주하는 질문의 카테고리 선택 시 해당 카테고리의 글 목록 렌더링
+- 1:1문의의 글쓰기 버튼 클릭 시 글쓰기 페이지로 이동
+>>>>>>> bfc588d4d9d9c037ed5d87c873750ab45296c017
